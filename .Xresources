@@ -1,0 +1,78 @@
+! this are Xresources to make xterm look good
+! put into ~/.Xresources
+! after changing contents, run xrdb -merge ~/.Xresources
+! gentoo has a bug so that it doesnt read it when X starts, so add above
+! command to /etc/xfce4/xinitrc (top) and be happy.
+
+!#define FONT1 -xos4-terminus-medium-r-normal--10-*-*-*-*-*-iso10646-1
+!#define FONT1B	true
+
+!#define FONT1 xft:liberation mono:size=8
+#define FONT1 xft:Dejavu Sans Mono:size=9
+!#define FONT1 xft:Bitstream Vera Sans Mono:pixelsize=10
+#define FONT1B true
+
+!!!!!!XTERM:COLORS
+Rxvt.colorMode: on
+Rxvt.dynamicColors: on
+Rxvt.depth: 24
+Rxvt.background: gray25
+!Rxvt.depth: 32
+!Rxvt.background: rgba:0000/2000/3000/aaaa
+Rxvt.foreground: white
+!!!background color of color11
+Rxvt.color0: black
+Rxvt.color1: red
+Rxvt.color2: green3
+Rxvt.color3: yellow
+!!!mc background
+!Rxvt.color4: black
+Rxvt.color4: DarkSeaGreen4
+Rxvt.color5: blue3
+!!!selection background (+mc menu)
+Rxvt.color6: DarkSeaGreen3
+!!!active buttons and files
+Rxvt.color7: LightYellow1
+Rxvt.color8: gray50
+Rxvt.color9: red
+!!!login and exutables foreground
+Rxvt.color10: green1
+!!!mc column names
+Rxvt.color11: DarkSeaGreen1
+!!!directories foreground
+Rxvt.color12: yellow2
+!!!mc nonfiles foreground
+Rxvt.color13: IndianRed1
+Rxvt.color14: cyan
+!!!mc directories foreground
+Rxvt.color15: white
+Rxvt.colorUL: yellow
+Rxvt.colorBD: white
+Rxvt.cursorColor: white
+Rxvt.cursorBlink: true
+
+!!!!!!XTERM:FONT
+Rxvt.font: FONT1
+Rxvt.boldMode: FONT1B
+
+!!!!!!XTERM:GEOMETRY
+!Rxvt.geometry: 100x50
+
+!!!!!!XTERM:SCROLLING
+Rxvt.scrollBar: false
+Rxvt.saveLines: 1024
+Rxvt.scrollKey: true
+Rxvt.scrollTtyOutput: false
+Rxvt.scrollTtyKeypress: true
+Rxvt.scrollWithBuffer: false
+!Rxvt.jumpScroll: true
+Rxvt.skipScroll: true
+Rxvt.scrollColor: #aaa894
+Rxvt.troughColor: #000000
+Rxvt.scrollstyle: plain
+
+Rxvt.tintColor: #60aadd
+Rxvt.shading: 80
+Rxvt.inheritPixmap: true
+Rxvt.transparent: false
+

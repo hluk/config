@@ -1,0 +1,3 @@
+#!/bin/bash
+screen -x default $@ || screen -R default $@
+

@@ -1,0 +1,11 @@
+#!/bin/bash
+# browse images given as parameter or images in current directory
+test $# -eq 0 && ARGS=. || ARGS=$@
+# quotes hell!
+feh -F -S filename "$ARGS" --action1 '
+	PIC_ROOT=~/Pictures
+	DEST=$((cd ~/Pictures && find * -maxdepth 1 -type d) | \
+		awk '"'"'{print "\\""$0"\\"","\\""$0"\\"",0}'"'"' | \
+			xargs kdialog --radiolist "Select directory")
+	test -n "$DEST" && mv "%f" "$PIC_ROOT/$DEST/"'
+

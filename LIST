@@ -1,0 +1,16 @@
+~/.zshrc
+~/.vimrc
+~/.easystroke
+~/.screenrc
+~/.conky/panel.conkyrc
+~/.Xresources
+~/.config/awesome/
+~/dev/bin/
+~/dev/menus/*.sh menus/
+~/dev/menus/dmenu-3.4/ menus/
+~/dev/pdf/
+~/dev/pocketpc/
+~/dev/rss/
+~/dev/translate/
+~/dev/zcode/_saved zcode/
+~/dev/zcode/_rungame.sh zcode/

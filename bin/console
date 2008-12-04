@@ -1,0 +1,4 @@
+#!/bin/sh
+# replace file:// with ""
+urxvtc -hold -title "$*" -e $(echo "$*" | sed 's/\bfile:\/\///g');
+
