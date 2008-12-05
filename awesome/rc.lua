@@ -22,6 +22,14 @@ bindir = "/home/lukas/dev/bin/"
 osd = "conky -c "
 menu = "/home/lukas/dev/menus/"
 
+function volumeup()
+	awful.util.spawn(bindir .. "volume.sh 1%+")
+end
+
+function volumedown()
+	awful.util.spawn(bindir .. "volume.sh 1%-")
+end
+
 -- Default modkey.
 -- Usually, Mod4 is the key with a logo between Control and Alt.
 -- If you do not like this or do not have such a key,
@@ -240,8 +248,8 @@ keybinding({ modkey }, "period", function () awful.util.spawn("mocp -f") end):ad
 keybinding({ modkey }, "comma", function () awful.util.spawn("mocp -r") end):add()
 
 -- volume up/down
-keybinding({ modkey }, "parenright", function () awful.util.spawn(bindir .. "volume.sh 1%+") end):add()
-keybinding({ modkey }, "section", function () awful.util.spawn(bindir .. "volume.sh 1%-") end):add()
+keybinding({ modkey }, "parenright", volumeup):add()
+keybinding({ modkey }, "section", volumedown):add()
 
 -- Client manipulation
 keybinding({ modkey }, "m", awful.client.maximize):add()

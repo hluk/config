@@ -11,6 +11,6 @@ BEGIN {
 		to = to "/" $2
 		system("mkdir -p " to)
 	}
-	system("cp --recursive --dereference " from " " to)
+	system("cp --verbose --update --recursive --dereference " from " " to)
 }
 
