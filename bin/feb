@@ -4,8 +4,6 @@ test $# -eq 0 && ARGS=. || ARGS=$@
 # quotes hell!
 feh -F -S filename "$ARGS" --action1 '
 	PIC_ROOT=~/Pictures
-	DEST=$((cd ~/Pictures && find * -maxdepth 1 -type d) | \
-		awk '"'"'{print "\\""$0"\\"","\\""$0"\\"",0}'"'"' | \
-			xargs kdialog --radiolist "Select directory")
+	DEST=$(~/dev/menus/imgmenu.sh) || exit 1
 	test -n "$DEST" && mv "%f" "$PIC_ROOT/$DEST/"'
 

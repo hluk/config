@@ -35,6 +35,7 @@ esac
 # env
 export MANPAGER=vimmanpager
 export EDITOR=vim
+export TEXMFCNF=/usr/share/texmf/web2c
 
 # aliases
 alias ls="ls --color=auto"
