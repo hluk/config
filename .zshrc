@@ -35,7 +35,18 @@ esac
 # env
 export MANPAGER=vimmanpager
 export EDITOR=vim
-export TEXMFCNF=/usr/share/texmf/web2c
+# tex
+#export TEXMF=/usr/share/texmf-dist
+#export TEXMFCNF=/usr/share/texmf/web2c
+#export LUAINPUTS=/usr/share/texmf-dist/tex/context/base/:/usr/share/texmf-dist/scripts/context/lua
+# ConTeXt
+export PATH=/home/lukas/dev/context/tex/texmf-linux/bin:$PATH
+export TEXMF=/home/lukas/dev/context/tex/texmf-linux
+export TEXMFCNF=/home/lukas/dev/context/tex/texmf-context/web2c
+export LUAINPUTS=/home/lukas/dev/context/tex/texmf-context/tex/context/base/:/home/lukas/dev/context/tex/texmf-context/scripts/context/lua
+cd ~/dev/context/tex/ && . ./setuptex >/dev/null
+# also run:
+# luatools --generate && context --make
 
 # aliases
 alias ls="ls --color=auto"
@@ -53,4 +64,6 @@ then
 	alias feb="$HOME/feb > /dev/null 2>&1 &"
 	alias smplayer="LANG=C smplayer"
 fi
+
+cd ~
 
