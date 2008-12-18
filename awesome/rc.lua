@@ -17,7 +17,7 @@ beautiful.init(theme_path)
 terminal = "urxvtc -e $HOME/screen"
 editor_cmd = "gvim"
 filemanager = "EDITOR=vim urxvtc -e screen mc -x"
-calc = "/home/lukas/dev/speedcrunch/build/speedcrunch"
+calc = "/home/lukas/apps/speedcrunch/build/speedcrunch"
 bindir = "/home/lukas/dev/bin/"
 osd = "conky -c "
 menu = "/home/lukas/dev/menus/"
@@ -36,6 +36,7 @@ end
 -- I suggest you to remap Mod4 to another key using xmodmap or other tools.
 -- However, you can use another modifier like Mod1, but it may interact with others.
 modkey = "Mod4"
+history = awful.client.focus.history
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
@@ -62,7 +63,7 @@ floatapps =
 	Smplayer = true,
 	gimp = true,
 	pidgin = true,
-	Conky_osd = true,
+	--Conky_panel = true,
 	speedcrunch = true,
 	rxvtpopup = true,
 	designer = true,
@@ -105,20 +106,20 @@ end
 
 -- {{{ Wibox
 -- Create a laucher widget and a main menu
-myawesomemenu = {
-   { "manual", terminal .. " -e man awesome" },
-   { "edit config", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua" },
-   { "restart", awesome.restart },
-   { "quit", awesome.quit }
-}
+--myawesomemenu = {
+--   { "manual", terminal .. " -e man awesome" },
+--   { "edit config", editor_cmd .. " " .. awful.util.getdir("config") .. "/rc.lua" },
+--   { "restart", awesome.restart },
+--   { "quit", awesome.quit }
+--}
 
-mymainmenu = awful.menu.new({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
-                                        { "open terminal", terminal }
-                                      }
-                            })
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
+--mymainmenu = awful.menu.new({ items = { { "awesome", myawesomemenu, beautiful.awesome_icon },
+--                                        { "open terminal", terminal }
+--                                      }
+--                            })
+--
+--mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
+--                                     menu = mymainmenu })
 
 -- Create a systray
 mysystray = widget({ type = "systray", align = "right" })
@@ -161,7 +162,7 @@ for s = 1, screen.count() do
     mywibox[s].screen = s
     
     -- Create the wibox2
-    mywibox2[s] = wibox({ position = "bottom", bg = '#000000', align="right", height=18, width=80})
+    mywibox2[s] = wibox({ position = "bottom", bg = '#00000000', align="right", height=18, width=80})
     mywibox2[s].widgets = { mysystray }
     mywibox2[s].screen = s
 
@@ -170,7 +171,7 @@ end
 
 -- {{{ Mouse bindings
 awesome.buttons({
-    button({ }, 3, function () mymainmenu:toggle() end),
+--    button({ }, 3, function () mymainmenu:toggle() end),
     button({ }, 4, awful.tag.viewnext),
     button({ }, 5, awful.tag.viewprev)
 })
@@ -188,7 +189,6 @@ for i = 1, 9 do
                        local screen = mouse.screen
                        if tags[screen][i] then
                            awful.tag.viewonly(tags[screen][i])
-			   awful.client.focus.byidx(1)
                        end
                    end):add()
     keybinding({ modkey, "Control" }, numkeys[i],
@@ -218,6 +218,8 @@ end
 
 keybinding({ modkey }, "Left", awful.tag.viewprev):add()
 keybinding({ modkey }, "Right", awful.tag.viewnext):add()
+keybinding({ modkey }, "Up",  function () awful.client.focus.byidx(-1) end):add()
+keybinding({ modkey }, "Down", function () awful.client.focus.byidx(1) end):add()
 keybinding({ modkey }, "Escape", awful.tag.history.restore):add()
 
 -- Standard program
@@ -266,13 +268,7 @@ keybinding({ modkey, "Control" }, "Return", function () if client.focus then cli
 keybinding({ modkey }, "o", awful.client.movetoscreen):add()
 keybinding({ modkey }, "u", awful.client.urgent.jumpto):add()
 keybinding({ modkey, "Shift" }, "r", function () if client.focus then client.focus:redraw() end end):add()
-keybinding({ modkey }, "Tab", function ()
-	local c = client.focus
-	awful.client.focus.history.previous()
-	if c == client.focus then
-		awful.client.focus.byidx(1)
-	end
-end):add()
+keybinding({ modkey }, "Tab", history.previous):add()
 
 -- Layout manipulation
 keybinding({ modkey }, "l", function () awful.tag.incmwfact(0.05) end):add()
@@ -330,40 +326,40 @@ end
 
 -- {{{ Hooks
 -- Hook function to execute when focusing a client.
-awful.hooks.focus.register(function (c)
+awful.hooks.focus.register(function (c)--{{{
     if not awful.client.ismarked(c) then
         c.border_color = beautiful.border_focus
     end
-end)
+end)--}}}
 
 -- Hook function to execute when unfocusing a client.
-awful.hooks.unfocus.register(function (c)
+awful.hooks.unfocus.register(function (c)--{{{
     if not awful.client.ismarked(c) then
         c.border_color = beautiful.border_normal
     end
-end)
+end)--}}}
 
 -- Hook function to execute when marking a client
-awful.hooks.marked.register(function (c)
+awful.hooks.marked.register(function (c)--{{{
     c.border_color = beautiful.border_marked
-end)
+end)--}}}
 
 -- Hook function to execute when unmarking a client.
-awful.hooks.unmarked.register(function (c)
+awful.hooks.unmarked.register(function (c)--{{{
     c.border_color = beautiful.border_focus
-end)
+end)--}}}
 
 -- Hook function to execute when the mouse enters a client.
-awful.hooks.mouse_enter.register(function (c)
+awful.hooks.mouse_enter.register(function (c)--{{{
     -- Sloppy focus, but disabled for magnifier layout
     if awful.layout.get(c.screen) ~= "magnifier"
         and awful.client.focus.filter(c) then
         client.focus = c
     end
-end)
+end)--}}}
 
 -- Hook function to execute when a new client appears.
-awful.hooks.manage.register(function (c)
+awful.hooks.manage.register(function (c)--{{{
     if use_titlebar then
         -- Add a titlebar
         awful.titlebar.add(c, { modkey = modkey })
@@ -400,25 +396,24 @@ awful.hooks.manage.register(function (c)
         c.screen = target.screen
         awful.client.movetotag(tags[target.screen][target.tag], c)
     end
-
+   
     -- Set the windows at the slave,
     -- i.e. put it at the end of others instead of setting it master.
     -- awful.client.setslave(c)
 
     -- Honor size hints: if you want to drop the gaps between windows, set this to false.
     -- c.honorsizehints = false
-end)
+end)--}}}
 
 -- Hook function to execute when arranging the screen.
 -- (tag switch, new client, etc)
-awful.hooks.arrange.register(function (screen)
+awful.hooks.arrange.register(function (screen)--{{{
     local layout = awful.layout.get(screen)
 
-    -- Give focus to the latest client in history if no window has focus
-    -- or if the current window is a desktop or a dock one.
+    -- Give focus to the latest client in history if no window has focus.
     if not client.focus then
-        local c = awful.client.focus.history.get(screen, 0)
-        if c then client.focus = c end
+	local c = history.get(screen, 0)
+        if c and awful.client.focus.filter(c) then client.focus = c end
     end
 
     -- Uncomment if you want mouse warping
@@ -435,7 +430,7 @@ awful.hooks.arrange.register(function (screen)
         end
     end
     ]]
-end)
+end)--}}}
 
 -- Hook called every second
 --awful.hooks.timer.register(1, function ()
@@ -445,9 +440,8 @@ end)
 -- {{{ Autostart
 awful.util.spawn("xrdb -merge /home/lukas/.Xresources")
 awful.util.spawn("pidof urxvtd >/dev/null || urxvtd -q")
---awful.util.spawn("pidof launchy >/dev/null || launchy")
 awful.util.spawn("pidof conky >/dev/null || conky")
 awful.util.spawn("pidof pidgin >/dev/null || pidgin")
-awful.util.spawn("pidof easystroke >/dev/null || /home/lukas/dev/easystroke/easystroke")
+awful.util.spawn("pidof easystroke >/dev/null || /home/lukas/apps/easystroke/easystroke")
 -- }}}
 
