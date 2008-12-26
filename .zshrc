@@ -59,6 +59,7 @@ if [ -n "$DISPLAY" ]
 then
 	alias mc="mc -x"
 	alias feb="$HOME/feb > /dev/null 2>&1 &"
+	alias febt="THUMBS=1 $HOME/feb > /dev/null 2>&1 &"
 	alias smplayer="LANG=C smplayer"
 	alias e="gvim"
 else

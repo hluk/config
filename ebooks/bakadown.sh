@@ -1,13 +1,13 @@
 #!/bin/bash
 # file: bakadown.sh
 # download light novel from www.baka-tsuki.net
-FORMAT=${FORMAT:-'http://www.baka-tsuki.net/project/index.php?title=<N>:Volume<V>_Chapter<C>&printable=yes'}
+FORMAT=${FORMAT:-'http://www.baka-tsuki.net/project/index.php?title=<N>:Volume<V>_Chapter<C>'} #&printable=yes'}
 
 if [ $# != 3 ]
 then
         echo 'Specify novel name, volume and number of chapters.'
         echo 'You can define FORMAT environment variable. Default:'
-        echo "  'http://www.baka-tsuki.net/project/index.php?title=<N>:Volume<V>_Chapter<C>&printable=yes'"
+        echo "  $FORMAT"
         exit 1
 fi
 
@@ -23,13 +23,13 @@ do
 done
 
 # rename html files
-for X in `(cd "$DIR" && file -iF' ' * | sed -n '/text\/html/{s/  text\/html$//p}')`
+for X in `(cd "$DIR" && file -iF' ' *[^.html] | sed -n '/text\/html/{s/  text\/html$//p}')`
 do
         NAME=`echo "$X" | sed 's/^index.php@title=//;s/%[0-9A-F]\{2\}/-/g'`
         mv "$DIR/$X" "$DIR/$NAME.html"
 done
 
-rm -f "$DIR/"*.html.html "$DIR/robots.txt" "$DIR/favicon.ico" "$DIR/index.php@title=-&action=raw&gen=js"
+rm -f "$DIR/robots.txt" "$DIR/favicon.ico" "$DIR/index.php@title=-&action=raw&gen=js"
 
 # create zip file
 rm -f "$DIR.zip"

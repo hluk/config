@@ -1,0 +1,13 @@
+ENTRY "down" URL "/home/lukas/down"
+ENTRY "dev" URL "/home/lukas/dev"
+ENTRY "apps" URL "/home/lukas/apps"
+ENTRY "Music" URL "/home/lukas/Music"
+ENTRY "Movies" URL "/home/lukas/Movies"
+ENTRY "eBooks" URL "/home/lukas/eBooks"
+ENTRY "wine" URL "/home/lukas/.wine/drive_c/Program Files"
+ENTRY "Pictures" URL "/home/lukas/Pictures"
+ENTRY "wallpapers" URL "/home/lukas/wallpapers"
+GROUP "mnt"
+  ENTRY "card" URL "/mnt/auto/card"
+  ENTRY "usb1" URL "/mnt/auto/usb1"
+ENDGROUP

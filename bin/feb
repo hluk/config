@@ -1,9 +1,29 @@
 #!/bin/bash
 # browse images given as parameter or images in current directory
 test $# -eq 0 && ARGS=. || ARGS=$@
-# quotes hell!
-feh -F -S filename "$ARGS" --action1 '
-	PIC_ROOT=~/Pictures
-	DEST=$(~/dev/menus/imgmenu.sh) || exit 1
-	test -n "$DEST" && mv "%f" "$PIC_ROOT/$DEST/"'
+
+# THUMBS != "" => thumbnail mode
+THUMBS=${THUMBS:-}
+FONT="$HOME/dev/magic/font/ --font MatrixB_cs/13"
+#FONT="$HOME/.fonts/ --font Fertigo_PRO.otf/11"
+
+if [ -n "$THUMBS" ]
+then
+	ARG="--fontpath $FONT -t -y 320 -E 320 -W 1280"
+else
+	ARG="-F"
+fi
+
+# ACTIONS
+ACTION1='
+	PIC_ROOT=$HOME/Pictures
+	DEST=$($HOME/dev/menus/imgmenu.sh) || exit 1
+	test -n "$DEST" && mv "%f" "$PIC_ROOT/$DEST/"
+	'
+ACTION9='
+	(echo -e "yes\nno" | ~/dev/menus/menu.sh "DELETE \"%f\"?" | xargs test yes \=) && rm -f "%f"
+	'
+
+# COMMAND LINE
+feh $ARG -S filename "$ARGS" --action1 "$ACTION1" --action9 "$ACTION9"
 

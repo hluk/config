@@ -66,8 +66,8 @@ floatapps =
 	--Conky_panel = true,
 	speedcrunch = true,
 	rxvtpopup = true,
-	designer = true,
-	Wine = true
+	designer = true
+	--Wine = true
 }
 
 -- Applications to be moved to a pre-defined tag by class or instance.

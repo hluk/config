@@ -1,4 +1,5 @@
 ~/.Xresources
+~/.mc/{bindings,hotlist,ini,menu} .mc/
 ~/.config/awesome/
 ~/.conky/panel.conkyrc
 ~/.easystroke
@@ -12,7 +13,6 @@
 ~/dev/pocketpc/
 ~/dev/rss/*.sh rss/
 ~/dev/translate/
-~/dev/zcode/_rungame.sh zcode/
-~/dev/zcode/_saved zcode/
+~/dev/zcode/{_rungame.sh,_saved} zcode/
 ~/eBooks/Knihy/Baka-Tsuki/bakadown.sh ebooks/
 ~/eBooks/Knihy/Protagonize/protagonize.sh ebooks/
