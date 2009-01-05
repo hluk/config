@@ -1,6 +1,7 @@
 -- Include awesome libraries, with lots of useful function!
 require("awful")
 require("beautiful")
+require('naughty')
 
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
@@ -14,14 +15,15 @@ theme_path = awful.util.getdir("config") .. "/mytheme"
 beautiful.init(theme_path)
 
 -- This is used later as the default terminal and editor to run.
-terminal = "urxvtc -e $HOME/screen"
+terminal = "urxvtc -geometry 141x57 -e $HOME/screen"
 editor_cmd = "gvim"
-filemanager = "EDITOR=vim urxvtc -e screen mc -x"
+filemanager = "EDITOR=vim urxvtc -geometry 141x57 -e screen mc -x"
 calc = "/home/lukas/apps/speedcrunch/build/speedcrunch"
 bindir = "/home/lukas/dev/bin/"
 osd = "conky -c "
 menu = "/home/lukas/dev/menus/"
 
+-- VOLUME
 function volumeup()
 	awful.util.spawn(bindir .. "volume.sh 1%+")
 end
@@ -30,11 +32,7 @@ function volumedown()
 	awful.util.spawn(bindir .. "volume.sh 1%-")
 end
 
--- Default modkey.
--- Usually, Mod4 is the key with a logo between Control and Alt.
--- If you do not like this or do not have such a key,
--- I suggest you to remap Mod4 to another key using xmodmap or other tools.
--- However, you can use another modifier like Mod1, but it may interact with others.
+-- MODKEY
 modkey = "Mod4"
 history = awful.client.focus.history
 
@@ -62,12 +60,9 @@ floatapps =
 	MPlayer = true,
 	Smplayer = true,
 	gimp = true,
-	pidgin = true,
-	--Conky_panel = true,
 	speedcrunch = true,
 	rxvtpopup = true,
 	designer = true
-	--Wine = true
 }
 
 -- Applications to be moved to a pre-defined tag by class or instance.
@@ -82,6 +77,25 @@ apptags =
 	korganizer = { screen = 1, tag = 3 },
 	designer = { screen = 1, tag = 5 }
 }
+
+-- NOTIFICATIONS
+naughty.config.timeout          = 5
+naughty.config.screen           = 1
+naughty.config.position         = "top_right"
+naughty.config.margin           = 4
+naughty.config.height           = 16
+naughty.config.width            = 300
+naughty.config.gap              = 1
+naughty.config.ontop            = true
+naughty.config.font             = beautiful.font or "Verdana 8"
+naughty.config.icon             = "/usr/share/icons/gnome/32x32/emblems/emblem-important.png"
+naughty.config.icon_size        = 32
+naughty.config.fg               = beautiful.fg_focus or '#ffffff'
+naughty.config.bg               = beautiful.bg_focus or '#535d6c'
+naughty.config.border_color     = beautiful.border_focus or '#535d6c'
+naughty.config.border_width     = 1
+naughty.config.hover_timeout    = nil
+--naughty.notify({ text = '<span color="#ffff99" font_desc="14">Notification</span> ...and its text!', icon="/usr/share/icons/gnome/48x48/actions/appointment-new.png", icon_size=48 })
 
 -- Define if we want to use titlebar on all applications.
 use_titlebar = false

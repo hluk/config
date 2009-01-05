@@ -15,15 +15,25 @@ else
 fi
 
 # ACTIONS
+# 1) move to selected picture directory
 ACTION1='
 	PIC_ROOT=$HOME/Pictures
 	DEST=$($HOME/dev/menus/imgmenu.sh) || exit 1
 	test -n "$DEST" && mv "%f" "$PIC_ROOT/$DEST/"
 	'
+# 2) open with firefox (for animated gif)
+ACTION2='
+	firefox "%f"
+	'
+# 3) det as wallpaper
+ACTION3='
+	$HOME/dev/img/set_wallpaper.sh "%f"
+	'
+# 9) delete file
 ACTION9='
 	(echo -e "yes\nno" | ~/dev/menus/menu.sh "DELETE \"%f\"?" | xargs test yes \=) && rm -f "%f"
 	'
 
 # COMMAND LINE
-feh $ARG -S filename "$ARGS" --action1 "$ACTION1" --action9 "$ACTION9"
+feh $ARG -S filename "$ARGS" --action1 "$ACTION1" --action2 "$ACTION2" --action3 "$ACTION3" --action9 "$ACTION9"
 

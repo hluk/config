@@ -17,6 +17,9 @@ OptionParser.new do |opts|
 	opts.on("-t", "--test TIME", "View part of encoded video.") do |t|
 		opt[:test] = t
 	end
+	opts.on("-l", "--length TIME", "Length in frames of encoded videopart (see option -t).") do |i|
+		opt[:length] = i
+	end
 	opts.on("-i", "--identify", "Identify videos") do |i|
 		opt[:identify] = i
 	end
@@ -91,7 +94,7 @@ if not opt[:search].empty?
 end # }}}
 
 ARGV.sort.each_with_index do |filename, i|
-	puts "--- " + filename + " (" + (i+1).to_s + "/" + ARGV.size.to_s + ")"
+	puts C_grp + "--- " + filename + " (" + (i+1).to_s + "/" + ARGV.size.to_s + ")" + C_end
 
 	# identify file {{{
 	if opt[:identify]
@@ -106,30 +109,23 @@ ARGV.sort.each_with_index do |filename, i|
 		
 		# reformat output
 		group=0
+		output = {}
+		id = nil
 		ids.sort.each do |arr|
 			if arr[0] =~ /^ID_(.*)/
 				arr[0]=$1
-				case arr[0]
-				when /^AUDIO_(.*)/:
-					if group != 1
-						group=1
-						puts C_grp + "- Audio" + C_end
-					end
-					printf("%s%10s%s = %s%s%s", C_id, $1, C_end , C_val, arr[1], C_end)
-				when /^VIDEO_(.*)/:
-					if group != 2
-						group=2
-						puts C_grp + "- Video" + C_end
-					end
-					printf("%s%10s%s = %s%s%s", C_id, $1, C_end , C_val, arr[1], C_end)
+				if arr[0] =~ /^([^_]*)_(.*)/
+					arr[0]=$2
+					id = $1
 				else
-					if group != 3
-						group=3
-						puts C_grp + "- Others" + C_end
-					end
-					printf("%s%10s%s = %s%s%s", C_id, arr[0], C_end , C_val, arr[1], C_end)
+					id = "OTHER"
 				end
+				output[id] = (output[id] or "") + sprintf("%s%11s%s = %s%s%s", C_id, arr[0], C_end , C_val, arr[1], C_end)
 			end
+		end
+
+		output.each_pair do |k, v|
+			puts( C_grp + "-- " + k + C_end + "\n" + v )
 		end
 	# }}}
 	elsif opt[:test] # test video {{{
@@ -140,22 +136,15 @@ ARGV.sort.each_with_index do |filename, i|
 			puts "--- Skipping: file already exists!"
 			next
 		end
-		#mencoder = Thread.new{
-			if system(Mencoder, '-noconfig', 'all', '-include', Mencoder_conf,
-				'-ss', opt[:test], '-frames', '200',
-				'-o', ofilename, filename)
-				puts "--- DONE"
-			else
-				puts "--- FAILED!"
-			end
-		#}
-		#sleep 5
-		#f=open(filename)
-		#IO.popen(Mplayer, '-') do |io|
-			#io.write(f.read)
-		#end
-		#mencoder.kill
-		#f.close
+		
+		if system(Mencoder, '-noconfig', 'all', '-include', Mencoder_conf,
+			'-ss', opt[:test], '-frames', (opt[:length] or '250'),
+			'-o', ofilename, filename)
+			puts "--- DONE"
+		else
+			puts "--- FAILED!"
+		end
+
 		system(Mplayer, ofilename)
 		File.delete(ofilename)
 	# }}}

@@ -79,7 +79,7 @@ base_color=normal=light,default:selected=,:marked=,default:markselect=,:menu=bla
 
 [Layout]
 equal_split=0
-first_panel_size=68
+first_panel_size=54
 message_visible=0
 keybar_visible=1
 xterm_title=1
@@ -91,35 +91,35 @@ permission_mode=1
 filetype_mode=1
 
 [Dirs]
-other_dir=.
-current_is_left=1
+other_dir=/home/lukas
+current_is_left=0
 
 [New Left Panel]
 display=listing
 reverse=0
-case_sensitive=0
+case_sensitive=1
 sort_order=name
-list_mode=full
-user_format=half type name | size | perm
+list_mode=user
+user_format=half type name
 user_status0=half type name | size | perm
 user_status1=half type name | size | perm
 user_status2=half type name | size | perm
 user_status3=half type name | size | perm
-user_mini_status=0
+user_mini_status=1
 panel_display_codepage=Other_8_bit
 
 [New Right Panel]
-display=quickview
+display=listing
 reverse=0
-case_sensitive=0
+case_sensitive=1
 sort_order=name
-list_mode=full
+list_mode=long
 user_format=half type name | size | perm
 user_status0=half type name | size | perm
 user_status1=half type name | size | perm
 user_status2=half type name | size | perm
 user_status3=half type name | size | perm
-user_mini_status=0
+user_mini_status=1
 panel_display_codepage=Other_8_bit
 
 [Misc]
