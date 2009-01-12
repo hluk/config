@@ -109,7 +109,7 @@ for s = 1, screen.count() do
     tags[s] = {}
     -- Create 9 tags per screen.
     for tagnumber = 1, 9 do
-        tags[s][tagnumber] = tag({ name = tagnumber, layout = layouts[1] })
+        tags[s][tagnumber] = tag({ name = tagnumber, layout = (tagnumber == 3 and "floating" or layouts[1]) })
         -- Add tags to screen one by one
         tags[s][tagnumber].screen = s
     end

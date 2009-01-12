@@ -23,7 +23,7 @@ do
 done
 
 # rename html files
-for X in `(cd "$DIR" && file -iF' ' *[^.html] | sed -n '/text\/html/{s/  text\/html$//p}')`
+for X in `(cd "$DIR" && file -iF' ' index.php* | sed -n '/text\/html/{s/  text\/html$//p}')`
 do
         NAME=`echo "$X" | sed 's/^index.php@title=//;s/%[0-9A-F]\{2\}/-/g'`
         mv "$DIR/$X" "$DIR/$NAME.html"

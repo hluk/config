@@ -63,7 +63,8 @@ end # }}}
 # paths {{{
 Mencoder = "mencoder"
 Mplayer = "mplayer"
-Mencoder_conf = File.expand_path("~/dev/pocketpc/encode/encode.conf")
+mencoder_conf = (File.exist? "./encode.conf") ? "./encode.conf" :
+			File.expand_path("~/dev/pocketpc/encode/encode.conf")
 Video_root = File.expand_path("~/down/_encoded")
 # }}}
 
@@ -94,7 +95,7 @@ if not opt[:search].empty?
 end # }}}
 
 ARGV.sort.each_with_index do |filename, i|
-	puts C_grp + "--- " + filename + " (" + (i+1).to_s + "/" + ARGV.size.to_s + ")" + C_end
+	puts C_info + "--- " + filename + " (" + (i+1).to_s + "/" + ARGV.size.to_s + ")" + C_end
 
 	# identify file {{{
 	if opt[:identify]
@@ -133,16 +134,18 @@ ARGV.sort.each_with_index do |filename, i|
 		ofilename=Video_root + '/' + filename.gsub(/.*[\\\/]/,"") + '.tmp.mp4'
 
 		if File.exist?(ofilename) and !opt[:overwrite]
-			puts "--- Skipping: file already exists!"
+			puts C_info + "--- Skipping: file already exists!" + C_end
 			next
 		end
 		
-		if system(Mencoder, '-noconfig', 'all', '-include', Mencoder_conf,
+		t=Time.now
+		if system(Mencoder, '-noconfig', 'all', '-include', mencoder_conf,
 			'-ss', opt[:test], '-frames', (opt[:length] or '250'),
 			'-o', ofilename, filename)
-			puts "--- DONE"
+			t=Time.now-t.to_f
+			puts C_info + "--- DONE " + C_hilite + sprintf("(in %02d:%02d:%02d)", (t.hour-1), t.min, t.sec) + C_end
 		else
-			puts "--- FAILED!"
+			puts C_warn + "--- FAILED!" + C_end
 		end
 
 		system(Mplayer, ofilename)
@@ -153,16 +156,18 @@ ARGV.sort.each_with_index do |filename, i|
 		ofilename=Video_root + '/' + filename.gsub(/.*[\\\/]/,"") + '.mp4'
 
 		if File.exist?(ofilename) and !opt[:overwrite]
-			puts "--- Skipping: file already exists!"
+			puts C_info + "--- Skipping: file already exists!"
 			next
 		end
 		# convert
-		if system(Mencoder, '-noconfig', 'all', '-include', Mencoder_conf,
+		t=Time.now
+		if system(Mencoder, '-noconfig', 'all', '-include', mencoder_conf,
 		'-o', ofilename + '.part', filename)
+			t=t-Time.now.to_f
 			File.rename(ofilename + '.part', ofilename)
-			puts "--- DONE"
+			puts C_info + "--- DONE (in " + t.hour.to_s + ":" + t.min.to_s + ":" + t.sec.to_s + ")" + C_end
 		else
-			puts "--- FAILED!"
+			puts C_warn + "--- FAILED!" + C_end
 			exit 1
 		end
 	end # }}}

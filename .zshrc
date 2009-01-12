@@ -36,12 +36,12 @@ esac
 export MANPAGER=vimmanpager
 export EDITOR=vim
 # ConTeXt
-export PATH=/home/lukas/apps/context/tex/texmf-linux/bin:$PATH
-export TEXMF=/home/lukas/apps/context/tex/texmf-linux
-export TEXMFCNF=/home/lukas/apps/context/tex/texmf-context/web2c
-export LUAINPUTS=/home/lukas/apps/context/tex/texmf-context/tex/context/base/:/home/lukas/apps/context/tex/texmf-context/scripts/context/lua
-export MANPATH=/home/lukas/apps/context/tex/texmf-linux/man:$MANPATH
-cd ~/apps/context/tex/ && . ./setuptex >/dev/null
+#export PATH=/home/lukas/apps/context/tex/texmf-linux/bin:$PATH
+#export TEXMF=/home/lukas/apps/context/tex/texmf-linux
+#export TEXMFCNF=/home/lukas/apps/context/tex/texmf-context/web2c
+#export LUAINPUTS=/home/lukas/apps/context/tex/texmf-context/tex/context/base/:/home/lukas/apps/context/tex/texmf-context/scripts/context/lua
+#export MANPATH=/home/lukas/apps/context/tex/texmf-linux/man:$MANPATH
+#cd ~/apps/context/tex/ && . ./setuptex >/dev/null
 # also run:
 #~ luatools --generate && context --make
 

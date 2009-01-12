@@ -427,7 +427,8 @@ include/video
 
 # Postscript
 type/^PostScript
-	Open=(gv %f &)
+	#Open=(gv %f &)
+        Open=(wine "C:\Program Files\Tracker Software\PDF-XChange Viewer\pdf-viewer\PDFXCview.exe" %f 1>/dev/null 2>&1 &)
 	View=%view{ascii} ps2ascii %f
 
 # PDF
