@@ -102,7 +102,7 @@ ARGV.sort.each_with_index do |filename, i|
 	if opt[:identify]
 		# TODO: print also alternative audio and video codecs
 		ids = {}
-		IO.popen(Mplayer + ' -identify -vo null -ao null -frames 0 -really-quiet ' + filename) do |io|
+		IO.popen(Mplayer + ' -identify -vo null -ao null -frames 0 -really-quiet ' + '"' + filename + '"') do |io|
 			io.each do |line|
 				ln = line.split '='
 				ids[ln[0]] = ln[1]
@@ -132,7 +132,7 @@ ARGV.sort.each_with_index do |filename, i|
 	# }}}
 	elsif opt[:test] # test video {{{
 		FileUtils::mkpath Video_root
-		ofilename=Video_root + '/' + filename.gsub(/.*[\\\/]/,"") + '.tmp.mp4'
+		ofilename=Video_root + '/' + filename.gsub(/.*[\\\/]/,"") + '.tmp.mkv'
 
 		if File.exist?(ofilename) and !opt[:overwrite]
 			puts C_info + "--- Skipping: file already exists!" + C_end
@@ -154,7 +154,7 @@ ARGV.sort.each_with_index do |filename, i|
 	# }}}
 	else # encode video {{{
 		FileUtils::mkpath Video_root
-		ofilename=Video_root + '/' + filename.gsub(/.*[\\\/]/,"") + '.mp4'
+		ofilename=Video_root + '/' + filename.gsub(/.*[\\\/]/,"") + '.mkv'
 
 		if File.exist?(ofilename) and !opt[:overwrite]
 			puts C_info + "--- Skipping: file already exists!"
@@ -164,9 +164,9 @@ ARGV.sort.each_with_index do |filename, i|
 		t=Time.now
 		if system(Mencoder, '-include', mencoder_conf,
 		'-o', ofilename + '.part', filename)
-			t=t-Time.now.to_f
+			t=Time.now-t.to_f
 			File.rename(ofilename + '.part', ofilename)
-			puts C_info + "--- DONE (in " + t.hour.to_s + ":" + t.min.to_s + ":" + t.sec.to_s + ")" + C_end
+			puts C_info + "--- DONE " + C_hilite + sprintf("(in %02d:%02d:%02d)", (t.hour-1), t.min, t.sec) + C_end
 		else
 			puts C_warn + "--- FAILED!" + C_end
 			exit 1

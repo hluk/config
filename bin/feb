@@ -35,5 +35,5 @@ ACTION9='
 	'
 
 # COMMAND LINE
-feh $ARG -S filename "$ARGS" --action1 "$ACTION1" --action2 "$ACTION2" --action3 "$ACTION3" --action9 "$ACTION9"
+feh -r $ARG -S filename "$ARGS" --action1 "$ACTION1" --action2 "$ACTION2" --action3 "$ACTION3" --action9 "$ACTION9"
 

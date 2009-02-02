@@ -29,6 +29,8 @@ set wildchar=<Tab>
 " completion menu
 set wildmenu
 set wildmode=longest:full,full
+" vim scans first and last few lines for file settings
+set modeline
 
 filetype plugin on
 filetype indent on
@@ -54,7 +56,7 @@ inoremap <expr> <m-;> pumvisible() ? "\<lt>c-n>" : "\<lt>c-x>\<lt>c-o>\<lt>c-n>\
 "" Dictionary Word Completion Using Ctrl-x Ctrl-k
 set dictionary+=/usr/share/dict/words
 "" spell checking
-set spelllang=cs
+"set spelllang=cs
 map <silent> <F7> :call Cream_spellcheck()<CR>
 imap <silent> <F7> <C-o>:call Cream_spellcheck()<CR>
 vmap <silent> <F7> :<C-u>call Cream_spellcheck("v")<CR>
