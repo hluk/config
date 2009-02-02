@@ -65,7 +65,8 @@ Mencoder = "mencoder"
 Mplayer = "mplayer"
 mencoder_conf = (File.exist? "./encode.conf") ? "./encode.conf" :
 			File.expand_path("~/dev/pocketpc/encode/encode.conf")
-Video_root = File.expand_path("~/down/_encoded")
+#Video_root = "/tmp/video/"
+Video_root = "/mnt/pc2/down/_encoded/"
 # }}}
 
 # print audio or video codecs {{{
@@ -139,7 +140,7 @@ ARGV.sort.each_with_index do |filename, i|
 		end
 		
 		t=Time.now
-		if system(Mencoder, '-noconfig', 'all', '-include', mencoder_conf,
+		if system(Mencoder, '-include', mencoder_conf,
 			'-ss', opt[:test], '-frames', (opt[:length] or '250'),
 			'-o', ofilename, filename)
 			t=Time.now-t.to_f
@@ -161,7 +162,7 @@ ARGV.sort.each_with_index do |filename, i|
 		end
 		# convert
 		t=Time.now
-		if system(Mencoder, '-noconfig', 'all', '-include', mencoder_conf,
+		if system(Mencoder, '-include', mencoder_conf,
 		'-o', ofilename + '.part', filename)
 			t=t-Time.now.to_f
 			File.rename(ofilename + '.part', ofilename)
