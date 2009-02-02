@@ -1,20 +1,18 @@
--- Include awesome libraries, with lots of useful function!
 require("awful")
 require("beautiful")
 require('naughty')
 
--- {{{ Variable definitions
--- Themes define colours, icons, and wallpapers
--- The default is a dark theme
---theme_path = "/usr/share/awesome/themes/default/theme"
+-- THEME
 theme_path = awful.util.getdir("config") .. "/mytheme"
--- Uncommment this for a lighter theme
--- theme_path = "@AWESOME_THEMES_PATH@/sky/theme"
-
--- Actually load theme
 beautiful.init(theme_path)
 
--- This is used later as the default terminal and editor to run.
+-- move mouse to corner
+mouse.coords({x=0,y=1024})
+
+-- {{{ Variable definitions
+--theme_path = "/usr/share/awesome/themes/default/theme"
+
+-- Defaul apps and paths
 terminal = "urxvtc -geometry 141x57 -e $HOME/screen"
 editor_cmd = "gvim"
 filemanager = "EDITOR=vim urxvtc -geometry 141x57 -e screen mc -x"
@@ -30,6 +28,11 @@ end
 
 function volumedown()
 	awful.util.spawn(bindir .. "volume.sh 1%-")
+end
+
+-- moc player: currently player song
+function mocinfo()
+	awful.util.spawn(bindir .. "awesome_moc.sh")
 end
 
 -- MODKEY
@@ -65,16 +68,15 @@ floatapps =
 	designer = true
 }
 
+tag_count = 5
 -- Applications to be moved to a pre-defined tag by class or instance.
 -- Use the screen and tags indices.
 apptags =
 {
 	Firefox = { screen = 1, tag = 2 },
-	Krusader = { screen = 1, tag = 3 },
 	mocp = { screen = 1, tag = 4 },
 	["beep-media-player-2-bin"] = { screen = 1, tag = 4 },
 	pidgin = { screen = 1, tag = 3 },
-	korganizer = { screen = 1, tag = 3 },
 	designer = { screen = 1, tag = 5 }
 }
 
@@ -84,7 +86,7 @@ naughty.config.screen           = 1
 naughty.config.position         = "top_right"
 naughty.config.margin           = 4
 naughty.config.height           = 16
-naughty.config.width            = 300
+naughty.config.width            = 400
 naughty.config.gap              = 1
 naughty.config.ontop            = true
 naughty.config.font             = beautiful.font or "Verdana 8"
@@ -95,10 +97,8 @@ naughty.config.bg               = beautiful.bg_focus or '#535d6c'
 naughty.config.border_color     = beautiful.border_focus or '#535d6c'
 naughty.config.border_width     = 1
 naughty.config.hover_timeout    = nil
+-- USAGE:
 --naughty.notify({ text = '<span color="#ffff99" font_desc="14">Notification</span> ...and its text!', icon="/usr/share/icons/gnome/48x48/actions/appointment-new.png", icon_size=48 })
-
--- Define if we want to use titlebar on all applications.
-use_titlebar = false
 -- }}}
 
 -- {{{ Tags
@@ -107,8 +107,8 @@ tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
     tags[s] = {}
-    -- Create 9 tags per screen.
-    for tagnumber = 1, 9 do
+    -- Create tag_count tags per screen.
+    for tagnumber = 1, tag_count do
         tags[s][tagnumber] = tag({ name = tagnumber, layout = (tagnumber == 3 and "floating" or layouts[1]) })
         -- Add tags to screen one by one
         tags[s][tagnumber].screen = s
@@ -194,10 +194,10 @@ awesome.buttons({
 -- {{{ Key bindings
 
 -- Bind keyboard digits
--- Compute the maximum number of digit we need, limited to 9
+-- Compute the maximum number of digit we need, limited to tag_count
 numkeys = {"plus", "ecaron", "scaron", "ccaron", "rcaron", "zcaron", "yacute", "aacute", "iacute"}
 
-for i = 1, 9 do
+for i = 1, tag_count do
     keybinding({ modkey }, numkeys[i],
                    function ()
                        local screen = mouse.screen
@@ -258,10 +258,11 @@ keybinding({ modkey }, "semicolon", function () awful.util.spawn(menu .. "vimmen
 keybinding({ modkey }, "g", function () awful.util.spawn(menu .. "gamemenu.sh") end):add()
 
 -- mocp
-keybinding({ modkey }, "p", function () awful.spawn("urxvtc -name mocp -title mocp -e mocp") end):add()
+keybinding({ modkey }, "p", function () awful.util.spawn("urxvtc -name mocp -title mocp -e mocp") end):add()
 keybinding({ modkey }, "minus", function () awful.util.spawn("mocp -G") end):add()
 keybinding({ modkey }, "period", function () awful.util.spawn("mocp -f") end):add()
 keybinding({ modkey }, "comma", function () awful.util.spawn("mocp -r") end):add()
+keybinding({ modkey }, "dead_diaeresis", mocinfo):add()
 
 -- volume up/down
 keybinding({ modkey }, "parenright", volumeup):add()
@@ -325,7 +326,7 @@ keybinding({ modkey, "Ctrl" }, "i", function ()
 -- Client awful tagging: this is useful to tag some clients and then do stuff like move to tag on them
 keybinding({ modkey }, "t", awful.client.togglemarked):add()
 
-for i = 1, 9 do
+for i = 1, tag_count do
     keybinding({ modkey, "Shift" }, "F" .. i,
                    function ()
                        local screen = mouse.screen
@@ -374,10 +375,6 @@ end)--}}}
 
 -- Hook function to execute when a new client appears.
 awful.hooks.manage.register(function (c)--{{{
-    if use_titlebar then
-        -- Add a titlebar
-        awful.titlebar.add(c, { modkey = modkey })
-    end
     -- Add mouse bindings
     c:buttons({
         button({ }, 1, function (c) client.focus = c; c:raise() end),
@@ -457,5 +454,6 @@ awful.util.spawn("pidof urxvtd >/dev/null || urxvtd -q")
 awful.util.spawn("pidof conky >/dev/null || conky")
 awful.util.spawn("pidof pidgin >/dev/null || pidgin")
 awful.util.spawn("pidof easystroke >/dev/null || /home/lukas/apps/easystroke/easystroke")
+awful.util.spawn("pidof xbindkeys || (sleep 10 && xbindkeys)")
 -- }}}
 

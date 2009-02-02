@@ -468,7 +468,8 @@ shell/.abw
 
 # Microsoft Word Document
 regex/\.([Dd][oO][cCtT]|[Ww][rR][iI])$
-	Open=(abiword %f >/dev/null 2>&1 &)
+	Open=(oowriter %f &)
+	#Open=(abiword %f >/dev/null 2>&1 &)
 	View=%view{ascii} catdoc -w %f || word2x -f text %f - || strings %f
 type/^Microsoft\ Word
 	Open=(abiword %f >/dev/null 2>&1 &)
@@ -476,7 +477,8 @@ type/^Microsoft\ Word
 
 # RTF document
 regex/\.([rR][tT][fF])$
-	Open=(abiword %f >/dev/null 2>&1 &)
+	Open=(oowriter %f &)
+	#Open=(abiword %f >/dev/null 2>&1 &)
 
 # Microsoft Excel Worksheet
 regex/\.([xX][lL][sSwW])$

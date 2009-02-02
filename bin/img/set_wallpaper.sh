@@ -37,7 +37,7 @@ echo -e "\tInput..."$(/usr/bin/identify "$IMG")
 echo -e "\tResizing..."
 # PIL
 python -c "
-W = 1280; H=1024
+W = 1280; H = 1024
 import Image
 im = Image.open('$IMG')
 if float(im.size[0])/im.size[1] >= float(W)/H:

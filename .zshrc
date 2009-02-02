@@ -1,7 +1,7 @@
 # Lines configured by zsh-newuser-install
 HISTFILE=~/.histfile
-HISTSIZE=1000
-SAVEHIST=1000
+HISTSIZE=1000000
+SAVEHIST=1000000
 bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
@@ -36,13 +36,13 @@ esac
 export MANPAGER=vimmanpager
 export EDITOR=vim
 # ConTeXt
-#export PATH=/home/lukas/apps/context/tex/texmf-linux/bin:$PATH
-#export TEXMF=/home/lukas/apps/context/tex/texmf-linux
-#export TEXMFCNF=/home/lukas/apps/context/tex/texmf-context/web2c
-#export LUAINPUTS=/home/lukas/apps/context/tex/texmf-context/tex/context/base/:/home/lukas/apps/context/tex/texmf-context/scripts/context/lua
-#export MANPATH=/home/lukas/apps/context/tex/texmf-linux/man:$MANPATH
-#cd ~/apps/context/tex/ && . ./setuptex >/dev/null
-# also run:
+export PATH=/home/lukas/apps/context/tex/texmf-linux/bin:$PATH
+export TEXMF=/home/lukas/apps/context/tex/texmf-linux
+export TEXMFCNF=/home/lukas/apps/context/tex/texmf-context/web2c
+export LUAINPUTS=/home/lukas/apps/context/tex/texmf-context/tex/context/base/:/home/lukas/apps/context/tex/texmf-context/scripts/context/lua
+export MANPATH=/home/lukas/apps/context/tex/texmf-linux/man:$MANPATH
+cd ~/apps/context/tex/ && . ./setuptex >/dev/null
+# it may also help to run:
 #~ luatools --generate && context --make
 
 # aliases
@@ -54,6 +54,7 @@ alias man="LANG=C man"
 alias ri="ri -Tf ansi"
 alias s="screen"
 alias irb="irb --readline -r irb/completion"
+alias x="startx"
 # aliases for X
 if [ -n "$DISPLAY" ]
 then
