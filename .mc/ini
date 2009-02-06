@@ -1,4 +1,3 @@
-
 [Midnight-Commander]
 show_backups=1
 show_dot_files=1
@@ -79,7 +78,7 @@ base_color=normal=light,default:selected=,:marked=,default:markselect=,:menu=bla
 
 [Layout]
 equal_split=0
-first_panel_size=34
+first_panel_size=54
 message_visible=0
 keybar_visible=1
 xterm_title=1
@@ -92,7 +91,7 @@ filetype_mode=1
 
 [Dirs]
 current_is_left=1
-other_dir=/home/lukas/down
+other_dir=/home/lukas/PDA/games/strategy
 
 [New Left Panel]
 display=listing

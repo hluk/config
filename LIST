@@ -5,6 +5,7 @@
 ~/.easystroke
 ~/.screenrc
 ~/.vimrc
+~/.vimperatorrc
 ~/.zshrc
 ~/dev/bin/
 ~/dev/menus/*.sh menus/

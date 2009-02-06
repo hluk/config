@@ -20,7 +20,8 @@ promptinit
 # End of lines added by compinstall
 
 # /usr/share/zsh/4.3.4/functions/Prompts/
-prompt gentoo2
+#prompt gentoo2
+prompt walters
 
 # keys
 bindkey '\e[1~' beginning-of-line
