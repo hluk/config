@@ -13,8 +13,6 @@ fi
 PERCENT=$(amixer set Master $1 | sed -n '/^  Front Left:/{s/.*\[\([0-9][0-9]*\).*/\1/p;q}')
 #COLOR=$(printf '#%02x%02x80\n' $(($PERCENT*255/100)) $((-$PERCENT*255/100+255)))
 #killall osd_cat 2> /dev/null
-#osd_cat --delay=1 --color=$COLOR --shadow=1 --barmode=percentage \
+#osd_cat --delay=1 --color=\#66bb44 --shadow=1 --barmode=percentage \
 	#--pos=bottom --offset=18 --align=center --percentage=$PERCENT &
-osd_cat --delay=1 --color=white --shadow=1 --barmode=percentage \
-	--pos=bottom --offset=18 --align=center --percentage=$PERCENT &
 

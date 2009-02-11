@@ -17,7 +17,8 @@ GROUP "School"
   ENTRY "IV113 Uvod do validace a verifikace" URL "/home/lukas/School/IV113 Uvod do validace a verifikace"
 ENDGROUP
 GROUP "mnt"
-  ENTRY "cd" URL "/mnt/cd"
   ENTRY "card" URL "/mnt/auto/card"
   ENTRY "usb1" URL "/mnt/auto/usb1"
+  ENTRY "cd" URL "/mnt/auto/cd"
+  ENTRY "cd2" URL "/mnt/cd"
 ENDGROUP

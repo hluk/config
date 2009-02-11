@@ -90,8 +90,8 @@ permission_mode=1
 filetype_mode=1
 
 [Dirs]
-current_is_left=1
-other_dir=/home/lukas/PDA/games/strategy
+current_is_left=0
+other_dir=/home/lukas/down
 
 [New Left Panel]
 display=listing

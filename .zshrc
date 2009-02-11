@@ -34,6 +34,11 @@ case $TERM in (xterm*)
 esac
 
 # env
+export CFLAGS="-pipe -O2 -march=pentium4 -msse2 -mfpmath=sse -fomit-frame-pointer"
+export CHOST="i686-pc-linux-gnu"
+export CXXFLAGS="${CFLAGS}"
+export MAKEOPTS="-j2"
+
 export MANPAGER=vimmanpager
 export EDITOR=vim
 # ConTeXt

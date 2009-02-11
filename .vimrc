@@ -37,6 +37,7 @@ filetype indent on
 
 " font in gui
 if has("gui_running")
+	gui
 	"set guifont=Bitstream\ Vera\ Sans\ Mono\ 9
 	"set guifont=Liberation\ Mono\ 9
 	"set guifont=Monospace\ 9
@@ -100,21 +101,14 @@ autocmd FileType ruby noremap <F11> :!exuberant-ctags --totals --lang-map=Ruby:+
 "autocmd FileType python setlocal omnifunc=pysmell#Complete
 
 " KEYS
-" ex mode
-map <C-y> :
-imap <C-y> <C-o>:
-" visual mode
-map <M-y> v
-imap <M-y> <C-o>v
-imap <C-v> <C-o><C-v>
 " save
 map <F2> :w<CR>
 imap <F2> <C-o>:w<CR>
 map <C-S> :w<CR>
 imap <C-S> <C-o>:w<CR>
 " quit
-map <C-q> :q<CR>
-imap <C-q> <C-o>:q<CR>
+map <C-q> :qa<CR>
+imap <C-q> <C-o>:qa<CR>
 " make
 map <F5> :make<CR>
 imap <F5> <C-o>:make<CR>
