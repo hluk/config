@@ -20,7 +20,8 @@ promptinit
 # End of lines added by compinstall
 
 # /usr/share/zsh/4.3.4/functions/Prompts/
-prompt gentoo2
+#prompt gentoo2
+prompt walters
 
 # keys
 bindkey '\e[1~' beginning-of-line
@@ -33,6 +34,11 @@ case $TERM in (xterm*)
 esac
 
 # env
+export CFLAGS="-pipe -O2 -march=pentium4 -msse2 -mfpmath=sse -fomit-frame-pointer"
+export CHOST="i686-pc-linux-gnu"
+export CXXFLAGS="${CFLAGS}"
+export MAKEOPTS="-j2"
+
 export MANPAGER=vimmanpager
 export EDITOR=vim
 # ConTeXt
