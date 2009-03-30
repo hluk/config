@@ -20,8 +20,8 @@ promptinit
 # End of lines added by compinstall
 
 # /usr/share/zsh/4.3.4/functions/Prompts/
-#prompt gentoo2
-prompt walters
+prompt gentoo2
+#prompt bart
 
 # keys
 bindkey '\e[1~' beginning-of-line
@@ -52,6 +52,7 @@ cd ~/apps/context/tex/ && . ./setuptex >/dev/null
 #~ luatools --generate && context --make
 
 # aliases
+alias ..="cd .."
 alias ls="ls --color=auto"
 alias ll="ls --color=auto -la"
 alias grep="grep --colour=auto"
@@ -60,7 +61,7 @@ alias man="LANG=C man"
 alias ri="ri -Tf ansi"
 alias s="screen"
 alias irb="irb --readline -r irb/completion"
-alias x="startx"
+alias x="startx > .xsession 2>&1 &"
 # aliases for X
 if [ -n "$DISPLAY" ]
 then
