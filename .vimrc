@@ -35,18 +35,34 @@ set modeline
 filetype plugin on
 filetype indent on
 
+" 256 colors
+set t_Co=256
+set t_AB=[48;5;%dm
+set t_AF=[38;5;%dm
+
 " font in gui
 if has("gui_running")
 	gui
-	"set guifont=Bitstream\ Vera\ Sans\ Mono\ 9
-	"set guifont=Liberation\ Mono\ 9
-	"set guifont=Monospace\ 9
-	"set guifont=Monaco\ 9
-	set guifont=DejaVu\ Sans\ Mono\ 9
+	"set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
+	"set guifont=Liberation\ Mono\ 12
+	"set guifont=Monospace\ 12
+	"set guifont=DejaVu\ Sans\ Mono\ 12
+	set guifont=Consolas\ 13
+	"set guifont=Inconsolata\ 14
+	colorscheme rainbow_breeze
+else
+	"colorscheme redblack
+	"colorscheme 256-jungle
+	"colorscheme molokai
+	"colorscheme wombat256
+	"colorscheme kellys
+	
+        "colorscheme calmar256-light
+	"colorscheme soso
+	colorscheme khaki
 endif
 
 " colors
-colorscheme grayorange
 
 "" Make Vim completion popup menu work just like in an IDE (Matt Zyzik)
 set completeopt=longest,menuone
@@ -95,6 +111,8 @@ autocmd FileType java set tags+=~/.vim/tags_java
 "noremap <F12> :!exuberant-ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 noremap <F12> :!exuberant-ctags -R .<CR>
 autocmd FileType ruby noremap <F11> :!exuberant-ctags --totals --lang-map=Ruby:+.rb -f ~/.vim/tags_ruby -R /usr/lib/ruby/gems /usr/lib/ruby/site_ruby<CR>
+
+autocmd FileType haskell set expandtab
 
 " pysmell autocompletion for python
 " first generate tags with 'pysmell .' in project path

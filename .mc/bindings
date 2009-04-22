@@ -333,7 +333,8 @@ shell/.xpm
 	View=sxpm %f
 
 include/image
-	Open=(~/feb %f >/dev/null 2>&1 &)
+	Open=(wine "c:/Program Files/XnView/xnview.exe" %f >/dev/null 2>&1 &)
+	#Open=(~/feb %f >/dev/null 2>&1 &)
 	#Open=(gwenview %f >/dev/null 2>&1 &)
 	#Open=if [ "$DISPLAY" = "" ]; then zgv %f; else (gqview %f &); fi
 	View=%view{ascii} identify %f
@@ -343,9 +344,9 @@ include/image
 ### Sound files ###
 
 regex/\.([wW][aA][vV]|[sS][nN][dD]|[vV][oO][cC]|[aA][uU]|[sS][mM][pP]|[aA][iI][fF][fF]|[sS][nN][dD])$
-        #Open=if [ "$DISPLAY" = "" ]; then mplayer %f; else (smplayer %f 1>/dev/null 2>&1 &); fi
+	Open=if [ "$DISPLAY" = "" ]; then mplayer %f; else (smplayer %f 1>/dev/null 2>&1 &); fi
         #Open=(mplayer %f 1>/dev/null 2>&1 &)
-        Open=mplayer %f
+        #Open=mplayer %f
 
 regex/\.([mM][oO][dD]|[sS]3[mM]|[xX][mM]|[iI][tT]|[mM][tT][mM]|669|[sS][tT][mM]|[uU][lL][tT]|[fF][aA][rR])$
         Open=mikmod %f
@@ -360,9 +361,9 @@ regex/\.([mM][pP]3)$
 	View=%view{ascii} mpg123 -vtn1 %f 2>&1 | sed -n '/^Title/,/^Comment/p;/^MPEG/,/^Audio/p'
 
 regex/\.([oO][gG][gG])$
-	#Open=if [ "$DISPLAY" = "" ]; then mplayer %f; else (smplayer %f 1>/dev/null 2>&1 &); fi
+	Open=if [ "$DISPLAY" = "" ]; then mplayer %f; else (smplayer %f 1>/dev/null 2>&1 &); fi
         #Open=(mplayer %f 1>/dev/null 2>&1 &)
-        Open=mplayer %f
+        #Open=mplayer %f
 	View=%view{ascii} ogginfo %s
 
 regex/\.([mM][iI][dD][iI]?|[rR][mM][iI][dD]?)$
@@ -418,8 +419,8 @@ regex/\.([rR][aA]?[mM])$
 	Open=(realplay %f >/dev/null 2>&1 &)
 
 include/video
-        #Open=(mplayer %f 1>/dev/null 2>&1 &)
-       	Open=mplayer %f
+	Open=(mplayer %f 1>/dev/null 2>&1 &)
+        #Open=mplayer %f
 	View=midentify %f
 	#Open=(smplayer %f >/dev/null 2>&1 &)
 	#Open=(gtv %f >/dev/null 2>&1 &)
@@ -430,17 +431,16 @@ include/video
 
 # Postscript
 type/^PostScript
-	#Open=(gv %f &)
-        Open=(wine "C:\Program Files\Tracker Software\PDF-XChange Viewer\pdf-viewer\PDFXCview.exe" %f 1>/dev/null 2>&1 &)
+	Open=(gv %f &)
 	View=%view{ascii} ps2ascii %f
 
 # PDF
 type/^PDF
-	#Open=(xpdf %f &)
+	#Open=(xpdf %f 1>/dev/null 2>&1 &)
 	#Open=(acroread %f &)
 	#Open=(ghostview %f &)
 	#Open=(okular %f &)
-        Open=(wine "C:\Program Files\Tracker Software\PDF-XChange Viewer\pdf-viewer\PDFXCview.exe" %f 1>/dev/null 2>&1 &)
+	Open=(wine "C:\Program Files\Tracker Software\PDF-XChange Viewer\pdf-viewer\PDFXCview.exe" %f 1>/dev/null 2>&1 &)
 	View=%view{ascii} pdftotext %f -
 
 # The following code very ugly and should not be taken as example.

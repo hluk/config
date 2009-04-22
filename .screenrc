@@ -26,11 +26,11 @@
   hardcopy_append       on              # default: off
 # nethack               on              # default: off
   startup_message       off             # default: on
-# termcap  xterm        'AF=\E[3%dm:AB=\E[4%dm'
-# terminfo xterm        'AF=\E[3%p1%dm:AB=\E[4%p1%dm'
+#termcap  xterm        'AF=\E[3%dm:AB=\E[4%dm'
+#terminfo xterm        'AF=\E[3%p1%dm:AB=\E[4%p1%dm'
 # Matthias Kopfermann  [020222]:
-  termcapinfo linux "ve=\E[?25h\E[?17;0;64c" # red
-  vbell                 off             # default: ???
+  #termcapinfo linux "ve=\E[?25h\E[?17;0;64c" # red
+  vbell                 on             # default: ???
 #
 # ===============================================================
 # VARIABLES - Number values
@@ -514,5 +514,12 @@ bind ^Y screen -t log watch -n 5 rail -40 /var/log/syslog
 # Tell Vim to use a "tabstop" of '8',
 # ie expands TABs to the next column
 # whose number is a multiple of eight.
-# EOF  vim: ts=8
 
+# terminfo and termcap for nice 256 color terminal
+# allow bold colors - necessary for some reason
+attrcolor b ".I"
+# erase background with current bg color
+defbce "on"
+terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+# EOF  vim: ts=8

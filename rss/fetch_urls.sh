@@ -13,7 +13,7 @@ SCRIPTPATH=${0%\/*}
 LISTDIR="$SCRIPTPATH/lists"
 GETPATH="$HOME/dev/wget"
 
-URLS="http://www.gametrailers.com/rss/top20.xml
+URLS="http://www.gametrailers.com/rssgenerate.php?s1=&vidformat[mov]=on&quality[either]=on&agegate[no]=on&orderby=newest&limit=30
 http://www.gamersyde.com/news_en.rdf
 http://konachan.com/post/atom
 http://moe.imouto.org/post/atom
@@ -48,7 +48,7 @@ do
 	then
 		echo "* Downloading new items {{{"
 
-		if [ "$URL" ==  "http://www.gametrailers.com/rss/top20.xml" ]
+		if [ "$URL" ==  "http://www.gametrailers.com/rssgenerate.php?s1=&vidformat[mov]=on&quality[either]=on&agegate[no]=on&orderby=newest&limit=30" ]
 		then
 			cat "$DIFLIST" | xargs \
 			"$GETPATH/gt_video/gt_video.sh" || (echo "}}} FAILED!"; exit 1)

@@ -4,7 +4,6 @@ RUNHASHFILE=/home/lukas/dev/menus/runhash.txt
 
 # update hash on background
 (sleep 1; nice -n 10 /home/lukas/dev/menus/dmenu-3.4/dmenu_path > $RUNHASHFILE) &
-HASHPID=$!
 
 # command history and PATH
 EXE=$( (cat $HISTORYFILE $RUNHASHFILE) | /home/lukas/dev/menus/menu.sh "RUN:" ) || exit $?
@@ -15,7 +14,8 @@ EXE=$(echo $EXE | sed 's/^ *//;s/ *$//') # remove leading spaces
 mv $HISTORYFILE.new $HISTORYFILE
 
 # this allows some scripting to be included in command
-exec echo "$EXE" | /bin/sh ;
+#(exec echo "$EXE" | /bin/sh ;) &
+exec "$EXE" &
 
-wait $HASHPID
+disown -a && exit
 
