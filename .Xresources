@@ -8,16 +8,17 @@
 !#define FONT1 xft:liberation mono:size=8
 !#define FONT1 xft:Andale Mono:size=10
 !#define FONT1 xft:Dejavu Sans Mono:size=9
-#define FONT1 xft:Consolas:size=13
-!#define FONT1 xft:Inconsolata:size=11
+!#define FONT1 xft:Inconsolata:size=13
 !#define FONT1 xft:Bitstream Vera Sans Mono:pixelsize=10
+#define FONT1 xft:Consolas:size=13
 #define FONT1B true
 
 !!!!!!XTERM:COLORS
 Rxvt.colorMode: on
 Rxvt.dynamicColors: on
 Rxvt.depth: 24
-Rxvt.background: gray25
+!Rxvt.background: gray25
+Rxvt.background: white
 !Rxvt.depth: 32
 !Rxvt.background: rgba:0000/2000/3000/aaaa
 Rxvt.foreground: white
@@ -49,7 +50,7 @@ Rxvt.color14: cyan
 Rxvt.color15: white
 Rxvt.colorUL: yellow
 Rxvt.colorBD: white
-Rxvt.cursorColor: white
+Rxvt.cursorColor: gray
 Rxvt.cursorBlink: true
 
 !!!!!!XTERM:FONT

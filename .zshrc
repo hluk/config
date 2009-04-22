@@ -6,11 +6,6 @@ bindkey -e
 # End of lines configured by zsh-newuser-install
 # The following lines were added by compinstall
 
-if [ -n "$DISPLAY" ]
-then
-	xrdb -merge ~/.Xresources
-fi
-
 zstyle ':completion:*' list-colors ''
 zstyle :compinstall filename '/home/lukas/.zshrc'
 
@@ -20,18 +15,13 @@ promptinit
 # End of lines added by compinstall
 
 # /usr/share/zsh/4.3.4/functions/Prompts/
-prompt gentoo2
-#prompt bart
+prompt zefram
+export PS1='%B%F{blue}%n%(2v.%B@%b.@)%f%(!.%F{red}.%F{green})%m%f:%~%(?..%F{red}[%v]%f)%(!.#.>)%b '
 
 # keys
 bindkey '\e[1~' beginning-of-line
 bindkey '\e[4~' end-of-line
 bindkey '\e[3~' delete-char
-
-case $TERM in (xterm*)
-	bindkey '\e[H' beginning-of-line
-	bindkey '\e[F' end-of-line ;;
-esac
 
 # env
 export CFLAGS="-pipe -O2 -march=pentium4 -msse2 -mfpmath=sse -fomit-frame-pointer"
@@ -41,6 +31,7 @@ export MAKEOPTS="-j2"
 
 export MANPAGER=vimmanpager
 export EDITOR=vim
+
 # ConTeXt
 export PATH=/home/lukas/apps/context/tex/texmf-linux/bin:$PATH
 export TEXMF=/home/lukas/apps/context/tex/texmf-linux
@@ -62,14 +53,27 @@ alias ri="ri -Tf ansi"
 alias s="screen"
 alias irb="irb --readline -r irb/completion"
 alias x="startx > .xsession 2>&1 &"
-# aliases for X
+
+# X server running?
 if [ -n "$DISPLAY" ]
 then
+	#xrdb -merge ~/.Xresources
+
+	export TERM=xterm-color 
+	export TERMINFO=$HOME/lib/terminfo
+
+	case $TERM in (xterm*)
+		bindkey '\e[H' beginning-of-line
+		bindkey '\e[F' end-of-line ;;
+	esac
+
+	# aliases for X
 	alias mc="mc -x"
 	alias feb="$HOME/feb > /dev/null 2>&1 &"
 	alias febt="THUMBS=1 $HOME/feb > /dev/null 2>&1 &"
 	alias smplayer="LANG=C smplayer"
 	alias e="gvim"
+# X server not running?
 else
 	alias e="vim"
 fi

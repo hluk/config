@@ -35,6 +35,11 @@ set modeline
 filetype plugin on
 filetype indent on
 
+" 256 colors
+set t_Co=256
+set t_AB=[48;5;%dm
+set t_AF=[38;5;%dm
+
 " font in gui
 if has("gui_running")
 	gui
@@ -46,7 +51,15 @@ if has("gui_running")
 	"set guifont=Inconsolata\ 14
 	colorscheme rainbow_breeze
 else
-	colorscheme blue
+	"colorscheme redblack
+	"colorscheme 256-jungle
+	"colorscheme molokai
+	"colorscheme wombat256
+	"colorscheme kellys
+	
+        "colorscheme calmar256-light
+	"colorscheme soso
+	colorscheme khaki
 endif
 
 " colors

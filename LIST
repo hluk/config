@@ -3,6 +3,7 @@
 ~/.config/awesome/
 ~/.conky/panel.conkyrc
 ~/.easystroke
+~/.garglkrc
 ~/.screenrc
 ~/.vimrc
 ~/.vimperatorrc
@@ -17,3 +18,4 @@
 ~/dev/zcode/{_rungame.sh,_saved} zcode/
 ~/eBooks/Knihy/Baka-Tsuki/bakadown.sh ebooks/
 ~/eBooks/Knihy/Protagonize/protagonize.sh ebooks/
+~/Playlists/

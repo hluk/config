@@ -50,7 +50,6 @@ layouts =
     awful.layout.suit.tile.left,
     awful.layout.suit.fair,
     awful.layout.suit.fair.horizontal,
-    awful.layout.suit.magnifier,
     awful.layout.suit.max.fullscreen,
     awful.layout.suit.floating
 }
@@ -138,8 +137,7 @@ mytaglist.buttons = { button({ }, 1, awful.tag.viewonly),
                       button({ }, 4, awful.tag.viewnext),
                       button({ }, 5, awful.tag.viewprev) }
 mytasklist = {}
-mytasklist.buttons = { button({ }, 1, function (c) client.focus = c; c:raise() end),
-                       button({ }, 3, function () awful.menu.clients({ width=250 }) end),
+mytasklist.buttons = { button({ }, 3, function () awful.menu.clients({ width=250 }) end),
                        button({ }, 4, function () awful.client.focus.byidx(1) end),
                        button({ }, 5, function () awful.client.focus.byidx(-1) end) }
 
@@ -215,6 +213,15 @@ globalkeys = {
 	key({ modkey }, "semicolon", function () awful.util.spawn(menu .. "vimmenu.sh") end),
 	key({ modkey }, "g", function () awful.util.spawn(menu .. "gamemenu.sh") end),
 	
+	-- mpd
+	key({ modkey }, "o", function () awful.util.spawn("ario") end),
+	key({ modkey }, "p", function () awful.util.spawn("pidof mpd && killall mpd || mpd") end),
+	key({ modkey }, "minus", function () awful.util.spawn("mpc toggle") end),
+	key({ modkey }, "period", function () awful.util.spawn("mpc next") end),
+	key({ modkey }, "comma", function () awful.util.spawn("mpc prev") end),
+	key({ modkey, "Control" }, "period", function () awful.util.spawn("mpc seek +10") end),
+	key({ modkey, "Control" }, "comma", function () awful.util.spawn("mpc seek -10") end),
+
 	-- mocp
 	--key({ modkey }, "p", function () awful.util.spawn("urxvtc -name mocp -title mocp -e mocp") end),
 	--key({ modkey }, "minus", function () awful.util.spawn("mocp -G") end),
@@ -223,10 +230,10 @@ globalkeys = {
 	--key({ modkey }, "dead_diaeresis", mocinfo),
 	
 	-- foobar2000 (wine),
-	key({ modkey }, "p", function () awful.util.spawn(foobar) end),
-	key({ modkey }, "minus", function () awful.util.spawn(foobar .. " /playpause") end),
-	key({ modkey }, "period", function () awful.util.spawn(foobar .. " /next") end),
-	key({ modkey }, "comma", function () awful.util.spawn(foobar .. " /prev") end),
+	--key({ modkey }, "p", function () awful.util.spawn(foobar) end),
+	--key({ modkey }, "minus", function () awful.util.spawn(foobar .. " /playpause") end),
+	--key({ modkey }, "period", function () awful.util.spawn(foobar .. " /next") end),
+	--key({ modkey }, "comma", function () awful.util.spawn(foobar .. " /prev") end),
 	
 	-- volume up/down
 	key({ modkey }, "parenright", volumeup),
@@ -241,10 +248,10 @@ globalkeys = {
 	key({ modkey, "Control" }, "k", function () awful.screen.focus(-1) end),
 	key({ modkey }, "Tab",
         function ()
-            awful.client.focus.history.previous()
-            if client.focus then
-                client.focus:raise()
-            end
+	    awful.client.focus.history.previous()
+	    if client.focus then
+		client.focus:raise()
+	    end
         end),
 
 	
@@ -293,7 +300,7 @@ clientkeys =
     key({ modkey, "Shift"   }, "c", function (c) c:kill() end),
     key({ modkey, "Control" }, "space",  awful.client.floating.toggle),
     key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
-    key({ modkey }, "o", awful.client.movetoscreen),
+    --key({ modkey }, "o", awful.client.movetoscreen),
     key({ modkey }, "u", awful.client.urgent.jumpto),
     key({ modkey, "Shift" }, "r", function (c) c:redraw() end),
     key({ modkey }, "t", awful.client.togglemarked),
@@ -396,9 +403,7 @@ end)--}}}
 
 -- Hook function to execute when the mouse enters a client.
 awful.hooks.mouse_enter.register(function (c)--{{{
-    -- Sloppy focus, but disabled for magnifier layout
-    if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-        and awful.client.focus.filter(c) then
+    if awful.client.focus.filter(c) then
         client.focus = c
     end
 end)--}}}
@@ -479,7 +484,7 @@ end)--}}}
 awful.util.spawn("xrandr --dpi 100")
 awful.util.spawn("xrdb -merge /home/lukas/.Xresources")
 awful.util.spawn("pidof urxvtd >/dev/null || urxvtd -q")
-awful.util.spawn("killall conky >/dev/null; conky")
+awful.util.spawn("killall conky >/dev/null; conky -q")
 --awful.util.spawn("pidof pidgin >/dev/null || pidgin")
 awful.util.spawn("pidof easystroke >/dev/null || /home/lukas/apps/easystroke/easystroke")
 awful.util.spawn("pidof xbindkeys || (sleep 10 && xbindkeys)")

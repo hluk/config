@@ -1,3 +1,4 @@
+
 [Midnight-Commander]
 show_backups=1
 show_dot_files=1
@@ -77,8 +78,8 @@ editor_backup_extension=~
 base_color=normal=light,default:selected=,:marked=,default:markselect=,:menu=black,:menuhot=red,:menusel=,:menuhotsel=,:dnormal=,:dfocus=,:dhotnormal=red,:dhotfocus=,:input=,:reverse=,:executable=orange,default:directory=white,default:link=green,default:device=red,default:special=red,default:core=red,default:helpnormal=,:helplink=,:helpslink=,:
 
 [Layout]
-equal_split=0
-first_panel_size=54
+equal_split=1
+first_panel_size=95
 message_visible=0
 keybar_visible=1
 xterm_title=1
@@ -90,15 +91,15 @@ permission_mode=1
 filetype_mode=1
 
 [Dirs]
-current_is_left=0
-other_dir=/home/lukas/down
+current_is_left=1
+other_dir=/home/lukas
 
 [New Left Panel]
 display=listing
 reverse=0
 case_sensitive=1
 sort_order=name
-list_mode=user
+list_mode=full
 user_format=half type name
 user_status0=half type name | size | perm
 user_status1=half type name | size | perm
@@ -112,7 +113,7 @@ display=listing
 reverse=0
 case_sensitive=1
 sort_order=name
-list_mode=long
+list_mode=full
 user_format=half type name | size | perm
 user_status0=half type name | size | perm
 user_status1=half type name | size | perm
