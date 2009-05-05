@@ -55,11 +55,11 @@ else
 	"colorscheme 256-jungle
 	"colorscheme molokai
 	"colorscheme wombat256
-	"colorscheme kellys
+	colorscheme kellys
 	
         "colorscheme calmar256-light
 	"colorscheme soso
-	colorscheme khaki
+	"colorscheme khaki
 endif
 
 " colors

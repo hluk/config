@@ -18,3 +18,4 @@ GROUP "mnt"
   ENTRY "cd" URL "/mnt/auto/cd"
   ENTRY "cd2" URL "/mnt/cd"
 ENDGROUP
+ENTRY "ftp://popcorn" URL "/#ftp:ftpuser@popcorn"

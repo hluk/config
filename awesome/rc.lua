@@ -15,7 +15,7 @@ mouse.coords({x=0,y=1200})
 -- Defaul apps and paths
 terminal = "urxvtc -geometry 141x57 -e $HOME/screen"
 editor_cmd = "gvim"
-filemanager = "(cd ~/down; EDITOR=vim urxvtc -e screen mc -x)"
+filemanager = "(cd ~/down; EDITOR=\"$HOME/svim.sh\" urxvtc -e screen mc -x)"
 calc = "/home/lukas/apps/speedcrunch/build/speedcrunch"
 bindir = "/home/lukas/dev/bin/"
 osd = "conky -c "
@@ -59,9 +59,8 @@ layouts =
 -- a console app in a terminal like (Music on Console)
 floatapps =
 {
-	Conky_panel = true,
 	MPlayer = true,
-	Smplayer = true,
+	Conky_panel = true,
 	gimp = true,
 	speedcrunch = true,
 	rxvtpopup = true,
@@ -197,7 +196,7 @@ globalkeys = {
 	key({ modkey }, "x", function () awful.util.spawn("xkill") end),
 	key({ modkey }, "f", function () awful.util.spawn("firefox") end),
 	key({}, "Menu", function () awful.util.spawn("$HOME/dev/invert_colors/invert") end),
-	key({modkey}, "KP_Divide", function () awful.util.spawn("xrandr -s 640x480") end),
+	key({modkey}, "KP_Divide", function () awful.util.spawn("xrandr -s 1024x768") end),
 	key({modkey}, "KP_Multiply", function () awful.util.spawn("xrandr -s 1920x1200") end),
 	
 	key({ modkey, "Control" }, "r", function ()

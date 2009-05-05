@@ -17,8 +17,8 @@
 Rxvt.colorMode: on
 Rxvt.dynamicColors: on
 Rxvt.depth: 24
-!Rxvt.background: gray25
-Rxvt.background: white
+Rxvt.background: gray25
+!Rxvt.background: white
 !Rxvt.depth: 32
 !Rxvt.background: rgba:0000/2000/3000/aaaa
 Rxvt.foreground: white

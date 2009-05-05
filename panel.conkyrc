@@ -11,8 +11,7 @@ alignment bl
 maximum_width 1840
 minimum_size 1840 14
 
-update_interval 3
-music_player_interval 6
+update_interval 4
 
 default_color 808080
 default_outline_color 404040

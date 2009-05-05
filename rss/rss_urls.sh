@@ -4,20 +4,20 @@ then
 	exit 1
 fi
 
-(wget -q -O - "$1" || (echo "$1" | sed 's_^file:/__' | xargs cat)) | xml_parser - | sed -n '
-	/^ *> rss 2\b/,/^ *< rss 2\b/ {
-		/^ *> item\b/,/^ *< item\b/ {
-			/^ *> link\b/,+1 {s_\[pcdata\[\([^]]*\)\]\] [45]$_\1_p};
+xmllint --format --nocdata "$1" | sed -n '
+	/^<rss[ >]/,/^<\/rss>/ {
+		/^    <item[ >]/,/^    <\/item>/ {
+			s_^      <link>\(.*\)</link>_\1_p
 		}
 	}
-	/^ *> feed 2\b/,/^ *< feed 2\b/ {
-		/^ *> entry\b/,/^ *< entry\b/ {
-			/^ *> id\b/,+1 {s_\[pcdata\[\([^]]*\)\]\] [45]$_\1_p};
+	/^<feed[ >]/,/^<\/feed>/ {
+		/^  <entry[ >]/,/^  <\/entry>/ {
+			s_^    <link href="\([^"]*\).*_\1_p
 		}
 	}
-	/^ *> rdf:RDF 2\b/,/^ *< rdf:RDF 2\b/ {
-		/^ *> item\b/,/^ *< item\b/ {
-			/^ *> link\b/,+1 {s_\[pcdata\[\([^]]*\)\]\] [45]$_\1_p};
+	/^<rdf:RDF[ >]/,/^<\/rdf:RDF/ {
+		/^  <item[ >]/,/^    <\/item>/ {
+			s_^    <link>\(.*\)</link>_\1_p
 		}
 	}'
 exit $?
