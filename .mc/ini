@@ -92,7 +92,7 @@ filetype_mode=1
 
 [Dirs]
 current_is_left=1
-other_dir=/home/lukas
+other_dir=/#ftp:ftpuser@popcorn
 
 [New Left Panel]
 display=listing

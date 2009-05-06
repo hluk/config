@@ -38,12 +38,11 @@ export TEXMF=/home/lukas/apps/context/tex/texmf-linux
 export TEXMFCNF=/home/lukas/apps/context/tex/texmf-context/web2c
 export LUAINPUTS=/home/lukas/apps/context/tex/texmf-context/tex/context/base/:/home/lukas/apps/context/tex/texmf-context/scripts/context/lua
 export MANPATH=/home/lukas/apps/context/tex/texmf-linux/man:$MANPATH
-cd ~/apps/context/tex/ && . ./setuptex >/dev/null
+(cd ~/apps/context/tex/ && . ./setuptex >/dev/null)
 # it may also help to run:
 #~ luatools --generate && context --make
 
 # aliases
-alias ..="cd .."
 alias ls="ls --color=auto"
 alias ll="ls --color=auto -la"
 alias grep="grep --colour=auto"
@@ -68,15 +67,12 @@ then
 	esac
 
 	# aliases for X
-	alias mc="mc -x"
+	alias mc="EDITOR=\"$HOME/svim.sh\" mc -x"
 	alias feb="$HOME/feb > /dev/null 2>&1 &"
 	alias febt="THUMBS=1 $HOME/feb > /dev/null 2>&1 &"
 	alias smplayer="LANG=C smplayer"
-	alias e="gvim"
-# X server not running?
-else
-	alias e="vim"
+	alias e="$HOME/svim.sh"
 fi
 
-cd ~
+#cd ~
 

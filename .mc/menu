@@ -1,7 +1,4 @@
 shell_patterns=0
-q       Fork console
-        urxvtc -e $HOME/screen & 2>/dev/null
-
 + ! t t
 @       Do something on the current file
 	CMD=%{Enter command}

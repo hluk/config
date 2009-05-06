@@ -90,7 +90,7 @@
 # in addition to the hardstatus line.
 #
 # use caption to show window list:
-caption always "%{= 9w}%?%-Lw%?%{+b 9y}%n*%t[%h]%f %?(%u)%?%{= 9w}%?%+Lw%? %-=%{= 9w}%c %d.%m.%Y"
+caption always "%{= 9w}%?%-Lw%?%{+bu 9y}%n*%t %f %{= 9w}%?%+Lw%? %-=%{= 9w}%c %d.%m.%Y"
 
 
 #caption always '%{= wb}%50=%n%f %t%{= wb}'

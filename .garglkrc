@@ -38,7 +38,7 @@ spaces		1	# Spaces after a full stop -- 0=game-set 1=one 2=two
 graphics	1	# enable graphics
 sound		1	# enable sound
 
-lcd             0       # 0=grayscale 1=subpixel
+lcd             1       # 0=grayscale 1=subpixel
 
 # ------------------------------------------------------------------
 # Fonts, sizes and spaces.
@@ -68,7 +68,7 @@ monosize	22	# Monospaced tend to be bigger -- compensate
 leading		25	# Also known as linespacing
 baseline	20	# Offset from top of line to baseline
 
-wmarginx	192	# space around the window frame
+wmarginx	300	# space around the window frame
 wmarginy	64
 wpaddingx	0	# space between windows
 wpaddingy	0
@@ -128,36 +128,36 @@ caretshape	2	# 0=smalldot 1=fatdot 2=thinline 3=fatline 4=block
 # morealign	1	# 0=left 1=center 2=right
 # morefont	propb
 
-windowcolor	303030  # overall window background color
+windowcolor	909090  # overall window background color
 bordercolor	ffffff	# border line color
 caretcolor	ffffff	# input caret color
-morecolor	aaaaaa  # more prompt color
+morecolor	a0a0a0  # more prompt color
 
 # Colors for text buffer windows
-tcolor  0 fff0d0 303030 # Normal
-tcolor  1 e0e0e0 303030 # Emphasized
-tcolor  2 ffffff 303030 # Preformatted
-tcolor  3 ffffff 303030 # Header
-tcolor  4 ffffff 303030 # Subheader
-tcolor  5 ffffff 303030 # Alert
-tcolor  6 ffffff 303030 # Note
-tcolor  7 ffffff 303030 # BlockQuote
-tcolor  8 cccccc 303030 # Input
-tcolor  9 ffffff 303030 # User1
-tcolor 10 ffffff 303030 # User2
+tcolor  0 000000 909090 # Normal
+tcolor  1 d0d0d0 909090 # Emphasized
+tcolor  2 ffffff 909090 # Preformatted
+tcolor  3 ffffff 909090 # Header
+tcolor  4 ffffff 909090 # Subheader
+tcolor  5 ffffff 909090 # Alert
+tcolor  6 ffffff 909090 # Note
+tcolor  7 ffffff 909090 # BlockQuote
+tcolor  8 404040 909090 # Input
+tcolor  9 ffffff 909090 # User1
+tcolor 10 ffffff 909090 # User2
 
 # Colors for text grid windows
-gcolor  0 ffffff 303030 # Normal
-gcolor  1 ffffff 303030 # Emphasized
-gcolor  2 ffffff 303030 # Preformatted
-gcolor  3 ffffff 303030 # Header
-gcolor  4 ffffff 303030 # Subheader
-gcolor  5 ffffff 303030 # Alert
-gcolor  6 ffffff 303030 # Note
-gcolor  7 ffffff 303030 # BlockQuote
-gcolor  8 ffffff 303030 # Input
-gcolor  9 303030 a0a0a0 # User1
-gcolor 10 303030 a0a0a0 # User2
+gcolor  0 ffffff 909090 # Normal
+gcolor  1 ffffff 909090 # Emphasized
+gcolor  2 ffffff 909090 # Preformatted
+gcolor  3 ffffff 909090 # Header
+gcolor  4 ffffff 909090 # Subheader
+gcolor  5 ffffff 909090 # Alert
+gcolor  6 ffffff 909090 # Note
+gcolor  7 ffffff 909090 # BlockQuote
+gcolor  8 ffffff 909090 # Input
+gcolor  9 909090 cccccc # User1
+gcolor 10 909090 cccccc # User2
 
 # ------------------------------------------------------------------
 #
@@ -168,15 +168,15 @@ gcolor 10 303030 a0a0a0 # User2
 
 [ Agility Arun Magnetic Nitfol Scare ]
 
-gcolor  0 303030 a0a0a0 # Normal
-gcolor  1 303030 a0a0a0 # Emphasized
-gcolor  2 303030 a0a0a0 # Preformatted
-gcolor  3 303030 a0a0a0 # Header
-gcolor  4 303030 a0a0a0 # Subheader
-gcolor  5 303030 a0a0a0 # Alert
-gcolor  6 303030 a0a0a0 # Note
-gcolor  7 303030 a0a0a0 # BlockQuote
-gcolor  8 303030 a0a0a0 # Input
+gcolor  0 909090 a0a0a0 # Normal
+gcolor  1 909090 a0a0a0 # Emphasized
+gcolor  2 909090 a0a0a0 # Preformatted
+gcolor  3 909090 a0a0a0 # Header
+gcolor  4 909090 a0a0a0 # Subheader
+gcolor  5 909090 a0a0a0 # Alert
+gcolor  6 909090 a0a0a0 # Note
+gcolor  7 909090 a0a0a0 # BlockQuote
+gcolor  8 909090 a0a0a0 # Input
 
 [ Magnetic ]
 cols 68
@@ -195,8 +195,8 @@ rows 25
 wborderx 1
 wbordery 1
 
-gcolor 9  ffffff 303030
-gcolor 10 ffffff 303030
+gcolor 9  ffffff 909090
+gcolor 10 ffffff 909090
 
 # [ Agility ]
 # monoaspect 0.8	# squeeze mono font
