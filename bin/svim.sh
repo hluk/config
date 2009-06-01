@@ -1,2 +1,2 @@
 #!/bin/sh
-screen -t "VIM:$@" vim $@
+screen -t "VIM:$@" vim "$@"

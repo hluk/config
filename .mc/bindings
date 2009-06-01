@@ -440,7 +440,8 @@ type/^PDF
 	#Open=(acroread %f &)
 	#Open=(ghostview %f &)
 	#Open=(okular %f &)
-	Open=(wine "C:\Program Files\Tracker Software\PDF-XChange Viewer\pdf-viewer\PDFXCview.exe" %f 1>/dev/null 2>&1 &)
+	Open=(wine "C:\Program Files\PDFV_Portable\PDFXCview.exe" %f 1>/dev/null 2>&1 &)
+	#Open=(wine "C:\Program Files\SumatraPDF\SumatraPDF.exe" %f 1>/dev/null 2>&1 &)
 	View=%view{ascii} pdftotext %f -
 
 # The following code very ugly and should not be taken as example.

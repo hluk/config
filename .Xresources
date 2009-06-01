@@ -2,8 +2,10 @@
 ! put into ~/.Xresources
 ! after changing contents, run xrdb -merge ~/.Xresources
 
-!#define FONT1 -xos4-terminus-medium-r-normal--10-*-*-*-*-*-iso10646-1
-!#define FONT1B	true
+!#define FONT1 -*-proggysquare-*-*-*-*-*-80-*-*-*-*-*-*
+!#define FONT1 -xos4-terminus-medium-r-normal--17-*-*-*-*-*-iso10646-1
+!#define FONT1 -*-fixed-medium-r-normal--18-*-*-*-*-*-iso10646-1
+
 
 !#define FONT1 xft:liberation mono:size=8
 !#define FONT1 xft:Andale Mono:size=10
@@ -11,7 +13,9 @@
 !#define FONT1 xft:Inconsolata:size=13
 !#define FONT1 xft:Bitstream Vera Sans Mono:pixelsize=10
 #define FONT1 xft:Consolas:size=13
-#define FONT1B true
+
+XTerm*vt100.RenderFont: true
+XTerm*vt100.FaceName: Consolas:size=13
 
 !!!!!!XTERM:COLORS
 Rxvt.colorMode: on
@@ -55,7 +59,7 @@ Rxvt.cursorBlink: true
 
 !!!!!!XTERM:FONT
 Rxvt.font: FONT1
-Rxvt.boldMode: FONT1B
+Rxvt.boldMode: true
 
 !!!!!!XTERM:GEOMETRY
 !Rxvt.geometry: 100x50
@@ -77,7 +81,6 @@ Rxvt.tintColor: #60aadd
 Rxvt.shading: 80
 Rxvt.inheritPixmap: true
 Rxvt.transparent: false
-urxvt*fading: 0
 
 Xft.antialias:true
 Xft.dpi:100

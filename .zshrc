@@ -19,9 +19,9 @@ prompt zefram
 export PS1='%B%F{blue}%n%(2v.%B@%b.@)%f%(!.%F{red}.%F{green})%m%f:%~%(?..%F{red}[%v]%f)%(!.#.>)%b '
 
 # keys
-bindkey '\e[1~' beginning-of-line
-bindkey '\e[4~' end-of-line
-bindkey '\e[3~' delete-char
+bindkey '[1~' beginning-of-line
+bindkey '[4~' end-of-line
+bindkey '[3~' delete-char
 
 # env
 export CFLAGS="-pipe -O2 -march=pentium4 -msse2 -mfpmath=sse -fomit-frame-pointer"
@@ -33,18 +33,18 @@ export MANPAGER=vimmanpager
 export EDITOR=vim
 
 # ConTeXt
-export PATH=/home/lukas/apps/context/tex/texmf-linux/bin:$PATH
-export TEXMF=/home/lukas/apps/context/tex/texmf-linux
-export TEXMFCNF=/home/lukas/apps/context/tex/texmf-context/web2c
-export LUAINPUTS=/home/lukas/apps/context/tex/texmf-context/tex/context/base/:/home/lukas/apps/context/tex/texmf-context/scripts/context/lua
-export MANPATH=/home/lukas/apps/context/tex/texmf-linux/man:$MANPATH
-(cd ~/apps/context/tex/ && . ./setuptex >/dev/null)
+#export PATH=/home/lukas/apps/context/tex/texmf-linux/bin:$PATH
+#export TEXMF=/home/lukas/apps/context/tex/texmf-linux
+#export TEXMFCNF=/home/lukas/apps/context/tex/texmf-context/web2c
+#export LUAINPUTS=/home/lukas/apps/context/tex/texmf-context/tex/context/base/:/home/lukas/apps/context/tex/texmf-context/scripts/context/lua
+#export MANPATH=/home/lukas/apps/context/tex/texmf-linux/man:$MANPATH
+#(cd ~/apps/context/tex/ && . ./setuptex >/dev/null)
 # it may also help to run:
 #~ luatools --generate && context --make
 
 # aliases
 alias ls="ls --color=auto"
-alias ll="ls --color=auto -la"
+alias ll="ls --color=auto -lA"
 alias grep="grep --colour=auto"
 alias fgrep="fgrep --colour=auto"
 alias man="LANG=C man"
@@ -72,6 +72,7 @@ then
 	alias febt="THUMBS=1 $HOME/feb > /dev/null 2>&1 &"
 	alias smplayer="LANG=C smplayer"
 	alias e="$HOME/svim.sh"
+	export EDITOR="$HOME/svim.sh"
 fi
 
 #cd ~

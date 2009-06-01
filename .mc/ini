@@ -79,7 +79,7 @@ base_color=normal=light,default:selected=,:marked=,default:markselect=,:menu=bla
 
 [Layout]
 equal_split=1
-first_panel_size=95
+first_panel_size=73
 message_visible=0
 keybar_visible=1
 xterm_title=1
@@ -91,13 +91,13 @@ permission_mode=1
 filetype_mode=1
 
 [Dirs]
-current_is_left=1
-other_dir=/#ftp:ftpuser@popcorn
+current_is_left=0
+other_dir=/home/lukas/dev/brigada/tabulky/04
 
 [New Left Panel]
 display=listing
 reverse=0
-case_sensitive=1
+case_sensitive=0
 sort_order=name
 list_mode=full
 user_format=half type name
@@ -111,7 +111,7 @@ panel_display_codepage=Other_8_bit
 [New Right Panel]
 display=listing
 reverse=0
-case_sensitive=1
+case_sensitive=0
 sort_order=name
 list_mode=full
 user_format=half type name | size | perm

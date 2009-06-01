@@ -58,8 +58,8 @@ else
 	colorscheme kellys
 	
         "colorscheme calmar256-light
-	"colorscheme soso
 	"colorscheme khaki
+	"colorscheme soso
 endif
 
 " colors
