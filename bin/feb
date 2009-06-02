@@ -9,7 +9,7 @@ FONT="$HOME/dev/magic/font/ --font MatrixB_cs/13"
 
 if [ -n "$THUMBS" ]
 then
-	ARG="--fontpath $FONT -t -y 320 -E 320 -W 1280"
+	ARG="--fontpath $FONT -t -y 320 -E 320 -W 1950"
 else
 	ARG="-F"
 fi

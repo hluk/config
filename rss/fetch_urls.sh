@@ -64,7 +64,12 @@ do
 		"http://{orz.4,img.7}chan.org")
 			"$GETPATH/imgboard/imgboard.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
 			;;
-		esac && (echo "$NEWLIST" >> "$OLDLIST"; echo "  }}}")
+		esac && (
+			# remember saved urls (max 200 lines per list)
+			(echo "$NEWLIST" && cat "$OLDLIST") | head -n200 > "$OLDLIST.new" &&
+				mv "$OLDLIST.new" "$OLDLIST"
+			echo "  }}}"
+			)
 	fi
 done
 

@@ -79,7 +79,7 @@ base_color=normal=light,default:selected=,:marked=,default:markselect=,:menu=bla
 
 [Layout]
 equal_split=1
-first_panel_size=73
+first_panel_size=86
 message_visible=0
 keybar_visible=1
 xterm_title=1
@@ -92,7 +92,7 @@ filetype_mode=1
 
 [Dirs]
 current_is_left=0
-other_dir=/home/lukas/dev/brigada/tabulky/04
+other_dir=/home/lukas/down
 
 [New Left Panel]
 display=listing
