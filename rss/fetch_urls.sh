@@ -3,17 +3,18 @@
 PIDFILE="$HOME/fetch_url.pid"
 if [ -f "$PIDFILE" ]
 then
-	OLDPID=$(cat "$PIDFILE")
-	(ps --no-headers -p $OLDPID > /dev/null && echo -e "Script already running (PID=$OLDPID)!" 1>&2) &&
-		exit 1 || rm -f "$PIDFILE"
+	OLDPID=`cat "$PIDFILE"`
+	(ps -p $OLDPID >/dev/null && echo "Script already running (PID: $OLDPID)!" 1>&2) &&
+		exit 1
 fi
 echo $$ > "$PIDFILE"
 
-SCRIPTPATH=${0%\/*}
+#SCRIPTPATH=${0%\/*}
+SCRIPTPATH=`dirname "$0"`
 LISTDIR="$SCRIPTPATH/lists"
 GETPATH="$HOME/dev/wget"
 
-URLS="http://www.gametrailers.com/rssgenerate.php?s1=&vidformat[mov]=on&quality[either]=on&agegate[no]=on&orderby=newest&limit=30
+URLS="http://www.gametrailers.com/rssgenerate.php?s1=&vidformat[mov]=on&quality[either]=on&orderby=yespopular&limit=20
 http://www.gamersyde.com/news_en.rdf
 http://konachan.com/post/atom
 http://moe.imouto.org/post/atom
@@ -31,52 +32,45 @@ do
 	#MD5=$(echo "$URL" | md5sum | awk '{print $1; quit;}')
 	LISTNAME=$(echo "$URL" | sed 's_^[a-z]*://__;s/[\.\/]/_/g')
 	OLDLIST="$LISTDIR/$LISTNAME.lst"
-	NEWLIST="$LISTDIR/$LISTNAME.new.lst"
-	DIFLIST="$LISTDIR/$LISTNAME.diff.lst"
 
 	mkdir -p "$LISTDIR"
 
-	echo -n "* Fetching rss from \"$URL\" ... "
-	$SCRIPTPATH/rss_urls.sh "$URL" | sed 's/^\s*//' | sort > "$NEWLIST" &&
-	echo "Ok" || exit 1 || continue
+	echo -n "* Fetching rss \"$URL\" ... "
+	NEWLIST="`($SCRIPTPATH/rss_urls.sh "$URL" && cat "$OLDLIST") | sort | uniq -u`" &&
+		echo "Ok" || (echo "FAILED!"; continue)
 
-	touch "$OLDLIST"
-	diff --old-line-format="" --unchanged-line-format="" --new-line-format='%L' \
-		"$OLDLIST" "$NEWLIST" > "$DIFLIST"
-
-	if [ -s "$DIFLIST" ]
+	if [ -n "$NEWLIST" ]
 	then
 		echo "* Downloading new items {{{"
 
-		if [ "$URL" ==  "http://www.gametrailers.com/rssgenerate.php?s1=&vidformat[mov]=on&quality[either]=on&agegate[no]=on&orderby=newest&limit=30" ]
-		then
-			cat "$DIFLIST" | xargs \
-			"$GETPATH/gt_video/gt_video.sh" || (echo "}}} FAILED!"; exit 1)
-		elif [ "$URL" == "http://www.gamersyde.com/news_en.rdf" ]
-		then
-			cat "$DIFLIST" | xargs \
-			"$HOME/dev/webdigger/gamersyde.rb" || (echo "}}} FAILED!"; exit 1)
-		elif [ "$URL" == "http://konachan.com/post/atom" ]
-		then
-			cat "$DIFLIST" | xargs \
-			"$GETPATH/chan/konachan.sh" || (echo "}}} FAILED!"; exit 1)
-		elif [ "$URL" == "http://moe.imouto.org/post/atom" ]
-		then
-			cat "$DIFLIST" | xargs \
-			"$GETPATH/chan/moe.imouto.sh" || (echo "}}} FAILED!"; exit 1)
-		elif [ "$URL" == "http://localhost/rss/deviantart-daily.php" ]
-		then
+		HOST=`echo "$URL" | grep -oe "http://[^/]*\?"`
+		case "$HOST" in
+		"http://www.gametrailers.com")
+			"$GETPATH/gt_video/gt_video.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
+			;;
+		"http://www.gamersyde.com")
+			"$HOME/dev/webdigger/gamersyde.rb" $NEWLIST || (echo "}}} FAILED!"; exit 1);
+			;;
+		"http://konachan.com")
+			"$GETPATH/chan/konachan.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
+			;;
+		"http://moe.imouto.org")
+			"$GETPATH/chan/moe.imouto.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
+			;;
+		"http://localhost")
 			"$GETPATH/deviantart/deviantart-login.sh" > /dev/null
-			cat "$DIFLIST" | xargs \
-			"$GETPATH/deviantart/deviantart.sh" || (echo "}}} FAILED!"; exit 1)
-		elif [ "$URL" == "http://orz.4chan.org/hr/index.rss" -o "$URL" == "http://img.7chan.org/hr/rss.xml" ]
-		then
-			cat "$DIFLIST" | xargs \
-			"$GETPATH/imgboard/imgboard.sh" || (echo "}}} FAILED!"; exit 1)
-		fi && (mv "$NEWLIST" "$OLDLIST"; echo "  }}}")
+			"$GETPATH/deviantart/deviantart.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
+			;;
+		"http://{orz.4,img.7}chan.org")
+			"$GETPATH/imgboard/imgboard.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
+			;;
+		esac && (
+			# remember saved urls (max 200 lines per list)
+			(echo "$NEWLIST" && cat "$OLDLIST") | head -n200 > "$OLDLIST.new" &&
+				mv "$OLDLIST.new" "$OLDLIST"
+			echo "  }}}"
+			)
 	fi
-
-	rm -f "$NEWLIST" "$DIFLIST"
 done
 
 rm -f "$PIDFILE"

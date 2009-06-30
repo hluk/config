@@ -90,7 +90,7 @@
 # in addition to the hardstatus line.
 #
 # use caption to show window list:
-caption always "%{= 9w}%?%-Lw%?%{+bu 9y}%n*%t %f %{= 9w}%?%+Lw%? %-=%{= 9w}%c %d.%m.%Y"
+caption always "%{= 9w}%?%-Lw%?%{+bu 9y}%n*%t%?[%f]%?%{= 9w}%?%+Lw%? %-=%{= 9w}%c %d.%m.%Y"
 
 
 #caption always '%{= wb}%50=%n%f %t%{= wb}'
@@ -517,9 +517,11 @@ bind ^Y screen -t log watch -n 5 rail -40 /var/log/syslog
 
 # terminfo and termcap for nice 256 color terminal
 # allow bold colors - necessary for some reason
-attrcolor b ".I"
+#attrcolor b ".I"
 # erase background with current bg color
-defbce "on"
-terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+#defbce "on"
+#terminfo rxvt-unicode 'Co#256:AB=\E[48;5;%dm:AF=\E[38;5;%dm'
+
+ignorecase on
 
 # EOF  vim: ts=8

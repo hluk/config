@@ -9,9 +9,9 @@ export MENU_FONT="-*-helvetica-bold-r-*-*-14-*-*-*-*-*-iso10646-1"
 #export MENU_SELBG="#414141"
 #export MENU_SELFG="#73d216"
 # blue
-export MENU_BG="#23ad2c"
-export MENU_FG="#ccffee"
-export MENU_SELBG="#70cc80"
+export MENU_BG="#2060a0"
+export MENU_FG="#90c0e0"
+export MENU_SELBG="#4080c0"
 export MENU_SELFG="#ffffff"
 
 #export MENU_BG="#106080"

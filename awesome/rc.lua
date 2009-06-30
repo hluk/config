@@ -13,9 +13,9 @@ mouse.coords({x=0,y=1200})
 --theme_path = "/usr/share/awesome/themes/default/theme"
 
 -- Defaul apps and paths
-terminal = "urxvtc -geometry 141x57 -e $HOME/screen"
+--terminal = "urxvtc -geometry 141x57 -e $HOME/screen"
+terminal = "sakura -e $HOME/screen"
 editor_cmd = "gvim"
-filemanager = "(cd ~/down; EDITOR=\"$HOME/svim.sh\" urxvtc -e screen mc -x)"
 calc = "/home/lukas/apps/speedcrunch/build/speedcrunch"
 bindir = "/home/lukas/dev/bin/"
 osd = "conky -c "
@@ -152,7 +152,7 @@ for s = 1, screen.count() do
                                               end, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = wibox({ position = "top", height=16, fg = beautiful.fg_normal, bg = beautiful.bg_normal })
+    mywibox[s] = wibox({ position = "bottom", height=20, fg = beautiful.fg_normal, bg = beautiful.bg_normal })
     -- Add widgets to the wibox - order matters
     mywibox[s].widgets = { mylauncher,
                            mytaglist[s],
@@ -161,7 +161,7 @@ for s = 1, screen.count() do
     mywibox[s].screen = s
     
     -- Create the wibox2
-    mywibox2[s] = wibox({ position = "bottom", bg = '#00000000', align="right", height=20, width=80})
+    mywibox2[s] = wibox({ position = "top", bg = '#00000000', align="right", height=20, width=80})
     mywibox2[s].widgets = { mysystray }
     mywibox2[s].screen = s
 
@@ -191,7 +191,6 @@ globalkeys = {
 	
 	-- Standard program
 	key({ modkey }, "q", function () awful.util.spawn(terminal) end),
-	key({ modkey }, "e", function () awful.util.spawn(filemanager) end),
 	key({ modkey }, "c", function () awful.util.spawn(calc) end),
 	key({ modkey }, "x", function () awful.util.spawn("xkill") end),
 	key({ modkey }, "f", function () awful.util.spawn("firefox") end),
@@ -205,15 +204,25 @@ globalkeys = {
 	                                end),
 	key({ modkey, "Shift" }, "q", function () awful.util.spawn("~/shutdown.sh") end),
 	key({ modkey, "Control" }, "e", function () awful.util.spawn("gvim $HOME/.config/awesome/rc.lua") end),
+	key({ modkey }, "s", function () awful.util.spawn("~/dev/qt/qdict/qdict") end),
 	
 	-- menus
 	key({ modkey }, "r", function () awful.util.spawn(menu .. "runmenu.sh") end),
-	key({ modkey }, "s", function () awful.util.spawn(menu .. "translatemenu.sh") end),
+	--key({ modkey }, "s", function () awful.util.spawn(menu .. "translatemenu.sh") end),
 	key({ modkey }, "semicolon", function () awful.util.spawn(menu .. "vimmenu.sh") end),
 	key({ modkey }, "g", function () awful.util.spawn(menu .. "gamemenu.sh") end),
 	
+	-- xmms2
+	--key({ modkey }, "p", function () awful.util.spawn("xmms2-launcher") end),
+	--key({ modkey }, "minus", function () awful.util.spawn("xmms2 toggleplay") end),
+	--key({ modkey }, "period", function () awful.util.spawn("xmms2 next") end),
+	--key({ modkey }, "comma", function () awful.util.spawn("xmms2 prev") end),
+	--key({ modkey, "Control" }, "period", function () awful.util.spawn("xmms2 seek +10") end),
+	--key({ modkey, "Control" }, "comma", function () awful.util.spawn("xmms2 seek -10") end),
+
 	-- mpd
 	key({ modkey }, "o", function () awful.util.spawn("ario") end),
+	key({ modkey }, "uacute", function () awful.util.spawn(menu .. "mpd.sh") end),
 	key({ modkey }, "p", function () awful.util.spawn("pidof mpd && killall mpd || mpd") end),
 	key({ modkey }, "minus", function () awful.util.spawn("mpc toggle") end),
 	key({ modkey }, "period", function () awful.util.spawn("mpc next") end),
@@ -482,7 +491,7 @@ end)--}}}
 -- {{{ Autostart
 awful.util.spawn("xrandr --dpi 100")
 awful.util.spawn("xrdb -merge /home/lukas/.Xresources")
-awful.util.spawn("pidof urxvtd >/dev/null || urxvtd -q")
+--awful.util.spawn("pidof urxvtd >/dev/null || urxvtd -q")
 awful.util.spawn("killall conky >/dev/null; conky -q")
 --awful.util.spawn("pidof pidgin >/dev/null || pidgin")
 awful.util.spawn("pidof easystroke >/dev/null || /home/lukas/apps/easystroke/easystroke")

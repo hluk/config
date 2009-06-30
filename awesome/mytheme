@@ -1,10 +1,10 @@
 # font          = Dejavu Sans bold 9
 #font          =  Anivers bold 11
-font          =  Aller Display 11
+#font          =  Aller bold 12
+font          = Diavlo bold 12.5
 
 bg_normal     = #22222222
-#bg_focus      = #28557765
-bg_focus      = #23ad2c
+bg_focus      = #2060a0
 bg_urgent     = #A10000
 
 fg_normal     = #999999
@@ -13,8 +13,7 @@ fg_urgent     = #ffffff
 
 border_width  = 3
 border_normal = #333333
-#border_focus  = #4C7899
-border_focus  = #23ad2c
+border_focus  = #2060a0
 border_marked = #91231c
 
 # There are another variables sets

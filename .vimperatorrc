@@ -1,2 +1,3 @@
 map _ <C-z>
+set guioptions=Brbn
 
