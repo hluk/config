@@ -1,6 +1,6 @@
 set nocompatible
 set mouse=a
-set fileencodings=utf-8,iso8859-2,cp1250
+set fileencodings=utf-8,iso8859-2,cp852,cp1250
 set fileformats=unix,dos
 set binary
 " command history size
@@ -37,27 +37,34 @@ filetype indent on
 
 " 256 colors
 set t_Co=256
-set t_AB=[48;5;%dm
-set t_AF=[38;5;%dm
+"set t_AB=[48;5;%dm
+"set t_AF=[38;5;%dm
 
 " font in gui
 if has("gui_running")
 	gui
-	"set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
-	"set guifont=Liberation\ Mono\ 12
-	"set guifont=Monospace\ 12
-	"set guifont=DejaVu\ Sans\ Mono\ 12
-	set guifont=Consolas\ 13
-	"set guifont=Inconsolata\ 14
-	colorscheme rainbow_breeze
+	"set guifont=Bitstream\ Vera\ Sans\ Mono\ 16
+	"set guifont=Liberation\ Mono\ 16
+	"set guifont=Monospace\ 16
+	"set guifont=DejaVu\ Sans\ Mono\ 16
+	set guifont=Consolas\ 16
+	"set guifont=Inconsolata\ 16
+
+	colorscheme wombat
+	"colorscheme xoria256
+	
+	"colorscheme rainbow_breeze
+	
+	"colorscheme soso
+	"colorscheme khaki
 else
 	"colorscheme redblack
 	"colorscheme 256-jungle
 	"colorscheme molokai
-	"colorscheme wombat256
-	colorscheme kellys
+	colorscheme wombat256
+	"colorscheme kellys
 	
-        "colorscheme calmar256-light
+	"colorscheme calmar256-light
 	"colorscheme khaki
 	"colorscheme soso
 endif
@@ -93,13 +100,22 @@ nmap <C-S-F9> zM
 "" TABS
 map tn :tabnew<CR>
 map td :tabclose<CR>
+map [5;5~ :tabprev<CR>
+map [6;5~ :tabnext<CR>
+
+"" windows
+map <TAB> <C-W><C-W>
+map <S-TAB> <C-W><S-W>
 
 "" toggle comment
 map <C-C> ,c<SPACE>j
 imap <C-C> <C-o>,c<SPACE><DOWN>
 
 "" taglist
-map tt :TlistToggle<CR>
+map TT :TlistToggle<CR>
+
+"" NERDTree
+map tt :NERDTreeToggle<CR>
 
 "" omnicpp C++ code completion
 " RUN: exuberant-ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f ~/.vim/systags /usr/include/
@@ -147,4 +163,8 @@ imap <silent> <C-M-h> <C-o>:%!xxd -r<CR>
 vmap <silent> <C-M-h> :<C-u>!xxd -r<CR>
 
 let NERDShutUp=1
+
+" view tabs and trailing spaces
+"set list
+"set listchars=tab:»·,trail:·
 

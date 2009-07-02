@@ -24,10 +24,15 @@ bindkey '[4~' end-of-line
 bindkey '[3~' delete-char
 
 # env
-export CFLAGS="-pipe -O2 -march=pentium4 -msse2 -mfpmath=sse -fomit-frame-pointer"
 export CHOST="i686-pc-linux-gnu"
+export CFLAGS="-pipe -O2 -march=pentium4 -msse2 -mfpmath=sse -fomit-frame-pointer"
 export CXXFLAGS="${CFLAGS}"
 export MAKEOPTS="-j2"
+# ccache
+export PATH="/usr/lib/ccache/bin/:$PATH"
+export CCACHE_DIR="$HOME/.ccache"
+export CCACHE_SIZE="4G"
+export SANDBOX_WRITE="${SANDBOX_WRITE}:${CCACHE_DIR}"
 
 export MANPAGER=vimmanpager
 export EDITOR=vim
@@ -52,6 +57,10 @@ alias ri="ri -Tf ansi"
 alias s="screen"
 alias irb="irb --readline -r irb/completion"
 alias x="startx > .xsession 2>&1 &"
+alias lpr="lpr -o InputSlot=Default -o Resolution=600x600dpi -o PageSize=A4"
+
+
+alias rcdiff="vimdiff {~/.config,/etc/xdg}/awesome/rc.lua"
 
 # X server running?
 if [ -n "$DISPLAY" ]
@@ -67,12 +76,13 @@ then
 	esac
 
 	# aliases for X
-	alias mc="EDITOR=\"$HOME/svim.sh\" mc -x"
-	alias feb="$HOME/feb > /dev/null 2>&1 &"
-	alias febt="THUMBS=1 $HOME/feb > /dev/null 2>&1 &"
+	alias mc="mc -x"
+	alias feb="$HOME/feb"
+	alias febt="THUMBS=1 $HOME/feb"
 	alias smplayer="LANG=C smplayer"
-	alias e="$HOME/svim.sh"
-	export EDITOR="$HOME/svim.sh"
+	#export EDITOR="$HOME/svim.sh"
+	export EDITOR="gvim"
+	alias e="$EDITOR"
 fi
 
 #cd ~

@@ -1,18 +1,15 @@
 #!/bin/sh
 function listAll {
-	LIST=`mpc ls "$1" 2> /dev/null` || exit 0
-
-	echo "$LIST"
-	echo "$LIST" | while read Y
-	do
-		listAll "$Y"
-	done
+	awk -F ': ' '
+	$1 == "begin" {print $2;}
+	$1 == "filename" {print dir"/"$2;}
+	' ~/.mpd/db
 }
 
 INFO=`mpc`
-RND=`awk '$0~/^volume:/{print $6}' <<< "$INFO"`
-SINGLE=`awk '$0~/^volume:/{print $8}' <<< "$INFO"`
-CONSUME=`awk '$0~/^volume:/{print $10}' <<< "$INFO"`
+RND=`sed -n 's/.*random: \([^ ]*\).*/\1/p' <<< "$INFO"`
+SINGLE=`sed -n 's/.*single: \([^ ]*\).*/\1/p' <<< "$INFO"`
+CONSUME=`sed -n 's/.*consume: \([^ ]*\).*/\1/p' <<< "$INFO"`
 # actions
 ACTS="\
 add

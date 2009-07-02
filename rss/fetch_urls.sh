@@ -29,15 +29,18 @@ TIME=$(date '+%s')
 
 for URL in $URLS
 do
-	#MD5=$(echo "$URL" | md5sum | awk '{print $1; quit;}')
-	LISTNAME=$(echo "$URL" | sed 's_^[a-z]*://__;s/[\.\/]/_/g')
-	OLDLIST="$LISTDIR/$LISTNAME.lst"
+	MD5=$(echo "$URL" | md5sum | awk '{print $1; quit;}')
+	#LISTNAME=$(echo "$URL" | sed 's_^[a-z]*://__;s/[\.\/]/_/g')
+	OLDLIST="$LISTDIR/$MD5.lst"
 
 	mkdir -p "$LISTDIR"
+	touch "$LISTDIR/$MD5.lst"
 
 	echo -n "* Fetching rss \"$URL\" ... "
-	NEWLIST="`($SCRIPTPATH/rss_urls.sh "$URL" && cat "$OLDLIST") | sort | uniq -u`" &&
-		echo "Ok" || (echo "FAILED!"; continue)
+	$SCRIPTPATH/rss_urls.sh "$URL" | sort > "$OLDLIST.new"
+	NEWLIST="`diff "$OLDLIST.new" "$OLDLIST" --new-group-format='%<' --unchanged-group-format=''`"
+	test $? -eq 2 && (echo "FAILED!"; continue)
+	echo "Ok"
 
 	if [ -n "$NEWLIST" ]
 	then
@@ -65,12 +68,14 @@ do
 			"$GETPATH/imgboard/imgboard.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
 			;;
 		esac && (
-			# remember saved urls (max 200 lines per list)
-			(echo "$NEWLIST" && cat "$OLDLIST") | head -n200 > "$OLDLIST.new" &&
-				mv "$OLDLIST.new" "$OLDLIST"
+			# remember new urls and max 200 old
+			tail -n200 "$OLDLIST" | sort -m - "$OLDLIST.new" > "$OLDLIST.tmp" &&
+				mv "$OLDLIST.tmp" "$OLDLIST"
 			echo "  }}}"
 			)
 	fi
+
+	rm -f "$OLDLIST.new"
 done
 
 rm -f "$PIDFILE"

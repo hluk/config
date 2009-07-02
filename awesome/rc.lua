@@ -1,6 +1,7 @@
 require("awful")
 require("beautiful")
-require('naughty')
+-- Notification library
+require("naughty")
 
 -- THEME
 theme_path = awful.util.getdir("config") .. "/mytheme"
@@ -65,7 +66,9 @@ floatapps =
 	speedcrunch = true,
 	rxvtpopup = true,
 	designer = true,
-	["NO$GBA.EXE"] = true
+	["NO$GBA.EXE"] = true,
+	-- FreeRapid
+	["sun-awt-X11-XFramePeer"] = true
 }
 
 tag_count = 5
@@ -197,6 +200,7 @@ globalkeys = {
 	key({}, "Menu", function () awful.util.spawn("$HOME/dev/invert_colors/invert") end),
 	key({modkey}, "KP_Divide", function () awful.util.spawn("xrandr -s 1024x768") end),
 	key({modkey}, "KP_Multiply", function () awful.util.spawn("xrandr -s 1920x1200") end),
+	key({ modkey }, "t", function () awful.util.spawn("$HOME/apps/xviservicethief/bin/xvst") end),
 	
 	key({ modkey, "Control" }, "r", function ()
 	                                           mypromptbox[mouse.screen].text =
@@ -496,5 +500,6 @@ awful.util.spawn("killall conky >/dev/null; conky -q")
 --awful.util.spawn("pidof pidgin >/dev/null || pidgin")
 awful.util.spawn("pidof easystroke >/dev/null || /home/lukas/apps/easystroke/easystroke")
 awful.util.spawn("pidof xbindkeys || (sleep 10 && xbindkeys)")
+awful.util.spawn("pidof parcellite || parcellite")
 -- }}}
 
