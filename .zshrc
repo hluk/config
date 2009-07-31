@@ -37,6 +37,8 @@ export SANDBOX_WRITE="${SANDBOX_WRITE}:${CCACHE_DIR}"
 export MANPAGER=vimmanpager
 export EDITOR=vim
 
+export XDG_DATA_HOME="$HOME/.config"
+
 # ConTeXt
 #export PATH=/home/lukas/apps/context/tex/texmf-linux/bin:$PATH
 #export TEXMF=/home/lukas/apps/context/tex/texmf-linux
@@ -58,7 +60,6 @@ alias s="screen"
 alias irb="irb --readline -r irb/completion"
 alias x="startx > .xsession 2>&1 &"
 alias lpr="lpr -o InputSlot=Default -o Resolution=600x600dpi -o PageSize=A4"
-
 
 alias rcdiff="vimdiff {~/.config,/etc/xdg}/awesome/rc.lua"
 
@@ -83,7 +84,6 @@ then
 	#export EDITOR="$HOME/svim.sh"
 	export EDITOR="gvim"
 	alias e="$EDITOR"
+	alias v="$HOME/apps/comix/src/comix.py"
 fi
-
-#cd ~
 

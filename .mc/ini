@@ -91,8 +91,8 @@ permission_mode=1
 filetype_mode=1
 
 [Dirs]
-current_is_left=0
-other_dir=/#ftp:ftpuser@nmt/Video/anime
+current_is_left=1
+other_dir=/home
 
 [New Left Panel]
 display=listing

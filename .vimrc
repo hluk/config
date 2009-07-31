@@ -50,10 +50,10 @@ if has("gui_running")
 	set guifont=Consolas\ 16
 	"set guifont=Inconsolata\ 16
 
-	colorscheme wombat
+	"colorscheme wombat
 	"colorscheme xoria256
 	
-	"colorscheme rainbow_breeze
+	colorscheme rainbow_breeze
 	
 	"colorscheme soso
 	"colorscheme khaki
@@ -133,6 +133,7 @@ autocmd FileType haskell set expandtab
 " pysmell autocompletion for python
 " first generate tags with 'pysmell .' in project path
 "autocmd FileType python setlocal omnifunc=pysmell#Complete
+autocmd FileType python imap <Tab> <C-X><C-O>
 
 " KEYS
 " save
