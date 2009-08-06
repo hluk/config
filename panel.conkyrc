@@ -8,8 +8,8 @@ border_margin 0
 gap_x 0
 gap_y 1
 alignment tl
-maximum_width 1840
-minimum_size 1840 19
+maximum_width 1920
+minimum_size 1920 19
 
 update_interval 3
 
@@ -43,4 +43,4 @@ xftfont Diavlo:size=12.5:bold
 #${if_running xmms2d}$color  •  ${color1}$xmms2_elapsed${color2}|$xmms2_duration|${color1} ${xmms2_smart}${endif}
 #•  ${color0}Mem ${color1}$memfree${color0} free$color  
 TEXT
- ${color1}${time %H:%M • %a %d/%m}${color2} ${alignc -50} $kernel ${color1}$uptime_short$color  •  ${color0}CPU ${color1}${cpu}${color2}%$color  •  ${color0}Root ${color1}${font}${fs_free /}${color2}/${color1}${fs_size /}$color  •  ${color0}Down ${color1}${downspeedf eth0}${color2} KiB/s$color  •  ${color0}Up ${color1}${upspeedf eth0}${color2} KiB/s${if_running mpd}$color  •  ${color1}$mpd_elapsed${color2}|$mpd_length|${color1} ${mpd_smart}${endif}
+ ${color1}${time %H:%M • %a %d/%m}${color2} ${alignc -50} $kernel ${color1}$uptime_short$color  •  ${color0}CPU ${color1}${cpu}${color2}%$color  •  ${color0}Root ${color1}${font}${fs_free /}${color2}/${color1}${fs_size /}$color  •  ${color0}Down ${color1}${downspeedf eth0}${color2} KiB/s$color  •  ${color0}Up ${color1}${upspeedf eth0}${color2} KiB/s${if_running mpd}$color  •  ${color1}$mpd_elapsed${color2}|$mpd_length|${color1} $mpd_smart${endif}

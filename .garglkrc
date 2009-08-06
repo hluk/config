@@ -128,36 +128,36 @@ caretshape	2	# 0=smalldot 1=fatdot 2=thinline 3=fatline 4=block
 # morealign	1	# 0=left 1=center 2=right
 # morefont	propb
 
-windowcolor	909090  # overall window background color
+windowcolor	aaaaaa  # overall window background color
 bordercolor	ffffff	# border line color
 caretcolor	ffffff	# input caret color
-morecolor	a0a0a0  # more prompt color
+morecolor	ffffff  # more prompt color
 
 # Colors for text buffer windows
-tcolor  0 000000 909090 # Normal
-tcolor  1 d0d0d0 909090 # Emphasized
-tcolor  2 ffffff 909090 # Preformatted
-tcolor  3 ffffff 909090 # Header
-tcolor  4 ffffff 909090 # Subheader
-tcolor  5 ffffff 909090 # Alert
-tcolor  6 ffffff 909090 # Note
-tcolor  7 ffffff 909090 # BlockQuote
-tcolor  8 404040 909090 # Input
-tcolor  9 ffffff 909090 # User1
-tcolor 10 ffffff 909090 # User2
+tcolor  0 000000 aaaaaa # Normal
+tcolor  1 500000 aaaaaa # Emphasized
+tcolor  2 ffffff aaaaaa # Preformatted
+tcolor  3 ffffff aaaaaa # Header
+tcolor  4 ffffff aaaaaa # Subheader
+tcolor  5 ffffff aaaaaa # Alert
+tcolor  6 ffffff aaaaaa # Note
+tcolor  7 ffffff aaaaaa # BlockQuote
+tcolor  8 606060 aaaaaa # Input
+tcolor  9 ffffff aaaaaa # User1
+tcolor 10 ffffff aaaaaa # User2
 
 # Colors for text grid windows
-gcolor  0 ffffff 909090 # Normal
-gcolor  1 ffffff 909090 # Emphasized
-gcolor  2 ffffff 909090 # Preformatted
-gcolor  3 ffffff 909090 # Header
-gcolor  4 ffffff 909090 # Subheader
-gcolor  5 ffffff 909090 # Alert
-gcolor  6 ffffff 909090 # Note
-gcolor  7 ffffff 909090 # BlockQuote
-gcolor  8 ffffff 909090 # Input
-gcolor  9 909090 cccccc # User1
-gcolor 10 909090 cccccc # User2
+gcolor  0 ffffff aaaaaa # Normal
+gcolor  1 ffffff aaaaaa # Emphasized
+gcolor  2 ffffff aaaaaa # Preformatted
+gcolor  3 ffffff aaaaaa # Header
+gcolor  4 ffffff aaaaaa # Subheader
+gcolor  5 ffffff aaaaaa # Alert
+gcolor  6 ffffff aaaaaa # Note
+gcolor  7 ffffff aaaaaa # BlockQuote
+gcolor  8 ffffff aaaaaa # Input
+gcolor  9 aaaaaa cccccc # User1
+gcolor 10 aaaaaa cccccc # User2
 
 # ------------------------------------------------------------------
 #
@@ -168,15 +168,15 @@ gcolor 10 909090 cccccc # User2
 
 [ Agility Arun Magnetic Nitfol Scare ]
 
-gcolor  0 909090 a0a0a0 # Normal
-gcolor  1 909090 a0a0a0 # Emphasized
-gcolor  2 909090 a0a0a0 # Preformatted
-gcolor  3 909090 a0a0a0 # Header
-gcolor  4 909090 a0a0a0 # Subheader
-gcolor  5 909090 a0a0a0 # Alert
-gcolor  6 909090 a0a0a0 # Note
-gcolor  7 909090 a0a0a0 # BlockQuote
-gcolor  8 909090 a0a0a0 # Input
+gcolor  0 aaaaaa a0a0a0 # Normal
+gcolor  1 aaaaaa a0a0a0 # Emphasized
+gcolor  2 aaaaaa a0a0a0 # Preformatted
+gcolor  3 aaaaaa a0a0a0 # Header
+gcolor  4 aaaaaa a0a0a0 # Subheader
+gcolor  5 aaaaaa a0a0a0 # Alert
+gcolor  6 aaaaaa a0a0a0 # Note
+gcolor  7 aaaaaa a0a0a0 # BlockQuote
+gcolor  8 aaaaaa a0a0a0 # Input
 
 [ Magnetic ]
 cols 68
@@ -195,8 +195,8 @@ rows 25
 wborderx 1
 wbordery 1
 
-gcolor 9  ffffff 909090
-gcolor 10 ffffff 909090
+gcolor 9  ffffff aaaaaa
+gcolor 10 ffffff aaaaaa
 
 # [ Agility ]
 # monoaspect 0.8	# squeeze mono font

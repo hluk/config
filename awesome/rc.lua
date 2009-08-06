@@ -8,7 +8,7 @@ theme_path = awful.util.getdir("config") .. "/mytheme"
 beautiful.init(theme_path)
 
 -- move mouse to corner
-mouse.coords({x=0,y=1200})
+--mouse.coords({x=0,y=1200})
 
 -- {{{ Variable definitions
 -- Defaul apps and paths
@@ -51,6 +51,7 @@ layouts =
 -- a console app in a terminal like (Music on Console)
 floatapps =
 {	MPlayer = true
+,	["NO$GBA.EXE"] = true
 ,	Conky_panel = true
 ,	gimp = true
 ,	speedcrunch = true
@@ -62,6 +63,7 @@ floatapps =
 -- Use the screen and tags indices.
 apptags =
 {	Firefox = { screen = 1, tag = 2 }
+,	chrome = { screen = 1, tag = 2 }
 ,	Uzbl = { screen = 1, tag = 2 }
 ,	pidgin = { screen = 1, tag = 3 }
 ,	designer = { screen = 1, tag = 5 }
@@ -109,7 +111,7 @@ end
 
 -- {{{ Wibox
 -- Create a systray
-mysystray = widget({ type = "systray", align = "right" })
+mysystray = widget({ type = "systray", align = "left" })
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -139,17 +141,17 @@ for s = 1, screen.count() do
                                               end, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = wibox({ position = "bottom", height=20, fg = beautiful.fg_normal, bg = beautiful.bg_normal })
+    mywibox[s] = wibox({ position = "bottom", height=20 })
     -- Add widgets to the wibox - order matters
-    mywibox[s].widgets = { mylauncher,
+    mywibox[s].widgets = { mysystray,
+	                   mylauncher,
                            mytaglist[s],
                            mytasklist[s],
                            mypromptbox[s] }
     mywibox[s].screen = s
     
     -- Create the wibox2
-    mywibox2[s] = wibox({ position = "top", bg = '#00000000', align="right", height=20, width=80})
-    mywibox2[s].widgets = { mysystray }
+    mywibox2[s] = wibox({ position = "top", bg = '#00000000', align="right", height=20})
     mywibox2[s].screen = s
 
 end
@@ -181,7 +183,7 @@ globalkeys = {
 	key({ modkey }, "c", function () awful.util.spawn(calc) end),
 	key({ modkey }, "x", function () awful.util.spawn("xkill") end),
 	key({ modkey }, "f", function () awful.util.spawn("firefox") end),
-	key({ modkey }, "w", function () awful.util.spawn(home.."/uzbl.sh") end),
+	key({ modkey }, "w", function () awful.util.spawn("all_proxy='127.0.0.1:8118' chromium-bin --enable-greasemonkey --enable-user-scripts --enable-extensions --enable-plugins") end),
 	key({}, "Menu", function () awful.util.spawn(home.."/dev/invert_colors/invert") end),
 	key({modkey}, "KP_Divide", function () awful.util.spawn("xrandr -s 1024x768") end),
 	key({modkey}, "KP_Multiply", function () awful.util.spawn("xrandr -s 1920x1200") end),
