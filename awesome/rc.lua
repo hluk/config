@@ -1,26 +1,24 @@
 require("awful")
 require("beautiful")
-require('naughty')
+-- Notification library
+require("naughty")
 
 -- THEME
 theme_path = awful.util.getdir("config") .. "/mytheme"
 beautiful.init(theme_path)
 
 -- move mouse to corner
-mouse.coords({x=0,y=1200})
+--mouse.coords({x=0,y=1200})
 
 -- {{{ Variable definitions
---theme_path = "/usr/share/awesome/themes/default/theme"
-
 -- Defaul apps and paths
+home = "/home/lukas"
 --terminal = "urxvtc -geometry 141x57 -e $HOME/screen"
-terminal = "sakura -e $HOME/screen"
-editor_cmd = "gvim"
-calc = "/home/lukas/apps/speedcrunch/build/speedcrunch"
-bindir = "/home/lukas/dev/bin/"
-osd = "conky -c "
-menu = "/home/lukas/dev/menus/"
-foobar = "wine 'C:/Program Files/foobar2000/foobar2000.exe'"
+terminal = "sakura -e "..home.."/screen"
+calc = home.."/apps/speedcrunch/build/speedcrunch"
+bindir = home.."/dev/bin/"
+menu = home.."/dev/menus/"
+--foobar = "wine 'C:/Program Files/foobar2000/foobar2000.exe'"
 
 -- VOLUME
 function volumeup()
@@ -31,54 +29,44 @@ function volumedown()
 	awful.util.spawn(bindir .. "volume.sh 1%-")
 end
 
--- moc player: currently player song
-function mocinfo()
-	awful.util.spawn(bindir .. "awesome_moc.sh")
-end
-
 -- MODKEY
 modkey = "Mod4"
 history = awful.client.focus.history
 
 -- Table of layouts to cover with awful.layout.inc, order matters.
 layouts =
-{
-    awful.layout.suit.max,
-    awful.layout.suit.tile.bottom,
-    awful.layout.suit.tile.top,
-    awful.layout.suit.tile,
-    awful.layout.suit.tile.left,
-    awful.layout.suit.fair,
-    awful.layout.suit.fair.horizontal,
-    awful.layout.suit.max.fullscreen,
-    awful.layout.suit.floating
+{	awful.layout.suit.max
+,	awful.layout.suit.tile.bottom
+,	awful.layout.suit.tile.top
+,	awful.layout.suit.tile
+,	awful.layout.suit.tile.left
+,	awful.layout.suit.fair
+,	awful.layout.suit.fair.horizontal
+,	awful.layout.suit.max.fullscreen
+,	awful.layout.suit.floating
 }
 
 -- Table of clients that should be set floating. The index may be either
 -- the application class or instance. The instance is useful when running
 -- a console app in a terminal like (Music on Console)
 floatapps =
-{
-	MPlayer = true,
-	Conky_panel = true,
-	gimp = true,
-	speedcrunch = true,
-	rxvtpopup = true,
-	designer = true,
-	["NO$GBA.EXE"] = true
+{	MPlayer = true
+,	["NO$GBA.EXE"] = true
+,	Conky_panel = true
+,	gimp = true
+,	speedcrunch = true
+,	rxvtpopup = true
+,	designer = true
 }
 
-tag_count = 5
 -- Applications to be moved to a pre-defined tag by class or instance.
 -- Use the screen and tags indices.
 apptags =
-{
-	Firefox = { screen = 1, tag = 2 },
-	mocp = { screen = 1, tag = 4 },
-	["beep-media-player-2-bin"] = { screen = 1, tag = 4 },
-	["NO$GBA.EXE"] = { screen = 1, tag = 5 },
-	pidgin = { screen = 1, tag = 3 },
-	designer = { screen = 1, tag = 5 }
+{	Firefox = { screen = 1, tag = 2 }
+,	chrome = { screen = 1, tag = 2 }
+,	Uzbl = { screen = 1, tag = 2 }
+,	pidgin = { screen = 1, tag = 3 }
+,	designer = { screen = 1, tag = 5 }
 }
 
 -- NOTIFICATIONS
@@ -86,8 +74,8 @@ naughty.config.timeout          = 5
 naughty.config.screen           = 1
 naughty.config.position         = "top_right"
 naughty.config.margin           = 4
-naughty.config.height           = 16
-naughty.config.width            = 400
+naughty.config.height           = 24
+naughty.config.width            = 500
 naughty.config.gap              = 1
 naughty.config.ontop            = true
 naughty.config.font             = beautiful.font or "Verdana 8"
@@ -104,6 +92,7 @@ naughty.config.hover_timeout    = nil
 
 -- {{{ Tags
 -- Define tags table.
+tag_count = 5
 tags = {}
 for s = 1, screen.count() do
     -- Each screen has its own tag table.
@@ -122,7 +111,7 @@ end
 
 -- {{{ Wibox
 -- Create a systray
-mysystray = widget({ type = "systray", align = "right" })
+mysystray = widget({ type = "systray", align = "left" })
 
 -- Create a wibox for each screen and add it
 mywibox = {}
@@ -152,17 +141,17 @@ for s = 1, screen.count() do
                                               end, mytasklist.buttons)
 
     -- Create the wibox
-    mywibox[s] = wibox({ position = "bottom", height=20, fg = beautiful.fg_normal, bg = beautiful.bg_normal })
+    mywibox[s] = wibox({ position = "bottom", height=20 })
     -- Add widgets to the wibox - order matters
-    mywibox[s].widgets = { mylauncher,
+    mywibox[s].widgets = { mysystray,
+	                   mylauncher,
                            mytaglist[s],
                            mytasklist[s],
                            mypromptbox[s] }
     mywibox[s].screen = s
     
     -- Create the wibox2
-    mywibox2[s] = wibox({ position = "top", bg = '#00000000', align="right", height=20, width=80})
-    mywibox2[s].widgets = { mysystray }
+    mywibox2[s] = wibox({ position = "top", bg = '#00000000', align="right", height=20})
     mywibox2[s].screen = s
 
 end
@@ -194,17 +183,19 @@ globalkeys = {
 	key({ modkey }, "c", function () awful.util.spawn(calc) end),
 	key({ modkey }, "x", function () awful.util.spawn("xkill") end),
 	key({ modkey }, "f", function () awful.util.spawn("firefox") end),
-	key({}, "Menu", function () awful.util.spawn("$HOME/dev/invert_colors/invert") end),
+	key({ modkey }, "w", function () awful.util.spawn("all_proxy='127.0.0.1:8118' chromium-bin --enable-greasemonkey --enable-user-scripts --enable-extensions --enable-plugins") end),
+	key({}, "Menu", function () awful.util.spawn(home.."/dev/invert_colors/invert") end),
 	key({modkey}, "KP_Divide", function () awful.util.spawn("xrandr -s 1024x768") end),
 	key({modkey}, "KP_Multiply", function () awful.util.spawn("xrandr -s 1920x1200") end),
+	key({ modkey }, "t", function () awful.util.spawn(home.."/apps/xviservicethief/bin/xvst") end),
 	
 	key({ modkey, "Control" }, "r", function ()
 	                                           mypromptbox[mouse.screen].text =
 	                                               awful.util.escape(awful.util.restart())
 	                                end),
-	key({ modkey, "Shift" }, "q", function () awful.util.spawn("~/shutdown.sh") end),
-	key({ modkey, "Control" }, "e", function () awful.util.spawn("gvim $HOME/.config/awesome/rc.lua") end),
-	key({ modkey }, "s", function () awful.util.spawn("~/dev/qt/qdict/qdict") end),
+	key({ modkey, "Shift" }, "q", function () awful.util.spawn("sakura -e "..home.."/shutdown.sh") end),
+	key({ modkey, "Control" }, "e", function () awful.util.spawn("gvim "..home.."/.config/awesome/rc.lua") end),
+	key({ modkey }, "s", function () awful.util.spawn(home.."/dev/qt/qdict/qdict") end),
 	
 	-- menus
 	key({ modkey }, "r", function () awful.util.spawn(menu .. "runmenu.sh") end),
@@ -230,13 +221,6 @@ globalkeys = {
 	key({ modkey, "Control" }, "period", function () awful.util.spawn("mpc seek +10") end),
 	key({ modkey, "Control" }, "comma", function () awful.util.spawn("mpc seek -10") end),
 
-	-- mocp
-	--key({ modkey }, "p", function () awful.util.spawn("urxvtc -name mocp -title mocp -e mocp") end),
-	--key({ modkey }, "minus", function () awful.util.spawn("mocp -G") end),
-	--key({ modkey }, "period", function () awful.util.spawn("mocp -f") end),
-	--key({ modkey }, "comma", function () awful.util.spawn("mocp -r") end),
-	--key({ modkey }, "dead_diaeresis", mocinfo),
-	
 	-- foobar2000 (wine),
 	--key({ modkey }, "p", function () awful.util.spawn(foobar) end),
 	--key({ modkey }, "minus", function () awful.util.spawn(foobar .. " /playpause") end),
@@ -256,12 +240,11 @@ globalkeys = {
 	key({ modkey, "Control" }, "k", function () awful.screen.focus(-1) end),
 	key({ modkey }, "Tab",
         function ()
-	    awful.client.focus.history.previous()
+	    history.previous()
 	    if client.focus then
 		client.focus:raise()
 	    end
         end),
-
 	
 	-- Layout manipulation
 	key({ modkey }, "l", function () awful.tag.incmwfact(0.05) end),
@@ -478,7 +461,7 @@ awful.hooks.arrange.register(function (screen)--{{{
     -- Give focus to the latest client in history if no window has focus
     -- or if the current window is a desktop or a dock one.
     if not client.focus then
-        local c = awful.client.focus.history.get(screen, 0)
+        local c = history.get(screen, 0)
         if c then client.focus = c end
     end
 end)--}}}
@@ -490,11 +473,11 @@ end)--}}}
 
 -- {{{ Autostart
 awful.util.spawn("xrandr --dpi 100")
-awful.util.spawn("xrdb -merge /home/lukas/.Xresources")
---awful.util.spawn("pidof urxvtd >/dev/null || urxvtd -q")
-awful.util.spawn("killall conky >/dev/null; conky -q")
+--awful.util.spawn("xrdb -merge /home/lukas/.Xresources")
 --awful.util.spawn("pidof pidgin >/dev/null || pidgin")
-awful.util.spawn("pidof easystroke >/dev/null || /home/lukas/apps/easystroke/easystroke")
-awful.util.spawn("pidof xbindkeys || (sleep 10 && xbindkeys)")
+--awful.util.spawn("pidof xbindkeys || (sleep 10 && xbindkeys)")
+awful.util.spawn("killall conky >/dev/null; conky -q")
+awful.util.spawn("pidof easystroke >/dev/null || "..home.."/apps/easystroke/easystroke")
+awful.util.spawn("pidof parcellite || parcellite")
 -- }}}
 

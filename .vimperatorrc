@@ -1,3 +1,4 @@
-map _ <C-z>
+map <C-y> <C-z>
 set guioptions=Brbn
+set defsearch=gg
 

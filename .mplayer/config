@@ -1,0 +1,48 @@
+### audio/video output
+ao=alsa #,sdl,pulse,oss,arts
+#vo=xv
+vo=xvmc,xv:adaptor=0,xv
+#vo=x11
+#zoom=yes
+#vo=gl:yuv=3:swapinterval=1:force-pbo:ati-hack
+
+
+### VIDEO
+vf=screenshot
+# direct rendering
+dr=1
+#full screen
+fs=1
+autosync=30
+framedrop=no
+lavdopts=skiploopfilter=all,threads=3
+#noslices=1
+#stop-xscreensaver=1
+
+
+### AUDIO
+# reduce noise, volume normalization
+#af=sinesuppress=1:volnorm=2
+af=volnorm=2,scaletempo
+channels=2
+
+
+### OSD/FONT
+osdlevel=1
+ass=1
+embeddedfonts=1
+ass-color=ffe68200
+ass-border-color=40404000
+ass-force-style=Outline=1
+fontconfig=1
+font=Verdana
+subfont-autoscale=3
+ass-font-scale=1
+subcp=CP1250
+subpos=100
+
+
+# MISC
+nocache=1
+idx=1
+

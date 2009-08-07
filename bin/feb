@@ -1,6 +1,6 @@
 #!/bin/bash
 # browse images given as parameter or images in current directory
-test $# -eq 0 && ARGS=. || ARGS=$@
+test $# -eq 0 && ARGS=. || ARGS=("$@")
 
 # THUMBS != "" => thumbnail mode
 THUMBS=${THUMBS:-}
@@ -35,5 +35,5 @@ ACTION9='
 	'
 
 # COMMAND LINE
-feh $ARG -S filename "$ARGS" --action1 "$ACTION1" --action2 "$ACTION2" --action3 "$ACTION3" --action9 "$ACTION9"
+feh $ARG -S filename --action1 "$ACTION1" --action2 "$ACTION2" --action3 "$ACTION3" --action9 "$ACTION9" "${ARGS[@]}" > /dev/null 2>&1 &
 

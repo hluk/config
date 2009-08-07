@@ -85,8 +85,8 @@ Rxvt.transparent: false
 Xft.antialias:true
 Xft.dpi:100
 Xft.hinting:true
-Xft.hintstyle:hintslight
-Xft.rgba:none
+Xft.hintstyle:hintfull
+Xft.rgba:rgb
 
 !Xcursor.theme: gruppled_black
 Xcursor.theme: neutral

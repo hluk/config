@@ -333,7 +333,8 @@ shell/.xpm
 	View=sxpm %f
 
 include/image
-	Open=(wine "c:/Program Files/XnView/xnview.exe" %f >/dev/null 2>&1 &)
+	Open=(~/apps/comix/src/comix.py %f >/dev/null 2>&1 &)
+	#Open=(wine "c:/Program Files/XnView/xnview.exe" %f >/dev/null 2>&1 &)
 	#Open=(~/feb %f >/dev/null 2>&1 &)
 	#Open=(gwenview %f >/dev/null 2>&1 &)
 	#Open=if [ "$DISPLAY" = "" ]; then zgv %f; else (gqview %f &); fi
@@ -443,6 +444,10 @@ type/^PDF
 	Open=(wine "C:\Program Files\PDFV_Portable\PDFXCview.exe" %f 1>/dev/null 2>&1 &)
 	#Open=(wine "C:\Program Files\SumatraPDF\SumatraPDF.exe" %f 1>/dev/null 2>&1 &)
 	View=%view{ascii} pdftotext %f -
+
+# chm
+type/^MS Windows HtmlHelp Data
+	Open=(xchm %f 1>/dev/null 2>&1 &)
 
 # The following code very ugly and should not be taken as example.
 # It should be cleaned up when the new format of mc.ext is developed.

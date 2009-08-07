@@ -16,10 +16,10 @@ DIR="$1"_"$2"
 mkdir -p "$DIR"
 
 URL_V="`echo "$FORMAT" | sed "s/<N>/$1/;s/<V>/$2/"`"
-for X in `seq 1 $3`
+for X in {1..$3}
 do
         URL_C="`echo "$URL_V" | sed "s/<C>/$X/"`"
-        wget -P "$DIR" -nH --cut-dirs=1 -pk -nc --restrict-file-names=windows "$URL_C" || break
+        wget -P "$DIR" -nH --cut-dirs=1 -p -k -nc --restrict-file-names=windows "$URL_C" || break
 done
 
 # rename html files
