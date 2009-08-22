@@ -1,8 +1,6 @@
 ### audio/video output
 ao=alsa #,sdl,pulse,oss,arts
-#vo=xv
-vo=xvmc,xv:adaptor=0,xv
-#vo=x11
+vo=xvmc,xv:adaptor=0
 #zoom=yes
 #vo=gl:yuv=3:swapinterval=1:force-pbo:ati-hack
 

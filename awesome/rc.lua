@@ -57,6 +57,7 @@ floatapps =
 ,	speedcrunch = true
 ,	rxvtpopup = true
 ,	designer = true
+,	["desmume-cli"] = true
 }
 
 -- Applications to be moved to a pre-defined tag by class or instance.
@@ -183,7 +184,7 @@ globalkeys = {
 	key({ modkey }, "c", function () awful.util.spawn(calc) end),
 	key({ modkey }, "x", function () awful.util.spawn("xkill") end),
 	key({ modkey }, "f", function () awful.util.spawn("firefox") end),
-	key({ modkey }, "w", function () awful.util.spawn("all_proxy='127.0.0.1:8118' chromium-bin --enable-greasemonkey --enable-user-scripts --enable-extensions --enable-plugins") end),
+	key({ modkey }, "w", function () awful.util.spawn(home.."/chromium.sh") end),
 	key({}, "Menu", function () awful.util.spawn(home.."/dev/invert_colors/invert") end),
 	key({modkey}, "KP_Divide", function () awful.util.spawn("xrandr -s 1024x768") end),
 	key({modkey}, "KP_Multiply", function () awful.util.spawn("xrandr -s 1920x1200") end),
@@ -472,7 +473,7 @@ end)--}}}
 -- }}}
 
 -- {{{ Autostart
-awful.util.spawn("xrandr --dpi 100")
+--awful.util.spawn("xrandr --dpi 100")
 --awful.util.spawn("xrdb -merge /home/lukas/.Xresources")
 --awful.util.spawn("pidof pidgin >/dev/null || pidgin")
 --awful.util.spawn("pidof xbindkeys || (sleep 10 && xbindkeys)")

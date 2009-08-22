@@ -83,7 +83,7 @@ Rxvt.inheritPixmap: true
 Rxvt.transparent: false
 
 Xft.antialias:true
-Xft.dpi:100
+!Xft.dpi:94
 Xft.hinting:true
 Xft.hintstyle:hintfull
 Xft.rgba:rgb
@@ -95,5 +95,5 @@ xpdf*enableFreetype:    yes
 xpdf*antialias:         yes
 xpdf*foreground:        black
 xpdf*background:        white
-xpdf*urlCommand:        /usr/bin/firefox %s
+!xpdf*urlCommand:        /usr/bin/chromium-bin %s
 

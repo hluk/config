@@ -89,7 +89,7 @@ color_terminals=
 
 [Layout]
 equal_split=1
-first_panel_size=73
+first_panel_size=79
 message_visible=0
 keybar_visible=1
 xterm_title=1

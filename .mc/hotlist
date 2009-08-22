@@ -21,5 +21,6 @@ GROUP "mnt"
   ENTRY "usb1" URL "/mnt/auto/usb1"
   ENTRY "cd" URL "/mnt/auto/cd"
   ENTRY "cd2" URL "/mnt/cd"
+  ENTRY "nmt" URL "/mnt/nmt"
 ENDGROUP
 ENTRY "ftp://nmt" URL "/#ftp:ftpuser@nmt"

@@ -122,42 +122,42 @@ gfont  10 monor		# User2
 
 gamma	1.0		# this only affects text rendering, not other colors
 
-caretshape	2	# 0=smalldot 1=fatdot 2=thinline 3=fatline 4=block
+caretshape	3	# 0=smalldot 1=fatdot 2=thinline 3=fatline 4=block
 
 # moreprompt	( more )
 # morealign	1	# 0=left 1=center 2=right
 # morefont	propb
 
-windowcolor	aaaaaa  # overall window background color
-bordercolor	ffffff	# border line color
-caretcolor	ffffff	# input caret color
-morecolor	ffffff  # more prompt color
+windowcolor	333333 # overall window background color
+bordercolor	ffffff # border line color
+caretcolor	ffffff # input caret color
+morecolor	ffffff # more prompt color
 
 # Colors for text buffer windows
-tcolor  0 000000 aaaaaa # Normal
-tcolor  1 500000 aaaaaa # Emphasized
-tcolor  2 ffffff aaaaaa # Preformatted
-tcolor  3 ffffff aaaaaa # Header
-tcolor  4 ffffff aaaaaa # Subheader
-tcolor  5 ffffff aaaaaa # Alert
-tcolor  6 ffffff aaaaaa # Note
-tcolor  7 ffffff aaaaaa # BlockQuote
-tcolor  8 606060 aaaaaa # Input
-tcolor  9 ffffff aaaaaa # User1
-tcolor 10 ffffff aaaaaa # User2
+tcolor  0 ffffff 333333 # Normal
+tcolor  1 500000 333333 # Emphasized
+tcolor  2 ffffff 333333 # Preformatted
+tcolor  3 ffffff 333333 # Header
+tcolor  4 ffffff 333333 # Subheader
+tcolor  5 ffffff 333333 # Alert
+tcolor  6 ffffff 333333 # Note
+tcolor  7 ffffff 333333 # BlockQuote
+tcolor  8 808080 333333 # Input
+tcolor  9 ffffff 333333 # User1
+tcolor 10 ffffff 333333 # User2
 
 # Colors for text grid windows
-gcolor  0 ffffff aaaaaa # Normal
-gcolor  1 ffffff aaaaaa # Emphasized
-gcolor  2 ffffff aaaaaa # Preformatted
-gcolor  3 ffffff aaaaaa # Header
-gcolor  4 ffffff aaaaaa # Subheader
-gcolor  5 ffffff aaaaaa # Alert
-gcolor  6 ffffff aaaaaa # Note
-gcolor  7 ffffff aaaaaa # BlockQuote
-gcolor  8 ffffff aaaaaa # Input
-gcolor  9 aaaaaa cccccc # User1
-gcolor 10 aaaaaa cccccc # User2
+gcolor  0 ffffff 333333 # Normal
+gcolor  1 ffffff 333333 # Emphasized
+gcolor  2 ffffff 333333 # Preformatted
+gcolor  3 ffffff 333333 # Header
+gcolor  4 ffffff 333333 # Subheader
+gcolor  5 ffffff 333333 # Alert
+gcolor  6 ffffff 333333 # Note
+gcolor  7 ffffff 333333 # BlockQuote
+gcolor  8 ffffff 333333 # Input
+gcolor  9 333333 cccccc # User1
+gcolor 10 333333 cccccc # User2
 
 # ------------------------------------------------------------------
 #

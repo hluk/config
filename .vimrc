@@ -50,10 +50,10 @@ if has("gui_running")
 	set guifont=Consolas\ 16
 	"set guifont=Inconsolata\ 16
 
-	"colorscheme wombat
+	colorscheme wombat
 	"colorscheme xoria256
 	
-	colorscheme rainbow_breeze
+	"colorscheme rainbow_breeze
 	
 	"colorscheme soso
 	"colorscheme khaki
