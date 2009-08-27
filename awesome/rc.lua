@@ -15,7 +15,7 @@ beautiful.init(theme_path)
 home = "/home/lukas"
 --terminal = "urxvtc -geometry 141x57 -e $HOME/screen"
 terminal = "sakura -e "..home.."/screen"
-calc = home.."/apps/speedcrunch/build/speedcrunch"
+calc = home.."/apps/speedcrunch/src/speedcrunch"
 bindir = home.."/dev/bin/"
 menu = home.."/dev/menus/"
 --foobar = "wine 'C:/Program Files/foobar2000/foobar2000.exe'"
@@ -58,6 +58,7 @@ floatapps =
 ,	rxvtpopup = true
 ,	designer = true
 ,	["desmume-cli"] = true
+,	["sun-awt-X11-XFramePeer"] = true
 }
 
 -- Applications to be moved to a pre-defined tag by class or instance.
@@ -189,6 +190,7 @@ globalkeys = {
 	key({modkey}, "KP_Divide", function () awful.util.spawn("xrandr -s 1024x768") end),
 	key({modkey}, "KP_Multiply", function () awful.util.spawn("xrandr -s 1920x1200") end),
 	key({ modkey }, "t", function () awful.util.spawn(home.."/apps/xviservicethief/bin/xvst") end),
+	key({ modkey }, "d", function () awful.util.spawn("java -jar '"..home.."/apps/JDownloader 0.7/JDownloader.jar'") end),
 	
 	key({ modkey, "Control" }, "r", function ()
 	                                           mypromptbox[mouse.screen].text =
@@ -473,10 +475,9 @@ end)--}}}
 -- }}}
 
 -- {{{ Autostart
---awful.util.spawn("xrandr --dpi 100")
---awful.util.spawn("xrdb -merge /home/lukas/.Xresources")
+-- autorepeat
+awful.util.spawn("xset r 113 r 115 r 116 r rate 250 30")
 --awful.util.spawn("pidof pidgin >/dev/null || pidgin")
---awful.util.spawn("pidof xbindkeys || (sleep 10 && xbindkeys)")
 awful.util.spawn("killall conky >/dev/null; conky -q")
 awful.util.spawn("pidof easystroke >/dev/null || "..home.."/apps/easystroke/easystroke")
 awful.util.spawn("pidof parcellite || parcellite")

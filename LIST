@@ -17,6 +17,6 @@
 ~/dev/rss/*.sh rss/
 ~/dev/translate/
 ~/dev/zcode/{_rungame.sh,_saved} zcode/
-~/eBooks/Knihy/Baka-Tsuki/bakadown.sh ebooks/
-~/eBooks/Knihy/Protagonize/protagonize.sh ebooks/
+~/eBooks/knihy/Baka-Tsuki/bakadown.sh ebooks/
+~/eBooks/knihy/Protagonize/protagonize.sh ebooks/
 ~/Playlists/

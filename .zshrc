@@ -88,15 +88,16 @@ then
 	alias v="$HOME/apps/comix/src/comix.py"
 	alias xnview="wine ~/.wine/drive_c/Program\ Files/XnView/xnview.exe"
 	alias chromium="$HOME/chromium.sh"
+	alias fontmatrix="$HOME/apps/fontmatrix/build/src/fontmatrix"
 fi
 
 # edit privoxy user settings
 alias adblock="su -c \"$EDITOR -c ':cd /etc/privoxy' -c ':e user.action'\""
 # }}}
 
-# func: extract file [dir] # {{{
+# func: unpack file [dir] # {{{
 # info: Unpack file in dir.
-extract() {
+unpack() {
 	if [ -f "$1" ]
 	then
 		case "$1" in
@@ -119,8 +120,16 @@ extract() {
 		# filename with full path
 		FILE=`readlink -f "$1"`
 
-		# create dir and extract
-		(mkdir -p "$2" && cd "$2" && $CMD "$FILE") || return 2
+		(
+		# create dir
+		if [ -n "$2" ]
+		then
+			mkdir -p "$2" && cd "$2" || exit 1
+		fi
+
+		# unpack
+		eval "$CMD \"$FILE\""
+		) || return 1
 	else
 		echo "'$1' is not a valid file"
 		return 1
