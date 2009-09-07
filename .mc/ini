@@ -73,7 +73,6 @@ editor_visible_tabs=1
 editor_visible_spaces=1
 mcview_remember_file_position=0
 editor_backup_extension=~
-
 mouse_close_dialog=0
 skip_check_codeset=0
 editor_persistent_selections=1
@@ -83,9 +82,10 @@ auto_fill_mkdir_name=1
 
 [Colors]
 base_color=normal=light,default:selected=,:marked=,default:markselect=,:menu=black,:menuhot=red,:menusel=,:menuhotsel=,:dnormal=,:dfocus=,:dhotnormal=red,:dhotfocus=,:input=,:reverse=,:executable=orange,default:directory=white,default:link=green,default:device=red,default:special=red,default:core=red,default:helpnormal=,:helplink=,:helpslink=,:
-
 xterm-color=
 color_terminals=
+linux=
+screen=
 
 [Layout]
 equal_split=1
@@ -99,12 +99,11 @@ menubar_visible=0
 show_mini_info=1
 permission_mode=1
 filetype_mode=1
-
 free_space=1
 
 [Dirs]
 current_is_left=0
-other_dir=/home/lukas/down
+other_dir=/home/lukas/dev/brigada/1
 
 [New Left Panel]
 display=listing
@@ -137,9 +136,8 @@ panel_display_codepage=Other_8_bit
 [Misc]
 ftpfs_password=anonymous@
 ftp_proxy_host=gate
-display_codepage=UTF-8
+display_codepage=Other_8_bit
 ftp_codepage=Other_8_bit
-
 find_ignore_dirs=
 source_codepage=UTF-8
 

@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 MENUDIR="/home/lukas/dev/menus/"
 MENU="$MENUDIR/menu.sh"
 
@@ -26,8 +26,6 @@ consume:$CONSUME
 jamendo
 list
 next
-playlists
-play
 playall
 prev
 random:$RND
@@ -42,7 +40,13 @@ update" #}}}
 	# url from clipboard
 	CLIP=`xclip -o | grep -e '^\(http\|file\|mms\)://'` &&
 	ACTS=">$CLIP
-	$ACTS"
+$ACTS"
+
+
+	# library and playlists
+	ACTS="$ACTS
+`listAll | sed 's/^/>/'`
+`mpc lsplaylists | sed 's/^/+/'`"
 
 	ACT=`"$MENU" "MPD:" <<< "$ACTS" | sed 's/:\(on\|off\)//'`
 fi
@@ -55,38 +59,50 @@ then
 		ARG=`(for X in $(mpc ls); do mpc ls $X; done; mpc listall) | "$MENU" "ADD:"` &&
 		test -n "$ARG" && mpc add "$ARG"
 		;;
+
 		"jamendo")
-		ARG=`(test "$ORDER" || echo -e "ORDER=random\nORDER=rating_desc"; cat "$MENUDIR/jamendo.lst") | "$MENU" "JAMENDO(order=$ORDER):"` &&
-		if echo "$ARG" | grep -q '^ORDER='
+		test -n "$ARG" && LABEL="JAMENDO($ARG):" || LABEL="JAMENDO:"
+		ARG2=`(echo; sed -n 's/^/-b /p' <<< "\"$CLIP\""; cat "$MENUDIR/jamendo.lst") | "$MENU" "$LABEL"` &&
+		if [ -n "$ARG2" ]
 		then
-			eval "$ARG $0 jamendo"
-		else
-			test -n "$ARG" && (
-				eval "$ARG ~/dev/wget/jamendo/jamendo.sh > ~/Playlists/jamendo.m3u"
-				mpc clear && mpc load jamendo && mpc play
-			)
+			ARG="$ARG $ARG2"
+			ARG="$ARG" $0 jamendo
+		elif [ -n "$ARG" ]
+		then
+			eval "~/dev/wget/jamendo/jamendo.sh $ARG > ~/Playlists/jamendo.m3u"
+			mpc clear && mpc load jamendo && mpc play
 		fi
 		;;
+
 		"list")
 		ARG=`mpc playlist | "$MENU" "LIST:"` &&
 		test -n "$ARG" && mpc play "$ARG"
 		;;
-		"playlists")
-		ARG=`mpc lsplaylists | "$MENU" "PLAYLISTS:"` &&
-		test -n "$ARG" && mpc clear && mpc load "$ARG" && mpc play
-		;;
-		"play")
-		ARG=`listAll | "$MENU" "PLAY:"`
-		test -n "$ARG" && mpc clear && mpc add "$ARG" && mpc play
-		;;
+
+		#"play")
+		#ARG=`listAll | "$MENU" "PLAY:"`
+		#test -n "$ARG" && mpc clear && mpc add "$ARG" && mpc play
+		#;;
+
 		"playall")
 		mpc clear && mpc add / && mpc consume on && mpc play;
 		;;
-		">"*)
-		mpc clear && \
-		mpc add "`sed 's/^>//' <<< "$ACT"`" && \
-		mpc play
+
+		"+"*)
+		ITEM="`sed 's/^+//' <<< "$ACT"`"
+		mpc clear && mpc load "$ITEM" && mpc play
 		;;
+
+		">"*)
+		ITEM="`sed 's/^>//' <<< "$ACT"`"
+		if grep -e '+$' <<< "$ACT"
+		then
+			mpc add "`sed 's/+$//' <<< "$ITEM"`"
+		else
+			mpc clear && mpc add "$ITEM" &&	mpc play
+		fi
+		;;
+
 		*)
 		mpc $ACT
 		;;

@@ -36,18 +36,21 @@ then
 	X=$((SIZE[0]*RES[1]))
 	Y=$((SIZE[1]*RES[0]))
 
-	# calc wallpaper size
+	# calc wallpaper size and area to cut
+	WCUT=0
+	HCUT=0
 	test $X -ge $Y &&
-	W=$((X/SIZE[1])) H=${RES[1]} ||
-	W=${RES[0]}      H=$((Y/SIZE[0]))
+	W=$((X/SIZE[1])) H=${RES[1]}      WCUT=$(((W-RES[0])/2)) ||
+	W=${RES[0]}      H=$((Y/SIZE[0])) HCUT=$(((H-RES[1])/2))
 
 	# create wallpaper
 	mkdir -p "$TMPPATH" &&
-	convert "$IMG" -resize ${W}x${H} "$WALL"
+	convert "$IMG" -resize ${W}x${H} -shave ${WCUT}x${HCUT} "$WALL"
 fi &&
 echo -e "\tOutput: `/usr/bin/identify "$WALL"`" &&
 echo -e "\tSetting..." &&
 /usr/bin/feh --bg-center "$WALL" &&
+#/usr/bin/xv -root -quit "$WALL" &&
 echo "}}} Done" || exit 1
 
 # clean

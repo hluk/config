@@ -8,6 +8,8 @@
 ~/.screenrc
 ~/.vimrc
 ~/.vimperatorrc
+~/.xmobarrc.hs
+~/.xmonad/xmonad.hs
 ~/.zshrc
 ~/dev/bin/
 ~/dev/menus/*.sh menus/

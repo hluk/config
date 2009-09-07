@@ -6,16 +6,16 @@ draw_borders no
 border_margin 0
 
 gap_x 0
-gap_y 1
-alignment tl
+gap_y -1
+alignment bl
 maximum_width 1920
 minimum_size 1920 19
 
 update_interval 3
 
-default_color 808080
-default_outline_color 555555
-color0 80d0ff
+default_color 909090
+default_outline_color 333333
+color0 4090f0
 color1 ffffff
 color2 d0d0d0
 #own_window_colour 2060a0

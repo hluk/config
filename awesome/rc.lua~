@@ -421,9 +421,9 @@ awful.hooks.manage.register(function (c, startup)
     local cls = c.class
     local inst = c.instance
     if floatapps[cls] ~= nil then
-	awful.client.floating.set(c, floatapps[cls])
+        awful.client.floating.set(c, floatapps[cls])
     elseif floatapps[inst] ~= nil then
-	awful.client.floating.set(c, floatapps[inst])
+        awful.client.floating.set(c, floatapps[inst])
     end
 
     -- Check application->screen/tag mappings.
@@ -434,7 +434,7 @@ awful.hooks.manage.register(function (c, startup)
         target = apptags[inst]
     end
     if target then
-        c.screen = target.screen or 1
+        c.screen = target.screen
         awful.client.movetotag(tags[c.screen][target.tag], c)
     end
 
@@ -461,6 +461,11 @@ awful.hooks.arrange.register(function (screen)
         local c = awful.client.focus.history.get(screen, 0)
         if c then client.focus = c end
     end
+end)
+
+-- Hook called every minute
+awful.hooks.timer.register(60, function ()
+    mytextbox.text = os.date(" %a %b %d, %H:%M ")
 end)
 -- }}}
 
