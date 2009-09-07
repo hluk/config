@@ -1,15 +1,17 @@
 ~/.Xresources
-~/.mc/{bindings,hotlist,ini,menu} .mc/
 ~/.conky/panel.conkyrc
 ~/.easystroke
 ~/.garglkrc
+~/.mc/{bindings,hotlist,ini,menu} .mc/
 ~/.mplayer/
 ~/.screenrc
-~/.vimrc
 ~/.vimperatorrc
+~/.vimrc
+~/.xinitrc
 ~/.xmobarrc.hs
 ~/.xmonad/xmonad.hs
 ~/.zshrc
+~/Playlists/
 ~/dev/bin/
 ~/dev/menus/*.sh menus/
 ~/dev/menus/dmenu/ menus/
@@ -20,4 +22,3 @@
 ~/dev/zcode/{_rungame.sh,_saved} zcode/
 ~/eBooks/knihy/Baka-Tsuki/bakadown.sh ebooks/
 ~/eBooks/knihy/Protagonize/protagonize.sh ebooks/
-~/Playlists/

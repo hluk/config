@@ -91,6 +91,7 @@ then
 	alias chromium="$HOME/chromium.sh"
 	alias fontmatrix="$HOME/apps/fontmatrix/build/src/fontmatrix"
 	alias e="$EDITOR"
+	alias dmenu="$HOME/dev/menus/dmenu/dmenu-4.0/dmenu"
 
 	# wine apps
 	alias xnview="wine ~/.wine/drive_c/Program\ Files/XnView/xnview.exe"
@@ -101,7 +102,7 @@ fi
 # }}}
 
 # func: dt program# {{{
-# info: Detach program from console.
+# info: Detach program from console and exit.
 d() {
 	$@ & disown && exit
 } # }}}
