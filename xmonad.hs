@@ -145,6 +145,9 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- web browser
     , ((modMask,               xK_w     ), runOrRaise (bindir ++ "/chromium.sh") (className =? "Chrome"))
+    
+    -- download manager
+    , ((modMask,               xK_d     ), runOrRaise ("java -jar ~/apps/'JDownloader 0.7'/JDownloader.jar") (className =? "jd-Main"))
 
     -- calculator
     , ((modMask,               xK_c     ), spawn (home ++ "/apps/speedcrunch/src/speedcrunch"))
@@ -242,7 +245,7 @@ myManageHook = composeAll
     [ className =? "MPlayer"                --> doFloat
     , className =? "Gimp"                   --> doFloat
     , className =? "desmume-cli"            --> doFloat
-    , className =? "sun-awt-X11-XFramePeer" --> doFloat
+    , className =? "jd-Main"                --> doFloat
     , className =? "NO$GBA.EXE"             --> doFloat
     , className =? "Speedcrunch"            --> doFloat
     , className =? "Pidgin"                 --> doFloat
@@ -268,7 +271,7 @@ myPP h = defaultPP  { ppCurrent = wrap "<fc=white,#60b0e0> " " </fc>"
                      , ppUrgent = wrap "<fc=white,red> " " </fc>" 
                      , ppLayout = wrap "<fc=aquamarine2,black> :: " " </fc>"
                      , ppTitle = \x -> if length(x) > 0
-                                       then "<fc=white,#60b0e0>   " ++ shorten 83 x ++ "   </fc>"
+                                       then "<fc=white,#60b0e0>   " ++ shorten 70 x ++ "   </fc>"
                                        else ""
                      , ppHidden = wrap "<fc=#aaa,black> " " </fc>"
                      , ppOutput = hPutStrLn h

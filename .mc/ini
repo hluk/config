@@ -102,8 +102,8 @@ filetype_mode=1
 free_space=1
 
 [Dirs]
-current_is_left=0
-other_dir=/home/lukas/dev/brigada/1
+current_is_left=1
+other_dir=/home/lukas/dev/menus
 
 [New Left Panel]
 display=listing

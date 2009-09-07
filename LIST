@@ -1,6 +1,5 @@
 ~/.Xresources
 ~/.mc/{bindings,hotlist,ini,menu} .mc/
-~/.config/awesome/
 ~/.conky/panel.conkyrc
 ~/.easystroke
 ~/.garglkrc
@@ -13,7 +12,7 @@
 ~/.zshrc
 ~/dev/bin/
 ~/dev/menus/*.sh menus/
-~/dev/menus/dmenu-3.4/ menus/
+~/dev/menus/dmenu/ menus/
 ~/dev/pdf/
 ~/dev/pocketpc/
 ~/dev/rss/*.sh rss/
