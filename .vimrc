@@ -36,13 +36,13 @@ filetype plugin on
 filetype indent on
 
 " 256 colors
-set t_Co=256
+"set t_Co=256
 "set t_AB=[48;5;%dm
 "set t_AF=[38;5;%dm
 
 " font in gui
 if has("gui_running")
-	gui
+	"gui
 	"set guifont=Bitstream\ Vera\ Sans\ Mono\ 16
 	"set guifont=Liberation\ Mono\ 16
 	"set guifont=Monospace\ 16
@@ -50,10 +50,10 @@ if has("gui_running")
 	set guifont=Consolas\ 16
 	"set guifont=Inconsolata\ 16
 
-	"colorscheme wombat
+	colorscheme wombat
 	"colorscheme xoria256
 	
-	colorscheme rainbow_breeze
+	"colorscheme rainbow_breeze
 	
 	"colorscheme soso
 	"colorscheme khaki
@@ -129,11 +129,6 @@ noremap <F12> :!exuberant-ctags -R .<CR>
 autocmd FileType ruby noremap <F11> :!exuberant-ctags --totals --lang-map=Ruby:+.rb -f ~/.vim/tags_ruby -R /usr/lib/ruby/gems /usr/lib/ruby/site_ruby<CR>
 
 autocmd FileType haskell set expandtab
-
-" pysmell autocompletion for python
-" first generate tags with 'pysmell .' in project path
-"autocmd FileType python setlocal omnifunc=pysmell#Complete
-autocmd FileType python imap <Tab> <C-X><C-O>
 
 " KEYS
 " save

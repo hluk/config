@@ -17,7 +17,6 @@ GETPATH="$HOME/dev/wget"
 URLS="http://www.gametrailers.com/rssgenerate.php?s1=&vidformat[mov]=on&vidformat[wmv]=on&quality[either]=on&orderby=curpopular&limit=20
 http://www.gamersyde.com/news_en.rdf
 http://konachan.com/post/atom
-http://moe.imouto.org/post/atom
 http://localhost/rss/deviantart-daily.php"
 #http://orz.4chan.org/hr/index.rss
 #http://img.7chan.org/hr/rss.xml
@@ -46,33 +45,41 @@ do
 	then
 		echo "* Downloading new items {{{"
 
-		HOST=`echo "$URL" | grep -oe "http://[^/]*\?"`
-		case "$HOST" in
-		"http://www.gametrailers.com")
-			"$GETPATH/gt_video/gt_video.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
-			;;
-		"http://www.gamersyde.com")
-			"$HOME/dev/webdigger/gamersyde.rb" $NEWLIST || (echo "}}} FAILED!"; exit 1);
-			;;
-		"http://konachan.com")
-			"$GETPATH/chan/konachan.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
-			;;
-		"http://moe.imouto.org")
-			"$GETPATH/chan/moe.imouto.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
-			;;
-		"http://localhost")
-			"$GETPATH/deviantart/deviantart-login.sh" > /dev/null
-			"$GETPATH/deviantart/deviantart.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
-			;;
-		"http://{orz.4,img.7}chan.org")
-			"$GETPATH/imgboard/imgboard.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
-			;;
-		esac && (
+		#HOST=`echo "$URL" | grep -oe "http://[^/]*\?"`
+		#case "$HOST" in
+		case "$URL" in
+		"http://www.gametrailers.com/"*)
+		"$GETPATH/gt_video/gt_video.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
+		;;
+
+		"http://www.gamersyde.com/"*)
+		"$HOME/dev/wget/gamersyde/gamersyde.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
+		;;
+
+		"http://konachan.com/"*)
+		"$GETPATH/chan/konachan.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
+		;;
+
+		"http://moe.imouto.org/"*)
+		"$GETPATH/chan/moe.imouto.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
+		;;
+
+		"http://localhost/"*)
+		"$GETPATH/deviantart/deviantart-login.sh" > /dev/null
+		"$GETPATH/deviantart/deviantart.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
+		;;
+
+		"http://{orz.4,img.7}chan.org/"*)
+		"$GETPATH/imgboard/imgboard.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
+		;;
+
+		esac &&
+		(
 			# remember new urls and max 200 old
 			tail -n200 "$OLDLIST" | sort -m - "$OLDLIST.new" > "$OLDLIST.tmp" &&
 				mv "$OLDLIST.tmp" "$OLDLIST"
 			echo "  }}}"
-			)
+		)
 	fi
 
 	rm -f "$OLDLIST.new"

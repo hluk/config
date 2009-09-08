@@ -1,43 +1,58 @@
 #!/bin/sh
 # vim: foldmarker=<<<,>>>
-WALLPATH="$HOME/wallpapers"
+# usage:
+#   ./set_wallpaper.sh # sets random wallpaper from WALLPATH env
+#   ./set_wallpaper.sh image_file
+WALLPATH=${WALLPATH:-"$HOME/wallpapers"}
+TMPPATH="$WALLPATH/_tmp"
+TMP="/home/lukas/dev/img/wallpaper.tmp.jpg"
 
 # redirect output to LOGFILE
-if [ -n "$LOGFILE" ]
-then
-	exec 1>>"$LOGFILE"
-fi
+test -n "$LOGFILE" && exec 1>>"$LOGFILE"
 
 trap 'echo "}}} FAILED!"; exit 1' TERM QUIT INT
 
-# take wallpaper as parameter or random from WALLPATH
+# take image as parameter or random image from WALLPATH
 if [ -n "$1" ]
 then
-	echo "$(date -R): Setting wallpaper \"$1\" {{{"
-	/usr/bin/wget -q -O "/home/lukas/dev/img/wallpaper.tmp.jpg" "$1" && IMG="/home/lukas/dev/img/wallpaper.tmp.jpg" || IMG="$1"
+	echo "`date -R`: Setting wallpaper \"$1\" {{{"
+	/usr/bin/curl -s -o "$TMP" "$1" && IMG="$TMP" || IMG="$1"
 else 
-	IMG=$WALLPATH/$(cd $WALLPATH && /bin/ls -1 | sort -R | head -1) || exit $?
-	echo "$(date -R): Setting random wallpaper \"$IMG\" {{{"
+	IMG="$WALLPATH/`cd $WALLPATH && /bin/ls -1 | sort -R | head -1`" || exit $?
+	echo "`date -R`: Setting random wallpaper \"$IMG\" {{{"
 fi
 
+echo -e "\tInput: `/usr/bin/identify "$IMG"`"
 
-echo -e "\tInput..."$(/usr/bin/identify "$IMG")
-echo -e "\tResizing..."
 # get screen resolution
-RES=($(xdpyinfo|sed -n '/^  dimensions:    /{s/.* \([0-9]\+\)x\([0-9]\+\).*/\1 \2/;p;q}'))
-# PIL
-python -c "
-W = ${RES[0]}; H = ${RES[1]};
-import Image
-im = Image.open('$IMG')
-if float(im.size[0])/im.size[1] >= float(W)/H:
-	w, h = int( float( H*im.size[0] )/float( im.size[1] ) ), H
-else:
-	w, h = W, int( float( W*im.size[1] )/float( im.size[0] ))
-out = im.resize((w,h), Image.ANTIALIAS)
-out.save('/home/lukas/dev/img/_wallpaper.png', 'PNG')" &&
-echo -e "\tOutput..."$(/usr/bin/identify "/home/lukas/dev/img/_wallpaper.png") &&
+RES=(`xdpyinfo|sed -n '/^  dimensions:    /{s/.* \([0-9]\+\)x\([0-9]\+\).*/\1 \2/;p;q}'`)
+
+# if wallpaper already exists
+WALL="$TMPPATH/`basename "$IMG"_${RES[0]}x${RES[1]}`.png"
+if [ ! -f "$WALL" ]
+then
+	echo -e "\tResizing..."
+	SIZE=(`/usr/bin/identify -format "%w %h" "$IMG"`)
+	X=$((SIZE[0]*RES[1]))
+	Y=$((SIZE[1]*RES[0]))
+
+	# calc wallpaper size and area to cut
+	WCUT=0
+	HCUT=0
+	test $X -ge $Y &&
+	W=$((X/SIZE[1])) H=${RES[1]}      WCUT=$(((W-RES[0])/2)) ||
+	W=${RES[0]}      H=$((Y/SIZE[0])) HCUT=$(((H-RES[1])/2))
+
+	# create wallpaper
+	mkdir -p "$TMPPATH" &&
+	convert "$IMG" -resize ${W}x${H} -shave ${WCUT}x${HCUT} "$WALL"
+fi &&
+echo -e "\tOutput: `/usr/bin/identify "$WALL"`" &&
 echo -e "\tSetting..." &&
-/usr/bin/feh --bg-center "/home/lukas/dev/img/_wallpaper.png" &&
-echo "}}} Done!" || exit 1
+/usr/bin/feh --bg-center "$WALL" &&
+#/usr/bin/xv -root -quit "$WALL" &&
+echo "}}} Done" || exit 1
+
+# clean
+rm -rf "$TMP"
 

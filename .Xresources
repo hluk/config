@@ -12,78 +12,78 @@
 !#define FONT1 xft:Dejavu Sans Mono:size=9
 !#define FONT1 xft:Inconsolata:size=13
 !#define FONT1 xft:Bitstream Vera Sans Mono:pixelsize=10
-#define FONT1 xft:Consolas:size=13
+!#define FONT1 xft:Consolas:size=16.5
 
 XTerm*vt100.RenderFont: true
-XTerm*vt100.FaceName: Consolas:size=13
+XTerm*vt100.FaceName: Consolas:size=16.5
 
 !!!!!!XTERM:COLORS
-Rxvt.colorMode: on
-Rxvt.dynamicColors: on
-Rxvt.depth: 24
-Rxvt.background: gray25
-!Rxvt.background: white
-!Rxvt.depth: 32
-!Rxvt.background: rgba:0000/2000/3000/aaaa
-Rxvt.foreground: white
+XTerm*vt100.colorMode: on
+XTerm*vt100.dynamicColors: on
+XTerm*vt100.depth: 24
+XTerm*vt100.background: gray25
+!XTerm*vt100.background: white
+!XTerm*vt100.depth: 32
+!XTerm*vt100.background: rgba:0000/2000/3000/aaaa
+XTerm*vt100.foreground: white
 !!!background color of color11
-Rxvt.color0: black
-Rxvt.color1: red
-Rxvt.color2: green3
-Rxvt.color3: yellow
+XTerm*vt100.color0: black
+XTerm*vt100.color1: red
+XTerm*vt100.color2: green3
+XTerm*vt100.color3: yellow
 !!!mc background
-!Rxvt.color4: black
-Rxvt.color4: DarkSeaGreen4
-Rxvt.color5: blue3
+!XTerm*vt100.color4: black
+XTerm*vt100.color4: DarkSeaGreen4
+XTerm*vt100.color5: blue3
 !!!selection background (+mc menu)
-Rxvt.color6: DarkSeaGreen3
+XTerm*vt100.color6: DarkSeaGreen3
 !!!active buttons and files
-Rxvt.color7: LightYellow1
-Rxvt.color8: gray50
-Rxvt.color9: red
+XTerm*vt100.color7: LightYellow1
+XTerm*vt100.color8: gray50
+XTerm*vt100.color9: red
 !!!login and exutables foreground
-Rxvt.color10: green1
+XTerm*vt100.color10: green1
 !!!mc column names
-Rxvt.color11: DarkSeaGreen1
+XTerm*vt100.color11: DarkSeaGreen1
 !!!directories foreground
-Rxvt.color12: yellow2
+XTerm*vt100.color12: yellow2
 !!!mc nonfiles foreground
-Rxvt.color13: IndianRed1
-Rxvt.color14: cyan
+XTerm*vt100.color13: IndianRed1
+XTerm*vt100.color14: cyan
 !!!mc directories foreground
-Rxvt.color15: white
-Rxvt.colorUL: yellow
-Rxvt.colorBD: white
-Rxvt.cursorColor: gray
-Rxvt.cursorBlink: true
+XTerm*vt100.color15: white
+XTerm*vt100.colorUL: yellow
+XTerm*vt100.colorBD: white
+XTerm*vt100.cursorColor: gray
+XTerm*vt100.cursorBlink: true
 
 !!!!!!XTERM:FONT
-Rxvt.font: FONT1
-Rxvt.boldMode: true
+XTerm*vt100.font: FONT1
+XTerm*vt100.boldMode: true
 
 !!!!!!XTERM:GEOMETRY
-!Rxvt.geometry: 100x50
+!XTerm*vt100.geometry: 100x50
 
 !!!!!!XTERM:SCROLLING
-Rxvt.scrollBar: false
-Rxvt.saveLines: 1024
-Rxvt.scrollKey: true
-Rxvt.scrollTtyOutput: false
-Rxvt.scrollTtyKeypress: true
-Rxvt.scrollWithBuffer: false
-!Rxvt.jumpScroll: true
-Rxvt.skipScroll: true
-Rxvt.scrollColor: #aaa894
-Rxvt.troughColor: #000000
-Rxvt.scrollstyle: plain
+XTerm*vt100.scrollBar: false
+XTerm*vt100.saveLines: 1024
+XTerm*vt100.scrollKey: true
+XTerm*vt100.scrollTtyOutput: false
+XTerm*vt100.scrollTtyKeypress: true
+XTerm*vt100.scrollWithBuffer: false
+!XTerm*vt100.jumpScroll: true
+XTerm*vt100.skipScroll: true
+XTerm*vt100.scrollColor: #aaa894
+XTerm*vt100.troughColor: #000000
+XTerm*vt100.scrollstyle: plain
 
-Rxvt.tintColor: #60aadd
-Rxvt.shading: 80
-Rxvt.inheritPixmap: true
-Rxvt.transparent: false
+XTerm*vt100.tintColor: #60aadd
+XTerm*vt100.shading: 80
+XTerm*vt100.inheritPixmap: true
+XTerm*vt100.transparent: false
 
 Xft.antialias:true
-Xft.dpi:100
+!Xft.dpi:94
 Xft.hinting:true
 Xft.hintstyle:hintfull
 Xft.rgba:rgb
@@ -95,5 +95,5 @@ xpdf*enableFreetype:    yes
 xpdf*antialias:         yes
 xpdf*foreground:        black
 xpdf*background:        white
-xpdf*urlCommand:        /usr/bin/firefox %s
+!xpdf*urlCommand:        /usr/bin/chromium-bin %s
 
