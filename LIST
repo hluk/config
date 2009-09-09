@@ -5,7 +5,6 @@
 ~/.mc/{bindings,hotlist,ini,menu} .mc/
 ~/.mplayer/
 ~/.screenrc
-~/.vimperatorrc
 ~/.vimrc
 ~/.xinitrc
 ~/.xmobarrc.hs

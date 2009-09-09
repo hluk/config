@@ -28,7 +28,7 @@ mouse_move_pages_viewer=1
 fast_refresh=0
 navigate_with_arrows=0
 drop_menus=0
-wrap_mode=1
+wrap_mode=-1
 old_esc_mode=0
 cd_symlinks=1
 show_all_if_ambiguous=1
@@ -102,8 +102,8 @@ filetype_mode=1
 free_space=1
 
 [Dirs]
-current_is_left=1
-other_dir=/home/lukas/dev/menus
+current_is_left=0
+other_dir=/home/lukas/down
 
 [New Left Panel]
 display=listing

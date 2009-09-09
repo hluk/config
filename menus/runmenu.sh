@@ -1,9 +1,10 @@
 #!/bin/sh
-HISTORYFILE=/home/lukas/dev/menus/runhistory.txt
-RUNHASHFILE=/home/lukas/dev/menus/runhash.txt
+DIR=`dirname $0`
+HISTORYFILE="$DIR/runhistory.txt"
+RUNHASHFILE="$DIR/runhash.txt"
 
 # update hash on background
-(sleep 1; nice -n 10 /home/lukas/dev/menus/dmenu-3.4/dmenu_path > $RUNHASHFILE) &
+(sleep 1; nice -n 10 "$DIR/dmenu/dmenu-4.0/dmenu_path" > $RUNHASHFILE) &
 
 # command history and PATH
 EXE=$( (cat $HISTORYFILE $RUNHASHFILE) | /home/lukas/dev/menus/menu.sh "RUN:" ) || exit $?
