@@ -9,26 +9,24 @@
 
 import XMonad
 import XMonad.Layout.Gaps
-import XMonad.Util.Run(spawnPipe)
+import XMonad.Util.Run (spawnPipe)
 import XMonad.Hooks.DynamicLog
-import XMonad.Actions.WindowGo
-import XMonad.Util.Scratchpad
+import XMonad.Actions.WindowGo (runOrRaise)
 import System.Exit
 import System.IO
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
-home   = "~"
-menus  = home ++ "/dev/menus"
-bindir = home ++ "/dev/bin"
+menus  = "~/dev/menus"
+bindir = "~/dev/bin"
 
 numkeys = [0x2b,0x1ec,0x1b9,0x1e8,0x1f8]
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "sakura -e " ++ home ++ "/screen"
+myTerminal      = "sakura -e ~/screen"
 myTerminalClass = "Sakura"
 
 -- Width of the window border in pixels.
@@ -71,7 +69,7 @@ myWorkspaces    = map show [1..5]
 -- Border colors for unfocused and focused windows, respectively.
 --
 myNormalBorderColor  = "#000000"
-myFocusedBorderColor = "#60b0e0"
+myFocusedBorderColor = "#30a0c0"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -150,7 +148,7 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     , ((modMask,               xK_d     ), runOrRaise ("java -jar ~/apps/'JDownloader 0.7'/JDownloader.jar") (className =? "jd-Main"))
 
     -- calculator
-    , ((modMask,               xK_c     ), spawn (home ++ "/apps/speedcrunch/src/speedcrunch"))
+    , ((modMask,               xK_c     ), spawn ("~/apps/speedcrunch/src/speedcrunch"))
 
     -- xkill
     , ((modMask,               xK_x     ), spawn ("xkill"))
@@ -167,9 +165,6 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
     -- volume
     , ((modMask,               xK_parenright ), spawn (bindir ++ "/volume.sh 1%+"))
     , ((modMask,               xK_section    ), spawn (bindir ++ "/volume.sh 1%-"))
-
-    , ((modMask,               xK_Menu  ),
-                    scratchpadSpawnAction $ defaultConfig {terminal="xterm"})
     ]
     ++
 
@@ -184,6 +179,11 @@ myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 --
+setOpacity :: Window -> Integer -> X ()
+setOpacity w t = withDisplay $ \dpy -> do
+                        a <- getAtom "_NET_WM_WINDOW_OPACITY"
+                        c <- getAtom "CARDINAL"
+                        io $ changeProperty32 dpy w a c propModeReplace [fromIntegral t]
 myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- mod-button1, Set the window to floating mode and move by dragging
@@ -194,10 +194,10 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 
     -- mod-button3, Set the window to floating mode and resize by dragging
     , ((modMask, button3), (\w -> focus w >> mouseResizeWindow w))
-
-    {-, ((modMask, xK_b),       sendMessage ToggleStruts) [> Hide top bar-}
-
-    -- you may also bind events to the mouse scroll wheel (button4 and button5)
+    
+    -- TODO: mouse wheel changes window opacity
+    , ((modMask, button4), (\w -> focus w >> setOpacity w 0xffffffff))
+    , ((modMask, button5), (\w -> focus w >> setOpacity w 0x80808080))
     ]
 
 ------------------------------------------------------------------------
@@ -212,7 +212,7 @@ myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
 -- which denotes layout choice.
 --
 
-myLayout = gaps [(U,25), (D,0)] $ Full ||| tiled ||| Mirror tiled
+myLayout = gaps [(U,0), (D,20)] $ Full ||| tiled ||| Mirror tiled
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
@@ -221,7 +221,7 @@ myLayout = gaps [(U,25), (D,0)] $ Full ||| tiled ||| Mirror tiled
      nmaster = 1
 
      -- Default proportion of screen occupied by master pane
-     ratio   = 2/3
+     ratio   = 5/8
 
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
@@ -241,21 +241,15 @@ myLayout = gaps [(U,25), (D,0)] $ Full ||| tiled ||| Mirror tiled
 -- To match on the WM_NAME, you can use 'title' in the same way that
 -- 'className' and 'resource' are used below.
 --
-myManageHook = composeAll
-    [ className =? "MPlayer"                --> doFloat
-    , className =? "Gimp"                   --> doFloat
-    , className =? "desmume-cli"            --> doFloat
-    , className =? "jd-Main"                --> doFloat
-    , className =? "NO$GBA.EXE"             --> doFloat
-    , className =? "Speedcrunch"            --> doFloat
-    , className =? "Pidgin"                 --> doFloat
-    , className =? "Pidgin"                 --> doShift "3"
-    , className =? "Chrome"                 --> doShift "2"
-    , className =? "Conky_panel"    --> doIgnore
-    , className =? "trayer"         --> doIgnore
-    , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore
-    , scratchpadManageHookDefault]
+myManageHook = composeAll . concat $
+    [ [className =? c --> doFloat    | c <- myFloats]
+    , [className =? c --> doIgnore   | c <- myIgnore]
+    , [className =? c --> doShift ws | (ws,cs) <- myShifts, c <- cs]
+    ]
+    where
+    myFloats = ["MPlayer", "Gimp", "desmume-cli", "jd-Main", "NO$GBA.EXE", "Speedcrunch", "Pidgin"]
+    myIgnore = ["Conky", "trayer", "desktop_window"]
+    myShifts = [("1",[myTerminalClass]), ("2",["Chrome"]), ("3",["Pidgin"])]
 
 -- Whether focus follows the mouse pointer.
 myFocusFollowsMouse :: Bool
@@ -264,19 +258,18 @@ myFocusFollowsMouse = True
 myLogHook h = do dynamicLogWithPP $ myPP h
  
 myPP :: Handle -> PP
-myPP h = defaultPP  { ppCurrent = wrap "<fc=white,#60b0e0> " " </fc>" 
+myPP h = defaultPP  { ppCurrent = wrap "<fc=white,#30a0c0> " " </fc>" 
                      , ppSep     = ""
                      , ppWsSep = ""
                      , ppVisible = wrap "<fc=black,DarkSlateGray4> " " </fc>" 
                      , ppUrgent = wrap "<fc=white,red> " " </fc>" 
-                     , ppLayout = wrap "<fc=aquamarine2,black> :: " " </fc>"
+                     , ppLayout = wrap "<fc=aquamarine2> :: " " </fc>"
                      , ppTitle = \x -> if length(x) > 0
-                                       then "<fc=white,#60b0e0>   " ++ shorten 70 x ++ "   </fc>"
+                                       then "<fc=white,#30a0c0>   " ++ shorten 60 x ++ "   </fc>"
                                        else ""
-                     , ppHidden = wrap "<fc=#aaa,black> " " </fc>"
+                     , ppHidden = wrap "<fc=#aaa> " " </fc>"
                      , ppOutput = hPutStrLn h
                      }
-
 ------------------------------------------------------------------------
 -- Startup hook
 

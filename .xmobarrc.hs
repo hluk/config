@@ -1,18 +1,18 @@
-Config { font = "xft:Aller:size=13:style=bold"
-       , bgColor = "black"
+Config { font = "xft:Aller:size=14:style=bold"
+       , bgColor = "#303030"
        , fgColor = "#c0f0f0"
-       , position = Top
+       , position = Bottom
        , lowerOnStart = True
-       , commands = [ Run Network "eth0" ["--template","<rx>   <tx>","-L","1","-H","1000","--low","aquamarine3","--normal","#f0e050","--high","#ff9a00"] 10
-                    , Run Cpu ["--template","CPU <total>","-L","10","-H","90","--low","aquamarine3","--normal","#f0e050","--high","#ff9a00"] 10
+       , commands = [ Run Network "eth0" ["--template","<rx>   <tx>","-L","1","-H","1000","--low","aquamarine3","--normal","#f0e050","--high","#ff9a50"] 30
+                    , Run Cpu ["--template","<total>","-L","10","-H","90","--low","aquamarine3","--normal","#f0e050","--high","#ff9a50"] 10
                     , Run Com "echo $((`cut -f1 -d'.' /proc/uptime`/60)) min" [] "uptime" 600
                     , Run Com "uname" ["-r"] "" 36000
-                    , Run Com "mpc" ["-f", "\"[<fc=##80e0ff>[%artist% - ]%title%</fc> ]\"",
-                        "| awk 'NR==1 {printf $0} NR==2 {printf \"<fc=#ee9a00>\"$1\"</fc> <fc=aquamarine3>\"$3\"</fc>\"; exit}' || true"] "music" 30
+                    , Run Com "~/dev/mpd/mpdinfo" [] "music" 20
                     , Run Date "%m/%_d %H:%M:%S" "date" 100
                     , Run StdinReader
+                    , Run Com "df" ["--no-sync", "-h", "/","|awk 'NR==2 {print $4\"/\"$2}'"] "" 100
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "   %StdinReader%    %music%    •    %cpu%    •    %eth0% }{ %uname%  <fc=#ee9a00>(%uptime%)  %date%</fc>   "
+       , template = "%StdinReader% }{ %music%    •    %cpu%    •    %eth0%    •    %df%    •    %uptime%    •    <fc=#ee9a50>%date%</fc>  %uname%                         "
        }
