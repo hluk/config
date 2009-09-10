@@ -6,7 +6,7 @@ parcellite &
 
 xset r 113 r 115 r 116 r rate 250 30 &
 xsetroot -cursor_name arrow &
-(sleep 2 && xcompmgr -cCfF -D10 -O1) &
+xcompmgr -cCfF -D10 -O1 &
 
 exec xmonad
 
