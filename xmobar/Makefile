@@ -1,8 +1,4 @@
-all: mpd uptime
-
-mpd:
+all:
 	(cd mpd; make)
-
-uptime:
 	(cd uptime; make)
 

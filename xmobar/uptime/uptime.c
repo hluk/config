@@ -56,7 +56,7 @@ int getUptime(void) {
 		else if ( av[i] > 1.0 )
 			colors[i] = ncolor;
 		else
-			colors[i] = hcolor;
+			colors[i] = lcolor;
 	}
 
 

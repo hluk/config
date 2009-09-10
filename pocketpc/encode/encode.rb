@@ -35,6 +35,9 @@ OptionParser.new do |opts|
 	opts.on("-s", "--search x,y,z", Array, "Search for alternate codecs") do |a|
 		opt[:search] = a
 	end
+	opts.on("-d", "--directory DIR", String, "Save encoded videos in given directory.") do |a|
+		opt[:dir] = a
+	end
 	opts.on_tail("-h", "--help", "Show this message") do
 		puts opts
 		exit
@@ -65,8 +68,7 @@ Mencoder = "mencoder"
 Mplayer = "mplayer"
 mencoder_conf = (File.exist? "./encode.conf") ? "./encode.conf" :
 			File.expand_path("~/dev/pocketpc/encode/encode.conf")
-#Video_root = "/tmp/video/"
-Video_root = "/mnt/pc2/down/_encoded/"
+Video_root = (opt[:dir] or "/mnt/pc2/down/_encoded/")
 # }}}
 
 # print audio or video codecs {{{
