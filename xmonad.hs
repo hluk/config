@@ -32,29 +32,6 @@ myTerminalClass = "Sakura"
 -- Width of the window border in pixels.
 --
 myBorderWidth   = 5
-
--- modMask lets you specify which modkey you want to use. The default
--- is mod1Mask ("left alt").  You may also consider using mod3Mask
--- ("right alt"), which does not conflict with emacs keybindings. The
--- "windows key" is usually mod4Mask.
---
-myModMask       = mod4Mask
-
--- The mask for the numlock key. Numlock status is "masked" from the
--- current modifier status, so the keybindings will work with numlock on or
--- off. You may need to change this on some systems.
---
--- You can find the numlock modifier by running "xmodmap" and looking for a
--- modifier with Num_Lock bound to it:
---
--- > $ xmodmap | grep Num
--- > mod2        Num_Lock (0x4d)
---
--- Set numlockMask = 0 if you don't have a numlock key, or want to treat
--- numlock status separately.
---
-myNumlockMask   = mod2Mask
-
 -- The default number of workspaces (virtual screens) and their names.
 -- By default we use numeric strings, but any string may be used as a
 -- workspace name. The number of workspaces is determined by the length
@@ -71,133 +48,110 @@ myWorkspaces    = map show [1..5]
 myNormalBorderColor  = "#000000"
 myFocusedBorderColor = "#30a0c0"
 
+-- The mask for the numlock key. Numlock status is "masked" from the
+-- current modifier status, so the keybindings will work with numlock on or
+-- off. You may need to change this on some systems.
+--
+-- You can find the numlock modifier by running "xmodmap" and looking for a
+-- modifier with Num_Lock bound to it:
+--
+-- > $ xmodmap | grep Num
+-- > mod2        Num_Lock (0x4d)
+--
+-- Set numlockMask = 0 if you don't have a numlock key, or want to treat
+-- numlock status separately.
+--
+myNumlockMask   = mod2Mask
+
+m  = mod4Mask
+ms = m .|. shiftMask
+ma = m .|. mod1Mask
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
-myKeys conf@(XConfig {XMonad.modMask = modMask}) = M.fromList $
-
+myKeys conf@(XConfig {XMonad.modMask = m}) = M.fromList $
     -- launch a terminal
-    [ ((modMask .|. shiftMask, xK_Return), runOrRaise (XMonad.terminal conf) (className =? myTerminalClass))
-
+    [ ((ms, xK_Return), runOrRaise (XMonad.terminal conf) (className =? myTerminalClass))
     -- launch dmenu
-    {-, ((modMask,               xK_p     ), spawn "exe=`dmenu_path | dmenu` && eval \"exec $exe\"")-}
-    , ((modMask,               xK_r     ), spawn (menus ++ "/runmenu.sh"))
-
+    , ((m,  xK_r), spawn (menus ++ "/runmenu.sh"))
     -- close focused window 
-    , ((modMask .|. shiftMask, xK_c     ), kill)
-
+    , ((ms, xK_c), kill)
      -- Rotate through the available layout algorithms
-    , ((modMask,               xK_space ), sendMessage NextLayout)
-
+    , ((m,  xK_space), sendMessage NextLayout)
     --  Reset the layouts on the current workspace to default
-    , ((modMask .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
-
+    , ((ms, xK_space), setLayout $ XMonad.layoutHook conf)
     -- Resize viewed windows to the correct size
-    , ((modMask,               xK_n     ), refresh)
-
+    , ((m,  xK_n), refresh)
     -- Move focus to the next window
-    , ((modMask,               xK_Tab   ), windows W.focusDown >> windows W.swapMaster )
-
+    , ((m,  xK_Tab), windows W.focusDown >> windows W.swapMaster )
     -- Move focus to the next window
-    , ((modMask,               xK_j     ), windows W.focusDown)
-
+    , ((m,  xK_j), windows W.focusDown)
     -- Move focus to the previous window
-    , ((modMask,               xK_k     ), windows W.focusUp  )
-
+    , ((m,  xK_k), windows W.focusUp  )
     -- Move focus to the master window
-    , ((modMask,               xK_m     ), windows W.focusMaster  )
-
+    , ((m,  xK_m), windows W.focusMaster  )
     -- Swap the focused window and the master window
-    , ((modMask,               xK_Return), windows W.swapMaster)
-
+    , ((m,  xK_Return), windows W.swapMaster)
     -- Swap the focused window with the next window
-    , ((modMask .|. shiftMask, xK_j     ), windows W.swapDown  )
-
+    , ((ms, xK_j), windows W.swapDown  )
     -- Swap the focused window with the previous window
-    , ((modMask .|. shiftMask, xK_k     ), windows W.swapUp    )
-
+    , ((ms, xK_k), windows W.swapUp    )
     -- Shrink the master area
-    , ((modMask,               xK_h     ), sendMessage Shrink)
-
+    , ((m,  xK_h), sendMessage Shrink)
     -- Expand the master area
-    , ((modMask,               xK_l     ), sendMessage Expand)
-
+    , ((m,  xK_l), sendMessage Expand)
     -- Push window back into tiling
-    , ((modMask,               xK_t     ), withFocused $ windows . W.sink)
-
+    , ((m,  xK_t), withFocused $ windows . W.sink)
     -- Increment the number of windows in the master area
-    , ((modMask              , xK_comma ), sendMessage (IncMasterN 1))
-
+    , ((m,  xK_comma), sendMessage (IncMasterN 1))
     -- Deincrement the number of windows in the master area
-    , ((modMask              , xK_period), sendMessage (IncMasterN (-1)))
-
+    , ((m,  xK_period), sendMessage (IncMasterN (-1)))
     -- Quit xmonad
-    , ((modMask .|. shiftMask, xK_BackSpace), io (exitWith ExitSuccess))
-    , ((modMask .|. shiftMask, xK_q     ), spawn ("sakura -e " ++ bindir ++ "/shutdown.sh"))
-
+    , ((ms, xK_BackSpace), io (exitWith ExitSuccess))
+    , ((ms, xK_q), spawn ("sakura -e " ++ bindir ++ "/shutdown.sh"))
     -- Restart xmonad
-    , ((modMask              , xK_q     ), restart "xmonad" True)
-    
+    , ((m,  xK_q), restart "xmonad" True)
     -- Edit config
-    , ((modMask              , xK_e     ), spawn "gvim ~/.xmonad/xmonad.hs")
-
+    , ((m,  xK_e), spawn "gvim ~/.xmonad/xmonad.hs")
     -- web browser
-    , ((modMask,               xK_w     ), runOrRaise (bindir ++ "/chromium.sh") (className =? "Chrome"))
-    
+    , ((m,  xK_w), runOrRaise (bindir ++ "/chromium.sh") (className =? "Chrome"))
     -- download manager
-    , ((modMask,               xK_d     ), runOrRaise ("java -jar ~/apps/'JDownloader 0.7'/JDownloader.jar") (className =? "jd-Main"))
-
+    , ((m,  xK_d), runOrRaise ("java -jar ~/apps/'JDownloader 0.7'/JDownloader.jar") (className =? "jd-Main"))
     -- calculator
-    , ((modMask,               xK_c     ), spawn ("~/apps/speedcrunch/src/speedcrunch"))
-
+    , ((m,  xK_c), spawn ("~/apps/speedcrunch/src/speedcrunch"))
     -- xkill
-    , ((modMask,               xK_x     ), spawn ("xkill"))
-
+    , ((m,  xK_x), spawn ("xkill"))
     -- mpc
-    , ((modMask,               xK_p      ), spawn "pidof mpd && killall mpd || mpd")
-    , ((modMask,               xK_minus  ), spawn "mpc toggle")
-    , ((modMask .|. shiftMask, xK_period ), spawn "mpc next")
-    , ((modMask .|. shiftMask, xK_comma  ), spawn "mpc prev")
-    , ((modMask .|. mod1Mask,  xK_period ), spawn "mpc seek +10")
-    , ((modMask .|. mod1Mask,  xK_comma  ), spawn "mpc seek -10")
-    , ((modMask,               xK_uacute ), spawn (menus ++ "/mpd.sh"))
-
+    , ((m,  xK_p), spawn "pidof mpd && killall mpd || mpd")
+    , ((m,  xK_minus), spawn "mpc toggle")
+    , ((ms, xK_period), spawn "mpc next")
+    , ((ms, xK_comma), spawn "mpc prev")
+    , ((ma, xK_period), spawn "mpc seek +10")
+    , ((ma, xK_comma), spawn "mpc seek -10")
+    , ((m,  xK_uacute), spawn (menus ++ "/mpd.sh"))
     -- volume
-    , ((modMask,               xK_parenright ), spawn (bindir ++ "/volume.sh 1%+"))
-    , ((modMask,               xK_section    ), spawn (bindir ++ "/volume.sh 1%-"))
+    , ((m,  xK_parenright), spawn (bindir ++ "/volume.sh 1%+"))
+    , ((m,  xK_section), spawn (bindir ++ "/volume.sh 1%-"))
     ]
     ++
-
     --
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
     --
-    [((m .|. modMask, k), windows $ f i)
+    [((m2 .|. m, k), windows $ f i)
         | (i, k) <- zip (XMonad.workspaces conf) numkeys
-        , (f, m) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
+        , (f, m2) <- [(W.greedyView, 0), (W.shift, shiftMask)]]
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
 --
-setOpacity :: Window -> Integer -> X ()
-setOpacity w t = withDisplay $ \dpy -> do
-                        a <- getAtom "_NET_WM_WINDOW_OPACITY"
-                        c <- getAtom "CARDINAL"
-                        io $ changeProperty32 dpy w a c propModeReplace [fromIntegral t]
-myMouseBindings (XConfig {XMonad.modMask = modMask}) = M.fromList $
-
+myMouseBindings (XConfig {XMonad.modMask = m}) = M.fromList $
     -- mod-button1, Set the window to floating mode and move by dragging
-    [ ((modMask, button1), (\w -> focus w >> mouseMoveWindow w))
-
+    [ ((m, button1), (\w -> focus w >> mouseMoveWindow w))
     -- mod-button2, Raise the window to the top of the stack
-    , ((modMask, button2), (\w -> focus w >> windows W.swapMaster))
-
+    , ((m, button2), (\w -> focus w >> windows W.swapMaster))
     -- mod-button3, Set the window to floating mode and resize by dragging
-    , ((modMask, button3), (\w -> focus w >> mouseResizeWindow w))
-    
-    -- TODO: mouse wheel changes window opacity
-    , ((modMask, button4), (\w -> focus w >> setOpacity w 0xffffffff))
-    , ((modMask, button5), (\w -> focus w >> setOpacity w 0x80808080))
+    , ((m, button3), (\w -> focus w >> mouseResizeWindow w))
     ]
 
 ------------------------------------------------------------------------
@@ -216,13 +170,10 @@ myLayout = gaps [(U,0), (D,20)] $ Full ||| tiled ||| Mirror tiled
   where
      -- default tiling algorithm partitions the screen into two panes
      tiled   = Tall nmaster delta ratio
-
      -- The default number of windows in the master pane
      nmaster = 1
-
      -- Default proportion of screen occupied by master pane
      ratio   = 5/8
-
      -- Percent of screen to increment by when resizing panes
      delta   = 3/100
 
@@ -286,13 +237,13 @@ myStartupHook = return ()
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 main = do
-        xmproc <- spawnPipe "xmobar ~/.xmobarrc.hs"
+        h <- spawnPipe "xmobar ~/.xmobarrc.hs"
         xmonad $ defaultConfig {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = myFocusFollowsMouse,
         borderWidth        = myBorderWidth,
-        modMask            = myModMask,
+        modMask            = m,
         numlockMask        = myNumlockMask,
         workspaces         = myWorkspaces,
         normalBorderColor  = myNormalBorderColor,
@@ -305,6 +256,6 @@ main = do
       -- hooks, layouts
         layoutHook         = myLayout,
         manageHook         = myManageHook,
-        logHook            = myLogHook xmproc,
+        logHook            = myLogHook h,
         startupHook        = myStartupHook
     }
