@@ -1,4 +1,4 @@
-Config { font = "xft:Aller:size=14:style=bold"
+Config { font = "xft:Aller:size=13"
        , bgColor = "#303030"
        , fgColor = "#c0f0f0"
        , position = Bottom
@@ -14,5 +14,5 @@ Config { font = "xft:Aller:size=14:style=bold"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %music%    •    %uptime%  %cpu%    •    %eth0%    •    %df%    •    <fc=#ee9a50>%date%</fc>  %uname%                         "
+       , template = "%StdinReader% }{ %music%    •    %uptime%  %cpu%    •    %eth0%    •    %df%    •    %uname%    <fc=#ee9a50>%date%</fc>                        "
        }

@@ -6,7 +6,6 @@
 !#define FONT1 -xos4-terminus-medium-r-normal--17-*-*-*-*-*-iso10646-1
 !#define FONT1 -*-fixed-medium-r-normal--18-*-*-*-*-*-iso10646-1
 
-
 !#define FONT1 xft:liberation mono:size=8
 !#define FONT1 xft:Andale Mono:size=10
 !#define FONT1 xft:Dejavu Sans Mono:size=9
@@ -15,51 +14,11 @@
 !#define FONT1 xft:Consolas:size=16.5
 
 XTerm*vt100.RenderFont: true
-XTerm*vt100.FaceName: Consolas:size=16.5
-
-!!!!!!XTERM:COLORS
-XTerm*vt100.colorMode: on
-XTerm*vt100.dynamicColors: on
-XTerm*vt100.depth: 24
-XTerm*vt100.background: gray25
-!XTerm*vt100.background: white
-!XTerm*vt100.depth: 32
-!XTerm*vt100.background: rgba:0000/2000/3000/aaaa
-XTerm*vt100.foreground: white
-!!!background color of color11
-XTerm*vt100.color0: black
-XTerm*vt100.color1: red
-XTerm*vt100.color2: green3
-XTerm*vt100.color3: yellow
-!!!mc background
-!XTerm*vt100.color4: black
-XTerm*vt100.color4: DarkSeaGreen4
-XTerm*vt100.color5: blue3
-!!!selection background (+mc menu)
-XTerm*vt100.color6: DarkSeaGreen3
-!!!active buttons and files
-XTerm*vt100.color7: LightYellow1
-XTerm*vt100.color8: gray50
-XTerm*vt100.color9: red
-!!!login and exutables foreground
-XTerm*vt100.color10: green1
-!!!mc column names
-XTerm*vt100.color11: DarkSeaGreen1
-!!!directories foreground
-XTerm*vt100.color12: yellow2
-!!!mc nonfiles foreground
-XTerm*vt100.color13: IndianRed1
-XTerm*vt100.color14: cyan
-!!!mc directories foreground
-XTerm*vt100.color15: white
-XTerm*vt100.colorUL: yellow
-XTerm*vt100.colorBD: white
-XTerm*vt100.cursorColor: gray
-XTerm*vt100.cursorBlink: true
+XTerm*vt100.FaceName: Consolas:size=16
 
 !!!!!!XTERM:FONT
 XTerm*vt100.font: FONT1
-XTerm*vt100.boldMode: true
+XTerm*vt100.boldMode: false
 
 !!!!!!XTERM:GEOMETRY
 !XTerm*vt100.geometry: 100x50
@@ -96,4 +55,33 @@ xpdf*antialias:         yes
 xpdf*foreground:        black
 xpdf*background:        white
 !xpdf*urlCommand:        /usr/bin/chromium-bin %s
+
+!!! color schemes: http://phraktured.net/terminal-colors/
+!*cursorColor: gray
+XTerm*vt100.foreground:     rgb:dd/dd/dd
+XTerm*vt100.background:     rgb:22/22/22
+!black
+XTerm*vt100.color0:         rgb:19/19/19
+XTerm*vt100.color8:         rgb:25/25/25
+!red
+XTerm*vt100.color1:         rgb:80/32/32
+XTerm*vt100.color9:         rgb:98/2b/2b
+!green
+XTerm*vt100.color2:         rgb:5b/76/2f
+XTerm*vt100.color10:        rgb:89/b8/3f
+!brown/yellow
+XTerm*vt100.color3:         rgb:aa/99/43
+XTerm*vt100.color11:        rgb:ef/ef/60
+!blue
+XTerm*vt100.color4:         rgb:32/4c/80
+XTerm*vt100.color12:        rgb:2b/4f/98
+!magenta
+XTerm*vt100.color5:         rgb:70/6c/9a
+XTerm*vt100.color13:        rgb:82/6a/b1
+!cyan
+XTerm*vt100.color6:         rgb:92/b1/9e
+XTerm*vt100.color14:        rgb:a1/cd/cd
+!white
+XTerm*vt100.color7:         rgb:ff/ff/ff
+XTerm*vt100.color15:        rgb:dd/dd/dd
 

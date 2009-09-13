@@ -103,7 +103,7 @@ free_space=1
 
 [Dirs]
 current_is_left=0
-other_dir=/#ftp:ftpuser@nmt/Video/krátké/trailers/nové
+other_dir=/home/lukas
 
 [New Left Panel]
 display=listing

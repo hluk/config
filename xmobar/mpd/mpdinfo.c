@@ -19,7 +19,7 @@ int main(){
 				printf("|| ");
 				break;
 			case MPD_PLAYER_PLAY:
-				printf("> ");
+				printf("» ");
 				break;
 			default:
 				break;

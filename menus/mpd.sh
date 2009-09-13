@@ -19,8 +19,8 @@ then
 	ACT="$@"
 else
 # actions#{{{
-ACTS="\
-add
+ACTS=\
+"add
 clear
 consume:$CONSUME
 jamendo

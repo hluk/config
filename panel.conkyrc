@@ -6,7 +6,7 @@ draw_borders no
 border_margin 0
 
 gap_x 0
-gap_y -1
+gap_y 1
 alignment bl
 maximum_width 1920
 minimum_size 1920 19
@@ -21,11 +21,9 @@ color2 d0d0d0
 #own_window_colour 2060a0
 
 own_window yes
-own_window_class Conky_panel
+own_window_class Conky
 own_window_transparent no
-own_window_hints above
 own_window_type desktop
-#own_window_hints undecorated,sticky,skip_taskbar,skip_pager,above
 own_window_transparent yes
 
 use_xft yes
@@ -33,12 +31,12 @@ use_xft yes
 #xftfont Linux Libertine C:size=12:bold
 #xftfont Quicksand:size=12:bold
 #xftfont Fertigo Pro:size=11:bold
-#xftfont Aller:size=12:bold
+xftfont Aller:size=13:bold
 #xftfont Aller Display:size=12
 #xftfont Anivers:size=12:bold
 #xftfont Juicy Hunt:size=18
 #xftfont Tenderness:size=12.5:bold
-xftfont Diavlo:size=12.5:bold
+#xftfont Diavlo:size=14
 
 #${if_running xmms2d}$color  •  ${color1}$xmms2_elapsed${color2}|$xmms2_duration|${color1} ${xmms2_smart}${endif}
 #•  ${color0}Mem ${color1}$memfree${color0} free$color  
