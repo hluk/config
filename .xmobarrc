@@ -1,9 +1,9 @@
-Config { font = "xft:Aller:size=13"
-       , bgColor = "#303030"
-       , fgColor = "#c0f0f0"
+Config { font = "xft:Gayatri:size=14"
+       , bgColor = "#151515"
+       , fgColor = "#b0b0b0"
        , position = Bottom
        , lowerOnStart = True
-       , commands = [ Run Network "eth0" ["--template","<rx>   <tx>","-L","1","-H","1000","--low","aquamarine3","--normal","#f0e050","--high","#ff9a50"] 30
+       , commands = [ Run Network "eth0" ["--template","<rx>   <tx>","-L","1","-H","1000","--low","aquamarine3","--normal","#f0e050","--high","#ff9a50"] 50
                     , Run Cpu ["--template","cpu <total>","-L","10","-H","90","--low","aquamarine3","--normal","#f0e050","--high","#ff9a50"] 10
                     , Run Com "~/dev/xmobar/uptime/uptime" [] "uptime" 100
                     , Run Com "uname" ["-r"] "" 36000
@@ -14,5 +14,5 @@ Config { font = "xft:Aller:size=13"
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% }{ %music%    •    %uptime%  %cpu%    •    %eth0%    •    %df%    •    %uname%    <fc=#ee9a50>%date%</fc>                        "
+       , template = "%StdinReader% %music%}{   •   %uptime%  %cpu%   •   %eth0%   •   %df%   •   %uname%   <fc=#ee9a50>%date%</fc>                        "
        }

@@ -675,12 +675,12 @@ setup(Bool topbar) {
 		XSetFont(dpy, dc.gc, dc.font.xfont->fid);
 	if(maxname)
 		cmdw = textw(maxname);
-	if(cmdw > mw / 3)
-		cmdw = mw / 3;
+	if(cmdw > mw / 7)
+		cmdw = mw / 7;
 	if(prompt)
 		promptw = textw(prompt);
-	if(promptw > mw / 5)
-		promptw = mw / 5;
+	if(promptw > mw / 10)
+		promptw = mw / 10;
 	text[0] = 0;
 	match(text);
 	XMapRaised(dpy, win);

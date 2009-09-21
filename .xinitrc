@@ -1,5 +1,5 @@
 #!/bin/sh
-trayer --edge top --align right --expand true --tint 0x303030 --alpha 0 --transparent true --height 20 --width 5 &
+trayer --edge bottom --align right --expand true --tint 0x151515 --alpha 0 --transparent true --height 20 --width 5 &
 ~/dev/img/set_wallpaper.sh &
 ~/apps/easystroke/easystroke &
 parcellite &

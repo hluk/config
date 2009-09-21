@@ -16,10 +16,10 @@ int main(){
 
 		switch (state) {
 			case MPD_PLAYER_PAUSE:
-				printf("|| ");
+				printf("II ");
 				break;
 			case MPD_PLAYER_PLAY:
-				printf("» ");
+				printf(">> ");
 				break;
 			default:
 				break;
@@ -31,7 +31,7 @@ int main(){
 		printf(title);
 		printf("</fc>");
 
-		printf("<fc=aquamarine3>");
+		printf("<fc=90000>");
 		if (elapsed >= 0)
 			printf(" %02d:%02d",elapsed/60,elapsed%60);
 		if (total > 0)

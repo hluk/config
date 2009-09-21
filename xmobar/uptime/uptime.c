@@ -22,7 +22,7 @@ int getUptime(void) {
 	char *lcolor = "aquamarine3";
 	char *ncolor = "#f0e050";
 	char *hcolor = "#ff9a50";
-	char *hhcolor = "#ff4000";
+	char *hhcolor = "#ff2020";
 
 	struct sysinfo s_info;
 	sysinfo(&s_info);

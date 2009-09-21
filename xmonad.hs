@@ -3,6 +3,7 @@ import XMonad.Layout.Gaps
 import XMonad.Layout.NoBorders
 import XMonad.Util.Run (spawnPipe)
 import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.UrgencyHook
 import XMonad.Actions.WindowGo (runOrRaise)
 import XMonad.Actions.NoBorders
 import XMonad.Actions.FloatKeys
@@ -145,39 +146,24 @@ myManageHook = composeAll . concat $
     , [className =? c --> doShift ws | (ws,cs) <- myShifts, c <- cs]
     ]
     where
-    myFloats = ["MPlayer", "Gimp", "desmume-cli", "jd-Main", "NO$GBA.EXE", "Speedcrunch", "Pidgin"]
+    myFloats = ["MPlayer", "Gimp", "desmume-cli", "jd-Main", "NO$GBA.EXE", "Speedcrunch", "Pidgin", "fontforge"]
     myIgnore = ["Conky", "trayer", "desktop_window"]
-    myShifts = [("1",[myTerminalClass]), ("2",["Chrome"]), ("3",["Pidgin"])]
+    myShifts = [("1",[myTerminalClass]), ("2",["Chrome"]), ("3",["Pidgin"]), ("4",["Gimp","fontforge"])]
 -- }}}
 
 -- log-- {{{
 myLogHook h = do dynamicLogWithPP $ myPP h
 
-{-
 myPP :: Handle -> PP
-myPP h = defaultPP  { ppCurrent = wrap "^fg(white)^bg(#40c0e0) " " ^bg()^fg()" 
+myPP h = defaultPP  { ppCurrent = wrap "<fc=white,#900000> " " </fc>" 
                      , ppSep     = ""
                      , ppWsSep = ""
-                     , ppUrgent = wrap "^fg(white)^bg(red) " " ^bg()^fg()" 
-                     , ppLayout = wrap "^fg(aquamarine2) :: " " ^fg()"
+                     , ppUrgent = wrap "<fc=black,yellow>" "!!</fc>" 
+                     , ppLayout = wrap " .:" ":. "
                      , ppTitle = \x -> if length(x) > 0
-                                       then "^fg(white)^bg(#40c0e0)   " ++ shorten 60 x ++ "   ^bg()^fg()"
+                                       then "<fc=white,#900000>   " ++ shorten 60 x ++ "   </fc>"
                                        else ""
-                     , ppHidden = wrap "^fg(#aaaaaa) " " ^fg()"
-                     , ppOutput = hPutStrLn h
-                     }
--}
-
-myPP :: Handle -> PP
-myPP h = defaultPP  { ppCurrent = wrap "<fc=white,#30a0d0> " " </fc>" 
-                     , ppSep     = ""
-                     , ppWsSep = ""
-                     , ppUrgent = wrap "<fc=white,red> " " </fc>" 
-                     , ppLayout = wrap "<fc=aquamarine2> :: " " </fc>"
-                     , ppTitle = \x -> if length(x) > 0
-                                       then "<fc=white,#30a0d0>   " ++ shorten 60 x ++ "   </fc>"
-                                       else ""
-                     , ppHidden = wrap "<fc=#909090> " " </fc>"
+                     , ppHidden = wrap " " " "
                      , ppOutput = hPutStrLn h
                      }
 -- }}}
@@ -187,8 +173,7 @@ myStartupHook = return ()
 -- main-- {{{
 main = do
         h <- spawnPipe "xmobar ~/.xmobarrc"
-        {-h <- spawnPipe "~/dev/dzen/panel.sh"-}
-        xmonad $ defaultConfig {
+        xmonad $ withUrgencyHook NoUrgencyHook defaultConfig {
       -- simple stuff
         terminal           = myTerminal,
         focusFollowsMouse  = True,
@@ -197,7 +182,7 @@ main = do
         numlockMask        = myNumlockMask,
         workspaces         = map show [1..5],
         normalBorderColor  = "#000000",
-        focusedBorderColor = "#30a0d0",
+        focusedBorderColor = "#900000",
 
       -- key bindings
         keys               = myKeys,

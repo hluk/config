@@ -65,10 +65,6 @@ alias rcdiff="vimdiff {~/.config,/etc/xdg}/awesome/rc.lua"
 alias q="paludis -q"
 alias dict="~/dev/translate/translate.py"
 
-# edit privoxy user settings
-alias adblock="su -c \"$EDITOR -c ':cd /etc/privoxy' -c ':e user.action'\""
-# }}}
-
 # X11# {{{
 if [ -n "$DISPLAY" ]
 then
@@ -87,7 +83,8 @@ then
 	alias feb="$HOME/feb"
 	alias febt="THUMBS=1 $HOME/feb"
 	alias smplayer="LANG=C smplayer"
-	alias v="$HOME/apps/comix/src/comix.py"
+	#alias v="$HOME/apps/comix/src/comix.py"
+	alias v="$HOME/dev/gallery/mkgallery.sh"
 	alias chromium="$HOME/chromium.sh"
 	alias fontmatrix="$HOME/apps/fontmatrix/build/src/fontmatrix"
 	alias e="$EDITOR"
@@ -98,6 +95,10 @@ then
 else
 	alias x="startx > $HOME/.xsession 2>&1 &"
 fi
+# }}}
+
+# edit privoxy user settings
+alias adblock="su -c \"$EDITOR -c ':cd /etc/privoxy' -c ':e user.action'\""
 # }}}
 
 # func: dt program# {{{
@@ -148,12 +149,19 @@ unpack() {
 	return 0
 } # }}}
 
-# print notes
-(
-cd ~/notes
-for f in *
-do
-	echo -e "\033[0;33m---------------- $f ----------------\033[0m"
-	cat "$f" && echo
-done 2> /dev/null
-)
+# func: unpack file [dir] # {{{
+# info: Print notes.
+notes() {
+	(
+	cd ~/notes
+	for f in *
+	do
+		echo -e "\033[0;33m---------------- $f ----------------\033[0m"
+		cat "$f" && echo
+	done 2> /dev/null
+	)
+}
+# }}}
+
+notes
+

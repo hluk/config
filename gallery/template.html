@@ -1,0 +1,185 @@
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/> 
+<html>
+<head>
+<style>
+* {text-align: center; margin: 0;font-family: Aller, Verdana, Arial, Helvetica; font-size: 18px; background-color: #222; color: #ccc;}
+a {color: #6af; text-decoration: none; font-weight: bold;}
+a:hover {color: #ff0;}
+a:visited {color: #6af;}
+a:visited:hover {color: #ff0;}
+</style>
+<script type="text/javascript"> 
+// drag scroll (pan)
+window.addEventListener("load",function() {
+  var dragging = false;
+  
+  document.addEventListener("mousedown",startDragScroll,false);
+  document.addEventListener("mouseup",stopDragScroll,false);
+  document.addEventListener("mousemove",dragScroll,false);
+
+  function startDragScroll(e){
+    if (e.button == 0 && e.target instanceof HTMLImageElement) {
+      dragging=e;
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }
+
+  function stopDragScroll(e){ 
+    dragging=false;
+  }
+
+  function dragScroll(e) {
+    if (dragging) {
+      window.scrollBy((dragging.clientX-e.clientX),(dragging.clientY-e.clientY));
+      dragging = e;
+      e.preventDefault();
+      e.stopPropagation();
+    }
+  }
+},false);
+
+// zoom image
+function zoom(state){
+	if (!document.all&&!document.getElementById)
+		return;
+	whatcache = document.images["myimage"];
+	if (state=="restore"){
+		whatcache.style.width  = w;
+		whatcache.style.height = h;
+	}
+	else if (state=="fit"){
+		whatcache.style.width  = window.innerWidth;
+		whatcache.style.height = h*window.innerWidth/w;
+	}
+	else if (zoom_factor>0.01){
+		if (state=="in")
+			zoom_factor += zoom_step;
+		else if (state=="out")
+			zoom_factor -= zoom_step;
+		whatcache.style.width  = w*zoom_factor;
+		whatcache.style.height = h*zoom_factor;
+	}
+}
+
+function getUrlVars() {
+	var map = {};
+	var parts = window.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+		map[key] = value;
+	});
+	return map;
+}
+
+function link(target,name,href,img) {
+	var l = document.createElement('a');
+	l.href = href;
+	if (img) l.appendChild(img);
+	l.appendChild(document.createTextNode(name));
+	target.appendChild(l);
+}
+
+function img_create(src) {
+    var img = document.createElement('img');
+    img.src = src;
+    img.name = "myimage";
+    img.onload = imgOnLoad;
+    return img;
+}
+
+function key(e){
+	var key = e ? e.which : event.keyCode;
+	switch (String.fromCharCode(key)) {
+	case "1":
+		go(len);
+		break;
+	case "3":
+		go(n+5);
+		break;
+	case "4":
+		go(n-1);
+		break;
+	case "6":
+		go(n+1);
+		break;
+	case "7":
+		go(1);
+		break;
+	case "9":
+		go(n-5);
+		break;
+	case "+":
+		zoom('in');
+		break;
+	case "-":
+		zoom('out');
+		break;
+	case "*":
+		zoom('restore');
+		break;
+	case "/":
+		zoom('fit');
+		break;
+	}
+}
+
+function imgOnLoad() {
+	w = this.width;
+	h = this.height;
+	var resinfo = document.createTextNode(" ("+w+"x"+h+")");
+	document.getElementById('info').appendChild(resinfo);
+	zoom(); // refresh zoom
+}
+
+function getPage(i) {
+	if (!i || i<1)
+		return 1;
+	else if (n > len)
+		return len;
+	else 
+		return i;
+}
+
+function go(i) {
+	document.navigation.n.value = getPage(i);
+	document.navigation.zoom.value = zoom_factor;
+	document.navigation.submit();
+}
+
+//INSERT VARIABLES HERE
+
+var vars = getUrlVars();
+var len = ls.length;
+// page number
+var n = getPage( parseInt(vars["n"]) );
+curr = ls[n-1];
+// zoom
+var zoom_step   = 0.2;
+var zoom_factor = parseFloat(vars["zoom"]);
+if (!zoom_factor) zoom_factor = 1.0;
+
+// image width and height
+var w = null;
+var h = null;
+</script> 
+</head>
+<body onKeyPress="key()">
+<script type="text/javascript">
+var b = document.getElementsByTagName('body')[0];
+
+var info = document.createElement('div');
+info.id = "info";
+info.innerText = "[" + n + "/" + len + "] ";
+link(info,curr,dir+"/"+curr);
+b.appendChild(info);
+
+img = img_create(dir+"/"+curr);
+b.appendChild(img);
+
+document.write('<form name="navigation" action="'+index+'" method="get">'+
+		'<input type="hidden" name="zoom" value="1" />'+
+		'<input type="hidden" name="n" value="0" />'+
+		'</form>');
+
+</script>
+</body>
+</html>

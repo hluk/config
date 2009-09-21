@@ -103,13 +103,13 @@ free_space=1
 
 [Dirs]
 current_is_left=0
-other_dir=/home/lukas
+other_dir=/
 
 [New Left Panel]
 display=listing
 reverse=0
 case_sensitive=0
-sort_order=name
+sort_order=time
 list_mode=full
 user_format=half type name
 user_status0=half type name | size | perm

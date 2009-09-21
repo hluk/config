@@ -12,6 +12,7 @@
 ~/.zshrc
 ~/Playlists/
 ~/dev/bin/
+~/dev/gallery/
 ~/dev/menus/*.sh menus/
 ~/dev/menus/dmenu/ menus/
 ~/dev/pdf/
