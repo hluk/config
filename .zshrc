@@ -69,7 +69,7 @@ alias dict="~/dev/translate/translate.py"
 if [ -n "$DISPLAY" ]
 then
 	export EDITOR="gvim"
-	export BROWSER="~/chromium.sh"
+	export BROWSER="$HOME/chromium.sh"
 	#export TERM=xterm-color 
 	#export TERMINFO=$HOME/lib/terminfo
 

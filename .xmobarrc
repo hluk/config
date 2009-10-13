@@ -1,6 +1,6 @@
 Config { font = "xft:Gayatri:size=14"
-       , bgColor = "#151515"
-       , fgColor = "#b0b0b0"
+       , bgColor = "#222"
+       , fgColor = "#bbb"
        , position = Bottom
        , lowerOnStart = True
        , commands = [ Run Network "eth0" ["--template","<rx>   <tx>","-L","1","-H","1000","--low","aquamarine3","--normal","#f0e050","--high","#ff9a50"] 50

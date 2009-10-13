@@ -12,8 +12,8 @@ set ignorecase
 set incsearch
 " show numbers
 set number
-" highlight cursor line
-set cursorline
+" highlight cursor line (slow!)
+"set cursorline
 " C indent
 set cin
 " cursor show next/prev parenthesis
@@ -22,7 +22,7 @@ set showmatch
 set showcmd
 "set backspace=indent,eol,start
 set nojoinspaces
-" register "unnamed" == clipboard
+" clipboard
 set clipboard=unnamed
 " completion char in :
 set wildchar=<Tab>
@@ -31,6 +31,10 @@ set wildmenu
 set wildmode=longest:full,full
 " vim scans first and last few lines for file settings
 set modeline
+" tab -> spaces
+set expandtab
+set tabstop=4
+set shiftwidth=4
 
 filetype plugin on
 filetype indent on
@@ -47,8 +51,10 @@ if has("gui_running")
 	"set guifont=Liberation\ Mono\ 16
 	"set guifont=Monospace\ 16
 	"set guifont=DejaVu\ Sans\ Mono\ 16
-	set guifont=Consolas\ 16
-	"set guifont=Inconsolata\ 16
+	"set guifont=Inconsolata\ 15
+	"set guifont=Consolas\ 16
+	"set guifont=monofur\ 17
+	set guifont=Envy\ Code\ R\ 15
 
 	colorscheme wombat
 	"colorscheme xoria256
@@ -69,15 +75,13 @@ else
 	"colorscheme soso
 endif
 
-" colors
-
 "" Make Vim completion popup menu work just like in an IDE (Matt Zyzik)
-set completeopt=longest,menuone
+set completeopt=longest,menuone,preview
 inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
 inoremap <expr> <c-n> pumvisible() ? "\<lt>c-n>" : "\<lt>c-n>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>" 
 inoremap <expr> <m-;> pumvisible() ? "\<lt>c-n>" : "\<lt>c-x>\<lt>c-o>\<lt>c-n>\<lt>c-p>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"
 
-"" Dictionary Word Completion Using Ctrl-x Ctrl-k
+"" Dictionary Word Completion Using C-x C-k
 set dictionary+=/usr/share/dict/words
 "" spell checking
 "set spelllang=cs
@@ -98,7 +102,7 @@ nmap <C-F9> zR
 nmap <C-S-F9> zM
 
 "" TABS
-map tn :tabnew<CR>
+map tn :tabnew<CR>:e 
 map td :tabclose<CR>
 map [5;5~ :tabprev<CR>
 map [6;5~ :tabnext<CR>
@@ -117,15 +121,14 @@ map TT :TlistToggle<CR>
 "" NERDTree
 map tt :NERDTreeToggle<CR>
 
-"" omnicpp C++ code completion
-" RUN: exuberant-ctags -R --c++-kinds=+p --fields=+iaS --extra=+q -f ~/.vim/systags /usr/include/
+set omnifunc=ccomplete#Complete
 autocmd FileType c    set tags+=~/.vim/tags_c
 autocmd FileType cpp  set tags+=~/.vim/tags_cpp
 autocmd FileType ruby set tags+=~/.vim/tags_ruby
 autocmd FileType java set tags+=~/.vim/tags_java
 "set tags+=~/.vim/ctags
-"noremap <F12> :!exuberant-ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
-noremap <F12> :!exuberant-ctags -R .<CR>
+autocmd FileType cpp noremap <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ .<CR>
+"noremap <F12> :!exuberant-ctags -R .<CR>
 autocmd FileType ruby noremap <F11> :!exuberant-ctags --totals --lang-map=Ruby:+.rb -f ~/.vim/tags_ruby -R /usr/lib/ruby/gems /usr/lib/ruby/site_ruby<CR>
 
 autocmd FileType haskell set expandtab
@@ -136,15 +139,15 @@ map <F2> :w<CR>
 imap <F2> <C-o>:w<CR>
 map <C-S> :w<CR>
 imap <C-S> <C-o>:w<CR>
-" quit
-map <C-q> :qa<CR>
-imap <C-q> <C-o>:qa<CR>
+" save session and quit
+map <C-q> :mksession!<CR>:qa<CR>
+imap <C-q> <C-o>:mksession!<CR><C-o>:qa<CR>
 " make
 map <F5> :make<CR>
 imap <F5> <C-o>:make<CR>
 
 " omni-completion shortcut alias
-imap <C-Tab> <C-X><C-O>
+imap <C-Space> <C-X><C-O>
 
 " expedite ~/.vimrc edit & reload
 map <C-e> :split ~/.vimrc <CR>
@@ -163,4 +166,15 @@ let NERDShutUp=1
 " view tabs and trailing spaces
 "set list
 "set listchars=tab:»·,trail:·
+
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+let g:SuperTabDefaultCompletionType = "context"
+
+"let g:acp_completeoptPreview = 1
+"let g:acp_behavior = {
+"\ '*': [ {'command' : "\<C-x>\<C-o>",
+"\       'pattern' : ".",
+"\       'repeat' : 0}
+"\      ]  
+"\}
 

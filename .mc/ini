@@ -89,7 +89,7 @@ screen=
 
 [Layout]
 equal_split=1
-first_panel_size=79
+first_panel_size=95
 message_visible=0
 keybar_visible=1
 xterm_title=1
@@ -102,14 +102,14 @@ filetype_mode=1
 free_space=1
 
 [Dirs]
-current_is_left=0
-other_dir=/
+current_is_left=1
+other_dir=/home/lukas/apps
 
 [New Left Panel]
 display=listing
 reverse=0
 case_sensitive=0
-sort_order=time
+sort_order=name
 list_mode=full
 user_format=half type name
 user_status0=half type name | size | perm

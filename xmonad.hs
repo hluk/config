@@ -1,15 +1,15 @@
+import System.Exit
+import System.IO
 import XMonad
+import XMonad.Actions.FloatKeys
+import XMonad.Actions.NoBorders
+import XMonad.Actions.WindowBringer
+import XMonad.Actions.WindowGo (runOrRaise)
+import XMonad.Hooks.DynamicLog
+import XMonad.Hooks.UrgencyHook
 import XMonad.Layout.Gaps
 import XMonad.Layout.NoBorders
 import XMonad.Util.Run (spawnPipe)
-import XMonad.Hooks.DynamicLog
-import XMonad.Hooks.UrgencyHook
-import XMonad.Actions.WindowGo (runOrRaise)
-import XMonad.Actions.NoBorders
-import XMonad.Actions.FloatKeys
-import XMonad.Actions.WindowBringer
-import System.Exit
-import System.IO
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -91,6 +91,9 @@ myKeys conf@(XConfig {XMonad.modMask = m}) = M.fromList $
     -- volume
     , ((m,  xK_parenright), spawn (bindir ++ "/volume.sh 1%+"))
     , ((m,  xK_section), spawn (bindir ++ "/volume.sh 1%-"))
+    -- parcellite
+    {-, ((m, xK_semicolon), spawn (bindir ++ "/clip.py"))-}
+    , ((m, xK_semicolon), spawn ("~/dev/qt/qclip/qclip"))
     -- fullscreen
     , ((m, xK_F12), sendMessage ToggleGaps >> withFocused toggleBorder >> refresh)
     -- floating
@@ -146,7 +149,7 @@ myManageHook = composeAll . concat $
     , [className =? c --> doShift ws | (ws,cs) <- myShifts, c <- cs]
     ]
     where
-    myFloats = ["MPlayer", "Gimp", "desmume-cli", "jd-Main", "NO$GBA.EXE", "Speedcrunch", "Pidgin", "fontforge"]
+    myFloats = ["MPlayer", "Vlc", "Gimp", "desmume-cli", "jd-Main", "NO$GBA.EXE", "Speedcrunch", "Pidgin", "fontforge", "Qsimpleweb", "Qclip"]
     myIgnore = ["Conky", "trayer", "desktop_window"]
     myShifts = [("1",[myTerminalClass]), ("2",["Chrome"]), ("3",["Pidgin"]), ("4",["Gimp","fontforge"])]
 -- }}}

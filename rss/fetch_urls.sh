@@ -14,7 +14,7 @@ SCRIPTPATH=`dirname "$0"`
 LISTDIR="$SCRIPTPATH/lists"
 GETPATH="$HOME/dev/wget"
 
-URLS="http://www.gametrailers.com/rssgenerate.php?s1=&vidformat[mov]=on&vidformat[wmv]=on&quality[either]=on&orderby=curpopular&limit=20
+URLS="http://www.gametrailers.com/rssgenerate.php?s1=&vidformat[mov]=on&vidformat[wmv]=on&quality[hd]=on&orderby=curpopular&limit=20
 http://www.gamersyde.com/news_en.rdf
 http://konachan.com/post/atom
 http://localhost/rss/deviantart-daily.php"
