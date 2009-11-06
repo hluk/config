@@ -17,7 +17,7 @@ GETPATH="$HOME/dev/wget"
 URLS="http://www.gametrailers.com/rssgenerate.php?s1=&vidformat[mov]=on&vidformat[wmv]=on&quality[hd]=on&orderby=curpopular&limit=20
 http://www.gamersyde.com/news_en.rdf
 http://konachan.com/post/atom
-http://localhost/rss/deviantart-daily.php"
+$HOME/dev/wget/deviantart/deviantart-daily.sh"
 #http://orz.4chan.org/hr/index.rss
 #http://img.7chan.org/hr/rss.xml
 
@@ -36,7 +36,8 @@ do
 	touch "$LISTDIR/$MD5.lst"
 
 	echo -n "* Fetching rss \"$URL\" ... "
-	$SCRIPTPATH/rss_urls.sh "$URL" | sort > "$OLDLIST.new"
+    # URL is executable file or url to rss
+	(test -x "$URL" && "$URL" || $SCRIPTPATH/rss_urls.sh "$URL") | sort > "$OLDLIST.new"
 	NEWLIST="`diff "$OLDLIST.new" "$OLDLIST" --new-group-format='%<' --unchanged-group-format=''`"
 	test $? -eq 2 && (echo "FAILED!"; continue)
 	echo "Ok"
@@ -64,8 +65,7 @@ do
 		"$GETPATH/chan/moe.imouto.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
 		;;
 
-		"http://localhost/"*)
-		"$GETPATH/deviantart/deviantart-login.sh" > /dev/null
+		*"/deviantart-daily.sh")
 		"$GETPATH/deviantart/deviantart.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
 		;;
 

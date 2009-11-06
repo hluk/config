@@ -25,7 +25,7 @@ fi
 echo -e "\tInput: `/usr/bin/identify "$IMG"`"
 
 # get screen resolution
-RES=(`xdpyinfo|sed -n '/^  dimensions:    /{s/.* \([0-9]\+\)x\([0-9]\+\).*/\1 \2/;p;q}'`)
+RES=(`xdpyinfo|sed -n '/^  dimensions:    /{s/.* \([0-9]\+\)x\([0-9]\+\).*/\1 \2/;p;q}'`) || exit $?
 
 # if wallpaper already exists
 WALL="$TMPPATH/`basename "$IMG"_${RES[0]}x${RES[1]}`.png"

@@ -31,7 +31,7 @@ int main(){
 		printf(title);
 		printf("</fc>");
 
-		printf("<fc=90000>");
+		printf("<fc=#70D070>");
 		if (elapsed >= 0)
 			printf(" %02d:%02d",elapsed/60,elapsed%60);
 		if (total > 0)

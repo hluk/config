@@ -89,7 +89,7 @@ screen=
 
 [Layout]
 equal_split=1
-first_panel_size=95
+first_panel_size=106
 message_visible=0
 keybar_visible=1
 xterm_title=1
@@ -102,8 +102,8 @@ filetype_mode=1
 free_space=1
 
 [Dirs]
-current_is_left=1
-other_dir=/home/lukas/apps
+current_is_left=0
+other_dir=/home/lukas
 
 [New Left Panel]
 display=listing
@@ -136,7 +136,7 @@ panel_display_codepage=Other_8_bit
 [Misc]
 ftpfs_password=anonymous@
 ftp_proxy_host=gate
-display_codepage=Other_8_bit
+display_codepage=UTF-8
 ftp_codepage=Other_8_bit
 find_ignore_dirs=
 source_codepage=UTF-8

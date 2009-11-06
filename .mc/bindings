@@ -297,7 +297,7 @@ regex/\.[pP][sS][dD]$
 
 type/^GIF
 	#Include=image
-	Open=(~/chromium.sh file://%d/%f) 2>/dev/null
+	Open=(~/chromium.sh file://%f) 2>/dev/null
 
 type/^JPEG
 	Include=image
@@ -421,10 +421,9 @@ regex/\.([rR][aA]?[mM])$
 	Open=(realplay %f >/dev/null 2>&1 &)
 
 include/video
-	Open=(mplayer %f 1>/dev/null 2>&1 &)
-        #Open=mplayer %f
+	#Open=(mplayer %f 1>/dev/null 2>&1 &)
 	View=midentify %f
-	#Open=(smplayer %f >/dev/null 2>&1 &)
+    Open=(smplayer %f >/dev/null 2>&1 &)
 	#Open=(gtv %f >/dev/null 2>&1 &)
 	#Open=(xanim %f >/dev/null 2>&1 &)
 
@@ -456,14 +455,14 @@ type/^MS Windows HtmlHelp Data
 # html
 regex/\.([hH][tT][mM][lL]?)$
 	#Open=(if test -n "firefox" && test -n "$DISPLAY"; then (firefox file://%d/%p &) 1>&2; else links %f || lynx -force_html %f || ${PAGER:-more} %f; fi) 2>/dev/null
-	Open=(~/chromium.sh file://%d/%f) 2>/dev/null
+	Open=(~/chromium.sh file://%f) 2>/dev/null
 	#Open=(if test -n "konqueror" && test -n "$DISPLAY"; then (konqueror file://%d/%p &) 1>&2; else links %f || lynx -force_html %f || ${PAGER:-more} %f; fi) 2>/dev/null
 	View=%view{ascii} lynx -dump -force_html %f
 
 # Flash
 regex/\.([sS][wW][fF])$
         #Open=(firefox %f 1>/dev/null 2>&1 &)
-	Open=(~/chromium.sh file://%d/%f) 2>/dev/null
+	Open=(~/chromium.sh file://%f) 2>/dev/null
 
 # StarOffice 5.2
 shell/.sdw

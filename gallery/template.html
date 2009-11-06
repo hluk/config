@@ -238,7 +238,7 @@ function showImageInfo(target) {
 
 	imgtitle.id = "imgtitle";
 	var l = document.createElement('a');
-	l.href = imgpath;
+	l.href = "imgs/" + imgpath;
 	l.appendChild(document.createTextNode(imgname));
 	imgtitle.appendChild(l);
 
@@ -255,7 +255,7 @@ function showImageInfo(target) {
 }
 
 function showImage(target) {
-	var img = img_create(imgpath);
+	var img = img_create("imgs/" + imgpath);
 	target.appendChild(img);
 }
 
@@ -303,7 +303,7 @@ document.write(
 	'<input type="hidden" name="n" value="0" />'+
 	'</form>');
 
-// selection box
+// selection box {{{
 var imglist = document.createElement("div");
 imglist.id = "imglist";
 
@@ -342,6 +342,7 @@ if(to < len)
 	imglist.appendChild(document.createTextNode("..."));
 
 b.appendChild(imglist);
+//}}}
 </script>
 </body>
 </html>

@@ -21,23 +21,21 @@ bindkey '[4~' end-of-line
 bindkey '[3~' delete-char
 
 # env# {{{
+export XDG_DATA_HOME="$HOME/.config"
+export MANPAGER=vimmanpager
+export EDITOR=gvim
 # - proxy
 export http_proxy=localhost:8118
-# - build
-export CHOST="i686-pc-linux-gnu"
-export CFLAGS="-pipe -O3 -march=pentium4 -msse2 -mfpmath=sse -fomit-frame-pointer"
+# - C flags
+export CHOST="x86_64-pc-linux-gnu"
+export CFLAGS="-march=core2 -O2 -pipe"
 export CXXFLAGS="${CFLAGS}"
-export MAKEOPTS="-j2"
+export MAKEOPTS="-j7"
 # - ccache
-export PATH="/usr/lib/ccache/bin/:$PATH"
+export PATH="/usr/lib/ccache/bin/:${PATH}"
 export CCACHE_DIR="$HOME/.ccache"
 export CCACHE_SIZE="4G"
 export SANDBOX_WRITE="${SANDBOX_WRITE}:${CCACHE_DIR}"
-
-export MANPAGER=vimmanpager
-export EDITOR=vim
-
-export XDG_DATA_HOME="$HOME/.config"
 # }}}
 
 # ConTeXt # {{{
@@ -64,6 +62,7 @@ alias lpr="lpr -o InputSlot=Default -o Resolution=600x600dpi -o PageSize=A4"
 alias rcdiff="vimdiff {~/.config,/etc/xdg}/awesome/rc.lua"
 alias q="paludis -q"
 alias dict="~/dev/translate/translate.py"
+alias crontab="EDITOR=vim crontab"
 
 # X11# {{{
 if [ -n "$DISPLAY" ]

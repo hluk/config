@@ -54,7 +54,7 @@ if has("gui_running")
 	"set guifont=Inconsolata\ 15
 	"set guifont=Consolas\ 16
 	"set guifont=monofur\ 17
-	set guifont=Envy\ Code\ R\ 15
+	set guifont=Envy\ Code\ R\ 12
 
 	colorscheme wombat
 	"colorscheme xoria256
@@ -126,6 +126,7 @@ autocmd FileType c    set tags+=~/.vim/tags_c
 autocmd FileType cpp  set tags+=~/.vim/tags_cpp
 autocmd FileType ruby set tags+=~/.vim/tags_ruby
 autocmd FileType java set tags+=~/.vim/tags_java
+autocmd FileType python set noexpandtab
 "set tags+=~/.vim/ctags
 autocmd FileType cpp noremap <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ .<CR>
 "noremap <F12> :!exuberant-ctags -R .<CR>

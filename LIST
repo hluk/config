@@ -12,7 +12,8 @@
 ~/.zshrc
 ~/Playlists/
 ~/dev/bin/
-~/dev/gallery/
+~/dev/gallery/mkgallery.sh gallery/
+~/dev/gallery/template.html gallery/
 ~/dev/menus/*.sh menus/
 ~/dev/menus/dmenu/ menus/
 ~/dev/pdf/

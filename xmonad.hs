@@ -4,20 +4,22 @@ import XMonad
 import XMonad.Actions.FloatKeys
 import XMonad.Actions.NoBorders
 import XMonad.Actions.WindowBringer
-import XMonad.Actions.WindowGo (runOrRaise)
+import XMonad.Actions.WindowGo (raiseMaybe)
 import XMonad.Hooks.DynamicLog
 import XMonad.Hooks.UrgencyHook
+import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Gaps
 import XMonad.Layout.NoBorders
-import XMonad.Util.Run (spawnPipe)
+import XMonad.Util.Run (spawnPipe, runInTerm)
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
-menudir = "~/dev/menus"
-bindir  = "~/dev/bin"
+homedir = "/home/lukas"
+menudir = homedir ++ "/dev/menus"
+bindir  = homedir ++ "/dev/bin"
 
-myTerminal      = "sakura -e ~/screen"
+myTerminal      = "/usr/bin/sakura -e " ++ bindir ++ "/screen"
 myTerminalClass = "Sakura"
 
 -- keys-- {{{
@@ -30,7 +32,7 @@ wskeys = [0x2b,0x1ec,0x1b9,0x1e8,0x1f8]
 
 myKeys conf@(XConfig {XMonad.modMask = m}) = M.fromList $
     -- launch a terminal
-    [ ((ms, xK_Return), runOrRaise (XMonad.terminal conf) (className =? myTerminalClass))
+    [ ((ms, xK_Return), raiseMaybe (runInTerm "" (bindir ++ "/screen")) (className =? myTerminalClass))
     -- launch dmenu
     , ((m,  xK_r), spawn (menudir ++ "/runmenu.sh"))
     -- close focused window 
@@ -73,9 +75,9 @@ myKeys conf@(XConfig {XMonad.modMask = m}) = M.fromList $
     -- Edit config
     , ((m,  xK_e), spawn "gvim ~/.xmonad/xmonad.hs")
     -- web browser
-    , ((m,  xK_w), runOrRaise (bindir ++ "/chromium.sh") (className =? "Chrome"))
+    , ((m,  xK_w), raiseMaybe (spawn (bindir ++ "/chromium.sh")) (className =? "Chrome"))
     -- download manager
-    , ((m,  xK_d), runOrRaise ("java -jar ~/apps/'JDownloader 0.7'/JDownloader.jar") (className =? "jd-Main"))
+    , ((m,  xK_d), raiseMaybe (spawn ("java -jar ~/apps/'JDownloader 0.7'/JDownloader.jar")) (className =? "jd-Main"))
     -- calculator
     , ((m,  xK_c), spawn ("~/apps/speedcrunch/src/speedcrunch"))
     -- xkill
@@ -89,11 +91,11 @@ myKeys conf@(XConfig {XMonad.modMask = m}) = M.fromList $
     , ((ma, xK_comma), spawn "mpc seek -10")
     , ((m,  xK_uacute), spawn (menudir ++ "/mpd.sh"))
     -- volume
-    , ((m,  xK_parenright), spawn (bindir ++ "/volume.sh 1%+"))
-    , ((m,  xK_section), spawn (bindir ++ "/volume.sh 1%-"))
+    , ((m,  xK_parenright), spawn (bindir ++ "/volume.sh 2%+"))
+    , ((m,  xK_section), spawn (bindir ++ "/volume.sh 2%-"))
     -- parcellite
     {-, ((m, xK_semicolon), spawn (bindir ++ "/clip.py"))-}
-    , ((m, xK_semicolon), spawn ("~/dev/qt/qclip/qclip"))
+    , ((m, xK_semicolon), spawn ("~/dev/qt/copyq/build/src/copyq"))
     -- fullscreen
     , ((m, xK_F12), sendMessage ToggleGaps >> withFocused toggleBorder >> refresh)
     -- floating
@@ -147,9 +149,10 @@ myManageHook = composeAll . concat $
     [ [className =? c --> doFloat    | c <- myFloats]
     , [className =? c --> doIgnore   | c <- myIgnore]
     , [className =? c --> doShift ws | (ws,cs) <- myShifts, c <- cs]
+    , [isFullscreen --> doFullFloat]
     ]
     where
-    myFloats = ["MPlayer", "Vlc", "Gimp", "desmume-cli", "jd-Main", "NO$GBA.EXE", "Speedcrunch", "Pidgin", "fontforge", "Qsimpleweb", "Qclip"]
+    myFloats = ["MPlayer", "Vlc", "Gimp", "Copyq", "Wine", "desmume-cli", "jd-Main", "NO$GBA.EXE", "Speedcrunch", "Pidgin", "fontforge", "Qsimpleweb"]
     myIgnore = ["Conky", "trayer", "desktop_window"]
     myShifts = [("1",[myTerminalClass]), ("2",["Chrome"]), ("3",["Pidgin"]), ("4",["Gimp","fontforge"])]
 -- }}}
