@@ -12,6 +12,7 @@
 ~/.zshrc
 ~/Playlists/
 ~/dev/bin/
+~/dev/colors/
 ~/dev/gallery/mkgallery.sh gallery/
 ~/dev/gallery/template.html gallery/
 ~/dev/menus/*.sh menus/

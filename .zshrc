@@ -48,64 +48,6 @@ export SANDBOX_WRITE="${SANDBOX_WRITE}:${CCACHE_DIR}"
 # it may also help to run:
 #~ luatools --generate && context --make # }}}
 
-# aliases# {{{
-alias e="$EDITOR"
-alias ls="ls --color=auto"
-alias ll="ls --color=auto -lA"
-alias grep="grep --colour=auto"
-alias fgrep="fgrep --colour=auto"
-alias man="LANG=C man"
-alias s="screen"
-alias irb="irb --readline -r irb/completion"
-alias ri="ri -Tf ansi"
-alias lpr="lpr -o InputSlot=Default -o Resolution=600x600dpi -o PageSize=A4"
-alias rcdiff="vimdiff {~/.config,/etc/xdg}/awesome/rc.lua"
-alias q="paludis -q"
-alias dict="~/dev/translate/translate.py"
-alias crontab="EDITOR=vim crontab"
-
-# X11# {{{
-if [ -n "$DISPLAY" ]
-then
-	export EDITOR="gvim"
-	export BROWSER="$HOME/chromium.sh"
-	#export TERM=xterm-color 
-	#export TERMINFO=$HOME/lib/terminfo
-
-	case $TERM in (xterm*)
-		bindkey '\e[H' beginning-of-line
-		bindkey '\e[F' end-of-line ;;
-	esac
-
-	# aliases for X
-	alias mc="mc -x"
-	alias feb="$HOME/feb"
-	alias febt="THUMBS=1 $HOME/feb"
-	alias smplayer="LANG=C smplayer"
-	#alias v="$HOME/apps/comix/src/comix.py"
-	alias v="$HOME/dev/gallery/mkgallery.sh"
-	alias chromium="$HOME/chromium.sh"
-	alias fontmatrix="$HOME/apps/fontmatrix/build/src/fontmatrix"
-	alias e="$EDITOR"
-
-	# wine apps
-	alias xnview="wine ~/.wine/drive_c/Program\ Files/XnView/xnview.exe"
-	alias foobar="wine ~/.wine/drive_c/Program\ Files/foobar2000/foobar2000.exe"
-else
-	alias x="startx > $HOME/.xsession 2>&1 &"
-fi
-# }}}
-
-# edit privoxy user settings
-alias adblock="su -c \"$EDITOR -c ':cd /etc/privoxy' -c ':e user.action'\""
-# }}}
-
-# func: dt program# {{{
-# info: Detach program from console and exit.
-d() {
-	$@ & disown && exit
-} # }}}
-
 # func: unpack file [dir] # {{{
 # info: Unpack file in dir.
 unpack() {
@@ -148,7 +90,7 @@ unpack() {
 	return 0
 } # }}}
 
-# func: unpack file [dir] # {{{
+# func: notes # {{{
 # info: Print notes.
 notes() {
 	(
@@ -161,6 +103,66 @@ notes() {
 	)
 }
 # }}}
+
+# aliases# {{{
+alias e="$EDITOR"
+alias ls="ls --color=auto"
+alias ll="ls --color=auto -lA"
+alias grep="grep --colour=auto"
+alias fgrep="fgrep --colour=auto"
+alias man="LANG=C man"
+alias s="screen"
+alias irb="irb --readline -r irb/completion"
+alias ri="ri -Tf ansi"
+alias lpr="lpr -o InputSlot=Default -o Resolution=600x600dpi -o PageSize=A4"
+alias rcdiff="vimdiff {~/.config,/etc/xdg}/awesome/rc.lua"
+alias q="paludis -q"
+alias dict="~/dev/translate/translate.py"
+alias crontab="EDITOR=vim crontab"
+alias p="echo -n 'Press any key to continue...'; read -sn 1; echo"
+alias unpackall="for x in *.(zip|rar); do unpack \$x \${x%.???}; done"
+
+# X11# {{{
+if [ -n "$DISPLAY" ]
+then
+	export EDITOR="gvim"
+	export BROWSER="$HOME/chromium.sh"
+	#export TERM=xterm-color 
+	#export TERMINFO=$HOME/lib/terminfo
+
+	case $TERM in (xterm*)
+		bindkey '\e[H' beginning-of-line
+		bindkey '\e[F' end-of-line ;;
+	esac
+
+	# aliases for X
+	alias mc="mc -x"
+	alias feb="$HOME/feb"
+	alias febt="THUMBS=1 $HOME/feb"
+	alias smplayer="LANG=C smplayer"
+	#alias v="$HOME/apps/comix/src/comix.py"
+	alias v="$HOME/dev/gallery/mkgallery.sh"
+	alias chromium="$HOME/chromium.sh"
+	alias fontmatrix="$HOME/apps/fontmatrix/build/src/fontmatrix"
+	alias e="$EDITOR"
+
+	# wine apps
+	alias xnview="wine ~/.wine/drive_c/Program\ Files/XnView/xnview.exe"
+	alias foobar="wine ~/.wine/drive_c/Program\ Files/foobar2000/foobar2000.exe"
+else
+	alias x="startx > $HOME/.xsession 2>&1 &"
+fi
+# }}}
+
+# edit privoxy user settings
+alias adblock="su -c \"$EDITOR -c ':cd /etc/privoxy' -c ':e user.action'\""
+# }}}
+
+# func: dt program# {{{
+# info: Detach program from console and exit.
+d() {
+	$@ & disown && exit
+} # }}}
 
 notes
 

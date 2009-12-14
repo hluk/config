@@ -28,7 +28,7 @@ mouse_move_pages_viewer=1
 fast_refresh=0
 navigate_with_arrows=0
 drop_menus=0
-wrap_mode=-1
+wrap_mode=1
 old_esc_mode=0
 cd_symlinks=1
 show_all_if_ambiguous=1
@@ -89,7 +89,7 @@ screen=
 
 [Layout]
 equal_split=1
-first_panel_size=106
+first_panel_size=95
 message_visible=0
 keybar_visible=1
 xterm_title=1

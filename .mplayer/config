@@ -1,5 +1,6 @@
 ### audio/video output
-ao=alsa #,sdl,pulse,oss,arts
+#ao=alsa #,sdl,pulse,oss,arts
+ao=alsa:device=hw=0.0
 vo=xv:adaptor=0
 #zoom=yes
 #vo=gl:yuv=3:swapinterval=1:force-pbo:ati-hack
@@ -13,7 +14,7 @@ dr=1
 fs=1
 autosync=30
 framedrop=1
-lavdopts=skiploopfilter=all,threads=3
+lavdopts=skiploopfilter=all,threads=6
 #lavdopts=skiploopfilter=all
 #noslices=1
 #stop-xscreensaver=1
@@ -27,16 +28,16 @@ channels=2
 
 
 ### OSD/FONT
-osdlevel=1
+#osdlevel=1
 ass=1
 embeddedfonts=1
-ass-color=ffe68200
-ass-border-color=40404000
-ass-force-style=Outline=1
-fontconfig=1
-font=Verdana
-subfont-autoscale=3
-ass-font-scale=1
+#ass-color=ffe68200
+#ass-border-color=40404000
+#ass-force-style=Outline=1
+#fontconfig=1
+font=Aller
+#subfont-autoscale=3
+#ass-font-scale=1
 subcp=CP1250
 subpos=100
 

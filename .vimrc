@@ -50,11 +50,11 @@ if has("gui_running")
 	"set guifont=Bitstream\ Vera\ Sans\ Mono\ 16
 	"set guifont=Liberation\ Mono\ 16
 	"set guifont=Monospace\ 16
-	"set guifont=DejaVu\ Sans\ Mono\ 16
-	"set guifont=Inconsolata\ 15
-	"set guifont=Consolas\ 16
-	"set guifont=monofur\ 17
-	set guifont=Envy\ Code\ R\ 12
+    "set guifont=Inconsolata\ 13
+    "set guifont=Consolas\ 13
+    "set guifont=monofur\ 15
+	"set guifont=Envy\ Code\ R\ 12
+    set guifont=DejaVu\ Sans\ Mono\ 12
 
 	colorscheme wombat
 	"colorscheme xoria256
@@ -85,11 +85,7 @@ inoremap <expr> <m-;> pumvisible() ? "\<lt>c-n>" : "\<lt>c-x>\<lt>c-o>\<lt>c-n>\
 set dictionary+=/usr/share/dict/words
 "" spell checking
 "set spelllang=cs
-map <silent> <F7> :call Cream_spellcheck()<CR>
-imap <silent> <F7> <C-o>:call Cream_spellcheck()<CR>
-vmap <silent> <F7> :<C-u>call Cream_spellcheck("v")<CR>
-imap <silent> <M-F7> <C-o>:call Cream_spell_altword()<CR>
-vmap <silent> <M-F7> :<C-u>call Cream_spell_altword("v")<CR>
+map <F7> :set spell<CR>
 " spell keys
 map <F6> :w<CR>:!LANG=cs_CZ.iso-8859-2 aspell -t -x --lang=cs -c %<CR>:<CR>:e<CR><CR>k
 imap <F6> <ESC>:w<CR>:!LANG=cs_CZ.iso-8859-2 aspell -t -x --lang=cs -c %<CR>:e<CR><CR>ki

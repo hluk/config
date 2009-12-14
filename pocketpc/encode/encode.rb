@@ -35,9 +35,6 @@ OptionParser.new do |opts|
 	opts.on("-s", "--search x,y,z", Array, "Search for alternate codecs") do |a|
 		opt[:search] = a
 	end
-	opts.on("-d", "--directory DIR", String, "Save encoded videos in given directory.") do |a|
-		opt[:dir] = a
-	end
 	opts.on_tail("-h", "--help", "Show this message") do
 		puts opts
 		exit
@@ -68,7 +65,7 @@ Mencoder = "mencoder"
 Mplayer = "mplayer"
 mencoder_conf = (File.exist? "./encode.conf") ? "./encode.conf" :
 			File.expand_path("~/dev/pocketpc/encode/encode.conf")
-Video_root = (opt[:dir] or "/mnt/pc2/down/_encoded/")
+Video_root = File.expand_path("~/down/_encoded")
 # }}}
 
 # print audio or video codecs {{{
@@ -142,7 +139,7 @@ ARGV.sort.each_with_index do |filename, i|
 		end
 		
 		t=Time.now
-		if system(Mencoder, '-include', mencoder_conf,
+		if system(Mencoder, '-noconfig', 'all', '-include', mencoder_conf,
 			'-ss', opt[:test], '-frames', (opt[:length] or '250'),
 			'-o', ofilename, filename)
 			t=Time.now-t.to_f
@@ -164,7 +161,7 @@ ARGV.sort.each_with_index do |filename, i|
 		end
 		# convert
 		t=Time.now
-		if system(Mencoder, '-include', mencoder_conf,
+		if system(Mencoder, '-noconfig', 'all', '-include', mencoder_conf,
 		'-o', ofilename + '.part', filename)
 			t=Time.now-t.to_f
 			File.rename(ofilename + '.part', ofilename)

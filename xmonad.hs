@@ -69,7 +69,7 @@ myKeys conf@(XConfig {XMonad.modMask = m}) = M.fromList $
     , ((m,  xK_period), sendMessage (IncMasterN (-1)))
     -- Quit xmonad
     , ((ms, xK_BackSpace), io (exitWith ExitSuccess))
-    , ((ms, xK_q), spawn ("sakura -e " ++ bindir ++ "/shutdown.sh"))
+    , ((ms, xK_q), spawn ("gksu " ++ bindir ++ "/shutdown.sh"))
     -- Restart xmonad
     , ((m,  xK_q), restart "xmonad" True)
     -- Edit config
@@ -93,9 +93,15 @@ myKeys conf@(XConfig {XMonad.modMask = m}) = M.fromList $
     -- volume
     , ((m,  xK_parenright), spawn (bindir ++ "/volume.sh 2%+"))
     , ((m,  xK_section), spawn (bindir ++ "/volume.sh 2%-"))
+    -- brightness
+    , ((m,  xK_KP_Add), spawn (homedir ++ "/dev/colors/brightness 16"))
+    , ((m,  xK_KP_Subtract), spawn (homedir ++ "/dev/colors/brightness -16"))
+    , ((m,  xK_KP_Multiply), spawn (homedir ++ "/dev/colors/brightness"))
+    -- invert colors
+    , ((m,  xK_KP_Divide), spawn (homedir ++ "/dev/colors/invert"))
     -- parcellite
     {-, ((m, xK_semicolon), spawn (bindir ++ "/clip.py"))-}
-    , ((m, xK_semicolon), spawn ("~/dev/qt/copyq/build/src/copyq"))
+    , ((m, xK_semicolon), spawn ("~/dev/qt/copyq/build/copyq"))
     -- fullscreen
     , ((m, xK_F12), sendMessage ToggleGaps >> withFocused toggleBorder >> refresh)
     -- floating
@@ -152,7 +158,7 @@ myManageHook = composeAll . concat $
     , [isFullscreen --> doFullFloat]
     ]
     where
-    myFloats = ["MPlayer", "Vlc", "Gimp", "Copyq", "Wine", "desmume-cli", "jd-Main", "NO$GBA.EXE", "Speedcrunch", "Pidgin", "fontforge", "Qsimpleweb"]
+    myFloats = ["Gksu", "MPlayer", "Vlc", "Gimp", "Copyq", "Wine", "desmume-cli", "jd-Main", "NO$GBA.EXE", "Speedcrunch", "Pidgin", "fontforge", "Qsimpleweb"]
     myIgnore = ["Conky", "trayer", "desktop_window"]
     myShifts = [("1",[myTerminalClass]), ("2",["Chrome"]), ("3",["Pidgin"]), ("4",["Gimp","fontforge"])]
 -- }}}
