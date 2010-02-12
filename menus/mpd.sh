@@ -14,6 +14,10 @@ RND=`sed -n 's/.*random: \([^ ]*\).*/\1/p' <<< "$INFO"`
 SINGLE=`sed -n 's/.*single: \([^ ]*\).*/\1/p' <<< "$INFO"`
 CONSUME=`sed -n 's/.*consume: \([^ ]*\).*/\1/p' <<< "$INFO"`
 
+# run mpd and show status
+pidof mpd > /dev/null || mpd
+#notify-send -t 2000 -i sound "Playing" "`mpc current`"
+
 if [ $# -ne 0 ]
 then
 	ACT="$@"
@@ -53,7 +57,6 @@ fi
 
 if [ $? -eq 0 ]
 then
-	pidof mpd > /dev/null || mpd
 	case "$ACT" in
 		"add")
 		ARG=`(for X in $(mpc ls); do mpc ls $X; done; mpc listall) | "$MENU" "ADD:"` &&

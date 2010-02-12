@@ -1,6 +1,7 @@
 import System.Exit
 import System.IO
 import XMonad
+import XMonad.Actions.CycleWindows
 import XMonad.Actions.FloatKeys
 import XMonad.Actions.NoBorders
 import XMonad.Actions.WindowBringer
@@ -11,6 +12,8 @@ import XMonad.Hooks.ManageHelpers
 import XMonad.Layout.Gaps
 import XMonad.Layout.NoBorders
 import XMonad.Util.Run (spawnPipe, runInTerm)
+
+import XMonad.Config.Xfce
 
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
@@ -45,6 +48,9 @@ myKeys conf@(XConfig {XMonad.modMask = m}) = M.fromList $
     , ((m,  xK_n), refresh)
     -- Move focus to the next window
     , ((m,  xK_Tab), windows W.focusDown >> windows W.swapMaster )
+    , ((m,  xK_a), cycleRecentWindows [xK_Super_L] xK_a xK_s)
+    , ((m,  xK_s), cycleRecentWindows [xK_Super_L] xK_s xK_a)
+    {-, ((m,  xK_a), windows W.focusDown >> rotUnfocusedUp >> windows W.swapMaster)-}
     -- Move focus to the next window
     , ((m,  xK_j), windows W.focusDown)
     -- Move focus to the previous window
@@ -114,7 +120,7 @@ myKeys conf@(XConfig {XMonad.modMask = m}) = M.fromList $
     , ((m, xK_Left), withFocused (keysMoveWindow (-40,0)))
     , ((m, xK_Right), withFocused (keysMoveWindow (40,0)))
 
-    , ((0, xK_Menu), gotoMenu)
+    {-, ((0, xK_Menu), gotoMenu)-}
     ]
     ++
     --
@@ -138,16 +144,16 @@ myMouseBindings (XConfig {XMonad.modMask = m}) = M.fromList $
 -- }}}
 
 -- layout-- {{{
-myLayout = smartBorders $ gaps [(D,20)] $ noBorders Full ||| tiled ||| Mirror tiled
-  where
-     -- default tiling algorithm partitions the screen into two panes
-     tiled   = Tall nmaster delta ratio
-     -- The default number of windows in the master pane
-     nmaster = 1
-     -- Default proportion of screen occupied by master pane
-     ratio   = 5/8
-     -- Percent of screen to increment by when resizing panes
-     delta   = 3/100
+{-myLayout = smartBorders $ gaps [(D,20)] $ noBorders Full ||| Mirror tiled ||| tiled-}
+  {-where-}
+     {-[> default tiling algorithm partitions the screen into two panes-}
+     {-tiled   = Tall nmaster delta ratio-}
+     {-[> The default number of windows in the master pane-}
+     {-nmaster = 1-}
+     {-[> Default proportion of screen occupied by master pane-}
+     {-ratio   = 5/8-}
+     {-[> Percent of screen to increment by when resizing panes-}
+     {-delta   = 3/100-}
 -- }}}
 
 -- hooks-- {{{
@@ -160,51 +166,29 @@ myManageHook = composeAll . concat $
     where
     myFloats = ["Gksu", "MPlayer", "Vlc", "Gimp", "Copyq", "Wine", "desmume-cli", "jd-Main", "NO$GBA.EXE", "Speedcrunch", "Pidgin", "fontforge", "Qsimpleweb"]
     myIgnore = ["Conky", "trayer", "desktop_window"]
-    myShifts = [("1",[myTerminalClass]), ("2",["Chrome"]), ("3",["Pidgin"]), ("4",["Gimp","fontforge"])]
+    myShifts = [("1",[myTerminalClass]), ("2",["Chrome"]), ("3",["Pidgin"]), ("4",["Gimp","fontforge","VirtualBox"])]
 -- }}}
 
 -- log-- {{{
-myLogHook h = do dynamicLogWithPP $ myPP h
+{-myLogHook h = do dynamicLogWithPP $ myPP h-}
 
-myPP :: Handle -> PP
-myPP h = defaultPP  { ppCurrent = wrap "<fc=white,#900000> " " </fc>" 
-                     , ppSep     = ""
-                     , ppWsSep = ""
-                     , ppUrgent = wrap "<fc=black,yellow>" "!!</fc>" 
-                     , ppLayout = wrap " .:" ":. "
-                     , ppTitle = \x -> if length(x) > 0
-                                       then "<fc=white,#900000>   " ++ shorten 60 x ++ "   </fc>"
-                                       else ""
-                     , ppHidden = wrap " " " "
-                     , ppOutput = hPutStrLn h
-                     }
+{-myPP :: Handle -> PP-}
+{-myPP h = defaultPP  { ppCurrent = wrap "<fc=white,#900000> " " </fc>" -}
+                     {-, ppSep     = ""-}
+                     {-, ppWsSep = ""-}
+                     {-, ppUrgent = wrap "<fc=black,yellow>" "!!</fc>" -}
+                     {-, ppLayout = wrap " .:" ":. "-}
+                     {-, ppTitle = \x -> if length(x) > 0-}
+                                       {-then "<fc=white,#900000>   " ++ shorten 60 x ++ "   </fc>"-}
+                                       {-else ""-}
+                     {-, ppHidden = wrap " " " "-}
+                     {-, ppOutput = hPutStrLn h-}
+                     {-}-}
 -- }}}
 
-myStartupHook = return ()
+{-myStartupHook = return ()-}
 
 -- main-- {{{
-main = do
-        h <- spawnPipe "xmobar ~/.xmobarrc"
-        xmonad $ withUrgencyHook NoUrgencyHook defaultConfig {
-      -- simple stuff
-        terminal           = myTerminal,
-        focusFollowsMouse  = True,
-        borderWidth        = 5,
-        modMask            = m,
-        numlockMask        = myNumlockMask,
-        workspaces         = map show [1..5],
-        normalBorderColor  = "#000000",
-        focusedBorderColor = "#900000",
-
-      -- key bindings
-        keys               = myKeys,
-        mouseBindings      = myMouseBindings,
-
-      -- hooks, layouts
-        layoutHook         = myLayout,
-        manageHook         = myManageHook,
-        logHook            = myLogHook h,
-        startupHook        = myStartupHook
-    }
+main = xmonad xfceConfig
 -- }}}
 

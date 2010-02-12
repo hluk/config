@@ -1,12 +1,31 @@
 #!/bin/sh
-trayer --edge bottom --align right --expand true --tint 0x202020 --alpha 0 --transparent true --height 20 --width 4 &
+export LIBGL_ALWAYS_SOFTWARE=1
+
+# wallpaper
 ~/dev/img/set_wallpaper.sh &
+
+# clipboard
 ~/dev/qt/copyq/build/copyq &
 
-setxkbmap cz &
-xset r 113 r 115 r 116 r rate 250 30 &
-( xrdb -merge ~/.Xresources && xsetroot -cursor_name arrow ) &
-#xcompmgr -cCfF -D10 -O1 &
+# misc
+pidgin &
 
-exec xmonad
+# keyboard
+setxkbmap cz &
+xset r rate 200 40 &
+
+# cursor
+( xrdb -merge ~/.Xresources && xsetroot -cursor_name arrow ) &
+
+# panel
+/home/lukas/apps/tint2/src/tint2 -c ~/.tint2rc &
+# conky
+conky &
+
+# automatically set LCD color temperature
+/home/lukas/apps/redshift-1.0/redshift -l 49.0:16.7 -t 6000:4000 &
+
+# window manager
+exec compiz-manager
+#exec /home/lukas/apps/tiling/dwm/dwm
 

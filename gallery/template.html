@@ -4,20 +4,21 @@
 <style>
 #imglist {
 position:absolute;
-width:200px;
-top:190px;
-left:-210px;
+width:285px;
+top:50px;
+left:-295px;
 background-color:rgba(0,0,0,0.5); 
 padding:10px;
 -moz-border-radius: 10px;
 -webkit-border-radius: 10px;
 }
 #imglist:hover {left:-8px;}
-.imgitem, #default {overflow: hidden; width: 185px; text-align: left; font-size: 0.7em; display:block; padding: 6px; font-weight: bold;}
+.imgitem, #default {overflow: hidden; width: 270px; text-align: left; font-size: 0.7em; display:block; padding: 6px; font-weight: bold;}
 .imgitem {cursor: pointer;}
 
 * {margin: 0;font-family: Aller, Verdana, Arial, Helvetica; font-size: 16px; color: #ddd;}
-body {text-align: center; background-color: #222;}
+html,body {height: 100%}
+body {height: 100%;text-align: center; background-color: #222;}
 #info {margin: 5 10; position: absolute; top: 0; left: 0; text-shadow: #000 1px 1px 1px;}
 #counter, #resolution {color: white; font-size: 0.7em; font-weight: bold;}
 #imgtitle {margin: 0 5;}
@@ -26,6 +27,7 @@ a, .imgitem {color: #7bf; text-decoration: none; font-weight: bold;}
 a:hover, .imgitem:hover {color: #ff0;}
 a:visited {color: #7bf;}
 a:visited:hover {color: #ff0;}
+#myimage {position: relative; z-index: -1;}
 </style>
 <script type="text/javascript" src="http://script.aculo.us/prototype.js"></script>
 <script type="text/javascript" src="http://script.aculo.us/effects.js"></script>
@@ -78,6 +80,10 @@ function zoom(){
 
 	img.style.width  = w*zoom_factor;
 	img.style.height = h*zoom_factor;
+
+    // center image in window
+    newtop = (wh-img.height)/2;
+    img.style.top = newtop > 0 ? newtop : 0;
 }
 
 // keys
@@ -307,8 +313,8 @@ document.write(
 var imglist = document.createElement("div");
 imglist.id = "imglist";
 
-var from = n-8;
-var to = n+7;
+var from = n-6;
+var to = n+14;
 if (from < 0) {
 	to += -from;
 	if (to > len) to = len;

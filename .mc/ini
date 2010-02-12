@@ -87,6 +87,8 @@ color_terminals=
 linux=
 screen=
 
+xterm=
+
 [Layout]
 equal_split=1
 first_panel_size=95

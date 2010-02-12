@@ -7,6 +7,7 @@ set binary
 set history=512
 " case insensitive search
 set ignorecase
+set smartcase
 " from-end-to-beginning search
 " search while typing
 set incsearch
@@ -117,12 +118,14 @@ map TT :TlistToggle<CR>
 "" NERDTree
 map tt :NERDTreeToggle<CR>
 
-set omnifunc=ccomplete#Complete
 autocmd FileType c    set tags+=~/.vim/tags_c
+autocmd FileType c    set omnifunc=ccomplete#Complete
+autocmd FileType cpp  set omnifunc=ccomplete#Complete
 autocmd FileType cpp  set tags+=~/.vim/tags_cpp
 autocmd FileType ruby set tags+=~/.vim/tags_ruby
 autocmd FileType java set tags+=~/.vim/tags_java
 autocmd FileType python set noexpandtab
+autocmd FileType python set omnifunc=pythoncomplete#Complete
 "set tags+=~/.vim/ctags
 autocmd FileType cpp noremap <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ .<CR>
 "noremap <F12> :!exuberant-ctags -R .<CR>
@@ -174,4 +177,29 @@ let g:SuperTabDefaultCompletionType = "context"
 "\       'repeat' : 0}
 "\      ]  
 "\}
+
+"{{{Theme Rotating
+let themeindex=0
+function! RotateColorTheme()
+    let y = -1
+    while y == -1
+        if has("gui_running")
+            let colorstring = "#wombat#molokai#xoria256#kellys#soso#redblack#256-jungle#"
+        else
+            let colorstring = "#wombat256#molokai#xoria256#soso#redblack#256-jungle#kellys#"
+        endif
+
+        let x = match( colorstring, "#", g:themeindex )
+        let y = match( colorstring, "#", x + 1 )
+        let g:themeindex = x + 1
+        if y == -1
+            let g:themeindex = 0
+        else
+            let themestring = strpart(colorstring, x + 1, y - x - 1)
+            return ":colorscheme ".themestring
+        endif
+    endwhile
+endfunction
+" }}}
+nnoremap <silent> <F8> :execute RotateColorTheme()<CR>
 

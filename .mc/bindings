@@ -437,9 +437,9 @@ type/^PostScript
 
 # PDF
 type/^PDF
-	Open=(xpdf %f 1>/dev/null 2>&1 &)
+	#Open=(xpdf %f 1>/dev/null 2>&1 &)
 	#Open=(wine "C:\Program Files\PDFV_Portable\PDFXCview.exe" %f  1>/dev/null 2>&1 &)
-	#Open=(acroread %f &)
+    Open=(acroread %f 1>/dev/null 2>&1 &)
 	#Open=(ghostview %f &)
 	#Open=(okular %f &)
 	#Open=(wine "C:\Program Files\SumatraPDF\SumatraPDF.exe" %f 1>/dev/null 2>&1 &)
@@ -476,6 +476,10 @@ regex/\.(odt|ott|sxw|stw|ods|ots|sxc|stc|odp|otp|sxi|sti|odg|otg|sxd|std|odb|odf
 # AbiWord
 shell/.abw
 	Open=(abiword %f &)
+
+# PowerPoint
+regex/\.([Pp][Pp][Tt])$
+	Open=(ooimpress %f &)
 
 # Microsoft Word Document
 regex/\.([Dd][oO][cCtT]|[Ww][rR][iI])$

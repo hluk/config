@@ -1,6 +1,7 @@
 ### audio/video output
 #ao=alsa #,sdl,pulse,oss,arts
-ao=alsa:device=hw=0.0
+#ao=alsa:device=hw=0.0
+ao=alsa
 vo=xv:adaptor=0
 #zoom=yes
 #vo=gl:yuv=3:swapinterval=1:force-pbo:ati-hack
@@ -12,9 +13,9 @@ vf=screenshot
 dr=1
 #full screen
 fs=1
-autosync=30
-framedrop=1
-lavdopts=skiploopfilter=all,threads=6
+#autosync=30
+#framedrop=1
+#lavdopts=threads=4
 #lavdopts=skiploopfilter=all
 #noslices=1
 #stop-xscreensaver=1

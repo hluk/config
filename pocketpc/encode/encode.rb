@@ -101,7 +101,7 @@ ARGV.sort.each_with_index do |filename, i|
 	if opt[:identify]
 		# TODO: print also alternative audio and video codecs
 		ids = {}
-		IO.popen(Mplayer + ' -identify -vo null -ao null -frames 0 -really-quiet ' + '"' + filename + '"') do |io|
+		IO.popen(Mplayer + ' -noconfig all -include ' + mencoder_conf + ' -identify -vo null -ao null -frames 0 -really-quiet ' + '"' + filename + '"') do |io|
 			io.each do |line|
 				ln = line.split '='
 				ids[ln[0]] = ln[1]

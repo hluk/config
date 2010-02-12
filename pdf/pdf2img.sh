@@ -13,7 +13,7 @@ fi
 
 for INFILE in "$@"
 do
-	OFILE=${INFILE/.pdf/}
+	OFILE="${INFILE/.pdf/}"
 	echo -n "Grabbing images from \"$INFILE\"..."
 	# create output directory
 	rm -rf "${OFILE}_imgs/"
@@ -23,19 +23,15 @@ do
 	(echo "FAILED! (pdftoppm -f $FIRST -l $LAST \"${INFILE}\" \"${OFILE}_imgs/page\")"; exit 1) || exit 1
 
 	# convert ppm images to FORMAT
-	python -c "
-import os, glob, Image, ImageFilter
-path = '${OFILE}_imgs/'
-files = glob.glob( os.path.join(path, 'page*.ppm') )
-files.sort()
-for infile in files:
-	print 'Converting image ' + infile + ' to $FORMAT...'
-	im = Image.open(infile)
-	out = im.resize(($RES,int(float($RES*im.size[1])/float(im.size[0]))),Image.ANTIALIAS)
-	#out = out.filter(ImageFilter.DETAIL)
-	out.save( infile + '.$FORMAT' )
-	" && echo "OK" || (echo "FAILED to convert $INFILE!)"; exit 1) || exit 1
-
+    (
+    cd "${OFILE}_imgs" &&
+    for x in *.ppm
+    do
+	    echo "Converting image $x to $FORMAT..."
+        convert "$x" -trim -resize "$RES" -quality $QUALITY "$x.$FORMAT" &&
+        echo "OK" || (echo "FAILED"; exit 1) || exit 1
+    done
+    ) || exit 1
 	#clean
 	rm -f "${OFILE}_imgs/page"*.ppm
 done
