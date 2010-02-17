@@ -14,7 +14,7 @@
 !#define FONT1 xft:Consolas:size=16.5
 
 XTerm*vt100.RenderFont: true
-XTerm*vt100.FaceName: Consolas:size=16
+XTerm*vt100.FaceName: Consolas:size=12
 
 !!!!!!XTERM:FONT
 XTerm*vt100.font: FONT1

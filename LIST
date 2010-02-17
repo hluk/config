@@ -1,10 +1,12 @@
 ~/.Xresources
+~/.config/compiz/
 ~/.conky/panel.conkyrc
 ~/.easystroke
 ~/.garglkrc
 ~/.mc/{bindings,hotlist,ini,menu} .mc/
 ~/.mplayer/
 ~/.screenrc
+~/.tint2rc
 ~/.vimrc
 ~/.xinitrc
 ~/.xmobarrc
