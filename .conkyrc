@@ -8,10 +8,10 @@ border_margin 0
 gap_x 0
 gap_y -1
 alignment top_left
-maximum_width 1920
-minimum_size 1920 18
+maximum_width 1366
+minimum_size 1366 18
 
-update_interval 1
+update_interval 2
 
 default_color aaaaaa
 default_outline_color 505050
@@ -42,4 +42,4 @@ xftfont Aller:size=10:bold
 #${if_running xmms2d}$color  •  ${color1}$xmms2_elapsed${color2}|$xmms2_duration|${color1} ${xmms2_smart}${endif}
 #•  ${color0}Mem ${color1}$memfree${color0} free$color  
 TEXT
-  ${color0}$kernel$color  •  ${color1}$uptime_short ${alignc} ${color0}CPU ${color2}% ${color1}${cpu cpu1} ${cpu cpu2} ${cpu cpu3} ${cpu cpu4}$color  •  ${color0}Load ${color1}${loadavg 1} ${loadavg 2} ${loadavg 3}$color  •  ${color0}Root ${color1}${fs_free /}${color2}/${color1}${fs_size /}$color  •  ${color0}Down ${color1}${downspeedf eth0}${color2} KiB/s$color  •  ${color0}Up ${color1}${upspeedf eth0}${color2} KiB/s${if_mpd_playing}$color  •  ${color1}$mpd_elapsed${color2}|$mpd_length|${color1} $mpd_smart${endif}
+  ${color0}$kernel$color  •  ${color1}$uptime_short ${alignc} ${color0}CPU ${color2}% ${color1}${cpu cpu1} ${cpu cpu2} $color  •  ${color0}Load ${color1}${loadavg 1} ${loadavg 2} ${loadavg 3}$color  •  ${color0}Root ${color1}${fs_free /}${color2}/${color1}${fs_size /}$color  •  ${color0}Down ${color1}${downspeedf wlan0}${color2} KiB/s$color  •  ${color0}Up ${color1}${upspeedf wlan0}${color2} KiB/s${if_mpd_playing}$color  •  ${color1}$mpd_elapsed${color2}|$mpd_length|${color1} $mpd_smart${endif}

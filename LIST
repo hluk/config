@@ -1,6 +1,6 @@
 ~/.Xresources
 ~/.config/compiz/
-~/.conky/panel.conkyrc
+~/.conkyrc
 ~/.easystroke
 ~/.garglkrc
 ~/.mc/{bindings,hotlist,ini,menu} .mc/

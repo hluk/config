@@ -1,7 +1,7 @@
 #!/bin/awk -f
 # update all files from LIST
 BEGIN {
-	gitpath = ENVIRON["HOME"]"/dev/config"
+	gitpath = ENVIRON["PWD"]
 }
 
 {
