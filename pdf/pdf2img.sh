@@ -1,7 +1,7 @@
 #!/bin/sh
 # Saves pdf document pages in some image format
 RES=${RES:-1024}	# set resolution here
-FORMAT=${FORMAT:-jpg}	# set jpeg quality
+FORMAT=${FORMAT:-png}	# set jpeg quality
 QUALITY=${QUALITY:-75}	# set jpeg quality
 FIRST=${FIRST:-0}	# first page
 LAST=${LAST:-0}		# last page

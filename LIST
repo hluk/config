@@ -8,6 +8,7 @@
 ~/.screenrc
 ~/.tint2rc
 ~/.vimrc
+~/.xbindkeys
 ~/.xinitrc
 ~/.xmobarrc
 ~/.xmonad/xmonad.hs
@@ -15,8 +16,6 @@
 ~/Playlists/
 ~/dev/bin/
 ~/dev/colors/
-~/dev/gallery/mkgallery.sh gallery/
-~/dev/gallery/template.html gallery/
 ~/dev/menus/*.sh menus/
 ~/dev/menus/dmenu/ menus/
 ~/dev/pdf/

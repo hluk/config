@@ -80,8 +80,25 @@ editor_line_state=0
 editor_simple_statusbar=0
 auto_fill_mkdir_name=1
 
+kilobyte_si=0
+ftpfs_use_passive_connections_over_proxy=0
+editor_cursor_beyond_eol=0
+editor_check_new_line=0
+reverse_files_only=1
+copymove_persistent_attr=1
+select_flags=6
+skin=default
+keymap=mc.keymap
+auto_save_setup_panels=1
+
+confirm_history_cleanup=1
+editor_show_right_margin=0
+mcview_eof=
+
+ignore_ftp_chattr_errors=true
+
 [Colors]
-base_color=normal=light,default:selected=,:marked=,default:markselect=,:menu=black,:menuhot=red,:menusel=,:menuhotsel=,:dnormal=,:dfocus=,:dhotnormal=red,:dhotfocus=,:input=,:reverse=,:executable=orange,default:directory=white,default:link=green,default:device=red,default:special=red,default:core=red,default:helpnormal=,:helplink=,:helpslink=,:
+base_color=normal=light,default:selected=black,yellow:marked=yellow,default:markselect=black,green:menu=white,:menuhot=red,:menusel=black,yellow:menuhotsel=,:dnormal=,:dfocus=,:dhotnormal=red,:dhotfocus=,:input=,:reverse=,:executable=orange,default:directory=white,default:link=green,default:device=red,default:special=red,default:core=red,default:helpnormal=,:helplink=,:helpslink=,:
 xterm-color=
 color_terminals=
 linux=
@@ -91,7 +108,7 @@ xterm=
 
 [Layout]
 equal_split=1
-first_panel_size=95
+first_panel_size=85
 message_visible=0
 keybar_visible=1
 xterm_title=1
@@ -102,6 +119,8 @@ show_mini_info=1
 permission_mode=1
 filetype_mode=1
 free_space=1
+
+classic_progressbar=true
 
 [Dirs]
 current_is_left=0
@@ -142,6 +161,10 @@ display_codepage=UTF-8
 ftp_codepage=Other_8_bit
 find_ignore_dirs=
 source_codepage=UTF-8
+
+timeformat_recent=%e.%b %H:%M
+timeformat_old=%e.%b  %Y
+autodetect_codeset=
 
 [HotlistConfig]
 expanded_view_of_groups=0

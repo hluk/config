@@ -47,16 +47,16 @@ zstyle ':completion:*' completer _expand _complete _approximate _ignored
 # generate descriptions with magic.
 zstyle ':completion:*' auto-description 'specify: %d'
 
-# Don't prompt for a huge list, page it!
+## Don't prompt for a huge list, page it!
 zstyle ':completion:*:default' list-prompt '%S%M matches%s'
 
-# Don't prompt for a huge list, menu it!
+## Don't prompt for a huge list, menu it!
 zstyle ':completion:*:default' menu 'select=0'
 
-# Have the newer files last so I see them first
-zstyle ':completion:*' file-sort modification reverse
+## Have the newer files last so I see them first
+#zstyle ':completion:*' file-sort modification reverse
 
-unsetopt LIST_AMBIGUOUS
+#unsetopt LIST_AMBIGUOUS
 setopt  COMPLETE_IN_WORD
 
 # Separate man page sections.  Neat.
@@ -83,10 +83,10 @@ zstyle ':completion::approximate*:*' prefix-needed false
 
 # env# {{{
 export XDG_DATA_HOME="$HOME/.config"
-export MANPAGER=vimmanpager
+#export MANPAGER=vimmanpager
 export EDITOR="vim"
 # - proxy
-export http_proxy=localhost:8118
+#export http_proxy=localhost:8118
 # - C flags
 export CHOST="x86_64-pc-linux-gnu"
 export CFLAGS="-march=core2 -O2 -pipe"
@@ -101,7 +101,6 @@ export SANDBOX_WRITE="${SANDBOX_WRITE}:${CCACHE_DIR}"
 # X11# {{{
 if [ -n "$DISPLAY" ]
 then
-	export EDITOR="gvim"
 	export BROWSER="$HOME/chromium.sh"
 	#export TERM=xterm-color 
 	#export TERMINFO=$HOME/lib/terminfo
@@ -128,16 +127,23 @@ fi
 # func: unpack file [dir] # {{{
 # info: Unpack file in dir.
 unpack() {
+    lst=($@)
+
     # directory to unpack files
     d=.
     if [ $# -gt 1 ]
     then
         d=${@[$#]}
+        lst=(${@[1,$((#-1))]})
         # create dir
-        mkdir -p "$d" || return 1
+        if ! mkdir -p "$d" 2> /dev/null
+        then
+            echo -e "usage:\n  $0 file [dir]\n  $0 file1 file2 ... dir"
+            return 1
+        fi
     fi
 
-    for f in ${@[1,$((#-1))]}
+    for f in $lst
     do
         if [ -f "$f" ]
         then
@@ -280,7 +286,7 @@ check() {
 # }}}
 
 # aliases# {{{
-alias e="$EDITOR"
+alias e="vim"
 alias ls="ls --color=auto"
 alias ll="ls --color=auto -lA"
 alias grep="grep --colour=auto"
@@ -288,17 +294,17 @@ alias fgrep="fgrep --colour=auto"
 alias man="LANG=C man"
 alias s="screen"
 alias irb="irb --readline -r irb/completion"
-alias ri="ri -Tf ansi"
 alias lpr="lpr -o InputSlot=Default -o Resolution=600x600dpi -o PageSize=A4"
 alias rcdiff="vimdiff {~/.config,/etc/xdg}/awesome/rc.lua"
-alias q="paludis -q"
-alias i="paludis -i --dl-upgrade as-needed"
-alias u="paludis -u --with-unused-dependencies"
-alias up="paludis --show-reasons full -i --continue-on-failure if-satisfied --dl-reinstall if-use-changed --dl-reinstall-scm weekly world"
 alias dict="~/dev/translate/translate.py"
-alias crontab="EDITOR=vim crontab"
 alias p="echo -n 'Press any key to continue...'; read -sn 1; echo"
 alias unpackall="for x in *.(zip|rar); do unpack \$x \${x%.???}; done"
+
+alias q="yaourt"
+alias i="yaourt -S"
+alias u="yaourt -Rs"
+alias up="yaourt -Syu --aur"
+alias clean="yaourt -Qdt"
 
 # X11# {{{
 if [ -n "$DISPLAY" ]
@@ -311,8 +317,8 @@ then
 	#alias v="$HOME/apps/comix/src/comix.py"
 	alias v="$HOME/dev/gallery/mkgallery.sh"
 	alias chromium="$HOME/chromium.sh"
-	alias fontmatrix="$HOME/apps/fontmatrix/build/src/fontmatrix"
-	alias e="$EDITOR"
+	alias e="gvim"
+    alias copyq="$HOME/dev/qt/copyq/release/copyq"
 
 	# wine apps
 	alias xnview="wine ~/.wine/drive_c/Program\ Files/XnView/xnview.exe"

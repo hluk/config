@@ -80,14 +80,15 @@ clock_rclick_command = orage
 #---------------------------------------------
 # BATTERY
 #---------------------------------------------
-battery = 0
-battery_low_status = 10
+battery = 1
+battery_low_status = 8
+battery_hide = 96
 battery_low_cmd = notify-send "battery low"
-bat1_font = sans 8
-bat2_font = sans 6
-battery_font_color = #ffffff 76
+bat1_font = Gayatri 10
+bat2_font = Gayatri 8
+battery_font_color = #ffffff 60
 battery_padding = 1 0
-battery_background_id = 0
+battery_background_id = 1
 
 #---------------------------------------------
 # TOOLTIP

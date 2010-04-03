@@ -6,12 +6,12 @@ draw_borders no
 border_margin 0
 
 gap_x 0
-gap_y -1
+gap_y 0
 alignment top_left
 maximum_width 1366
-minimum_size 1366 18
+minimum_size 1366 12
 
-update_interval 2
+#update_interval 2
 
 default_color aaaaaa
 default_outline_color 505050
@@ -31,7 +31,7 @@ use_xft yes
 #xftfont Linux Libertine C:size=12:bold
 #xftfont Quicksand:size=12:bold
 #xftfont Fertigo Pro:size=11:bold
-xftfont Aller:size=10:bold
+xftfont Aller:size=9:bold
 #xftfont Aller Display:size=12
 #xftfont Anivers:size=12:bold
 #xftfont Juicy Hunt:size=18
@@ -39,7 +39,9 @@ xftfont Aller:size=10:bold
 #xftfont Diavlo:size=14
 #xftfont Gayatri:size=12
 
-#${if_running xmms2d}$color  •  ${color1}$xmms2_elapsed${color2}|$xmms2_duration|${color1} ${xmms2_smart}${endif}
-#•  ${color0}Mem ${color1}$memfree${color0} free$color  
+mpd_host localhost
+mpd_port 6600
+#music_player_interval 4
+
 TEXT
-  ${color0}$kernel$color  •  ${color1}$uptime_short ${alignc} ${color0}CPU ${color2}% ${color1}${cpu cpu1} ${cpu cpu2} $color  •  ${color0}Load ${color1}${loadavg 1} ${loadavg 2} ${loadavg 3}$color  •  ${color0}Root ${color1}${fs_free /}${color2}/${color1}${fs_size /}$color  •  ${color0}Down ${color1}${downspeedf wlan0}${color2} KiB/s$color  •  ${color0}Up ${color1}${upspeedf wlan0}${color2} KiB/s${if_mpd_playing}$color  •  ${color1}$mpd_elapsed${color2}|$mpd_length|${color1} $mpd_smart${endif}
+  ${color0}$kernel$color  •  ${color1}$uptime_short ${alignr}  ${color0}BATTERY ${color1}${battery_percent} ${color2}%$color  •  ${color0}CPU ${color1}${cpu cpu1} ${color2}% ${color1}${cpu cpu2}$color  •  ${color0}Load ${color1}${loadavg 1} ${loadavg 2} ${loadavg 3}$color  •  ${color0}Root ${color1}${fs_free /}${color2}/${color1}${fs_size /}$color  •  ${color0}Down ${color1}${downspeedf wlan0}${color2} KiB/s$color  •  ${color0}Up ${color1}${upspeedf wlan0}${color2} KiB/s${if_mpd_playing}$color  •  ${color1}$mpd_elapsed${color2}|$mpd_length|${color1} $mpd_smart${endif}    

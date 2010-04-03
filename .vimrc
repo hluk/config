@@ -1,8 +1,11 @@
 set nocompatible
+set nofsync
 set mouse=a
 set fileencodings=utf-8,iso8859-2,cp852,cp1250
 set fileformats=unix,dos
 set binary
+" highlight matched
+set hlsearch
 " command history size
 set history=512
 " case insensitive search
@@ -36,6 +39,8 @@ set modeline
 set expandtab
 set tabstop=4
 set shiftwidth=4
+"syntax
+syntax on
 
 filetype plugin on
 filetype indent on
@@ -48,14 +53,14 @@ filetype indent on
 " font in gui
 if has("gui_running")
 	"gui
-	"set guifont=Bitstream\ Vera\ Sans\ Mono\ 16
+	"set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
 	"set guifont=Liberation\ Mono\ 16
 	"set guifont=Monospace\ 16
-    "set guifont=Inconsolata\ 13
+    "set guifont=Inconsolata\ 10
     "set guifont=Consolas\ 13
     "set guifont=monofur\ 15
-	"set guifont=Envy\ Code\ R\ 12
-    set guifont=DejaVu\ Sans\ Mono\ 12
+    set guifont=Envy\ Code\ R\ 11
+    "set guifont=DejaVu\ Sans\ Mono\ 10
 
 	colorscheme wombat
 	"colorscheme xoria256

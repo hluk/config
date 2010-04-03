@@ -105,7 +105,7 @@
 
 ### wine ###
 regex/\.[eE][xX][eE]
-	Open=wine %f
+	Open=(wine %f 1>/dev/null 2>&1 &)
 
 ### Archives ###
 
@@ -334,7 +334,7 @@ shell/.xpm
 	View=sxpm %f
 
 include/image
-	Open=(~/apps/comix/src/comix.py %f >/dev/null 2>&1 &)
+	Open=( feh %f >/dev/null 2>&1 &)
 	#Open=(wine "c:/Program Files/XnView/xnview.exe" %f >/dev/null 2>&1 &)
 	#Open=(~/feb %f >/dev/null 2>&1 &)
 	#Open=(gwenview %f >/dev/null 2>&1 &)
@@ -342,6 +342,9 @@ include/image
 	View=%view{ascii} identify %f
 	#View=%view{ascii} asciiview %f
 
+# SVG
+regex/\.([sS][vV][gG])
+	Open=(inkscape %f >/dev/null 2>&1 &)
 
 ### Sound files ###
 
@@ -362,7 +365,7 @@ regex/\.([mM][pP]3)$
 	#Open=if [ "$DISPLAY" = "" ]; then mpg123 %f; else (xmms %f &); fi
 	View=%view{ascii} mpg123 -vtn1 %f 2>&1 | sed -n '/^Title/,/^Comment/p;/^MPEG/,/^Audio/p'
 
-regex/\.([oO][gG][gG])$
+regex/\.([oO][gG]([gG]|[vV]))$
 	Open=if [ "$DISPLAY" = "" ]; then mplayer %f; else (smplayer %f 1>/dev/null 2>&1 &); fi
         #Open=(mplayer %f 1>/dev/null 2>&1 &)
         #Open=mplayer %f
@@ -379,7 +382,8 @@ regex/\.([wW][mM][aA])$
 ### Play lists ###
 
 regex/\.([mM]3[uU]|[pP][lL][sS])$
-	Open=if [ -z "$DISPLAY" ]; then mplayer -vo null -playlist %f; else (xmms -p %f &); fi
+	#Open=if [ -z "$DISPLAY" ]; then mplayer -vo null -playlist %f; else (xmms -p %f &); fi
+    Open=(smplayer %f >/dev/null 2>&1 &)
 
 
 ### Video ###
@@ -432,18 +436,24 @@ include/video
 
 # Postscript
 type/^PostScript
-	Open=(gv %f &)
+	#Open=(gv %f &)
+	Open=(evince %f 1>/dev/null 2>&1 &)
 	View=%view{ascii} ps2ascii %f
 
 # PDF
 type/^PDF
 	#Open=(xpdf %f 1>/dev/null 2>&1 &)
+	Open=(evince %f 1>/dev/null 2>&1 &)
 	#Open=(wine "C:\Program Files\PDFV_Portable\PDFXCview.exe" %f  1>/dev/null 2>&1 &)
-    Open=(acroread %f 1>/dev/null 2>&1 &)
+    #Open=(acroread %f 1>/dev/null 2>&1 &)
 	#Open=(ghostview %f &)
 	#Open=(okular %f &)
 	#Open=(wine "C:\Program Files\SumatraPDF\SumatraPDF.exe" %f 1>/dev/null 2>&1 &)
 	#View=%view{ascii} pdftotext %f -
+
+# DJVU
+regex/\.([dD][jJ][vV][uU])$
+	Open=(evince %f 1>/dev/null 2>&1 &)
 
 # chm
 type/^MS Windows HtmlHelp Data

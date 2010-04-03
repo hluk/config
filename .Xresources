@@ -11,13 +11,11 @@
 !#define FONT1 xft:Dejavu Sans Mono:size=9
 !#define FONT1 xft:Inconsolata:size=13
 !#define FONT1 xft:Bitstream Vera Sans Mono:pixelsize=10
-!#define FONT1 xft:Consolas:size=16.5
-
-XTerm*vt100.RenderFont: true
-XTerm*vt100.FaceName: Consolas:size=12
+#define FONT1 xft:Consolas:size=14
 
 !!!!!!XTERM:FONT
-XTerm*vt100.font: FONT1
+XTerm*vt100.RenderFont: true
+XTerm*vt100.FaceName: FONT1
 XTerm*vt100.boldMode: false
 
 !!!!!!XTERM:GEOMETRY
