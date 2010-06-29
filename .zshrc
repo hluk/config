@@ -1,7 +1,7 @@
-# Lines configured by zsh-newuser-install
+# basic configuration# {{{
 HISTFILE=~/.histfile
-HISTSIZE=1000000
-SAVEHIST=1000000
+HISTSIZE=3000
+SAVEHIST=3000
 bindkey -e
 
 zstyle ':completion:*' list-colors ''
@@ -32,6 +32,7 @@ setopt NO_FLOW_CONTROL
 
 # Case insensitive globbing
 setopt NO_CASE_GLOB
+# }}}
 
 # completion# {{{
 # case insensitive completion
@@ -81,6 +82,18 @@ zstyle ':completion:*' ignore-parents parent pwd
 zstyle ':completion::approximate*:*' prefix-needed false
 # }}}
 
+# directories# {{{
+export lapps=~/apps
+export lbooks=~/eBooks
+export ldev=~/dev
+export ldown=~/down
+export lmisc=~/Misc
+export lmovies=~/Movies
+export lpic=~/Pictures
+export lschool=~/School
+export lwallpapers=~/wallpapers
+# }}}
+
 # env# {{{
 export XDG_DATA_HOME="$HOME/.config"
 #export MANPAGER=vimmanpager
@@ -101,7 +114,8 @@ export SANDBOX_WRITE="${SANDBOX_WRITE}:${CCACHE_DIR}"
 # X11# {{{
 if [ -n "$DISPLAY" ]
 then
-	export BROWSER="$HOME/chromium.sh"
+    export BROWSER="/usr/bin/chromium-browser"
+	#export BROWSER="firefox"
 	#export TERM=xterm-color 
 	#export TERMINFO=$HOME/lib/terminfo
 
@@ -123,62 +137,6 @@ fi
 #(cd ~/apps/context/tex/ && . ./setuptex >/dev/null)
 # it may also help to run:
 #~ luatools --generate && context --make # }}}
-
-# func: unpack file [dir] # {{{
-# info: Unpack file in dir.
-unpack() {
-    lst=($@)
-
-    # directory to unpack files
-    d=.
-    if [ $# -gt 1 ]
-    then
-        d=${@[$#]}
-        lst=(${@[1,$((#-1))]})
-        # create dir
-        if ! mkdir -p "$d" 2> /dev/null
-        then
-            echo -e "usage:\n  $0 file [dir]\n  $0 file1 file2 ... dir"
-            return 1
-        fi
-    fi
-
-    for f in $lst
-    do
-        if [ -f "$f" ]
-        then
-            case "$f" in
-                *.tar)     CMD="tar xvf"    ;;
-                *.tbz2)    CMD="tar xvjf"   ;;
-                *.tgz)     CMD="tar xvzf"   ;;
-                *.tar.*)   CMD="tar xvf"    ;;
-                *.bz2)     CMD="bunzip2"    ;;
-                *.rar)     CMD="unrar x"    ;;
-                *.gz)      CMD="gunzip"     ;;
-                *.zip)     CMD="unzip"      ;;
-                *.Z)       CMD="uncompress" ;;
-                *.7z)      CMD="7z x"       ;;
-                *)
-                echo "File '$f' cannot be extracted!"
-                return 1
-                ;;
-            esac
-
-            # filename with full path
-            FILE=`readlink -f "$f"`
-
-            # unpack
-            (
-            echo "$CMD \"$FILE\""
-            cd "$d" && eval "$CMD \"$FILE\"" || return 2
-            )
-        else
-            echo "'$f' is not a valid file"
-            return 3
-        fi
-    done
-	return 0
-} # }}}
 
 # func: notes # {{{
 # info: Print notes from ~/notes directory.
@@ -293,12 +251,12 @@ alias grep="grep --colour=auto"
 alias fgrep="fgrep --colour=auto"
 alias man="LANG=C man"
 alias s="screen"
-alias irb="irb --readline -r irb/completion"
-alias lpr="lpr -o InputSlot=Default -o Resolution=600x600dpi -o PageSize=A4"
+alias unpack="~/dev/bin/unpack.sh"
 alias rcdiff="vimdiff {~/.config,/etc/xdg}/awesome/rc.lua"
 alias dict="~/dev/translate/translate.py"
 alias p="echo -n 'Press any key to continue...'; read -sn 1; echo"
 alias unpackall="for x in *.(zip|rar); do unpack \$x \${x%.???}; done"
+alias equalizer="alsamixer -D equal"
 
 alias q="yaourt"
 alias i="yaourt -S"
@@ -310,26 +268,26 @@ alias clean="yaourt -Qdt"
 if [ -n "$DISPLAY" ]
 then
 	# aliases for X
-	alias mc="mc -x"
+	alias e="gvim"
+	#alias mc="mc -x"
+	alias mc="ranger"
 	alias feb="$HOME/feb"
 	alias febt="THUMBS=1 $HOME/feb"
 	alias smplayer="LANG=C smplayer"
-	#alias v="$HOME/apps/comix/src/comix.py"
-	alias v="$HOME/dev/gallery/mkgallery.sh"
-	alias chromium="$HOME/chromium.sh"
-	alias e="gvim"
+	alias v="$HOME/dev/gallery/mkgallery.py"
+	alias traycmd="$HOME/dev/bin/traycmd.py"
+	alias grooveshark="$HOME/dev/grooveshark/grooveshark_toggle.sh show & traycmd $HOME/dev/grooveshark/{grooveshark.png,grooveshark_toggle.sh}"
     alias copyq="$HOME/dev/qt/copyq/release/copyq"
-
-	# wine apps
-	alias xnview="wine ~/.wine/drive_c/Program\ Files/XnView/xnview.exe"
-	alias foobar="wine ~/.wine/drive_c/Program\ Files/foobar2000/foobar2000.exe"
+    #alias wine32="WINEDEBUG=fixme-all LIBGL_DRIVERS_PATH=/opt/lib32/usr/lib/xorg/modules/dri wine"
+    #alias q4wine="LIBGL_DRIVERS_PATH=/opt/lib32/usr/lib/xorg/modules/dri q4wine"
+    alias blender="~/apps/blender/blender"
 else
 	alias x="startx > $HOME/.xsession 2>&1 &"
 fi
 # }}}
 
 # edit privoxy user settings
-alias adblock="su -c \"$EDITOR -c ':cd /etc/privoxy' -c ':e user.action'\""
+#alias adblock="su -c \"$EDITOR -c ':cd /etc/privoxy' -c ':e user.action'\""
 # }}}
 
 # func: dt program# {{{

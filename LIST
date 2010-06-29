@@ -5,6 +5,7 @@
 ~/.garglkrc
 ~/.mc/{bindings,hotlist,ini,menu} .mc/
 ~/.mplayer/
+~/.ranger/
 ~/.screenrc
 ~/.tint2rc
 ~/.vimrc

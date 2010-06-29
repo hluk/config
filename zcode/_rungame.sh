@@ -7,11 +7,11 @@ GAMEFILE=`ls "$ZCODEROOT/_games/$NAME".*`
 #(mkdir -p "$SAVEDIR" && cd "$SAVEDIR" &&
 	#"$HOME/dev/zcode/_apps/garglk/build/dist/gargoyle" "$GAMEFILE")
 
-JSGAMEFILE="/home/lukas/apps/parchment/stories/$NAME.js"
-(ls "$JSGAMEFILE" ||
- (cd /home/lukas/apps/parchment &&
-  python tools/zcode2js.py "$GAMEFILE" > "$JSGAMEFILE") &&
- ~/chromium.sh "file:///home/lukas/apps/parchment/parchment.html?story=file://$JSGAMEFILE")
+(
+    cd /home/lukas/www/parchment &&
+    python tools/zcode2js.py "$GAMEFILE" > "stories/$NAME.js" &&
+    $BROWSER "http://127.0.0.1:8080/parchment/parchment.html?story=stories/$NAME.js"
+)
 
 exit $?
 

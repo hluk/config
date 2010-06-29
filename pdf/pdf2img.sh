@@ -28,7 +28,7 @@ do
     for x in *.ppm
     do
 	    echo "Converting image $x to $FORMAT..."
-        convert "$x" -trim -resize "$RES" -quality $QUALITY "$x.$FORMAT" &&
+        convert "$x" -resize "$RES" -quality $QUALITY "$x.$FORMAT" &&
         echo "OK" || (echo "FAILED"; exit 1) || exit 1
     done
     ) || exit 1

@@ -1,6 +1,9 @@
 set nocompatible
-set nofsync
 set mouse=a
+" save power
+set nofsync
+let &guicursor = &guicursor . ",a:blinkon0"
+" file format/encoding
 set fileencodings=utf-8,iso8859-2,cp852,cp1250
 set fileformats=unix,dos
 set binary
@@ -53,13 +56,13 @@ filetype indent on
 " font in gui
 if has("gui_running")
 	"gui
-	"set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
-	"set guifont=Liberation\ Mono\ 16
-	"set guifont=Monospace\ 16
-    "set guifont=Inconsolata\ 10
+    "set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
+    "set guifont=Liberation\ Mono\ 11
+    "set guifont=Monospace\ 11
+    set guifont=Inconsolata\ 13
     "set guifont=Consolas\ 13
-    "set guifont=monofur\ 15
-    set guifont=Envy\ Code\ R\ 11
+    "set guifont=monofur\ 13
+    "set guifont=Envy\ Code\ R\ 11
     "set guifont=DejaVu\ Sans\ Mono\ 10
 
 	colorscheme wombat
@@ -110,8 +113,13 @@ map [5;5~ :tabprev<CR>
 map [6;5~ :tabnext<CR>
 
 "" windows
-map <TAB> <C-W><C-W>
-map <S-TAB> <C-W><S-W>
+"map <TAB> <C-W><C-W>
+"map <S-TAB> <C-W><S-W>
+let g:miniBufExplMapCTabSwitchBufs = 1
+imap <C-Tab> <C-o><C-Tab>
+imap <S-C-Tab> <C-o><S-C-Tab>
+" close buffer
+map <F4> :bd<CR>
 
 "" toggle comment
 map <C-C> ,c<SPACE>j
@@ -131,6 +139,7 @@ autocmd FileType ruby set tags+=~/.vim/tags_ruby
 autocmd FileType java set tags+=~/.vim/tags_java
 autocmd FileType python set noexpandtab
 autocmd FileType python set omnifunc=pythoncomplete#Complete
+autocmd FileType javascript set filetype+=.doxygen
 "set tags+=~/.vim/ctags
 autocmd FileType cpp noremap <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ .<CR>
 "noremap <F12> :!exuberant-ctags -R .<CR>
@@ -189,9 +198,9 @@ function! RotateColorTheme()
     let y = -1
     while y == -1
         if has("gui_running")
-            let colorstring = "#wombat#molokai#xoria256#kellys#soso#redblack#256-jungle#"
+            let colorstring = "#summerfruit256#default#soso#tango2#no_quarter#molokai#xoria256#wombat#"
         else
-            let colorstring = "#wombat256#molokai#xoria256#soso#redblack#256-jungle#kellys#"
+            let colorstring = "#wombat256#summerfruit#default#molokai#xoria256#soso#256-jungle#"
         endif
 
         let x = match( colorstring, "#", g:themeindex )
@@ -205,6 +214,101 @@ function! RotateColorTheme()
         endif
     endwhile
 endfunction
-" }}}
+
 nnoremap <silent> <F8> :execute RotateColorTheme()<CR>
+" }}}
+
+"{{{
+if !exists("g:change_color_scheme")
+    let g:sep='?'
+
+    function! ElementAt (array, sep, index)
+        if strlen(a:array) == 0 || a:index < 0
+            return -1
+        endif
+
+        let current_pos = 0 	" current character position within array
+        let i = 0		" current array position
+
+        " Search the array element on a:index position.
+        while i != a:index
+            let current_pos = match(a:array, a:sep, current_pos)
+            if current_pos == -1
+                return -1	" couldn't find it
+            endif
+
+            let current_pos = current_pos + 1
+            let i = i + 1
+        endwhile
+        
+	" then find where the current array element ends
+        let array_element_endpos = match(a:array, a:sep, current_pos)
+        if array_element_endpos == -1
+	    " must be the last array element
+	    let array_element_endpos = strlen(a:array)
+	endif
+
+        " return the color scheme file path in a:index position
+        return strpart(a:array,current_pos,(array_element_endpos-current_pos))
+    endfunction  " ElementAt
+
+
+    " If g:colors_name is defined, return the name of current color syntax name.
+    " Otherwise return an empty string
+    function! GetColorSyntaxName()
+        if exists('g:colors_name')
+            return g:colors_name
+        else
+            return ''
+        endif
+    endfunction  "GetColorSyntaxName
+
+    let g:change_color_scheme="0.1"
+endif
+
+let s:color_schemes = substitute(globpath(&runtimepath,"colors/*.vim"), '\n', g:sep, 'g')
+let s:total_schemes = 0
+let s:scheme_index = 0
+
+if (strlen(s:color_schemes) > 0)
+    let found = 0
+    while found != -1
+        let found = match(s:color_schemes, g:sep, found+1)
+        let s:total_schemes = s:total_schemes + 1
+    endwhile
+endif
+
+function! NextColorScheme()
+    let s:scheme_index = s:scheme_index + 1
+    call LoadColorScheme()
+endfunction
+
+function! PreviousColorScheme()
+    let s:scheme_index = s:scheme_index - 1
+    call LoadColorScheme()
+endfunction
+
+function! LoadColorScheme()
+    " quit if there's no color scheme
+    if s:total_schemes == 0
+    	    return 0
+    endif
+
+    " wrap around scheme_index for either direction
+    if s:scheme_index < 0 
+        let s:scheme_index = s:total_schemes-1
+    elseif s:scheme_index >= s:total_schemes
+        let s:scheme_index = 0
+    endif
+
+    " ElementAt returns the name of color scheme on scheme_index position in
+    " color_schemes array. Then we will load (source) the scheme.
+    exe "source " ElementAt(s:color_schemes, g:sep, s:scheme_index)
+endfunction
+
+map <F12>   :call NextColorScheme()<CR>
+map <S-F12> :call PreviousColorScheme()<CR>
+"set rulerformat=%55(%{g:colors_name}\ %5l,%-6(%c%V%)\ %P%)
+"set rulerformat=%55(%{GetColorSyntaxName()}\ %5l,%-6(%c%V%)\ %P%)
+"}}}
 

@@ -14,30 +14,30 @@
 #define FONT1 xft:Consolas:size=14
 
 !!!!!!XTERM:FONT
-XTerm*vt100.RenderFont: true
-XTerm*vt100.FaceName: FONT1
-XTerm*vt100.boldMode: false
+URxvt.RenderFont: true
+URxvt.FaceName: FONT1
+URxvt.boldMode: false
 
 !!!!!!XTERM:GEOMETRY
-!XTerm*vt100.geometry: 100x50
+!URxvt.geometry: 100x50
 
 !!!!!!XTERM:SCROLLING
-XTerm*vt100.scrollBar: false
-XTerm*vt100.saveLines: 1024
-XTerm*vt100.scrollKey: true
-XTerm*vt100.scrollTtyOutput: false
-XTerm*vt100.scrollTtyKeypress: true
-XTerm*vt100.scrollWithBuffer: false
-!XTerm*vt100.jumpScroll: true
-XTerm*vt100.skipScroll: true
-XTerm*vt100.scrollColor: #aaa894
-XTerm*vt100.troughColor: #000000
-XTerm*vt100.scrollstyle: plain
+URxvt.scrollBar: false
+URxvt.saveLines: 1024
+URxvt.scrollKey: true
+URxvt.scrollTtyOutput: false
+URxvt.scrollTtyKeypress: true
+URxvt.scrollWithBuffer: false
+!URxvt.jumpScroll: true
+URxvt.skipScroll: true
+URxvt.scrollColor: #aaa894
+URxvt.troughColor: #000000
+URxvt.scrollstyle: plain
 
-XTerm*vt100.tintColor: #60aadd
-XTerm*vt100.shading: 80
-XTerm*vt100.inheritPixmap: true
-XTerm*vt100.transparent: false
+URxvt.tintColor: #60aadd
+URxvt.shading: 80
+URxvt.inheritPixmap: true
+URxvt.transparent: false
 
 Xft.antialias:true
 !Xft.dpi:94
@@ -45,8 +45,12 @@ Xft.hinting:true
 Xft.hintstyle:hintfull
 Xft.rgba:rgb
 
-!Xcursor.theme: gruppled_black
-Xcursor.theme: neutral
+Xcursor.theme: pearl
+!Xcursor.theme: Human
+!Xcursor.theme: neutral
+!Xcursor.theme: Ecliz_Full
+!Xcursor.theme: aero
+!Xcursor.theme: PROTOZOA
 
 xpdf*enableFreetype:    yes
 xpdf*antialias:         yes
@@ -56,30 +60,30 @@ xpdf*background:        white
 
 !!! color schemes: http://phraktured.net/terminal-colors/
 !*cursorColor: gray
-XTerm*vt100.foreground:     rgb:dd/dd/dd
-XTerm*vt100.background:     rgb:22/22/22
+URxvt.foreground:     rgb:dd/dd/dd
+URxvt.background:     rgb:22/22/22
 !black
-XTerm*vt100.color0:         rgb:19/19/19
-XTerm*vt100.color8:         rgb:25/25/25
+URxvt.color0:         rgb:19/19/19
+URxvt.color8:         rgb:25/25/25
 !red
-XTerm*vt100.color1:         rgb:80/32/32
-XTerm*vt100.color9:         rgb:98/2b/2b
+URxvt.color1:         rgb:80/32/32
+URxvt.color9:         rgb:98/2b/2b
 !green
-XTerm*vt100.color2:         rgb:5b/76/2f
-XTerm*vt100.color10:        rgb:89/b8/3f
+URxvt.color2:         rgb:5b/76/2f
+URxvt.color10:        rgb:89/b8/3f
 !brown/yellow
-XTerm*vt100.color3:         rgb:aa/99/43
-XTerm*vt100.color11:        rgb:ef/ef/60
+URxvt.color3:         rgb:aa/99/43
+URxvt.color11:        rgb:ef/ef/60
 !blue
-XTerm*vt100.color4:         rgb:32/4c/80
-XTerm*vt100.color12:        rgb:2b/4f/98
+URxvt.color4:         rgb:32/4c/80
+URxvt.color12:        rgb:2b/4f/98
 !magenta
-XTerm*vt100.color5:         rgb:70/6c/9a
-XTerm*vt100.color13:        rgb:82/6a/b1
+URxvt.color5:         rgb:70/6c/9a
+URxvt.color13:        rgb:82/6a/b1
 !cyan
-XTerm*vt100.color6:         rgb:92/b1/9e
-XTerm*vt100.color14:        rgb:a1/cd/cd
+URxvt.color6:         rgb:92/b1/9e
+URxvt.color14:        rgb:a1/cd/cd
 !white
-XTerm*vt100.color7:         rgb:ff/ff/ff
-XTerm*vt100.color15:        rgb:dd/dd/dd
+URxvt.color7:         rgb:ff/ff/ff
+URxvt.color15:        rgb:dd/dd/dd
 

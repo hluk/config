@@ -18,8 +18,6 @@ URLS="http://www.gametrailers.com/rssgenerate.php?s1=&vidformat[mov]=on&vidforma
 http://www.gamersyde.com/news_en.rdf
 http://konachan.com/post/atom
 $HOME/dev/wget/deviantart/deviantart-daily.sh"
-#http://orz.4chan.org/hr/index.rss
-#http://img.7chan.org/hr/rss.xml
 
 echo -e "\n$(date -R): Fetching urls {{{"
 trap 'rm -f '"$PIDFILE"'; echo "}}} FAILED!"; exit 1' TERM QUIT INT

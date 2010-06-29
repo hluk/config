@@ -1,7 +1,9 @@
+[default]
 ### audio/video output
 #ao=alsa #,sdl,pulse,oss,arts
 #ao=alsa:device=hw=0.0
-ao=alsa
+#ao=alsa
+ao=oss
 vo=xv:adaptor=0
 #zoom=yes
 #vo=gl:yuv=3:swapinterval=1:force-pbo:ati-hack
@@ -47,3 +49,8 @@ subpos=100
 nocache=1
 idx=1
 
+[gnome-mplayer]
+vo=xv
+vf=eq2
+ao=alsa
+msglevel=all=5

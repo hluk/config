@@ -1,7 +1,7 @@
 
 [Midnight-Commander]
 show_backups=1
-show_dot_files=1
+show_dot_files=0
 verbose=1
 mark_moves_down=1
 pause_after_run=1
@@ -96,6 +96,8 @@ editor_show_right_margin=0
 mcview_eof=
 
 ignore_ftp_chattr_errors=true
+
+quick_search_case_sensitive=2
 
 [Colors]
 base_color=normal=light,default:selected=black,yellow:marked=yellow,default:markselect=black,green:menu=white,:menuhot=red,:menusel=black,yellow:menuhotsel=,:dnormal=,:dfocus=,:dhotnormal=red,:dhotfocus=,:input=,:reverse=,:executable=orange,default:directory=white,default:link=green,default:device=red,default:special=red,default:core=red,default:helpnormal=,:helplink=,:helpslink=,:
