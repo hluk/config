@@ -1,0 +1,20 @@
+vlc %f
+q4wine
+d!q4wine
+git diff --color
+s
+s zsh
+screen
+ls
+gvim
+vim
+s
+e ~
+gvim ~
+e 
+gvim ~/.ranger
+v
+w!ls *yy
+unpack %f
+d!blender %f
+
