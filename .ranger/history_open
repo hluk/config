@@ -17,4 +17,4 @@ v
 w!ls *yy
 unpack %f
 d!blender %f
-
+rm *_

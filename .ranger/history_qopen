@@ -1,4 +1,3 @@
-ll
 ls
 ls -l w
 ls -l p
@@ -18,3 +17,4 @@ w
 unpack
 e
 unpack 
+

@@ -1,8 +1,3 @@
-!git diff --color
-mkdir g
-v
-w
-W
 w %s
 mark \.(jpg|png|gif)
 delete seriously? y
@@ -17,4 +12,9 @@ e files/style.css/
 cd ~/dev/qt
 cd  copyq
 u
-u
+unapack %f a
+un %f a
+un
+cd  ~/dev/qt
+delete seriously? y
+delete 

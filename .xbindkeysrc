@@ -1,0 +1,133 @@
+# By defaults, xbindkeys does not pay attention with the modifiers
+# NumLock, CapsLock and ScrollLock.
+# Uncomment the lines above if you want to pay attention to them.
+
+#keystate_numlock = enable
+#keystate_capslock = enable
+#keystate_scrolllock= enable
+
+## set directly keycode (here control+alt+mod2 + f with my keyboard)
+#"xterm"
+#  alt + c:0x29 + m:4 + mod2
+#
+## Control+Shift+a  release event starts rxvt
+#"rxvt"
+#  release+control+shift + a
+#
+## Control + mouse button 2 release event starts rxvt
+#"rxvt"
+#  Control + b:2 + Release
+
+"xbindkeys_show" 
+  control+shift + q
+
+# enable/disable wlan
+"sh -c '(sudo /etc/rc.d/net-profiles stop && sudo ifconfig wlan0 down) || (sudo /etc/rc.d/net-profiles start && sudo /etc/rc.d/privoxy restart)'"
+    XF86WLAN
+
+"~/dev/bin/status.sh"
+    XF86Launch2
+
+# MOUSE# {{{
+# enable/disable touchpad
+"~/dev/bin/togglemodule.sh psmouse"
+    XF86TouchpadToggle
+
+# left button
+"xte 'mousedown 1 &'"
+    Menu
+"xte 'mouseup 1 &'"
+    Menu+Release
+
+# middle button
+"xte 'mouseclick 2 &'"
+    mod4+b:1+release
+# }}}
+
+# AUDIO# {{{
+# volume
+"~/dev/bin/volume.sh 2%+"
+    XF86AudioRaiseVolume
+"~/dev/bin/volume.sh 2%-"
+    XF86AudioLowerVolume
+"~/dev/bin/togglemute.sh"
+    XF86AudioMute
+"~/dev/grooveshark/grooveshark_toggle.sh toggle"
+    mod4+Home
+#"sakura -e ncmpc -t MUSIC -f 'DejaVu Sans Mono 15' --name=ncmpc"
+    #mod4+p
+"sakura -e '/usr/bin/mocp -T darkdot_theme' -t MUSIC -f 'DejaVu Sans Mono 15' --name=music"
+    mod4+p
+
+# music
+#"~/dev/menus/mpd.sh"
+    #mod4+uacute
+#"mpd && mpc play || mpc toggle"
+    #XF86AudioPlay
+#"mpc next"
+    #XF86AudioNext
+#"mpc prev"
+    #XF86AudioPrev
+#"killall mpd"
+    #XF86AudioStop
+
+"mocp --toggle-pause || mocp --play"
+    XF86AudioPlay
+"mocp --next"
+    XF86AudioNext
+"mocp --previous"
+    XF86AudioPrev
+"mocp -x"
+    XF86AudioStop
+# }}}
+
+# SCREEN# {{{
+# brightness
+"~/dev/colors/backlight.sh 5"
+    XF86MonBrightnessUp
+"~/dev/colors/backlight.sh -5"
+    XF86MonBrightnessDown
+
+# invert
+"~/dev/colors/invert"
+    mod4+shift+KP_Divide
+
+# rotate
+"xrandr -o right"
+    mod4+control+Left
+"xrandr -o left"
+    mod4+control+Right
+"xrandr -o normal"
+    mod4+control+Down
+
+# random wallpaper
+"~/dev/img/set_wallpaper.sh"
+    mod4+a
+# }}}
+
+# APPS# {{{
+# terminal
+"sakura -e ~/dev/bin/screen"
+    mod4+q
+"xkill"
+    mod4+mod1+x
+"/usr/bin/chromium-browser"
+    mod4+w
+"~/dev/qt/copyq/release/copyq"
+    mod4+semicolon
+"~/dev/qt/copyq/release/copyq action"
+    mod4+y
+"~/dev/qt/copyq/release/copyq select 2;sleep 0.1;~/dev/qt/copyq/release/copyq show 'clipboard'"
+    mod4+backslash
+"~/dev/qt/copyq/release/copyq remove;sleep 0.1;~/dev/qt/copyq/release/copyq show 'clipboard'"
+    mod4+alt+backslash
+"~/dev/qt/copyq/release/copyq edit"
+    mod4+shift+backslash
+"~/dev/menus/runmenu.sh"
+    mod4+x
+"SHELL=~/dev/bin/calc.sh sakura -t calc -e 'screen -d -RR calc'"
+    mod4+c
+"~/dev/menus/gamemenu.sh"
+    mod4+g
+# }}}
+

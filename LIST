@@ -9,7 +9,7 @@
 ~/.screenrc
 ~/.tint2rc
 ~/.vimrc
-~/.xbindkeys
+~/.xbindkeysrc
 ~/.xinitrc
 ~/.xmobarrc
 ~/.xmonad/xmonad.hs
