@@ -11,33 +11,33 @@
 !#define FONT1 xft:Dejavu Sans Mono:size=9
 !#define FONT1 xft:Inconsolata:size=13
 !#define FONT1 xft:Bitstream Vera Sans Mono:pixelsize=10
-#define FONT1 xft:Consolas:size=14
+#define FONT1 xft:Consolas:size=11
 
 !!!!!!XTERM:FONT
-URxvt.RenderFont: true
-URxvt.FaceName: FONT1
-URxvt.boldMode: false
+XTerm*RenderFont: true
+XTerm*FaceName: FONT1
+XTerm*boldMode: false
 
 !!!!!!XTERM:GEOMETRY
-!URxvt.geometry: 100x50
+!XTerm*geometry: 100x50
 
 !!!!!!XTERM:SCROLLING
-URxvt.scrollBar: false
-URxvt.saveLines: 1024
-URxvt.scrollKey: true
-URxvt.scrollTtyOutput: false
-URxvt.scrollTtyKeypress: true
-URxvt.scrollWithBuffer: false
-!URxvt.jumpScroll: true
-URxvt.skipScroll: true
-URxvt.scrollColor: #aaa894
-URxvt.troughColor: #000000
-URxvt.scrollstyle: plain
+XTerm*scrollBar: false
+XTerm*saveLines: 1024
+XTerm*scrollKey: true
+XTerm*scrollTtyOutput: false
+XTerm*scrollTtyKeypress: true
+XTerm*scrollWithBuffer: false
+!XTerm*jumpScroll: true
+XTerm*skipScroll: true
+XTerm*scrollColor: #aaa894
+XTerm*troughColor: #000000
+XTerm*scrollstyle: plain
 
-URxvt.tintColor: #60aadd
-URxvt.shading: 80
-URxvt.inheritPixmap: true
-URxvt.transparent: false
+XTerm*tintColor: #60aadd
+XTerm*shading: 80
+XTerm*inheritPixmap: true
+XTerm*transparent: false
 
 Xft.antialias:true
 !Xft.dpi:94
@@ -60,30 +60,30 @@ xpdf*background:        white
 
 !!! color schemes: http://phraktured.net/terminal-colors/
 !*cursorColor: gray
-URxvt.foreground:     rgb:dd/dd/dd
-URxvt.background:     rgb:22/22/22
+XTerm*foreground:     rgb:dd/dd/dd
+XTerm*background:     rgb:22/22/22
 !black
-URxvt.color0:         rgb:19/19/19
-URxvt.color8:         rgb:25/25/25
+XTerm*color0:         rgb:19/19/19
+XTerm*color8:         rgb:25/25/25
 !red
-URxvt.color1:         rgb:80/32/32
-URxvt.color9:         rgb:98/2b/2b
+XTerm*color1:         rgb:80/32/32
+XTerm*color9:         rgb:98/2b/2b
 !green
-URxvt.color2:         rgb:5b/76/2f
-URxvt.color10:        rgb:89/b8/3f
+XTerm*color2:         rgb:5b/76/2f
+XTerm*color10:        rgb:89/b8/3f
 !brown/yellow
-URxvt.color3:         rgb:aa/99/43
-URxvt.color11:        rgb:ef/ef/60
+XTerm*color3:         rgb:aa/99/43
+XTerm*color11:        rgb:ef/ef/60
 !blue
-URxvt.color4:         rgb:32/4c/80
-URxvt.color12:        rgb:2b/4f/98
+XTerm*color4:         rgb:32/4c/80
+XTerm*color12:        rgb:2b/4f/98
 !magenta
-URxvt.color5:         rgb:70/6c/9a
-URxvt.color13:        rgb:82/6a/b1
+XTerm*color5:         rgb:70/6c/9a
+XTerm*color13:        rgb:82/6a/b1
 !cyan
-URxvt.color6:         rgb:92/b1/9e
-URxvt.color14:        rgb:a1/cd/cd
+XTerm*color6:         rgb:92/b1/9e
+XTerm*color14:        rgb:a1/cd/cd
 !white
-URxvt.color7:         rgb:ff/ff/ff
-URxvt.color15:        rgb:dd/dd/dd
+XTerm*color7:         rgb:ff/ff/ff
+XTerm*color15:        rgb:dd/dd/dd
 

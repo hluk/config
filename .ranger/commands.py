@@ -16,7 +16,7 @@ class webview(Command):
 		action = ['/home/lukas/dev/gallery/mkgallery.py']
 		if line.rest(1):
 			action.extend([line.rest(1)])
-		action.extend(f.path for f in self.fm.env.get_selection())
+		#action.extend(f.path for f in self.fm.env.get_selection())
 		self.fm.execute_command(action, flags="w")
 
 class blender(Command):
@@ -44,8 +44,8 @@ class unpack(Command):
 	def execute(self):
 		line = parse(self.line)
 		action = ['/home/lukas/dev/bin/unpack.sh']
+		action.extend(f.path for f in self.fm.env.get_selection())
 		if line.rest(1):
 			action.extend([line.rest(1)])
-		action.extend(f.path for f in self.fm.env.get_selection())
 		self.fm.execute_command(action, flags="w")
 

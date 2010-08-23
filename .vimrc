@@ -48,41 +48,13 @@ syntax on
 filetype plugin on
 filetype indent on
 
-" 256 colors
-"set t_Co=256
-"set t_AB=[48;5;%dm
-"set t_AF=[38;5;%dm
-
-" font in gui
-if has("gui_running")
-	"gui
-    "set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
-    "set guifont=Liberation\ Mono\ 11
-    "set guifont=Monospace\ 11
-    set guifont=Inconsolata\ 13
-    "set guifont=Consolas\ 13
-    "set guifont=monofur\ 13
-    "set guifont=Envy\ Code\ R\ 11
-    "set guifont=DejaVu\ Sans\ Mono\ 10
-
-	colorscheme wombat
-	"colorscheme xoria256
-	
-	"colorscheme rainbow_breeze
-	
-	"colorscheme soso
-	"colorscheme khaki
-else
-	"colorscheme redblack
-	"colorscheme 256-jungle
-	"colorscheme molokai
-	colorscheme wombat256
-	"colorscheme kellys
-	
-	"colorscheme calmar256-light
-	"colorscheme khaki
-	"colorscheme soso
-endif
+"" Get arrow keys and j/k to work on screen lines, rather than document lines.
+"nmap <up>    gk
+"nmap <down>  gj
+"nmap k       gk
+"nmap j       gj
+"imap <up>   <esc>gka
+"imap <down> <esc>gja
 
 "" Make Vim completion popup menu work just like in an IDE (Matt Zyzik)
 set completeopt=longest,menuone,preview
@@ -107,17 +79,21 @@ nmap <C-F9> zR
 nmap <C-S-F9> zM
 
 "" TABS
-map tn :tabnew<CR>:e 
+map tn :tabnew<space>
 map td :tabclose<CR>
 map [5;5~ :tabprev<CR>
 map [6;5~ :tabnext<CR>
+map <C-Tab> :tabnext<CR>
+map <S-C-Tab> :tabprev<CR>
+imap <C-Tab> <C-o>:tabnext<CR>
+imap <S-C-Tab> <C-o>:tabprev<CR>
 
 "" windows
-"map <TAB> <C-W><C-W>
+map <TAB> <C-W><C-W>
 "map <S-TAB> <C-W><S-W>
-let g:miniBufExplMapCTabSwitchBufs = 1
-imap <C-Tab> <C-o><C-Tab>
-imap <S-C-Tab> <C-o><S-C-Tab>
+"let g:miniBufExplMapCTabSwitchBufs = 1
+"imap <C-Tab> <C-o><C-Tab>
+"imap <S-C-Tab> <C-o><S-C-Tab>
 " close buffer
 map <F4> :bd<CR>
 
@@ -311,4 +287,34 @@ map <S-F12> :call PreviousColorScheme()<CR>
 "set rulerformat=%55(%{g:colors_name}\ %5l,%-6(%c%V%)\ %P%)
 "set rulerformat=%55(%{GetColorSyntaxName()}\ %5l,%-6(%c%V%)\ %P%)
 "}}}
+
+if has("gui_running")
+	"gui
+    "set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
+    "set guifont=Liberation\ Mono\ 11
+    "set guifont=Monospace\ 11
+    "set guifont=Inconsolata\ 13
+    "set guifont=Consolas\ 13
+    "set guifont=monofur\ 13
+	set guifont=Envy\ Code\ R\ 10
+    "set guifont=DejaVu\ Sans\ Mono\ 10
+
+	colorscheme wombat
+	"colorscheme xoria256
+	
+	"colorscheme rainbow_breeze
+	
+	"colorscheme soso
+	"colorscheme khaki
+else
+	"colorscheme redblack
+	"colorscheme 256-jungle
+	"colorscheme molokai
+	colorscheme wombat256
+	"colorscheme kellys
+	
+	"colorscheme calmar256-light
+	"colorscheme khaki
+	"colorscheme soso
+endif
 

@@ -27,6 +27,9 @@ class CustomApplications(DefaultApps):
 				return self.either(c, 'chromium-browser', 'firefox', 'opera', 'elinks')
 			if f.extension in ('swf', ):
 				return self.either(c, 'chromium-browser', 'firefox', 'opera')
+			if f.extension in ('exe', ):
+				c.flags += 'd'
+				return tup('wine', *c)
 			if f.extension in ('nds', ):
 				c.flags += 'd'
 				return tup('/home/lukas/apps/desmume/src/gtk/desmume', *c)

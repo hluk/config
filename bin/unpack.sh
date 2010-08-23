@@ -1,14 +1,14 @@
 #!/bin/bash
 # usage: unpack file [dir]
 # info: Unpack file in dir.
-lst=($@)
+lst=("$@")
 
 # directory to unpack files
 d=.
 if [ $# -gt 1 ]
 then
-	d=${@[$#]}
-	lst=(${@[1,$((#-1))]})
+    d=${lst[$#-1]}
+	lst=("${lst[0,$#-2]}")
 	# create dir
 	if ! mkdir -p "$d" 2> /dev/null
 	then
@@ -17,25 +17,22 @@ then
 	fi
 fi
 
-for f in $lst
+for f in "$lst"
 do
 	if [ -f "$f" ]
 	then
-		case "$f" in
-			*.tar)     CMD="tar xvf"    ;;
-			*.tbz2)    CMD="tar xvjf"   ;;
-			*.tgz)     CMD="tar xvzf"   ;;
-			*.tar.*)   CMD="tar xvf"    ;;
+        mime=`file --brief --mime "$f"|grep -o '^[^;]\+'`
+		case "$mime" in
+			application/zip)    CMD="unzip"      ;;
+			application/x-rar)  CMD="unrar x"    ;;
+			application/x-gzip) CMD="tar xvf"    ;;
 			*.bz2)     CMD="bunzip2"    ;;
-			*.rar)     CMD="unrar x"    ;;
 			*.gz)      CMD="gunzip"     ;;
-			*.zip)     CMD="unzip"      ;;
 			*.Z)       CMD="uncompress" ;;
 			*.7z)      CMD="7z x"       ;;
 			*)
-			echo "File '$f' cannot be extracted!"
-			exit 1
-			;;
+                       echo "File '$f' cannot be extracted! (mime: '$mime')"
+			           exit 1 ;;
 		esac
 
 		# filename with full path
@@ -47,7 +44,7 @@ do
 		cd "$d" && eval "$CMD \"$FILE\"" || exit 2
 		)
 	else
-		echo "'$f' is not a valid file"
+		echo "'$f' is not a valid file!"
 		exit 3
 	fi
 done

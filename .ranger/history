@@ -1,20 +1,20 @@
-w %s
-mark \.(jpg|png|gif)
+mark (jpg|png|gif)$
+mkdir a
+v -tdeviant
+w -tdeviant
+e
+E
+e
 delete seriously? y
-delete 
 delete seriously? 
 delete seriously? y
-blend
-blender 
-v
-e
-e files/style.css/
-cd ~/dev/qt
-cd  copyq
-u
-unapack %f a
-un %f a
-un
-cd  ~/dev/qt
+w
+w -f
 delete seriously? y
-delete 
+w -tworld
+delete seriously? y
+w
+delete seriously? y
+delete seriously? y
+delete seriously? y
+delete seriously? y

@@ -8,6 +8,7 @@
 ~/.ranger/
 ~/.screenrc
 ~/.tint2rc
+~/.tmux.conf
 ~/.vimrc
 ~/.xbindkeysrc
 ~/.xinitrc

@@ -3,7 +3,8 @@
 #ao=alsa #,sdl,pulse,oss,arts
 #ao=alsa:device=hw=0.0
 #ao=alsa
-ao=oss
+#ao=oss
+ao=pulse
 vo=xv:adaptor=0
 #zoom=yes
 #vo=gl:yuv=3:swapinterval=1:force-pbo:ati-hack

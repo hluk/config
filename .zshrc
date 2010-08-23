@@ -31,7 +31,35 @@ setopt PUSHD_IGNORE_DUPS
 setopt NO_FLOW_CONTROL
 
 # Case insensitive globbing
-setopt NO_CASE_GLOB
+#setopt NO_CASE_GLOB
+# }}}
+
+# vi mode# {{{
+bindkey -v
+zle-keymap-select () {
+  if [ $TERM = "rxvt-256color" ]; then
+    if [ $KEYMAP = vicmd ]; then
+      echo -ne "\033]12;#ff6565\007"
+    else
+      echo -ne "\033]12;grey\007"
+    fi
+  elif [ $TERM = "screen" ]; then
+    if [ $KEYMAP = vicmd ]; then
+      echo -ne '\033P\033]12;#ff6565\007\033\\'
+    else
+      echo -ne '\033P\033]12;grey\007\033\\'
+    fi
+  fi
+}; zle -N zle-keymap-select
+zle-line-init () {
+  zle -K viins
+  if [ $TERM = "rxvt-256color" ]; then
+    echo -ne "\033]12;grey\007"
+  elif [ $TERM = "screen" ]; then
+    echo -ne '\033P\033]12;grey\007\033\\'
+  fi
+}; zle -N zle-line-init
+bindkey '^R' history-incremental-search-backward
 # }}}
 
 # completion# {{{
@@ -74,7 +102,7 @@ zstyle ':completion:*:approximate:*' max-errors 'reply=(  $((  ($#PREFIX+$#SUFFI
 zstyle ':completion:*:corrections' format '%B%d (errors %e)%b'
 
 # Don't complete stuff already on the line
-zstyle ':completion::*:(rm|vi):*' ignore-line true
+zstyle ':completion::*:(rm|cp|mv|gvim|mplayer):*' ignore-line true
 
 # Don't complete directory we are already in (../here)
 zstyle ':completion:*' ignore-parents parent pwd
@@ -115,6 +143,7 @@ export SANDBOX_WRITE="${SANDBOX_WRITE}:${CCACHE_DIR}"
 if [ -n "$DISPLAY" ]
 then
     export BROWSER="/usr/bin/chromium-browser"
+    #export BROWSER="/usr/bin/google-chrome"
 	#export BROWSER="firefox"
 	#export TERM=xterm-color 
 	#export TERMINFO=$HOME/lib/terminfo
@@ -159,7 +188,7 @@ notes() {
 	for f in *
 	do
         TXT=""
-        W=0
+        W=$#f
 
         # get max width
         cat "$f" |
@@ -243,6 +272,17 @@ check() {
 }
 # }}}
 
+# func: Find # {{{
+Find () {
+    if [ $# -gt 1 ]
+    then
+        find  $1 -iname "*$2*"
+    else
+        find -iname "*$1*"
+    fi
+}
+# }}}
+
 # aliases# {{{
 alias e="vim"
 alias ls="ls --color=auto"
@@ -258,6 +298,11 @@ alias p="echo -n 'Press any key to continue...'; read -sn 1; echo"
 alias unpackall="for x in *.(zip|rar); do unpack \$x \${x%.???}; done"
 alias equalizer="alsamixer -D equal"
 
+alias Gitd="git diff --color"
+alias Gitc="git commit --interactive -m"
+alias Gits="git show --color"
+alias Gitp="git push origin master"
+
 alias q="yaourt"
 alias i="yaourt -S"
 alias u="yaourt -Rs"
@@ -269,18 +314,17 @@ if [ -n "$DISPLAY" ]
 then
 	# aliases for X
 	alias e="gvim"
-	#alias mc="mc -x"
-	alias mc="ranger"
-	alias feb="$HOME/feb"
-	alias febt="THUMBS=1 $HOME/feb"
+    alias mc="mc -x"
+    alias m="ranger"
+	alias feb="$HOME/dev/bin/feb"
+	alias febt="THUMBS=1 $HOME/dev/bin/feb"
 	alias smplayer="LANG=C smplayer"
 	alias v="$HOME/dev/gallery/mkgallery.py"
 	alias traycmd="$HOME/dev/bin/traycmd.py"
 	alias grooveshark="$HOME/dev/grooveshark/grooveshark_toggle.sh show & traycmd $HOME/dev/grooveshark/{grooveshark.png,grooveshark_toggle.sh}"
-    alias copyq="$HOME/dev/qt/copyq/release/copyq"
+    alias copyq="$HOME/dev/copyq-build/release/copyq"
     #alias wine32="WINEDEBUG=fixme-all LIBGL_DRIVERS_PATH=/opt/lib32/usr/lib/xorg/modules/dri wine"
     #alias q4wine="LIBGL_DRIVERS_PATH=/opt/lib32/usr/lib/xorg/modules/dri q4wine"
-    alias blender="~/apps/blender/blender"
 else
 	alias x="startx > $HOME/.xsession 2>&1 &"
 fi
@@ -295,6 +339,8 @@ fi
 d() {
 	$@ & disown && exit
 } # }}}
+
+cd ~
 
 notes
 

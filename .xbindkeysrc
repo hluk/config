@@ -34,10 +34,12 @@
     XF86TouchpadToggle
 
 # left button
-"xte 'mousedown 1 &'"
-    Menu
-"xte 'mouseup 1 &'"
-    Menu+Release
+#"xte 'mousedown 1 &'"
+    #Menu
+#"xte 'mouseup 1 &'"
+    #Menu+Release
+#"xte 'keydown Control_L' 'keydown t' 'usleep 10000' 'keyup Control_L' 'keyup t' 'usleep 10000'"
+    #Menu
 
 # middle button
 "xte 'mouseclick 2 &'"
@@ -53,11 +55,13 @@
 "~/dev/bin/togglemute.sh"
     XF86AudioMute
 "~/dev/grooveshark/grooveshark_toggle.sh toggle"
-    mod4+Home
+    control+period
 #"sakura -e ncmpc -t MUSIC -f 'DejaVu Sans Mono 15' --name=ncmpc"
     #mod4+p
-"sakura -e '/usr/bin/mocp -T darkdot_theme' -t MUSIC -f 'DejaVu Sans Mono 15' --name=music"
-    mod4+p
+#"sakura -e '/usr/bin/mocp -T darkdot_theme' -t MUSIC -f 'DejaVu Sans Mono 15' --name=music"
+    #mod4+p
+#"deadbeef"
+    #mod4+p
 
 # music
 #"~/dev/menus/mpd.sh"
@@ -111,17 +115,16 @@
     mod4+q
 "xkill"
     mod4+mod1+x
+#"/usr/bin/google-chrome"
 "/usr/bin/chromium-browser"
     mod4+w
-"~/dev/qt/copyq/release/copyq"
-    mod4+semicolon
-"~/dev/qt/copyq/release/copyq action"
-    mod4+y
-"~/dev/qt/copyq/release/copyq select 2;sleep 0.1;~/dev/qt/copyq/release/copyq show 'clipboard'"
+"~/dev/copyq-build/release/copyq toggle || ~/dev/copyq-build/release/copyq"
     mod4+backslash
-"~/dev/qt/copyq/release/copyq remove;sleep 0.1;~/dev/qt/copyq/release/copyq show 'clipboard'"
+"~/dev/copyq-build/release/copyq select 2"
+    mod4+y
+"~/dev/copyq-build/release/copyq remove"
     mod4+alt+backslash
-"~/dev/qt/copyq/release/copyq edit"
+"~/dev/copyq-build/release/copyq edit"
     mod4+shift+backslash
 "~/dev/menus/runmenu.sh"
     mod4+x

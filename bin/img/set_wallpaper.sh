@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 # vim: foldmarker=<<<,>>>
 # usage:
 #   ./set_wallpaper.sh # sets random wallpaper from WALLPATH env
@@ -49,7 +49,9 @@ then
 fi &&
 echo -e "\tOutput: `/usr/bin/identify "$WALL"`" &&
 echo -e "\tSetting..." &&
-/usr/bin/feh --bg-center "$WALL" &&
+( pidof nautilus &&
+    gconftool-2 -t str --set /desktop/gnome/background/picture_filename "$WALL" ||
+  /usr/bin/feh --bg-center "$WALL" ) &&
 #/usr/bin/xv -root -quit "$WALL" &&
 echo "}}} Done" || exit 1
 

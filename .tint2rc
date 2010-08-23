@@ -8,12 +8,12 @@
 rounded = 0
 border_width = 0
 background_color = #000000 60
-border_color = #ffffff 18
+border_color = #ffffff 0
 
-rounded = 0
+rounded = 3
 border_width = 0
-background_color = #ff7000 100
-border_color = #000000 100
+background_color = #d0d0d0 100
+border_color = #000000 0
 
 rounded = 0
 border_width = 0
@@ -30,7 +30,7 @@ border_color = #ffffff 0
 #---------------------------------------------
 panel_monitor = all
 panel_position = bottom right
-panel_size = 100% 18
+panel_size = 100% 16
 panel_margin = 0 0
 panel_padding = 0 0
 font_shadow = 0
@@ -51,16 +51,17 @@ taskbar_background_id = 0
 #---------------------------------------------
 task_icon = 1
 task_text = 1
-task_maximum_size = 600 24
+task_maximum_size = 2048 16
 task_centered = 1
 task_padding = 0 0
 #task_font = Forgotten Futurist 11
 #task_font = Kleptocracy 11
-task_font = Libel Suit 12
+#task_font = Libel Suit 12
+#task_font = Envy Code R bold 10
 #task_font = SF Atarian System 12
 #task_font = League Gotic 8
-#task_font = Yanone Kaffeesatz 11
-#task_font = Inconsolata Bold 9
+task_font = Yanone Kaffeesatz 11
+#task_font = Inconsolata Bold 11
 task_font_color = #ffffff 100
 task_active_font_color = #000000 100
 task_background_id = 3
@@ -70,7 +71,7 @@ task_active_background_id = 2
 # SYSTRAYBAR
 #---------------------------------------------
 systray = 1
-systray_padding = 2 0 5
+systray_padding = 0 0 5
 systray_background_id = 1
 systray_sort = left2right
 
@@ -80,19 +81,20 @@ systray_sort = left2right
 time1_format = %H:%M
 #time1_font = Dream Orphans bold 16
 #time1_font = Effloresce bold 16
-time1_font = Kimberley 14
+#time1_font = Kimberley 14
 #time1_font = Nasalization 12
 #time1_font = Oliver's Barney 14
 #time1_font = New Brilliant 18
 #time1_font = Univox bold 16
+time1_font = Aller Display 12
 #time2_format = %A %d %B
-#time2_font = sans 6
+#time2_font = Inconsolata 6
 clock_font_color = #ffffff 100
 clock_padding = 4 0
 clock_background_id = 1
-#clock_lclick_command = xclock
-clock_rclick_command = orage
-#clock_tooltip = %A %d %B
+clock_lclick_command = xterm -title Calendar -geometry 20x9-0-0 -e sh -c 'export cmd="wmctrl -r :ACTIVE:"; $cmd -e 9,1366,748,-1,-1;$cmd -b add,above;$cmd -b add,sticky;$cmd -b add,skip_taskbar;$cmd -b add,skip_pager;cal;sleep 2'
+#clock_rclick_command = orage
+clock_tooltip = %A %d %B
 
 #---------------------------------------------
 # BATTERY

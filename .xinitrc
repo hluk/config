@@ -22,19 +22,26 @@ xset m 10 1
 # automatically set LCD color temperature
 #/home/lukas/apps/redshift-1.0/redshift -l 49.0:16.7 -t 6000:4000 &
 
-# panel
-tint2 -c ~/.tint2rc &
+# audio
+start-pulseaudio-x11 &
 
-# other apps
-(
-sleep 2;
-~/dev/qt/copyq/release/copyq
+# apps
+#(
+~/dev/copyq/release/copyq &
 #~/dev/bin/traycmd.py ~/dev/grooveshark/grooveshark.png ~/dev/grooveshark/grooveshark_toggle.sh &
-#pidgin
-) &
+#pidgin &
+#pytyle &
+#dropboxd &
+#) &
+
+# monitors
+#xrandr --output LVDS1 --mode 1366x768                                                                                             
+#xrandr --output HDMI1 --right-of LVDS1
+#xrandr --output HDMI1 --mode 1920x1080
+
+# panel
+(sleep 2; tint2 -c ~/.tint2rc) &
 
 # window manager
-#exec /home/lukas/apps/tiling/dwm/dwm
-#exec musca
-exec compiz-manager --indirect-rendering
+while ~/wm; do true; done
 
