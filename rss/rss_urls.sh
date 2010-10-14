@@ -12,7 +12,7 @@ xmllint --format --nocdata "$1" | sed -n '
 	}
 	/^<feed[ >]/,/^<\/feed>/ {
 		/^  <entry[ >]/,/^  <\/entry>/ {
-			s_^    <link href="\([^"]*\).*_\1_p
+			s_^    <link href="\([^"]*\).*rel="alternate".*_\1_p
 		}
 	}
 	/^<rdf:RDF[ >]/,/^<\/rdf:RDF/ {

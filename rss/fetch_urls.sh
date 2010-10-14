@@ -1,5 +1,20 @@
 #!/bin/bash
-# allow only one instance of program
+# RSS feed URLs
+URLS=(
+'http://www.gametrailers.com/rssgenerate.php?s1=&vidformat[mov]=on&vidformat[wmv]=on&quality[hd]=on&orderby=curpopular&limit=20'
+'http://www.gamersyde.com/news_en.rdf'
+'http://konachan.com/post/atom'
+#'http://moe.imouto.org/post/atom'
+#'$HOME/dev/wget/deviantart/deviantart-daily.sh'
+)
+
+# prefer URLs passed as arguments
+if [ $# -gt 0 ]
+then
+    URLS=($@)
+fi
+
+# allow only one instance
 PIDFILE="$HOME/fetch_url.pid"
 if [ -f "$PIDFILE" ]
 then
@@ -9,44 +24,40 @@ then
 fi
 echo $$ > "$PIDFILE"
 
-#SCRIPTPATH=${0%\/*}
 SCRIPTPATH=`dirname "$0"`
 LISTDIR="$SCRIPTPATH/lists"
 GETPATH="$HOME/dev/wget"
-
-URLS="\
-http://www.gametrailers.com/rssgenerate.php?s1=&vidformat[mov]=on&vidformat[wmv]=on&quality[hd]=on&orderby=curpopular&limit=20
-http://www.gamersyde.com/news_en.rdf
-http://konachan.com/post/atom
-$HOME/dev/wget/deviantart/deviantart-daily.sh"
 
 echo -e "\n$(date -R): Fetching urls {{{"
 trap 'rm -f '"$PIDFILE"'; echo "}}} FAILED!"; exit 1' TERM QUIT INT
 
 TIME=$(date '+%s')
 
-for URL in $URLS
+for URL in ${URLS[@]}
 do
 	MD5=$(echo "$URL" | md5sum | awk '{print $1; quit;}')
-	#LISTNAME=$(echo "$URL" | sed 's_^[a-z]*://__;s/[\.\/]/_/g')
 	OLDLIST="$LISTDIR/$MD5.lst"
 
 	mkdir -p "$LISTDIR"
 	touch "$LISTDIR/$MD5.lst"
 
 	echo -n "* Fetching rss \"$URL\" ... "
-    # URL is executable file or url to rss
-	(test -x "$URL" && "$URL" || $SCRIPTPATH/rss_urls.sh "$URL") | sort > "$OLDLIST.new"
-	NEWLIST="`diff "$OLDLIST.new" "$OLDLIST" --new-group-format='%<' --unchanged-group-format=''`"
-	test $? -eq 2 && (echo "FAILED!"; continue)
-	echo "Ok"
+    # $URL is executable file or url to rss
+	(test -x "$URL" && "$URL" || $SCRIPTPATH/rss_urls.sh "$URL") > "$OLDLIST.new"
+
+    # find new items
+    NEWLIST=`
+        while read LINE
+        do
+            grep -q '^'"$LINE"'$' "$OLDLIST" ||
+                echo "$LINE"
+        done < "$OLDLIST.new"`
+	echo "Done"
 
 	if [ -n "$NEWLIST" ]
 	then
 		echo "* Downloading new items {{{"
 
-		#HOST=`echo "$URL" | grep -oe "http://[^/]*\?"`
-		#case "$HOST" in
 		case "$URL" in
 		"http://www.gametrailers.com/"*)
 		"$GETPATH/gt_video/gt_video.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
@@ -56,12 +67,8 @@ do
 		"$HOME/dev/wget/gamersyde/gamersyde.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
 		;;
 
-		"http://konachan.com/"*)
-		"$GETPATH/chan/konachan.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
-		;;
-
-		"http://moe.imouto.org/"*)
-		"$GETPATH/chan/moe.imouto.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
+		"http://moe.imouto.org/"* | "http://konachan.com/"* | "http://danbooru.donmai.us/"*)
+		"$GETPATH/chan/chan.sh" $NEWLIST || (echo "}}} FAILED!"; exit 1);
 		;;
 
 		*"/deviantart-daily.sh")
@@ -74,8 +81,8 @@ do
 
 		esac &&
 		(
-			# remember new urls and max 200 old
-			tail -n200 "$OLDLIST" | sort -m - "$OLDLIST.new" > "$OLDLIST.tmp" &&
+			# remember new urls and max 1000 old
+            (cat "$OLDLIST.new"; head -n1000 "$OLDLIST") > "$OLDLIST.tmp" &&
 				mv "$OLDLIST.tmp" "$OLDLIST"
 			echo "  }}}"
 		)

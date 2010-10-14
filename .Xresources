@@ -10,8 +10,8 @@
 !#define FONT1 xft:Andale Mono:size=10
 !#define FONT1 xft:Dejavu Sans Mono:size=9
 !#define FONT1 xft:Inconsolata:size=13
-!#define FONT1 xft:Bitstream Vera Sans Mono:pixelsize=10
-#define FONT1 xft:Consolas:size=11
+#define FONT1 xft:Bitstream Vera Sans Mono:pixelsize=12
+!#define FONT1 xft:Consolas:size=11
 
 !!!!!!XTERM:FONT
 XTerm*RenderFont: true
@@ -40,7 +40,7 @@ XTerm*inheritPixmap: true
 XTerm*transparent: false
 
 Xft.antialias:true
-!Xft.dpi:94
+Xft.dpi:101
 Xft.hinting:true
 Xft.hintstyle:hintfull
 Xft.rgba:rgb

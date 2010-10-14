@@ -11,6 +11,7 @@ fi
 
 # view changed volume
 amixer set Master $1
+amixer set Headphone $1
 amixer set Speaker $1
 amixer set PCM $1
 

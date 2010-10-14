@@ -1,8 +1,3 @@
-ls,-l,
-gvim
-v
-ls
-ls p
 ls w
 w
 unpack
@@ -17,4 +12,9 @@ smplayer
 ar
 .
 sh
-
+evince
+gimp
+mplayer
+vlc
+gimp
+gvim

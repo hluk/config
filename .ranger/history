@@ -1,20 +1,14 @@
-mark (jpg|png|gif)$
-mkdir a
-v -tdeviant
-w -tdeviant
-e
-E
-e
+rename K-On!!
+rename Fullmetal Alchemist Brotherhood (1280x720 h264)
+rename Fullmetal Alchemist Brotherhood
+rename Darker than Black - Gaiden
 delete seriously? y
-delete seriously? 
+mkdir y
 delete seriously? y
-w
-w -f
+mkdir y
 delete seriously? y
-w -tworld
+mkdir Yokohama
 delete seriously? y
-w
-delete seriously? y
-delete seriously? y
+mkdir 
 delete seriously? y
 delete seriously? y

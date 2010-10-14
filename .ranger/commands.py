@@ -13,10 +13,9 @@ class webview(Command):
 
 	def execute(self):
 		line = parse(self.line)
-		action = ['/home/lukas/dev/gallery/mkgallery.py']
+		action = ['/home/lukas/dev/gallery/mkgallery.py','-f']
 		if line.rest(1):
 			action.extend([line.rest(1)])
-		#action.extend(f.path for f in self.fm.env.get_selection())
 		self.fm.execute_command(action, flags="w")
 
 class blender(Command):

@@ -290,13 +290,13 @@ map <S-F12> :call PreviousColorScheme()<CR>
 
 if has("gui_running")
 	"gui
-    "set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
+    set guifont=Bitstream\ Vera\ Sans\ Mono\ 8.5
     "set guifont=Liberation\ Mono\ 11
     "set guifont=Monospace\ 11
-    "set guifont=Inconsolata\ 13
+    "set guifont=Inconsolata\ 11
     "set guifont=Consolas\ 13
     "set guifont=monofur\ 13
-	set guifont=Envy\ Code\ R\ 10
+    "set guifont=Envy\ Code\ R\ 9
     "set guifont=DejaVu\ Sans\ Mono\ 10
 
 	colorscheme wombat
@@ -317,4 +317,13 @@ else
 	"colorscheme khaki
 	"colorscheme soso
 endif
+
+set wildignore=*.o,*.pyc           " don't complete on files you never need to open
+set scrolloff=5                    " keep a 5 line buffer for the cursor from top/bottom of window
+" clear highlighted search term on space
+noremap <silent> <Space> :silent noh<Bar>echo<CR>
+set nobackup
+
+" faster commands
+nnoremap ; :
 

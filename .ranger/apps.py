@@ -8,7 +8,7 @@ class CustomApplications(DefaultApps):
 
 	def app_gallery(self, c):
 		c.flags += 'd'
-		return tup('/home/lukas/dev/gallery/mkgallery.py', '--title=view', '--resolution=0', *c)
+		return tup('/home/lukas/dev/gallery/mkgallery.py', '--local', '--force', '--title=view', '--resolution=0', *c)
 
 	def app_editor(self, c):
 		c.flags += 'd'

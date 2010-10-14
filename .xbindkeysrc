@@ -22,7 +22,7 @@
   control+shift + q
 
 # enable/disable wlan
-"sh -c '(sudo /etc/rc.d/net-profiles stop && sudo ifconfig wlan0 down) || (sudo /etc/rc.d/net-profiles start && sudo /etc/rc.d/privoxy restart)'"
+"sh -c '(sudo /etc/rc.d/net-profiles stop && sudo ifconfig wlan0 down) || sudo /etc/rc.d/net-profiles start'"
     XF86WLAN
 
 "~/dev/bin/status.sh"
@@ -41,9 +41,15 @@
 #"xte 'keydown Control_L' 'keydown t' 'usleep 10000' 'keyup Control_L' 'keyup t' 'usleep 10000'"
     #Menu
 
+# right button
+"xte 'mouseclick 3 &'"
+    mod4+b:1+release
+"xte 'mouseclick 3 &'"
+    mod4+shift+b:1+release
+
 # middle button
 "xte 'mouseclick 2 &'"
-    mod4+b:1+release
+    mod4+alt+b:1+release
 # }}}
 
 # AUDIO# {{{
@@ -98,11 +104,11 @@
 
 # rotate
 "xrandr -o right"
-    mod4+control+Left
+    mod4+control+shift+Left
 "xrandr -o left"
-    mod4+control+Right
+    mod4+control+shift+Right
 "xrandr -o normal"
-    mod4+control+Down
+    mod4+control+shift+Down
 
 # random wallpaper
 "~/dev/img/set_wallpaper.sh"
@@ -116,18 +122,19 @@
 "xkill"
     mod4+mod1+x
 #"/usr/bin/google-chrome"
+#"/usr/bin/chromium"
 "/usr/bin/chromium-browser"
     mod4+w
 "~/dev/copyq-build/release/copyq toggle || ~/dev/copyq-build/release/copyq"
-    mod4+backslash
+    mod4+semicolon
 "~/dev/copyq-build/release/copyq select 2"
-    mod4+y
+    mod4+alt+semicolon
+"~/dev/copyq-build/release/copyq edit"
+    mod4+backslash
 "~/dev/copyq-build/release/copyq remove"
     mod4+alt+backslash
-"~/dev/copyq-build/release/copyq edit"
-    mod4+shift+backslash
 "~/dev/menus/runmenu.sh"
-    mod4+x
+    mod4+r
 "SHELL=~/dev/bin/calc.sh sakura -t calc -e 'screen -d -RR calc'"
     mod4+c
 "~/dev/menus/gamemenu.sh"

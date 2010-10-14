@@ -1,20 +1,19 @@
-ehoc %t
-w!echo %t
-w!echo %f
-w!for x in %s; do mkdir -p "zetman/$x" && unrar x "$x" "zetman/$x"; done
-mkdir -p fables/%f && unrar x %f fables/%f
-w!mkdir -p fables/%f && unrar x %f fables/%f
-w!for x in %s; do mkdir -p "fables/$x" && unrar x "$x" "fables/$x"; done
-w!mkdir -p fables/%f && unrar x %f fables/%f
-w!mkdir -p fables/%f && unzip %f -d fables/%f
-w!mkdir -p gabriel && unzip %f -d ganriel
-w!mkdir -p gabriel && unrar x %f ganriel
+unzip %f -d g_%f
+eh
+mkdir g_%f
+unrar x %f g_%f
+unzip %f -d g_%f
+mkdir g_%f && unrar x %f
+mkdir g_%f && unrar x %f g_%f
+unzip %f -d g_%f
+mkdir g_%f && unrar x %f g_%f
+unzip %f -d g_%f
+mkdir g_%f && unrar x %f
+unzip %f -d g_%f
+mkdir g_%f && unrar x %f g_%f
+unzip %f -d g_%f
+mkdir g_%f && unrar x %f g_%f
+unzip %f -d g_%f
+mkdir g_%f && unrar x %f g_%f
 tar xf %f
-w!unzip %f -d incubation
-unrar x %f
-zsh
-wine %f
-winecfg
-w!unzip %f -d gallery_%f
-mplayer %f
-w!unzip %f -d gallery_%f
+mkdir g_%f && unrar x %f g_%f

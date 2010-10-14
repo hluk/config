@@ -49,10 +49,18 @@ then
 fi &&
 echo -e "\tOutput: `/usr/bin/identify "$WALL"`" &&
 echo -e "\tSetting..." &&
-( pidof nautilus &&
-    gconftool-2 -t str --set /desktop/gnome/background/picture_filename "$WALL" ||
-  /usr/bin/feh --bg-center "$WALL" ) &&
-#/usr/bin/xv -root -quit "$WALL" &&
+if pidof nautilus
+then
+    gconftool-2 -t str --set /desktop/gnome/background/picture_filename "$WALL"
+elif pidof xfdesktop
+then
+    PROPERTY="/backdrop/screen0/monitor0/image-path"
+    xfconf-query -c xfce4-desktop -p $PROPERTY -s ""
+    xfconf-query -c xfce4-desktop -p $PROPERTY -s "$WALL"
+else
+    /usr/bin/feh --bg-center "$WALL" ||
+        /usr/bin/xv -root -quit "$WALL"
+fi &&
 echo "}}} Done" || exit 1
 
 # clean

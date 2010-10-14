@@ -25,11 +25,8 @@ do
 		case "$mime" in
 			application/zip)    CMD="unzip"      ;;
 			application/x-rar)  CMD="unrar x"    ;;
-			application/x-gzip) CMD="tar xvf"    ;;
-			*.bz2)     CMD="bunzip2"    ;;
-			*.gz)      CMD="gunzip"     ;;
-			*.Z)       CMD="uncompress" ;;
-			*.7z)      CMD="7z x"       ;;
+			application/x-gzip | application/x-bzip2)
+                CMD="tar xvf" ;;
 			*)
                        echo "File '$f' cannot be extracted! (mime: '$mime')"
 			           exit 1 ;;

@@ -35,31 +35,31 @@ setopt NO_FLOW_CONTROL
 # }}}
 
 # vi mode# {{{
-bindkey -v
-zle-keymap-select () {
-  if [ $TERM = "rxvt-256color" ]; then
-    if [ $KEYMAP = vicmd ]; then
-      echo -ne "\033]12;#ff6565\007"
-    else
-      echo -ne "\033]12;grey\007"
-    fi
-  elif [ $TERM = "screen" ]; then
-    if [ $KEYMAP = vicmd ]; then
-      echo -ne '\033P\033]12;#ff6565\007\033\\'
-    else
-      echo -ne '\033P\033]12;grey\007\033\\'
-    fi
-  fi
-}; zle -N zle-keymap-select
-zle-line-init () {
-  zle -K viins
-  if [ $TERM = "rxvt-256color" ]; then
-    echo -ne "\033]12;grey\007"
-  elif [ $TERM = "screen" ]; then
-    echo -ne '\033P\033]12;grey\007\033\\'
-  fi
-}; zle -N zle-line-init
-bindkey '^R' history-incremental-search-backward
+#bindkey -v
+#zle-keymap-select () {
+  #if [ $TERM = "rxvt-256color" ]; then
+    #if [ $KEYMAP = vicmd ]; then
+      #echo -ne "\033]12;#ff6565\007"
+    #else
+      #echo -ne "\033]12;grey\007"
+    #fi
+  #elif [ $TERM = "screen" ]; then
+    #if [ $KEYMAP = vicmd ]; then
+      #echo -ne '\033P\033]12;#ff6565\007\033\\'
+    #else
+      #echo -ne '\033P\033]12;grey\007\033\\'
+    #fi
+  #fi
+#}; zle -N zle-keymap-select
+#zle-line-init () {
+  #zle -K viins
+  #if [ $TERM = "rxvt-256color" ]; then
+    #echo -ne "\033]12;grey\007"
+  #elif [ $TERM = "screen" ]; then
+    #echo -ne '\033P\033]12;grey\007\033\\'
+  #fi
+#}; zle -N zle-line-init
+#bindkey '^R' history-incremental-search-backward
 # }}}
 
 # completion# {{{
@@ -309,6 +309,15 @@ alias u="yaourt -Rs"
 alias up="yaourt -Syu --aur"
 alias clean="yaourt -Qdt"
 
+# volume and brightness
+alias volup="~/dev/bin/volume.sh 8%+"
+alias voldown="~/dev/bin/volume.sh 8%-"
+alias brightup="~/dev/colors/backlight.sh 8"
+alias brightdown="~/dev/colors/backlight.sh -8"
+
+alias poweroff="sudo poweroff"
+alias reboot="sudo reboot"
+
 # X11# {{{
 if [ -n "$DISPLAY" ]
 then
@@ -323,8 +332,11 @@ then
 	alias traycmd="$HOME/dev/bin/traycmd.py"
 	alias grooveshark="$HOME/dev/grooveshark/grooveshark_toggle.sh show & traycmd $HOME/dev/grooveshark/{grooveshark.png,grooveshark_toggle.sh}"
     alias copyq="$HOME/dev/copyq-build/release/copyq"
+    alias wallpaper="$HOME/dev/img/set_wallpaper.sh"
+    alias jdownloader="java -Xmx256m -jar $HOME/apps/JDownloader/JDownloader.jar"
     #alias wine32="WINEDEBUG=fixme-all LIBGL_DRIVERS_PATH=/opt/lib32/usr/lib/xorg/modules/dri wine"
     #alias q4wine="LIBGL_DRIVERS_PATH=/opt/lib32/usr/lib/xorg/modules/dri q4wine"
+    #alias blender="LIBGL_ALWAYS_SOFTWARE=1 blender"
 else
 	alias x="startx > $HOME/.xsession 2>&1 &"
 fi
@@ -340,7 +352,31 @@ d() {
 	$@ & disown && exit
 } # }}}
 
-cd ~
+# func: flash url/command# {{{
+# play flash videos
+flash() {
+    (
+    cd ~/apps/get-flash-videos || return 1
+    case "$1" in
+        "clean")
+            rm *.(mp4|flv) ;;
+        "update")
+            git pull ;;
+        "")
+            ./get_flash_videos --play "`xclip -o`";;
+        *)
+            ./get_flash_videos --play $@ ;;
+    esac
+    mv *.(mp4|flv) ~/down/
+    )
+}
+# }}}
 
 notes
+
+# autojump
+source /etc/profile.d/autojump.zsh
+
+# pulseaudio
+#pidof pulseaudio >/dev/null || pulseaudio --start || echo "ERROR: Cannot start Pulseaudio!"
 
