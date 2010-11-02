@@ -276,7 +276,7 @@ check() {
 Find () {
     if [ $# -gt 1 ]
     then
-        find  $1 -iname "*$2*"
+        find $1 -iname "*$2*"
     else
         find -iname "*$1*"
     fi
@@ -292,10 +292,10 @@ alias fgrep="fgrep --colour=auto"
 alias man="LANG=C man"
 alias s="screen"
 alias unpack="~/dev/bin/unpack.sh"
+alias unpackall='for x in *; do unpack "$x" "x_$x" || ERROR="$ERROR\n$x"; done; echo "unpacking failed on:$ERROR"'
 alias rcdiff="vimdiff {~/.config,/etc/xdg}/awesome/rc.lua"
 alias dict="~/dev/translate/translate.py"
 alias p="echo -n 'Press any key to continue...'; read -sn 1; echo"
-alias unpackall="for x in *.(zip|rar); do unpack \$x \${x%.???}; done"
 alias equalizer="alsamixer -D equal"
 
 alias Gitd="git diff --color"
@@ -379,4 +379,32 @@ source /etc/profile.d/autojump.zsh
 
 # pulseaudio
 #pidof pulseaudio >/dev/null || pulseaudio --start || echo "ERROR: Cannot start Pulseaudio!"
+
+# func: yy [files]# {{{
+# copy files recursively
+yy() {
+    COPY_FILES=()
+    for x in $@
+    do
+        COPY_FILES=( ${COPY_FILES[@]} "$(readlink -f "$x")" )
+    done
+    export COPY_FILES
+}
+# }}}
+
+# func: pp|pm|pl [directory]# {{{
+# paste copied files recursively to given directory
+pp() {
+    test "$COPY_FILES" || return 1
+    cp -rv $COPY_FILES "${1:-.}"
+}
+pm() {
+    test "$COPY_FILES" || return 1
+    mv -v $COPY_FILES "${1:-.}"
+}
+pl() {
+    test "$COPY_FILES" || return 1
+    ln -sv $COPY_FILES "${1:-.}"
+}
+# }}}
 

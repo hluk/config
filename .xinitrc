@@ -20,10 +20,10 @@ xset m 10 1
 ~/dev/img/set_wallpaper.sh &
 
 # simple web server on port 8080
-(cd ~/www && python -m SimpleHTTPServer 8080 2>&1 >/dev/null) &
+(cd ~/www && python2 -m SimpleHTTPServer 8080 2>&1 >/dev/null) &
 
 # automatically set LCD color temperature
-~/apps/redshift-1.5/src/redshift -l 49.0:16.7 -t 6500:3800 &
+#redshift -l 49.0:16.7 -t 6500:3800 &
 
 # audio
 #start-pulseaudio-x11 &
@@ -31,6 +31,7 @@ xset m 10 1
 # apps
 #(
 ~/dev/copyq-build/release/copyq &
+wicd-client &
 #~/dev/bin/traycmd.py ~/dev/grooveshark/grooveshark.png ~/dev/grooveshark/grooveshark_toggle.sh &
 #pidgin &
 #pytyle &
@@ -43,10 +44,9 @@ xset m 10 1
 #xrandr --output HDMI1 --mode 1920x1080
 
 # panel
-tint2 -c ~/.tint2rc &
+#tint2 -c ~/.tint2rc &
 
 # window manager
-#while ~/wm; do true; done
-devilspie 2>&1 >/dev/null &
-exec fusion-icon
+#devilspie 2>&1 >/dev/null &
+while :; do ~/wm; done
 

@@ -1,31 +1,55 @@
 #!/bin/bash
-# usage: unpack file [dir]
+# usage: unpack file ... [dir]
 # info: Unpack file in dir.
+USAGE=$(cat <<EOF
+Usage:
+  $0 file ... [dir]
+  Directory name "dir" can contain "%d" ("%02d" or similar)
+  which will be replaced by archive sequence number.
+EOF
+)
+
+if [ $# -eq 0 ]
+then
+    echo "$USAGE"
+    exit 0
+fi
+
 lst=("$@")
 
 # directory to unpack files
-d=.
+dd=.
 if [ $# -gt 1 ]
 then
-    d=${lst[$#-1]}
-	lst=("${lst[0,$#-2]}")
-	# create dir
-	if ! mkdir -p "$d" 2> /dev/null
-	then
-		echo -e "usage:\n  $0 file [dir]\n  $0 file1 file2 ... dir"
-		exit 1
+    dd=${lst[$#-1]}
+    if [ ! -f "$d" ]
+    then
+        lst=("${lst[@]::$#-1}")
+    else
+        dd=.
 	fi
 fi
 
-for f in "$lst"
+i=0
+for f in "${lst[@]}"
 do
+    # create dir
+    i=$((i+1))
+    d=`printf "$dd" $i`
+    if ! mkdir -p "$d" # 2> /dev/null
+    then
+        echo "$USAGE"
+        exit 1
+    fi
+
+    f=`readlink -f "$f"`
 	if [ -f "$f" ]
 	then
-        mime=`file --brief --mime "$f"|grep -o '^[^;]\+'`
+        mime=`file --brief --mime-type "$f"`
 		case "$mime" in
 			application/zip)    CMD="unzip"      ;;
 			application/x-rar)  CMD="unrar x"    ;;
-			application/x-gzip | application/x-bzip2)
+			application/x-tar | application/x-gzip | application/x-bzip2)
                 CMD="tar xvf" ;;
 			*)
                        echo "File '$f' cannot be extracted! (mime: '$mime')"

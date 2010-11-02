@@ -61,7 +61,7 @@
 "~/dev/bin/togglemute.sh"
     XF86AudioMute
 "~/dev/grooveshark/grooveshark_toggle.sh toggle"
-    control+period
+    mod4+F1
 #"sakura -e ncmpc -t MUSIC -f 'DejaVu Sans Mono 15' --name=ncmpc"
     #mod4+p
 #"sakura -e '/usr/bin/mocp -T darkdot_theme' -t MUSIC -f 'DejaVu Sans Mono 15' --name=music"
@@ -100,7 +100,13 @@
 
 # invert
 "~/dev/colors/invert"
-    mod4+shift+KP_Divide
+    mod4+KP_Divide
+
+# redshift
+"redshift -l 49.0:16.7 -t 6500:3800 -o"
+    mod4+KP_Multiply
+"redshift -x"
+    mod4+mod1+KP_Multiply
 
 # rotate
 "xrandr -o right"

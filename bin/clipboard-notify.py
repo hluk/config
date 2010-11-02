@@ -1,4 +1,4 @@
-#!/usr/bin/python
+#!/usr/bin/python2
 import sys, cgi, pynotify
 
 #data = cgi.escape( sys.stdin.read() )

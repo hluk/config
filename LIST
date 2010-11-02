@@ -1,11 +1,10 @@
 ~/.Xresources
+~/.config/awesome/
 ~/.config/compiz/
 ~/.conkyrc
 ~/.easystroke
 ~/.garglkrc
-~/.mc/{bindings,hotlist,ini,menu} .mc/
 ~/.mplayer/
-~/.ranger/
 ~/.screenrc
 ~/.tint2rc
 ~/.tmux.conf

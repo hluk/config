@@ -117,9 +117,11 @@ autocmd FileType python set noexpandtab
 autocmd FileType python set omnifunc=pythoncomplete#Complete
 autocmd FileType javascript set filetype+=.doxygen
 "set tags+=~/.vim/ctags
+autocmd FileType c noremap <C-F12> :!ctags -R --c-kinds=+p --fields=+iaS --extra=+q --language-force=C 
+autocmd FileType c noremap <F12> :!ctags -R --c-kinds=+p --fields=+iaS --extra=+q --language-force=C .<CR>
 autocmd FileType cpp noremap <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ .<CR>
 "noremap <F12> :!exuberant-ctags -R .<CR>
-autocmd FileType ruby noremap <F11> :!exuberant-ctags --totals --lang-map=Ruby:+.rb -f ~/.vim/tags_ruby -R /usr/lib/ruby/gems /usr/lib/ruby/site_ruby<CR>
+"autocmd FileType ruby noremap <F11> :!exuberant-ctags --totals --lang-map=Ruby:+.rb -f ~/.vim/tags_ruby -R /usr/lib/ruby/gems /usr/lib/ruby/site_ruby<CR>
 
 autocmd FileType haskell set expandtab
 
@@ -137,6 +139,7 @@ map <F5> :make<CR>
 imap <F5> <C-o>:make<CR>
 
 " omni-completion shortcut alias
+"imap <Tab> <C-X><C-O>
 imap <C-Space> <C-X><C-O>
 
 " expedite ~/.vimrc edit & reload
@@ -282,8 +285,8 @@ function! LoadColorScheme()
     exe "source " ElementAt(s:color_schemes, g:sep, s:scheme_index)
 endfunction
 
-map <F12>   :call NextColorScheme()<CR>
-map <S-F12> :call PreviousColorScheme()<CR>
+map <F11>   :call NextColorScheme()<CR>
+map <S-F11> :call PreviousColorScheme()<CR>
 "set rulerformat=%55(%{g:colors_name}\ %5l,%-6(%c%V%)\ %P%)
 "set rulerformat=%55(%{GetColorSyntaxName()}\ %5l,%-6(%c%V%)\ %P%)
 "}}}
@@ -326,4 +329,17 @@ set nobackup
 
 " faster commands
 nnoremap ; :
+
+" run/execute current file
+map <C-CR> :w<CR>:!./%<CR>
+imap <C-CR> <C-o>:w<CR><C-o>:!./%<CR>
+
+" zoom"{{{
+function! Zoom(how)
+  let &guifont = substitute(&guifont, '[0-9.]\+$', '\=str2float(submatch(0))+' . string(a:how), '')
+endfunction
+
+map <C-F1> :execute Zoom(0.5)<CR>
+map <C-F2> :execute Zoom(-0.5)<CR>
+"}}}
 
