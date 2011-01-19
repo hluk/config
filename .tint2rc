@@ -12,7 +12,7 @@ border_color = #ffffff 0
 
 rounded = 3
 border_width = 0
-background_color = #d0d0d0 100
+background_color = #eeeeee 100
 border_color = #000000 0
 
 rounded = 0
@@ -29,13 +29,23 @@ border_color = #ffffff 0
 # PANEL
 #---------------------------------------------
 panel_monitor = all
-panel_position = bottom right
+#panel_position = bottom right
+panel_position = top left
 panel_size = 100% 16
 panel_margin = 0 0
 panel_padding = 0 0
 font_shadow = 0
+panel_dock = 0
 panel_background_id = 4
 wm_menu = 0
+panel_layer = top
+
+# Panel Autohide
+autohide = 0
+autohide_show_timeout = 0.3
+autohide_hide_timeout = 2
+autohide_height = 2
+strut_policy = follow_size
 
 #---------------------------------------------
 # TASKBAR
@@ -58,27 +68,34 @@ task_padding = 0 0
 #task_font = Kleptocracy 11
 #task_font = Libel Suit 12
 #task_font = Envy Code R bold 10
+#task_font = Terminus 8
 #task_font = SF Atarian System 12
 #task_font = League Gotic 8
-task_font = Yanone Kaffeesatz 11
+#task_font = Yanone Kaffeesatz 11
+#task_font = Droid Sans Mono 8
+task_font = Aller 10
 #task_font = Inconsolata Bold 11
-task_font_color = #ffffff 100
+task_font_color = #eeeeee 100
 task_active_font_color = #000000 100
 task_background_id = 3
 task_active_background_id = 2
 
-#---------------------------------------------
-# SYSTRAYBAR
-#---------------------------------------------
+# Task Icons
+task_icon_asb = 70 0 0
+task_active_icon_asb = 100 0 0
+task_urgent_icon_asb = 100 0 0
+task_iconified_icon_asb = 70 0 0
+
+# System Tray
 systray = 1
 systray_padding = 0 0 5
+systray_sort = ascending
 systray_background_id = 1
-systray_sort = left2right
+systray_icon_size = 24
+systray_icon_asb = 90 0 0
 
-#---------------------------------------------
-# CLOCK
-#---------------------------------------------
-time1_format = %H:%M
+# Clock
+#time1_format = %H:%M
 #time1_font = Dream Orphans bold 16
 #time1_font = Effloresce bold 16
 #time1_font = Kimberley 14
@@ -86,32 +103,17 @@ time1_format = %H:%M
 #time1_font = Oliver's Barney 14
 #time1_font = New Brilliant 18
 #time1_font = Univox bold 16
-time1_font = Aller Display 12
-#time2_format = %A %d %B
-#time2_font = Inconsolata 6
-clock_font_color = #ffffff 100
-clock_padding = 4 0
-clock_background_id = 1
-clock_lclick_command = xterm -title Calendar -geometry 20x9-0-0 -e sh -c 'export cmd="wmctrl -r :ACTIVE:"; $cmd -e 9,1366,748,-1,-1;$cmd -b add,above;$cmd -b add,sticky;$cmd -b add,skip_taskbar;$cmd -b add,skip_pager;cal;sleep 2'
+#time1_font = Aller Display 10
+#time2_format = %a %d %b
+#time2_font = Aller 7
+#clock_font_color = #ffffff 100
+#clock_padding = 4 0
+#clock_background_id = 1
+#clock_lclick_command = xterm -title Calendar -geometry 20x9-0-0 -e sh -c 'export cmd="wmctrl -r :ACTIVE:"; $cmd -e 9,1366,748,-1,-1;$cmd -b add,above;$cmd -b add,sticky;$cmd -b add,skip_taskbar;$cmd -b add,skip_pager;cal;sleep 2'
 #clock_rclick_command = orage
-clock_tooltip = %A %d %B
+#clock_tooltip = %A %d %B
 
-#---------------------------------------------
-# BATTERY
-#---------------------------------------------
-battery = 1
-battery_low_status = 8
-battery_hide = 96
-battery_low_cmd = notify-send "battery low"
-bat1_font = Gayatri 9
-bat2_font = Gayatri 6
-battery_font_color = #aaaaaa 100
-battery_padding = 2 0
-battery_background_id = 1
-
-#---------------------------------------------
-# TOOLTIP
-#---------------------------------------------
+# Tooltips
 tooltip = 0
 tooltip_padding = 2 2
 tooltip_show_timeout = 0.7
@@ -120,11 +122,20 @@ tooltip_background_id = 1
 tooltip_font_color = #OOOOOO 80
 tooltip_font = sans 10
 
-#---------------------------------------------
-# MOUSE ACTION ON TASK
-#---------------------------------------------
+# Mouse
 mouse_middle = none
 mouse_right = close
 mouse_scroll_up = toggle
 mouse_scroll_down = iconify
+
+# Battery
+#battery = 1
+#battery_low_status = 8
+#battery_hide = 96
+#battery_low_cmd = notify-send "battery low"
+#bat1_font = Gayatri 9
+#bat2_font = Gayatri 6
+#battery_font_color = #aaaaaa 100
+#battery_padding = 2 0
+#battery_background_id = 1
 

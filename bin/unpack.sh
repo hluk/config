@@ -51,6 +51,7 @@ do
 			application/x-rar)  CMD="unrar x"    ;;
 			application/x-tar | application/x-gzip | application/x-bzip2)
                 CMD="tar xvf" ;;
+            application/octet-stream) CMD="7z x" ;;
 			*)
                        echo "File '$f' cannot be extracted! (mime: '$mime')"
 			           exit 1 ;;

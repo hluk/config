@@ -98,15 +98,13 @@
 "~/dev/colors/backlight.sh -5"
     XF86MonBrightnessDown
 
-# invert
-"~/dev/colors/invert"
-    mod4+KP_Divide
+# switch between redshift and invert
+#"killall redshift && redshift -l 49.0:16.7 -t 6500:3800 -r -o && ~/dev/colors/invert || redshift -l 49.0:16.7 -t 6500:3800 -r"
+    #mod4+KP_Divide
 
-# redshift
-"redshift -l 49.0:16.7 -t 6500:3800 -o"
+# turnoff redshift and invert
+"killall redshift; redshift -x"
     mod4+KP_Multiply
-"redshift -x"
-    mod4+mod1+KP_Multiply
 
 # rotate
 "xrandr -o right"

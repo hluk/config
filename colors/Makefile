@@ -1,7 +1,10 @@
-all: brightness
+all: brightness invert
 
 brightness: brightness.c
 	gcc $(CFLAGS) -o brightness -lXxf86vm brightness.c
+
+invert: invert.c
+	gcc $(CFLAGS) -o invert -lXxf86vm invert.c
 
 test_brightness: brightness
 	./brightness && \

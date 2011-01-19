@@ -1,3 +1,8 @@
+" USAGE:
+" :read -- open file read only
+" :setl ar -- automatically reload file if changed
+" q/ -- search history
+" q: -- command history
 set nocompatible
 set mouse=a
 " save power
@@ -45,6 +50,10 @@ set shiftwidth=4
 "syntax
 syntax on
 
+" must be called before "filetype indent on"
+filetype off
+call pathogen#runtime_append_all_bundles()
+
 filetype plugin on
 filetype indent on
 
@@ -58,9 +67,15 @@ filetype indent on
 
 "" Make Vim completion popup menu work just like in an IDE (Matt Zyzik)
 set completeopt=longest,menuone,preview
-inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
-inoremap <expr> <c-n> pumvisible() ? "\<lt>c-n>" : "\<lt>c-n>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>" 
-inoremap <expr> <m-;> pumvisible() ? "\<lt>c-n>" : "\<lt>c-x>\<lt>c-o>\<lt>c-n>\<lt>c-p>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"
+"inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
+"inoremap <expr> <c-n> pumvisible() ? "\<lt>c-n>" : "\<lt>c-n>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>" 
+"inoremap <expr> <m-;> pumvisible() ? "\<lt>c-n>" : "\<lt>c-x>\<lt>c-o>\<lt>c-n>\<lt>c-p>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"
+inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
+inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
+inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
+inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
+inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
+inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 
 "" Dictionary Word Completion Using C-x C-k
 set dictionary+=/usr/share/dict/words
@@ -85,12 +100,14 @@ map [5;5~ :tabprev<CR>
 map [6;5~ :tabnext<CR>
 map <C-Tab> :tabnext<CR>
 map <S-C-Tab> :tabprev<CR>
+imap <C-Tab> :tabnext<CR>
+imap <S-C-Tab> :tabprev<CR>
 imap <C-Tab> <C-o>:tabnext<CR>
 imap <S-C-Tab> <C-o>:tabprev<CR>
 
 "" windows
 map <TAB> <C-W><C-W>
-"map <S-TAB> <C-W><S-W>
+map <S-TAB> <C-W><S-W>
 "let g:miniBufExplMapCTabSwitchBufs = 1
 "imap <C-Tab> <C-o><C-Tab>
 "imap <S-C-Tab> <C-o><S-C-Tab>
@@ -124,6 +141,9 @@ autocmd FileType cpp noremap <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --ext
 "autocmd FileType ruby noremap <F11> :!exuberant-ctags --totals --lang-map=Ruby:+.rb -f ~/.vim/tags_ruby -R /usr/lib/ruby/gems /usr/lib/ruby/site_ruby<CR>
 
 autocmd FileType haskell set expandtab
+
+" markdown
+autocmd BufNewFile,BufRead *.md set filetype=markdown
 
 " KEYS
 " save
@@ -163,13 +183,7 @@ let NERDShutUp=1
 let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 let g:SuperTabDefaultCompletionType = "context"
 
-"let g:acp_completeoptPreview = 1
-"let g:acp_behavior = {
-"\ '*': [ {'command' : "\<C-x>\<C-o>",
-"\       'pattern' : ".",
-"\       'repeat' : 0}
-"\      ]  
-"\}
+let g:acp_completeoptPreview = 1
 
 "{{{Theme Rotating
 let themeindex=0
@@ -177,9 +191,9 @@ function! RotateColorTheme()
     let y = -1
     while y == -1
         if has("gui_running")
-            let colorstring = "#summerfruit256#default#soso#tango2#no_quarter#molokai#xoria256#wombat#"
+            let colorstring = "#wombat#summerfruit256#soso#tango2#no_quarter#molokai#xoria256#default#"
         else
-            let colorstring = "#wombat256#summerfruit#default#molokai#xoria256#soso#256-jungle#"
+            let colorstring = "#wombat256#default#summerfruit#molokai#xoria256#soso#256-jungle#"
         endif
 
         let x = match( colorstring, "#", g:themeindex )
@@ -302,7 +316,9 @@ if has("gui_running")
     "set guifont=Envy\ Code\ R\ 9
     "set guifont=DejaVu\ Sans\ Mono\ 10
 
-	colorscheme wombat
+    colorscheme default
+
+    "colorscheme wombat
 	"colorscheme xoria256
 	
 	"colorscheme rainbow_breeze
@@ -342,4 +358,13 @@ endfunction
 map <C-F1> :execute Zoom(0.5)<CR>
 map <C-F2> :execute Zoom(-0.5)<CR>
 "}}}
+
+" Show syntax highlighting groups for word under cursor
+nmap <C-S-P> :call <SID>SynStack()<CR>
+function! <SID>SynStack()
+  if !exists("*synstack")
+    return
+  endif
+  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
+endfunc
 

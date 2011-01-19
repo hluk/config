@@ -4,8 +4,9 @@
 
 theme = {}
 
---theme.font          = "Envy Code R 8"
-theme.font          = "Yanone Kaffeesatz 10"
+theme.font          = "Aller bold 9.2"
+--theme.font          = "Envy Code R 9"
+--theme.font          = "Yanone Kaffeesatz 10"
 --theme.font          = "Forgotten Futurist bold 8"
 
 theme.bg_normal     = "#333333"
@@ -76,7 +77,7 @@ theme.titlebar_maximized_button_normal_active = "/usr/share/awesome/themes/defau
 theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/maximized_focus_active.png"
 
 -- You can use your own command to set your wallpaper
-theme.wallpaper_cmd = { "/home/lukas/dev/img/set_wallpaper.sh" }
+--theme.wallpaper_cmd = { "/home/lukas/dev/img/set_wallpaper.sh" }
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = "/usr/share/awesome/themes/default/layouts/fairhw.png"

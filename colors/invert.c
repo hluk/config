@@ -39,5 +39,8 @@ int main(int argc, char *argv[])
 
     XF86VidModeSetGammaRamp(dpy, 0, sz, red, green, blue);
 
+    if ( red[0] == 0 )
+        printf("RESET\n");
+
     return 0;
 }

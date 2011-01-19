@@ -7,6 +7,10 @@ require("beautiful")
 -- Notification library
 require("naughty")
 
+require("vicious") 
+
+local textbox = require("wibox.widget.textbox")
+
 -- {{{ Variable definitions
 -- Themes define colours, icons, and wallpapers
 beautiful.init("/home/lukas/.config/awesome/theme.lua")
@@ -63,9 +67,6 @@ mymainmenu = awful.menu({ items = { { "awesome", myawesomemenu, beautiful.awesom
                                     { "open terminal", terminal }
                                   }
                         })
-
-mylauncher = awful.widget.launcher({ image = beautiful.awesome_icon,
-                                     menu = mymainmenu })
 -- }}}
 
 -- {{{ Wibox
@@ -113,6 +114,48 @@ mytasklist.buttons = awful.util.table.join(
                                               if client.focus then client.focus:raise() end
                                           end))
 
+-- CPU widget
+vicious.cache(vicious.widgets.cpu)
+
+cpuwidget1 = textbox()
+vicious.register(cpuwidget1, vicious.widgets.cpu, "<span font='Fixed 7'>$1% </span>", 2)
+cpuwidget2 = textbox()
+vicious.register(cpuwidget2, vicious.widgets.cpu, "<span font='Fixed 7'>$1% </span>", 3)
+
+cpuwidget = awful.widget.graph()
+cpuwidget:set_width(60)
+cpuwidget:set_color("#66eeff")
+vicious.register(cpuwidget, vicious.widgets.cpu, "$1")
+
+-- memory widget
+--vicious.cache(vicious.widgets.mem)
+memwidget = textbox()
+vicious.register(memwidget, vicious.widgets.mem, "<span font='Fixed 7'> $1% </span>", 5)
+
+-- thermal widget
+vicious.cache(vicious.widgets.thermal)
+tempwidget1t = textbox()
+--tempwidget1t:set_valign("top")
+vicious.register(tempwidget1t, vicious.widgets.thermal, "<span font='Fixed 7'>$1°</span>", 21, "thermal_zone0")
+
+tempwidget2t = textbox()
+--tempwidget2t:set_valign("top")
+vicious.register(tempwidget2t, vicious.widgets.thermal, "<span font='Fixed 7'>$1°</span>", 21, "thermal_zone1")
+
+vicious.cache(vicious.widgets.hddtemp)
+tempwidget3t = textbox()
+--tempwidget3t:set_valign("top")
+vicious.register(tempwidget3t, vicious.widgets.hddtemp, "<span font='Fixed 7'>${/dev/sda}°</span>", 23)
+
+-- battery widget
+batwidget = awful.widget.progressbar()
+batwidget:set_width(8)
+batwidget:set_vertical(true)
+batwidget:set_background_color("#ff0000")
+batwidget:set_border_color(nil)
+batwidget:set_color(beautiful.bg_normal)
+vicious.register(batwidget, vicious.widgets.bat, "$2", 61, "BAT0")
+
 for s = 1, screen.count() do
     -- Create a promptbox for each screen
     mypromptbox[s] = awful.widget.prompt()
@@ -135,15 +178,22 @@ for s = 1, screen.count() do
 
     -- Widgets that are aligned to the left
     local left_layout = wibox.layout.fixed.horizontal()
-    left_layout:add(mylauncher)
     left_layout:add(mytaglist[s])
+    left_layout:add(mylayoutbox[s])
     left_layout:add(mypromptbox[s])
 
     -- Widgets that are aligned to the right
     local right_layout = wibox.layout.fixed.horizontal()
+    right_layout:add(cpuwidget1)
+    right_layout:add(cpuwidget2)
+    right_layout:add(cpuwidget)
+    right_layout:add(memwidget)
+    right_layout:add(tempwidget1t)
+    right_layout:add(tempwidget2t)
+    right_layout:add(tempwidget3t)
     if s == 1 then right_layout:add(wibox.widget.systray()) end
     right_layout:add(mytextclock)
-    right_layout:add(mylayoutbox[s])
+    right_layout:add(batwidget)
 
     -- Now bring it all together (with the tasklist in the middle)
     local layout = wibox.layout.align.horizontal()
@@ -193,10 +243,10 @@ globalkeys = awful.util.table.join(
         end),
 
     -- Layout manipulation
-    awful.key({ modkey, "Mod1"   }, "Left", function () awful.client.swap.byidx(  1)    end),
-    awful.key({ modkey, "Mod1"   }, "Right", function () awful.client.swap.byidx( -1)    end),
-    awful.key({ modkey, "Control" }, "Left", function () awful.screen.focus_relative( 1) end),
-    awful.key({ modkey, "Control" }, "Right", function () awful.screen.focus_relative(-1) end),
+    awful.key({ modkey, "Mod1"   }, "Right", function () awful.client.swap.byidx(  1)    end),
+    awful.key({ modkey, "Mod1"   }, "Left", function () awful.client.swap.byidx( -1)    end),
+    awful.key({ modkey, "Control" }, "Right", function () awful.screen.focus_relative( 1) end),
+    awful.key({ modkey, "Control" }, "Left", function () awful.screen.focus_relative(-1) end),
     awful.key({ modkey,           }, "u", awful.client.urgent.jumpto),
     awful.key({ "Mod1",           }, "Tab",
         function ()
@@ -229,7 +279,7 @@ globalkeys = awful.util.table.join(
     awful.key({ modkey, "Mod1"   }, "space", function () awful.layout.set(awful.layout.suit.max) end),
 
     -- Prompt
-    awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
+    --awful.key({ modkey },            "r",     function () mypromptbox[mouse.screen]:run() end),
 
     awful.key({ modkey }, "e",
               function ()
@@ -250,6 +300,15 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
     awful.key({ modkey,           }, "n",      function (c) c.minimized = not c.minimized    end),
+    -- all minimized clients are restored 
+    awful.key({ modkey, "Shift"   }, "n", 
+        function()
+            local tag = awful.tag.selected()
+                for i=1, #tag:clients() do
+                    tag:clients()[i].minimized=false
+                    tag:clients()[i]:redraw()
+            end
+    end),
     awful.key({ modkey,           }, "m",
         function (c)
             c.maximized_horizontal = not c.maximized_horizontal
@@ -298,7 +357,7 @@ end
 
 clientbuttons = awful.util.table.join(
     awful.button({ }, 1, function (c) client.focus = c; c:raise() end),
-    awful.button({ modkey }, 1, awful.mouse.client.move),
+    awful.button({ modkey }, 2, awful.mouse.client.move),
     awful.button({ modkey }, 3, awful.mouse.client.resize))
 
 -- Set keys
@@ -320,12 +379,16 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "Chrome" },
       properties = { tag = tags[1][2], maximized_vertical = true, maximized_horizontal = true } },
+    { rule = { class = "Qtcreator" },
+      properties = { tag = tags[1][3] } },
+    { rule = { class = "Eclipse" },
+      properties = { tag = tags[1][3] } },
     { rule = { class = "Pidgin" },
       properties = { floating = true, tag = tags[1][4] } },
     { rule = { class = "Copyq" },
       properties = { floating = true } },
-    { rule = { class = "Qtcreator" },
-      properties = { tag = tags[1][3] } },
+    { rule = { class = "conky" },
+      properties = { floating = true } },
 }
 -- }}}
 
@@ -336,12 +399,12 @@ client.connect_signal("manage", function (c, startup)
     -- awful.titlebar.add(c, { modkey = modkey })
 
     -- Enable sloppy focus
-    c:connect_signal("mouse::enter", function(c)
-        if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
-            and awful.client.focus.filter(c) then
-            client.focus = c
-        end
-    end)
+    --c:connect_signal("mouse::enter", function(c)
+        --if awful.layout.get(c.screen) ~= awful.layout.suit.magnifier
+            --and awful.client.focus.filter(c) then
+            --client.focus = c
+        --end
+    --end)
 
     if not startup then
         -- Set the windows at the slave,
@@ -359,3 +422,9 @@ end)
 client.connect_signal("focus", function(c) c.border_color = beautiful.border_focus; c:raise() end)
 client.connect_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
 -- }}}
+
+-- composite manager:
+--   removes white flickering when switching window/vieport
+--awful.util.spawn_with_shell("killall xcompmgr; xcompmgr -c -C -f -F -D 3 -l -50 -t -20 -o 1 -r 30")
+--awful.util.spawn_with_shell("killall xcompmgr; xcompmgr -f -F -D 3")
+

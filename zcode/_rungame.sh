@@ -9,7 +9,7 @@ GAMEFILE=`ls "$ZCODEROOT/_games/$NAME".*`
 
 (
     cd /home/lukas/www/parchment &&
-    python tools/zcode2js.py "$GAMEFILE" > "stories/$NAME.js" &&
+    python2 tools/zcode2js.py "$GAMEFILE" > "stories/$NAME.js" &&
     $BROWSER "http://127.0.0.1:8080/parchment/parchment.html?story=stories/$NAME.js"
 )
 

@@ -11,6 +11,8 @@ autoload -Uz compinit promptinit
 compinit
 promptinit
 
+export REPORTTIME=1
+
 # prompts: /usr/share/zsh/4.3.4/functions/Prompts/
 prompt zefram
 export PS1='%B%F{blue}%n%(2v.%B@%b.@)%f%(!.%F{red}.%F{green})%m%f:%~%(?..%F{red}[%v]%f)%(!.#.>)%b '
@@ -20,8 +22,9 @@ bindkey '^[[1~' beginning-of-line
 bindkey '^[[4~' end-of-line
 bindkey '^[[3~' delete-char
 bindkey '^[[Z' reverse-menu-complete
-bindkey '5D' backward-word
-bindkey '5C' forward-word
+bindkey "^[OD" backward-word
+bindkey "^[OC" forward-word
+# ALT-H is command help
 
 # This makes cd=pushd
 setopt AUTO_PUSHD
@@ -130,9 +133,9 @@ export EDITOR="vim"
 #export http_proxy=localhost:8118
 # - C flags
 export CHOST="x86_64-pc-linux-gnu"
-export CFLAGS="-march=core2 -O2 -pipe"
+export CFLAGS="-march=native -pipe -O2 -funroll-loops -fomit-frame-pointer "
 export CXXFLAGS="${CFLAGS}"
-export MAKEOPTS="-j7"
+export MAKEOPTS="-j3"
 # - ccache
 export PATH="/usr/lib/ccache/bin/:${PATH}"
 export CCACHE_DIR="$HOME/.ccache"
@@ -285,11 +288,13 @@ Find () {
 
 # aliases# {{{
 alias e="vim"
+alias S="e -S Session.vim"
 alias ls="ls --color=auto"
 alias ll="ls --color=auto -lA"
 alias grep="grep --colour=auto"
 alias fgrep="fgrep --colour=auto"
 alias man="LANG=C man"
+alias psx="ps auxf"
 alias s="screen"
 alias unpack="~/dev/bin/unpack.sh"
 alias unpackall='for x in *; do unpack "$x" "x_$x" || ERROR="$ERROR\n$x"; done; echo "unpacking failed on:$ERROR"'
@@ -359,7 +364,7 @@ flash() {
     cd ~/apps/get-flash-videos || return 1
     case "$1" in
         "clean")
-            rm *.(mp4|flv) ;;
+            rm *.(mp4|flv|mov|avi) ;;
         "update")
             git pull ;;
         "")
@@ -367,7 +372,8 @@ flash() {
         *)
             ./get_flash_videos --play $@ ;;
     esac
-    mv *.(mp4|flv) ~/down/
+    mkdir -p ~/down/_flash
+    mv *.(mp4|flv|mov|avi) ~/down/_flash
     )
 }
 # }}}
@@ -375,7 +381,7 @@ flash() {
 notes
 
 # autojump
-source /etc/profile.d/autojump.zsh
+#source /etc/profile.d/autojump.zsh
 
 # pulseaudio
 #pidof pulseaudio >/dev/null || pulseaudio --start || echo "ERROR: Cannot start Pulseaudio!"
@@ -407,4 +413,12 @@ pl() {
     ln -sv $COPY_FILES "${1:-.}"
 }
 # }}}
+
+# cd ~d
+d=~/down
+v=~/dev
+m=~/Movies
+p=~/Pictures
+w=~/wallpapers
+g=~/dev/gallery
 
