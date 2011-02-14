@@ -28,6 +28,10 @@
 "~/dev/bin/status.sh"
     XF86Launch2
 
+# change keyboard layout
+"setxkbmap -print|grep -q cz && setxkbmap us || setxkbmap cz"
+    mod4+v
+
 # MOUSE# {{{
 # enable/disable touchpad
 "~/dev/bin/togglemodule.sh psmouse"

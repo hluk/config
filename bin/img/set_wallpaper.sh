@@ -10,16 +10,16 @@ TMP="/home/lukas/dev/img/wallpaper.tmp.jpg"
 # redirect output to LOGFILE
 test -n "$LOGFILE" && exec 1>>"$LOGFILE"
 
-trap 'echo "}}} FAILED!"; exit 1' TERM QUIT INT
+trap 'echo "FAILED!"; exit 1' TERM QUIT INT
 
 # take image as parameter or random image from WALLPATH
 if [ -n "$1" ]
 then
-	echo "`date -R`: Setting wallpaper \"$1\" {{{"
+	echo "`date -R`: Setting wallpaper \"$1\""
 	/usr/bin/curl -s -o "$TMP" "$1" && IMG="$TMP" || IMG="$1"
 else 
 	IMG="$WALLPATH/`cd $WALLPATH && /bin/ls -1 | sort -R | head -1`" || exit $?
-	echo "`date -R`: Setting random wallpaper \"$IMG\" {{{"
+	echo "`date -R`: Setting random wallpaper \"$IMG\""
 fi
 
 echo -e "\tInput: `/usr/bin/identify "$IMG"`"
@@ -27,7 +27,7 @@ echo -e "\tInput: `/usr/bin/identify "$IMG"`"
 # get screen resolution
 RES=(`xdpyinfo|sed -n '/^  dimensions:    /{s/.* \([0-9]\+\)x\([0-9]\+\).*/\1 \2/;p;q}'`) || exit $?
 
-# if wallpaper already exists
+# create wallapaper if it doesn't exist for current resolution
 WALL="$TMPPATH/`basename "$IMG"_${RES[0]}x${RES[1]}`.png"
 if [ ! -f "$WALL" ]
 then
@@ -48,6 +48,12 @@ then
 	convert "$IMG" -resize ${W}x${H} -shave ${WCUT}x${HCUT} "$WALL"
 fi &&
 echo -e "\tOutput: `/usr/bin/identify "$WALL"`" &&
+
+# create symlink
+ln -sf "$WALL" ~/.wallpaper.png
+WALL=~/.wallpaper.png
+
+# set wallpaper
 echo -e "\tSetting..." &&
 if pidof nautilus
 then
@@ -61,7 +67,7 @@ else
     /usr/bin/feh --bg-center "$WALL" ||
         /usr/bin/xv -root -quit "$WALL"
 fi &&
-echo "}}} Done" || exit 1
+echo "Done" || exit 1
 
 # clean
 rm -rf "$TMP"

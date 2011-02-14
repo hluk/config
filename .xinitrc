@@ -14,21 +14,7 @@ echo ".xinit: starting xbindkeys"
 xbindkeys &
 
 # set mouse and touchpad
-MOUSE_ID="Genius Ergo Mouse"
-TOUCHPAD_ID="ImPS/2 Generic Wheel Mouse"
-
-echo ".xinit: setting mouse speed"
-CMD="xinput set-prop '$MOUSE_ID'"
-eval $CMD' "Device Accel Constant Deceleration" 2'
-#eval $CMD' "Device Accel Adaptive Deceleration" 2'
-#eval $CMD' "Device Accel Velocity Scaling" 10'
-
-echo ".xinit: setting touchpad speed"
-CMD="xinput set-prop '$TOUCHPAD_ID'"
-eval $CMD' "Device Accel Profile" 3'
-eval $CMD' "Device Accel Constant Deceleration" 1'
-#eval $CMD' "Device Accel Adaptive Deceleration" 1'
-eval $CMD' "Device Accel Velocity Scaling" 20'
+~/mouse.sh &
 
 # cursor
 echo ".xinit: setting mouse pointer theme"
@@ -51,6 +37,9 @@ wicd-client &
 
 echo ".xinit: starting CopyQ"
 ~/dev/copyq-build/release/copyq &
+
+# desktop
+#nautilus -n &
 
 # monitors
 #xrandr --output LVDS1 --mode 1366x768                                                                                             

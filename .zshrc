@@ -11,7 +11,7 @@ autoload -Uz compinit promptinit
 compinit
 promptinit
 
-export REPORTTIME=1
+#export REPORTTIME=1
 
 # prompts: /usr/share/zsh/4.3.4/functions/Prompts/
 prompt zefram
@@ -133,7 +133,7 @@ export EDITOR="vim"
 #export http_proxy=localhost:8118
 # - C flags
 export CHOST="x86_64-pc-linux-gnu"
-export CFLAGS="-march=native -pipe -O2 -funroll-loops -fomit-frame-pointer "
+export CFLAGS="-march=native -pipe -O3 -flto -funroll-loops -fomit-frame-pointer"
 export CXXFLAGS="${CFLAGS}"
 export MAKEOPTS="-j3"
 # - ccache
@@ -286,7 +286,7 @@ Find () {
 }
 # }}}
 
-# aliases# {{{
+# aliases {{{
 alias e="vim"
 alias S="e -S Session.vim"
 alias ls="ls --color=auto"
@@ -302,26 +302,6 @@ alias rcdiff="vimdiff {~/.config,/etc/xdg}/awesome/rc.lua"
 alias dict="~/dev/translate/translate.py"
 alias p="echo -n 'Press any key to continue...'; read -sn 1; echo"
 alias equalizer="alsamixer -D equal"
-
-alias Gitd="git diff --color"
-alias Gitc="git commit --interactive -m"
-alias Gits="git show --color"
-alias Gitp="git push origin master"
-
-alias q="yaourt"
-alias i="yaourt -S"
-alias u="yaourt -Rs"
-alias up="yaourt -Syu --aur"
-alias clean="yaourt -Qdt"
-
-# volume and brightness
-alias volup="~/dev/bin/volume.sh 8%+"
-alias voldown="~/dev/bin/volume.sh 8%-"
-alias brightup="~/dev/colors/backlight.sh 8"
-alias brightdown="~/dev/colors/backlight.sh -8"
-
-alias poweroff="sudo poweroff"
-alias reboot="sudo reboot"
 
 # X11# {{{
 if [ -n "$DISPLAY" ]
@@ -346,6 +326,27 @@ else
 	alias x="startx > $HOME/.xsession 2>&1 &"
 fi
 # }}}
+
+alias Gitd="git diff --color"
+alias Gitc="git commit --interactive -m"
+alias Gits="git show --color"
+alias Gitp="git push origin master"
+
+# yaourt
+alias q="yaourt"
+alias i="yaourt -S"
+alias u="yaourt -Rs"
+alias up="yaourt -Syu --aur"
+alias clean="yaourt -Qdt"
+
+# volume and brightness
+alias volup="~/dev/bin/volume.sh 8%+"
+alias voldown="~/dev/bin/volume.sh 8%-"
+alias brightup="~/dev/colors/backlight.sh 8"
+alias brightdown="~/dev/colors/backlight.sh -8"
+
+alias poweroff="sudo poweroff"
+alias reboot="sudo reboot"
 
 # edit privoxy user settings
 #alias adblock="su -c \"$EDITOR -c ':cd /etc/privoxy' -c ':e user.action'\""

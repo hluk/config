@@ -92,7 +92,7 @@ systray_padding = 0 0 5
 systray_sort = ascending
 systray_background_id = 1
 systray_icon_size = 24
-systray_icon_asb = 90 0 0
+systray_icon_asb = 100 0 0
 
 # Clock
 #time1_format = %H:%M
