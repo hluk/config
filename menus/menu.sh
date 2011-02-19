@@ -1,5 +1,5 @@
 #!/bin/sh
-export MENU_FONT="Aller:size=10:style=bold"
+export MENU_FONT="Terminus:size=9"
 # blue
 export MENU_BG="#4080c0"
 export MENU_FG="#ffffff"

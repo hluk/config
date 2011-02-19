@@ -38,7 +38,7 @@ font_shadow = 0
 panel_dock = 0
 panel_background_id = 4
 wm_menu = 0
-panel_layer = top
+panel_layer = bottom
 
 # Panel Autohide
 autohide = 0
