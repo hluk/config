@@ -102,7 +102,7 @@ noremap <silent> <Space> :silent noh<Bar>echo<CR>
 "}}}
 
 " Completion {{{
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+"let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 let g:SuperTabDefaultCompletionType = "context"
 
 let g:acp_completeoptPreview = 1
@@ -151,8 +151,6 @@ map [5;5~ :tabprev<CR>
 map [6;5~ :tabnext<CR>
 map <C-Tab> :tabnext<CR>
 map <S-C-Tab> :tabprev<CR>
-imap <C-Tab> :tabnext<CR>
-imap <S-C-Tab> :tabprev<CR>
 imap <C-Tab> <C-o>:tabnext<CR>
 imap <S-C-Tab> <C-o>:tabprev<CR>
 "}}}
@@ -300,8 +298,8 @@ function! HourColor()
     let i = 2
   endif
   execute 'colorscheme '.s:mycolors[i]
-  redraw
-  echo g:colors_name
+  "redraw
+  "echo g:colors_name
 endfunction
 
 nnoremap <F8> :call NextColor(1)<CR>
@@ -310,8 +308,8 @@ nnoremap <S-F8> :call NextColor(-1)<CR>
 
 " GUI/console appearance {{{
 if has("gui_running")
-    "gui
-    set guifont=Bitstream\ Vera\ Sans\ Mono\ 8.5
+    gui
+    set guifont=Bitstream\ Vera\ Sans\ Mono\ 9
 
     let s:mycolors = ['default', 'soso', 'wombat', 'molokai', 'summerfruit256']
     call HourColor()

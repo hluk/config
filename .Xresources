@@ -42,8 +42,9 @@ XTerm*transparent: false
 Xft.antialias:true
 Xft.dpi:101
 Xft.hinting:true
-Xft.hintstyle:hintfull
 Xft.rgba:rgb
+Xft.hintstyle:hintfull
+Xft.lcdfilter:lcddefault
 
 Xcursor.theme: pearl
 !Xcursor.theme: Human

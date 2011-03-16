@@ -8,8 +8,8 @@ border_margin 0
 
 gap_x 0
 gap_y 0
-#alignment top_left
-alignment bottom_left
+alignment top_left
+#alignment bottom_left
 border_inner_margin 0
 border_outer_margin 0
 border_width 0
@@ -30,6 +30,7 @@ color2 bbbbbb
 own_window yes
 own_window_class Conky
 own_window_type panel
+#own_window_type dock
 #own_window_transparent yes
 #own_window_argb_visual yes
 #own_window_argb_value 215
@@ -57,4 +58,4 @@ xftfont Aller:size=8:bold
 #xftfont Droid Sans:size=8
 
 TEXT
- ${color0}BAT ${color1}${battery_percent} ${color2}%     •     ${color0}TEMP ${color1}${acpitemp}° ${hddtemp /dev/sda}°$color     •     ${color0}UP ${color1}${upspeedf}${color2} KiB/s$color     •     ${color0}DOWN ${color1}${downspeedf}${color2} KiB/s$color     •     ${color0}ROOT ${color1}${fs_free /}${color2}/${color1}${fs_size /} ${diskiograph /dev/sda 13,120 00ff00 00ffd0}$color     •     ${color0}MEM ${color1}${mem} ${color2}$color     •     ${color0}LOAD ${color1}${loadavg}  ${cpugraph cpu0 13,120 ff0000 ffff00}  ${color0}CPU ${color1}${cpu cpu1} ${color2}% ${color1}${cpu cpu2} $color  ${alignr}  ${color1}$uptime_short$color     •     ${color0}$kernel$color     •      ${color2}${time %a %d %b}  ${color1}${time %H:%M}
+ ${color0}BAT ${color1}${battery_percent} ${color2}%     •     ${color0}TEMP ${color1}${hwmon temp 1}° ${hddtemp /dev/sda}°$color     •     ${color0}UP ${color1}${upspeedf}${color2} KiB/s$color     •     ${color0}DOWN ${color1}${downspeedf}${color2} KiB/s$color     •     ${color0}ROOT ${color1}${fs_free /}${color2}/${color1}${fs_size /} ${diskiograph /dev/sda 13,120 00ff00 00ffd0}$color     •     ${color0}MEM ${color1}${mem} ${color2}$color     •     ${color0}LOAD ${color1}${loadavg}  ${cpugraph cpu0 13,120 ff0000 ffff00}  ${color0}CPU ${color1}${cpu cpu1} ${color2}% ${color1}${cpu cpu2} $color  ${alignr}  ${color1}$uptime_short$color     •     ${color0}$kernel$color     •      ${color2}${time %a %d %b}  ${color1}${time %H:%M}

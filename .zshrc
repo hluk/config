@@ -35,6 +35,9 @@ setopt NO_FLOW_CONTROL
 
 # Case insensitive globbing
 #setopt NO_CASE_GLOB
+
+# extended globbing - e.g. (all files except *.txt): ^*.txt
+#setopt extendedglob
 # }}}
 
 # vi mode# {{{
@@ -381,8 +384,8 @@ flash() {
 
 notes
 
-# autojump
-#source /etc/profile.d/autojump.zsh
+# autojump needs this
+source /etc/profile
 
 # pulseaudio
 #pidof pulseaudio >/dev/null || pulseaudio --start || echo "ERROR: Cannot start Pulseaudio!"

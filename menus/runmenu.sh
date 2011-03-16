@@ -4,10 +4,11 @@ HISTORYFILE="$DIR/runhistory.txt"
 RUNHASHFILE="$DIR/runhash.txt"
 
 # update hash on background
-(sleep 1; nice -n 10 "$DIR/dmenu/dmenu-4.0/dmenu_path" > $RUNHASHFILE) &
+#(sleep 1; nice -n 10 "$DIR/dmenu/dmenu-4.0/dmenu_path" > $RUNHASHFILE) &
 
 # command history and PATH
-EXE=$( (cat $HISTORYFILE $RUNHASHFILE) | /home/lukas/dev/menus/menu.sh "RUN:" ) || exit $?
+#EXE=$( (cat $HISTORYFILE $RUNHASHFILE) | /home/lukas/dev/menus/menu.sh "RUN:" ) || exit $?
+EXE=$( (cat $HISTORYFILE; dmenu_path) | /home/lukas/dev/menus/menu.sh "RUN:" ) || exit $?
 EXE=$(echo $EXE | sed 's/^ *//;s/ *$//') # remove leading spaces
 
 # handle history
@@ -18,5 +19,5 @@ mv $HISTORYFILE.new $HISTORYFILE
 #(exec echo "$EXE" | /bin/sh ;) &
 exec "$EXE" &
 
-disown -a && exit
+#disown -a && exit
 

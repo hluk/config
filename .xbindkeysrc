@@ -19,7 +19,7 @@
 #  Control + b:2 + Release
 
 "xbindkeys_show" 
-  control+shift + q
+  control+shift+q
 
 # enable/disable wlan
 "sh -c '(sudo /etc/rc.d/net-profiles stop && sudo ifconfig wlan0 down) || sudo /etc/rc.d/net-profiles start'"
@@ -34,8 +34,8 @@
 
 # MOUSE# {{{
 # enable/disable touchpad
-"~/dev/bin/togglemodule.sh psmouse"
-    XF86TouchpadToggle
+#"~/dev/bin/togglemodule.sh psmouse"
+    #XF86TouchpadToggle
 
 # left button
 #"xte 'mousedown 1 &'"
@@ -65,7 +65,7 @@
 "~/dev/bin/togglemute.sh"
     XF86AudioMute
 "~/dev/grooveshark/grooveshark_toggle.sh toggle"
-    mod4+F1
+    mod4+m
 #"sakura -e ncmpc -t MUSIC -f 'DejaVu Sans Mono 15' --name=ncmpc"
     #mod4+p
 #"sakura -e '/usr/bin/mocp -T darkdot_theme' -t MUSIC -f 'DejaVu Sans Mono 15' --name=music"
@@ -125,7 +125,7 @@
 
 # APPS# {{{
 # terminal
-"sakura -e ~/dev/bin/screen"
+"~/dev/bin/console.sh"
     mod4+q
 "xkill"
     mod4+mod1+x
@@ -143,6 +143,8 @@
     mod4+alt+backslash
 "~/dev/menus/runmenu.sh"
     mod4+r
+"PATH=~/dev/sprinter-build-desktop/:$PATH ~/dev/sprinter/examples/open.sh"
+    mod4+o
 "SHELL=~/dev/bin/calc.sh sakura -t calc -e 'screen -d -RR calc'"
     mod4+c
 "~/dev/menus/gamemenu.sh"

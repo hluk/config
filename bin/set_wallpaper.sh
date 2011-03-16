@@ -3,6 +3,7 @@
 # usage:
 #   ./set_wallpaper.sh # sets random wallpaper from WALLPATH env
 #   ./set_wallpaper.sh image_file
+FILE=~/wallpaper.png
 WALLPATH=${WALLPATH:-"$HOME/wallpapers"}
 TMPPATH="$WALLPATH/_tmp"
 TMP="/home/lukas/dev/img/wallpaper.tmp.jpg"
@@ -27,8 +28,9 @@ echo -e "\tInput: `/usr/bin/identify "$IMG"`"
 # get screen resolution
 RES=(`xdpyinfo|sed -n '/^  dimensions:    /{s/.* \([0-9]\+\)x\([0-9]\+\).*/\1 \2/;p;q}'`) || exit $?
 
+TMPPATH="$TMPPATH/${RES[0]}x${RES[1]}"
 # create wallapaper if it doesn't exist for current resolution
-WALL="$TMPPATH/`basename "$IMG"_${RES[0]}x${RES[1]}`.png"
+WALL="$TMPPATH/`basename "$IMG"`.png"
 if [ ! -f "$WALL" ]
 then
 	echo -e "\tResizing..."
@@ -50,22 +52,21 @@ fi &&
 echo -e "\tOutput: `/usr/bin/identify "$WALL"`" &&
 
 # create symlink
-ln -sf "$WALL" ~/.wallpaper.png
-WALL=~/.wallpaper.png
+ln -f "$WALL" "$FILE"
 
 # set wallpaper
 echo -e "\tSetting..." &&
 if pidof nautilus
 then
-    gconftool-2 -t str --set /desktop/gnome/background/picture_filename "$WALL"
+    gconftool-2 -t str --set /desktop/gnome/background/picture_filename "$FILE"
 elif pidof xfdesktop
 then
     PROPERTY="/backdrop/screen0/monitor0/image-path"
     xfconf-query -c xfce4-desktop -p $PROPERTY -s ""
-    xfconf-query -c xfce4-desktop -p $PROPERTY -s "$WALL"
+    xfconf-query -c xfce4-desktop -p $PROPERTY -s "$FILE"
 else
-    /usr/bin/feh --bg-center "$WALL" ||
-        /usr/bin/xv -root -quit "$WALL"
+    /usr/bin/feh --bg-center "$FILE" ||
+        /usr/bin/xv -root -quit "$FILE"
 fi &&
 echo "Done" || exit 1
 
