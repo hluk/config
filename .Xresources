@@ -62,7 +62,7 @@ xpdf*background:        white
 !!! color schemes: http://phraktured.net/terminal-colors/
 !*cursorColor: gray
 XTerm*foreground:     rgb:dd/dd/dd
-XTerm*background:     rgb:22/22/22
+XTerm*background:     rgb:00/00/00
 !black
 XTerm*color0:         rgb:19/19/19
 XTerm*color8:         rgb:25/25/25

@@ -310,7 +310,7 @@ alias equalizer="alsamixer -D equal"
 if [ -n "$DISPLAY" ]
 then
 	# aliases for X
-	alias e="gvim"
+	#alias e="gvim"
     alias mc="mc -x"
     alias m="ranger"
 	alias feb="$HOME/dev/bin/feb"

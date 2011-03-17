@@ -8,8 +8,8 @@ echo ".xinit: starting CopyQ"
 ~/dev/copyq-build/debug/copyq &
 echo ".xinit: starting KDE"
 export KWIN_DIRECT_GL=1
-startkde
-exit
+#exec startkde
+exec ck-launch-session startkde
 
 
 # keyboard

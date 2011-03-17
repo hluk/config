@@ -13,3 +13,6 @@ caption always "%{= 9w}%?%-Lw%?%{+bu 9y}%n*%t%?%?%{= 9w}%?%+Lw%?"
 bind ^x
 bind x
 
+term screen-256color
+#term xterm-256color
+

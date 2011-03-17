@@ -199,12 +199,12 @@ imap <C-q> <C-o>:mksession!<CR><C-o>:qa<CR>
 "}}}
 
 " HEX {{{
-map <silent> <C-h> :%!xxd<CR>
-imap <silent> <C-h> <C-o>:%!xxd<CR>
-vmap <silent> <C-h> :<C-u>!xxd<CR>
-map <silent> <C-M-h> :%!xxd -r<CR>
-imap <silent> <C-M-h> <C-o>:%!xxd -r<CR>
-vmap <silent> <C-M-h> :<C-u>!xxd -r<CR>
+"map <silent> <C-x> :%!xxd<CR>
+"imap <silent> <C-x> <C-o>:%!xxd<CR>
+"vmap <silent> <C-x> :<C-u>!xxd<CR>
+"map <silent> <C-M-x> :%!xxd -r<CR>
+"imap <silent> <C-M-x> <C-o>:%!xxd -r<CR>
+"vmap <silent> <C-M-x> :<C-u>!xxd -r<CR>
 "}}}
 
 " zoom {{{
@@ -271,6 +271,7 @@ function! NextColor(how)
     endif
     try
       execute 'colorscheme '.s:mycolors[current]
+      let g:colors_name = s:mycolors[current]
       break
    catch /E185:/
       call add(missing, s:mycolors[current])
@@ -303,7 +304,9 @@ function! HourColor()
 endfunction
 
 nnoremap <F8> :call NextColor(1)<CR>
-nnoremap <S-F8> :call NextColor(-1)<CR>
+nnoremap <F7> :call NextColor(-1)<CR>
+inoremap <F8> <C-o>:call NextColor(1)<CR>
+inoremap <F7> <C-o>:call NextColor(-1)<CR>
 "}}}
 
 " GUI/console appearance {{{
@@ -311,10 +314,15 @@ if has("gui_running")
     gui
     set guifont=Bitstream\ Vera\ Sans\ Mono\ 9
 
-    let s:mycolors = ['default', 'soso', 'wombat', 'molokai', 'summerfruit256']
+    let s:mycolors = ['soso', 'wombat', 'molokai', 'summerfruit256']
     call HourColor()
 else
-	colorscheme wombat256
+    "colorscheme wombat256
+    let s:mycolors = ['autumn2', 'soso', 'zenburn', 'wombat256', 'mustang', 'tir_black', 'xoria256']
+    call HourColor()
 endif
 "}}}
+
+" screen
+nmap \| :!screen<CR>
 

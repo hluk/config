@@ -1,0 +1,16 @@
+
+[roxterm profile]
+audible_bell=0
+background_type=2
+saturation=0.190764
+login_shell=0
+use_custom_command=1
+command=/home/lukas/dev/bin/screen.sh
+maximise=1
+hide_menubar=1
+always_show_tabs=0
+update_records=0
+use_ssh=0
+term=xterm-256color
+scrollback_lines=0
+scrollbar_pos=0
