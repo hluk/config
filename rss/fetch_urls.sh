@@ -3,7 +3,7 @@
 URLS=(
 'http://www.gametrailers.com/rssgenerate.php?s1=&vidformat[mov]=on&vidformat[wmv]=on&quality[hd]=on&orderby=curpopular&limit=20'
 'http://konachan.com/post/atom'
-#'http://www.gamersyde.com/news_en.rdf'
+'http://www.gamersyde.com/news_en.rdf'
 #'http://moe.imouto.org/post/atom'
 #'$HOME/dev/wget/deviantart/deviantart-daily.sh'
 )

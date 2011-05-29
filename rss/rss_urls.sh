@@ -4,7 +4,7 @@ then
 	exit 1
 fi
 
-xmllint --format --nocdata "$1" | sed -n '
+xmllint --format --nocdata --recover "$1" | sed -n '
 	/^<rss[ >]/,/^<\/rss>/ {
 		/^    <item[ >]/,/^    <\/item>/ {
 			s_^      <link>\(.*\)</link>_\1_p

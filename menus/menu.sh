@@ -18,5 +18,6 @@ MENU_SELFG="#000000"
 
 #/home/lukas/dev/menus/dmenu/dmenu-4.0/dmenu -p "$@" -fa "$MENU_FONT" -nb "$MENU_BG" -nf "$MENU_FG" -sb "$MENU_SELBG" -sf "$MENU_SELFG"
 #~/apps/dmenu/dmenu-4.2.1/dmenu -t -i -p "$@" -fn "$MENU_FONT" -nb "$MENU_BG" -nf "$MENU_FG" -sb "$MENU_SELBG" -sf "$MENU_SELFG"
-sprinter -t"$@" -l"$@" -w -z 194,16 -g 400
+#sprinter -t"$@" -l"$@" -w -z 194,16 -g 400
+~/dev/sprinter-gtk/sprinter -t"$@" -l"$@" -g -64-1-1
 

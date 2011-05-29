@@ -7,7 +7,7 @@ defscrollback 3000
 vbell off
 bell_msg 'BELL in window %n'
 
-caption always "%{= 9w}%?%-Lw%?%{+bu 9y}%n*%t%?%?%{= 9w}%?%+Lw%?"
+caption always "%{= 9w}%?%-Lw%?%{+b 9y}%n*%t%?%?%{= 9w}%?%+Lw%?"
 
 # disable screen locking
 bind ^x

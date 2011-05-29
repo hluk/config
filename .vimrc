@@ -3,6 +3,7 @@
 " :setl ar -- automatically reload file if changed
 " q/ -- search history
 " q: -- command history
+" gf -- open file which filename is under cursor
 set nocompatible
 set mouse=a
 " save power
@@ -52,12 +53,15 @@ syntax on
 
 " must be called before "filetype indent on"
 filetype off
-call pathogen#runtime_append_all_bundles()
+"call pathogen#runtime_append_all_bundles()
 
 filetype plugin on
 filetype indent on
 
 set nobackup
+
+command! Q :q
+command! W :w
 
 " faster commands
 nnoremap ; :
@@ -131,6 +135,7 @@ set dictionary+=/usr/share/dict/words
 "" spell checking
 "set spelllang=cs
 map <F7> :set spell<CR>
+map <S-F7> :set nospell<CR>
 " spell keys
 map <F6> :w<CR>:!LANG=cs_CZ.iso-8859-2 aspell -t -x --lang=cs -c %<CR>:<CR>:e<CR><CR>k
 imap <F6> <ESC>:w<CR>:!LANG=cs_CZ.iso-8859-2 aspell -t -x --lang=cs -c %<CR>:e<CR><CR>ki
@@ -139,9 +144,6 @@ imap <F6> <ESC>:w<CR>:!LANG=cs_CZ.iso-8859-2 aspell -t -x --lang=cs -c %<CR>:e<C
 " FOLDS {{{
 set foldmethod=marker
 "set foldmethod=syntax
-nmap <F9> za
-nmap <C-F9> zR
-nmap <C-S-F9> zM
 "}}}
 
 " TABS {{{
@@ -149,6 +151,10 @@ map tn :tabnew<space>
 map td :tabclose<CR>
 map [5;5~ :tabprev<CR>
 map [6;5~ :tabnext<CR>
+map [1;5D :tabprev<CR>
+map [1;5C :tabnext<CR>
+imap [1;5D <C-o>:tabprev<CR>
+imap [1;5C <C-o>:tabnext<CR>
 map <C-Tab> :tabnext<CR>
 map <S-C-Tab> :tabprev<CR>
 imap <C-Tab> <C-o>:tabnext<CR>
@@ -199,12 +205,8 @@ imap <C-q> <C-o>:mksession!<CR><C-o>:qa<CR>
 "}}}
 
 " HEX {{{
-"map <silent> <C-x> :%!xxd<CR>
-"imap <silent> <C-x> <C-o>:%!xxd<CR>
-"vmap <silent> <C-x> :<C-u>!xxd<CR>
-"map <silent> <C-M-x> :%!xxd -r<CR>
-"imap <silent> <C-M-x> <C-o>:%!xxd -r<CR>
-"vmap <silent> <C-M-x> :<C-u>!xxd -r<CR>
+command! Xxd :%!xxd
+command! Xxdr :%!xxd -r
 "}}}
 
 " zoom {{{
@@ -257,8 +259,8 @@ function! NextColor(how)
   if len(s:mycolors) == 0
     call s:SetColors('all')
   endif
-  if exists('g:colors_name')
-    let current = index(s:mycolors, g:colors_name)
+  if exists('s:mycolor')
+    let current = index(s:mycolors, s:mycolor)
   else
     let current = -1
   endif
@@ -270,8 +272,8 @@ function! NextColor(how)
       let current = (how>0 ? 0 : len(s:mycolors)-1)
     endif
     try
-      execute 'colorscheme '.s:mycolors[current]
-      let g:colors_name = s:mycolors[current]
+      let s:mycolor=s:mycolors[current]
+      execute 'colorscheme '.s:mycolor
       break
    catch /E185:/
       call add(missing, s:mycolors[current])
@@ -281,48 +283,85 @@ function! NextColor(how)
   if len(missing) > 0
     echo 'Error: colorscheme not found:' join(missing)
   endif
-  echo g:colors_name
+  echo s:mycolor
 endfunction
 
 " Set color scheme according to current time of day.
 function! HourColor()
   let hr = str2nr(strftime('%H'))
   if hr <= 6
-    let i = 2
+    set background=dark
+    let i = 0
   elseif hr <= 7
+    set background=light
     let i = 1
   elseif hr <= 15
-    let i = 0
-  elseif hr <= 17
-    let i = 1
-  else
+    set background=light
     let i = 2
+  elseif hr <= 17
+    set background=light
+    let i = 3
+  else
+    set background=dark
+    let i = 4
   endif
-  execute 'colorscheme '.s:mycolors[i]
-  "redraw
-  "echo g:colors_name
+  let s:mycolor=s:mycolors[i]
+  execute 'colorscheme '.s:mycolor
 endfunction
 
-nnoremap <F8> :call NextColor(1)<CR>
-nnoremap <F7> :call NextColor(-1)<CR>
-inoremap <F8> <C-o>:call NextColor(1)<CR>
-inoremap <F7> <C-o>:call NextColor(-1)<CR>
+nnoremap <F9> :call NextColor(1)<CR>
+nnoremap <F8> :call NextColor(-1)<CR>
+inoremap <F9> <C-o>:call NextColor(1)<CR>
+inoremap <F8> <C-o>:call NextColor(-1)<CR>
 "}}}
 
 " GUI/console appearance {{{
+let s:mycolor='soso'
 if has("gui_running")
     gui
     set guifont=Bitstream\ Vera\ Sans\ Mono\ 9
 
-    let s:mycolors = ['soso', 'wombat', 'molokai', 'summerfruit256']
+    let s:mycolors = ['solarized', 'soso', 'wombat', 'molokai', 'summerfruit256']
     call HourColor()
 else
-    "colorscheme wombat256
-    let s:mycolors = ['autumn2', 'soso', 'zenburn', 'wombat256', 'mustang', 'tir_black', 'xoria256']
+    let s:mycolors = ['zenburn', 'autumn2', 'soso', 'mustang', 'wombat256', 'xoria256']
     call HourColor()
 endif
 "}}}
 
 " screen
 nmap \| :!screen<CR>
+
+" visually differentiate normal and insert modes"{{{
+"let s:n_laststatus=&laststatus
+function! ModeEntered(mode)
+    if a:mode == 'i'
+        "let s:n_laststatus=&laststatus
+        "set laststatus=2
+
+        "hi StatusLine term=reverse ctermfg=black ctermbg=green
+        "hi LineNr ctermfg=black ctermbg=green
+
+        set cursorline
+        "set cursorcolumn
+    else
+        "let &laststatus=s:n_laststatus
+
+        "execute 'colorscheme '.s:mycolor
+
+        set nocursorline
+        "set nocursorcolumn
+    endif
+endfunction
+
+"au InsertEnter * set cursorline
+"au InsertLeave * set nocursorline
+au InsertEnter * call ModeEntered('i')
+au InsertLeave * call ModeEntered('n')
+" cursor in Konsole for normal and insert mode
+"let &t_SI = "\<Esc>]50;CursorShape=1\x7"
+"let &t_EI = "\<Esc>]50;CursorShape=0\x7"
+"}}}
+
+set colorcolumn=81
 

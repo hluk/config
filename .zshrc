@@ -26,6 +26,8 @@ bindkey "^[OD" backward-word
 bindkey "^[OC" forward-word
 # ALT-H is command help
 
+#setopt menucomplete
+
 # This makes cd=pushd
 setopt AUTO_PUSHD
 setopt PUSHD_IGNORE_DUPS
@@ -38,34 +40,6 @@ setopt NO_FLOW_CONTROL
 
 # extended globbing - e.g. (all files except *.txt): ^*.txt
 #setopt extendedglob
-# }}}
-
-# vi mode# {{{
-#bindkey -v
-#zle-keymap-select () {
-  #if [ $TERM = "rxvt-256color" ]; then
-    #if [ $KEYMAP = vicmd ]; then
-      #echo -ne "\033]12;#ff6565\007"
-    #else
-      #echo -ne "\033]12;grey\007"
-    #fi
-  #elif [ $TERM = "screen" ]; then
-    #if [ $KEYMAP = vicmd ]; then
-      #echo -ne '\033P\033]12;#ff6565\007\033\\'
-    #else
-      #echo -ne '\033P\033]12;grey\007\033\\'
-    #fi
-  #fi
-#}; zle -N zle-keymap-select
-#zle-line-init () {
-  #zle -K viins
-  #if [ $TERM = "rxvt-256color" ]; then
-    #echo -ne "\033]12;grey\007"
-  #elif [ $TERM = "screen" ]; then
-    #echo -ne '\033P\033]12;grey\007\033\\'
-  #fi
-#}; zle -N zle-line-init
-#bindkey '^R' history-incremental-search-backward
 # }}}
 
 # completion# {{{
@@ -116,18 +90,6 @@ zstyle ':completion:*' ignore-parents parent pwd
 zstyle ':completion::approximate*:*' prefix-needed false
 # }}}
 
-# directories# {{{
-export lapps=~/apps
-export lbooks=~/eBooks
-export ldev=~/dev
-export ldown=~/down
-export lmisc=~/Misc
-export lmovies=~/Movies
-export lpic=~/Pictures
-export lschool=~/School
-export lwallpapers=~/wallpapers
-# }}}
-
 # env# {{{
 export XDG_DATA_HOME="$HOME/.config"
 #export MANPAGER=vimmanpager
@@ -148,9 +110,7 @@ export SANDBOX_WRITE="${SANDBOX_WRITE}:${CCACHE_DIR}"
 # X11# {{{
 if [ -n "$DISPLAY" ]
 then
-    export BROWSER="/usr/bin/chromium-browser"
-    #export BROWSER="/usr/bin/google-chrome"
-	#export BROWSER="firefox"
+    export BROWSER=~/dev/bin/browser.sh
 	#export TERM=xterm-color 
 	#export TERMINFO=$HOME/lib/terminfo
 
@@ -161,121 +121,6 @@ then
 fi
 # }}}
 
-# }}}
-
-# ConTeXt # {{{
-#export PATH=/home/lukas/apps/context/tex/texmf-linux/bin:$PATH
-#export TEXMF=/home/lukas/apps/context/tex/texmf-linux
-#export TEXMFCNF=/home/lukas/apps/context/tex/texmf-context/web2c
-#export LUAINPUTS=/home/lukas/apps/context/tex/texmf-context/tex/context/base/:/home/lukas/apps/context/tex/texmf-context/scripts/context/lua
-#export MANPATH=/home/lukas/apps/context/tex/texmf-linux/man:$MANPATH
-#(cd ~/apps/context/tex/ && . ./setuptex >/dev/null)
-# it may also help to run:
-#~ luatools --generate && context --make # }}}
-
-# func: notes # {{{
-# info: Print notes from ~/notes directory.
-notes() {
-    # colors
-    C_H1="\033[0;33m"
-    C_END="\033[0m"
-    C_ENDX="\\\033[0m"
-    C_ITEM="\\\033[0;36m-$C_ENDX"
-    C_TODO="\\\033[0;31m[ ]$C_ENDX"
-    C_DONE="\\\033[0;30m[\\\033[0;32mX$C_ENDX\\\033[0;30m]$C_ENDX"
-    C_H2="\\\033[0;36m\2$C_ENDX"
-    # vertical line
-    D_V="│"
-    D_VX="\\$C_H1│\\$C_END"
-
-	(
-	cd ~/notes || return
-    
-	for f in *
-	do
-        TXT=""
-        W=$#f
-
-        # get max width
-        cat "$f" |
-        while L=`line`
-        do
-            if [ $#L -gt $W ]
-            then
-                W=$#L
-            fi
-        done
-        W=$((W+2))
-
-        # horizontal line
-        D_L=`repeat $W; do printf "─"; done`
-
-        # print header
-        echo -e "${C_H1}┌$D_L┐$C_END"
-		printf  "${C_H1}$D_V%${W}s$D_V$C_END\n" "$f "
-
-        # print content
-        cat "$f" |
-        while L=`line`
-        do
-            S="`printf "%$((W-1-$#L))s" " "`"
-            echo -e "`sed \
-                -e 's/^\(\s*\)-/\1'"$C_ITEM"'/' \
-                -e 's/^\(\s*\)\[ \]/\1'"$C_TODO"'/' \
-                -e 's/^\(\s*\)\[X\]/\1'"$C_DONE"'/' \
-                -e 's/^\(\s*\)\([A-Z].*\)/\1'"$C_H2"'/' \
-                -e 's/^/'"$D_VX"' /' \
-                -e 's/$/'"$S$D_VX"'/' \
-                <<< "$L"`"
-        done
-        
-        echo -e "${C_H1}└$D_L┘$C_END"
-	done
-	) 2> /dev/null
-    return
-}
-# }}}
-
-# func: check # {{{
-# info: (Un)checks task.
-# args: task numbers
-#       none or 0 to check next unchecked
-check() {
-	(
-	cd ~/notes || return 1
-
-    if [ $# -eq 0 ]
-    then
-        check 0
-        return $?
-    fi
-
-    for n in $@
-    do
-        if [ $n -eq 0 ]
-        then
-            X=`grep -m 1 -Hne '^\s*\[ \]' *`
-        else
-            X=`grep -Hne '^\s*\[.\]' *|sed -n "${n}p"`
-        fi
-        test -n "$X" || return 1
-
-        file="`awk -F: '{print $1}' <<< "$X"`"
-        ln="`awk -F: '{print $2}' <<< "$X"`"
-        str="`awk -F: '{print $3}' <<< "$X"`"
-        
-        t="X"
-        if grep -qe '^\s*\[X\]' <<< "$str"
-        then
-            t=" "
-        fi
-
-        sed -i "$ln"'{s/^\(\s*\)\[.\]/\1\['"$t"'\]/}' "$file"
-    done
-
-    notes
-    )
-}
 # }}}
 
 # func: Find # {{{
@@ -290,8 +135,6 @@ Find () {
 # }}}
 
 # aliases {{{
-alias e="vim"
-alias S="e -S Session.vim"
 alias ls="ls --color=auto"
 alias ll="ls --color=auto -lA"
 alias grep="grep --colour=auto"
@@ -305,6 +148,10 @@ alias rcdiff="vimdiff {~/.config,/etc/xdg}/awesome/rc.lua"
 alias dict="~/dev/translate/translate.py"
 alias p="echo -n 'Press any key to continue...'; read -sn 1; echo"
 alias equalizer="alsamixer -D equal"
+alias S="e -S Session.vim"
+
+alias ifconfig="echo \"Use 'ip addr' command.\""
+alias netstat="echo \"Use 'ss' command.\""
 
 # X11# {{{
 if [ -n "$DISPLAY" ]
@@ -316,10 +163,10 @@ then
 	alias feb="$HOME/dev/bin/feb"
 	alias febt="THUMBS=1 $HOME/dev/bin/feb"
 	alias smplayer="LANG=C smplayer"
-	alias v="$HOME/dev/gallery/mkgallery.py"
+	alias v="$HOME/dev/gallery/mkgallery.py -u http://localhost:8080/Galleries/%s/"
 	alias traycmd="$HOME/dev/bin/traycmd.py"
 	alias grooveshark="$HOME/dev/grooveshark/grooveshark_toggle.sh show & traycmd $HOME/dev/grooveshark/{grooveshark.png,grooveshark_toggle.sh}"
-    alias copyq="$HOME/dev/copyq-build/release/copyq"
+    alias copyq="$HOME/dev/copyq-build/debug/copyq"
     alias wallpaper="$HOME/dev/img/set_wallpaper.sh"
     alias jdownloader="java -Xmx256m -jar $HOME/apps/JDownloader/JDownloader.jar"
     #alias wine32="WINEDEBUG=fixme-all LIBGL_DRIVERS_PATH=/opt/lib32/usr/lib/xorg/modules/dri wine"
@@ -336,9 +183,11 @@ alias Gits="git show --color"
 alias Gitp="git push origin master"
 
 # yaourt
+export PACMAN=pacman-color
 alias q="yaourt"
 alias i="yaourt -S"
 alias u="yaourt -Rs"
+alias qdiff="yaourt -C"
 alias up="yaourt -Syu --aur"
 alias clean="yaourt -Qdt"
 
@@ -355,34 +204,30 @@ alias reboot="sudo reboot"
 #alias adblock="su -c \"$EDITOR -c ':cd /etc/privoxy' -c ':e user.action'\""
 # }}}
 
-# func: dt program# {{{
-# info: Detach program from console and exit.
-d() {
-	$@ & disown && exit
-} # }}}
+e () {
+    screen -t ">$@" "$EDITOR" $@
+}
 
 # func: flash url/command# {{{
 # play flash videos
 flash() {
     (
-    cd ~/apps/get-flash-videos || return 1
+    CMD=~/apps/get-flash-videos/get_flash_videos
+    mkdir -p ~/down/_flash &&
+    cd ~/down/_flash/ || return 1
     case "$1" in
         "clean")
             rm *.(mp4|flv|mov|avi) ;;
         "update")
             git pull ;;
         "")
-            ./get_flash_videos --play "`xclip -o`";;
+            "$CMD" --play `xclip -o`;;
         *)
-            ./get_flash_videos --play $@ ;;
+            "$CMD" --play $@ ;;
     esac
-    mkdir -p ~/down/_flash
-    mv *.(mp4|flv|mov|avi) ~/down/_flash
     )
 }
 # }}}
-
-notes
 
 # autojump needs this
 source /etc/profile
@@ -418,6 +263,29 @@ pl() {
 }
 # }}}
 
+# func: v_archive file ... {{{
+# view archive contents (images, videos, fonts)
+# use G variable to set gallery name
+v_archive() {
+    DIR=~/.archives/${G:-default}
+
+    FILES=""
+    for archive in "$@"
+    do
+        DEST="$DIR/`basename "$archive"`"
+        unpack "$archive" "$DEST" || return 1
+        FILES="$FILES""$DEST\0"
+    done
+    [ -n "$FILES" ] || return 1
+
+    printf "$FILES" | xargs -0 "$HOME/dev/gallery/mkgallery.py" \
+        -u http://localhost:8080/Galleries/%s/ -t ${G:-default} -fp-1
+
+    echo "Press any key to delete unpacked files."; read &&
+        printf "$FILES" | xargs -0 rm -r && rmdir "$DIR"
+}
+# }}}
+
 # cd ~d
 d=~/down
 v=~/dev
@@ -425,4 +293,7 @@ m=~/Movies
 p=~/Pictures
 w=~/wallpapers
 g=~/dev/gallery
+
+# syntax highlighting
+source ~/apps/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 

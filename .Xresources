@@ -40,7 +40,9 @@ XTerm*inheritPixmap: true
 XTerm*transparent: false
 
 Xft.antialias:true
-Xft.dpi:101
+!Xft.dpi:152
+!Xft.dpi:101
+Xft.dpi:96
 Xft.hinting:true
 Xft.rgba:rgb
 Xft.hintstyle:hintfull

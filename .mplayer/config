@@ -1,3 +1,4 @@
+
 [default]
 ### audio/video output
 #ao=alsa #,sdl,pulse,oss,arts
@@ -51,7 +52,7 @@ nocache=1
 idx=1
 
 [gnome-mplayer]
-vo=xv
 vf=eq2
 ao=alsa
 msglevel=all=5
+vo=xv:adaptor=0

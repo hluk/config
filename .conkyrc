@@ -4,58 +4,88 @@ double_buffer yes
 draw_shades no
 #draw_outline yes
 draw_borders no
-border_margin 0
+#border_margin 0
 
-gap_x 0
+gap_x -1
 gap_y 0
-alignment top_left
+alignment middle_right
 #alignment bottom_left
 border_inner_margin 0
 border_outer_margin 0
 border_width 0
 draw_graph_borders no
-maximum_width 1366
-minimum_size 1366 12
+maximum_width 140
+minimum_size 140 1080
 
 update_interval 2
 update_interval_on_battery 6
 
-default_color 888888
-#default_outline_color 202020
+if_up_strictness link
+
+default_color ffffff
+default_outline_color 000000
 color0 66bbff
-color1 ffffff
-color2 bbbbbb
-#own_window_colour 2060a0
+color1 cccccc
+color2 888888
+color3 ff0000
+own_window_colour 000000
 
 own_window yes
 own_window_class Conky
 own_window_type panel
 #own_window_type dock
 #own_window_transparent yes
-#own_window_argb_visual yes
-#own_window_argb_value 215
-own_window_hints sticky
+own_window_argb_visual yes
+own_window_argb_value 207
+#own_window_hints sticky
+own_window_hints undecorated,below,sticky,skip_taskbar,skip_pager
 
 use_xft yes
 #xftfont URW Gothic L:size=11:bold
 #xftfont Linux Libertine C:size=12:bold
 #xftfont Quicksand:size=12:bold
-#xftfont Fertigo Pro:size=11:bold
-xftfont Aller:size=8:bold
+#xftfont Fertigo Pro:size=9
+#xftfont Aller:size=9
 #xftfont Terminus:size=5
-#xftfont Aller Display:size=12
-#xftfont Anivers:size=12:bold
-#xftfont Juicy Hunt:size=18
-#xftfont Tenderness:size=12.5:bold
+#xftfont Aller Display:size=9
 #xftfont Yanone Kaffeesatz:size=10
 #xftfont Diavlo:size=9
-#xftfont Gayatri:size=8
+xftfont Gayatri:size=10
 #xftfont Envy Code R:size=8:bold
 #xftfont Andale Mono:size=8:bold
 #xftfont DejaVu Sans Mono:size=8:bold
 #xftfont Nimbus:size=7:bold
 #xftfont Inconsolata:size=9:bold
-#xftfont Droid Sans:size=8
+#xftfont Droid Sans:size=9
+#xftfont Cambria:size=9
+
+#
+template0 ${color0}\1  \n${voffset -14}${offset 55}${color1}
+template2 ${offset -55}
+# ethernet - download and upload speed
+template1 ${template0 \1}${if_up eth0}${\2speedf eth0}${else}${if_up wlan0}${\2speedf wlan0}${else}${color3}XXX${endif}${endif}${alignr}${color2}KiB/s  $color${template2}
 
 TEXT
- ${color0}BAT ${color1}${battery_percent} ${color2}%     •     ${color0}TEMP ${color1}${hwmon temp 1}° ${hddtemp /dev/sda}°$color     •     ${color0}UP ${color1}${upspeedf}${color2} KiB/s$color     •     ${color0}DOWN ${color1}${downspeedf}${color2} KiB/s$color     •     ${color0}ROOT ${color1}${fs_free /}${color2}/${color1}${fs_size /} ${diskiograph /dev/sda 13,120 00ff00 00ffd0}$color     •     ${color0}MEM ${color1}${mem} ${color2}$color     •     ${color0}LOAD ${color1}${loadavg}  ${cpugraph cpu0 13,120 ff0000 ffff00}  ${color0}CPU ${color1}${cpu cpu1} ${color2}% ${color1}${cpu cpu2} $color  ${alignr}  ${color1}$uptime_short$color     •     ${color0}$kernel$color     •      ${color2}${time %a %d %b}  ${color1}${time %H:%M}
+  ${font Gayatri:size=16}${color1}${time %H:%M}${font}
+${voffset -32}
+  ${alignr}${color2}${time %a %d %b}    
+${voffset -12}
+  ${color0}$kernel
+${voffset -8}
+  ${template0 BAT} ${battery_percent} ${color2}%  ${battery_bar 8,40}${template2}
+  ${template0 TEMP} ${hwmon temp 1}° ${hddtemp /dev/sda}°${template2}
+${voffset -8}
+  ${template0 MEM} ${mem} ${color2}${template2}
+${voffset -8}
+  ${template0 CPU} ${cpu cpu1} ${color2}% ${color1}${cpu cpu2}${template2}
+  ${cpugraph cpu0 20,120 ff0000 ffff00}
+  ${color0}LOAD
+      ${color1}${loadavg}
+${voffset -8}
+  ${color0}ROOT
+      ${color1}${fs_free /}${color2}/${color1}${fs_size /}
+  ${diskiograph /dev/sda 20,120 00ff00 00ffd0}
+  ${template1 DOWN down}
+  ${template1 UP up}
+${voffset -8}
+  ${template0 UPTIME} $uptime_short${template2}

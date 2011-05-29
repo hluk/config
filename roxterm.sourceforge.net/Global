@@ -1,6 +1,6 @@
 
 [roxterm options]
-colour_scheme=Tango
+colour_scheme=Default
 edit_shortcuts=0
 profile=Screen
-warn_close=2
+warn_close=1

@@ -56,16 +56,19 @@ ln -f "$WALL" "$FILE"
 
 # set wallpaper
 echo -e "\tSetting..." &&
-if pidof nautilus
+if pidof nautilus >/dev/null
 then
     gconftool-2 -t str --set /desktop/gnome/background/picture_filename "$FILE"
-elif pidof xfdesktop
+elif pidof xfdesktop >/dev/null
 then
     PROPERTY="/backdrop/screen0/monitor0/image-path"
     xfconf-query -c xfce4-desktop -p $PROPERTY -s ""
     xfconf-query -c xfce4-desktop -p $PROPERTY -s "$FILE"
+#elif pidof pcmanfm >/dev/null
+#then
+    #pcmanfm --set-wallpaper "$FILE"
 else
-    /usr/bin/feh --bg-center "$FILE" ||
+    /usr/bin/feh --no-xinerama --bg-center "$FILE" ||
         /usr/bin/xv -root -quit "$FILE"
 fi &&
 echo "Done" || exit 1

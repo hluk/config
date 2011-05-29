@@ -1,34 +1,39 @@
-#!/bin/sh
+#!/bin/bash
 FILE="$PWD"
-FILE=$(
-while :
-do
-    cd "$FILE" 2>/dev/null || break
 
-    FILE=`(echo ../
-           find -maxdepth 1 -type d -not -name '.*' -printf '%f/\n' | sort
-           find -maxdepth 1 -not -type d -not -name '.*' -printf '%f\n' | sort
-           ) |
-        sprinter -t"Open file" -l"OPEN:" -g 400,300` ||
-            exit 1
+select_files () {
+    (
+        printf '../\0'
+        find -maxdepth 1 -type d -not -name '.*' -printf '%f/\0' | sort -nz
+        find -maxdepth 1 -not -type d -not -name '.*' -printf '%f\0' | sort -nz
+    ) | $MENU -tOPEN -lOPEN -i'\0' -o'\0'
+}
 
-    if [ -z "$FILE" ]
+cmd () {
+    CMD=$(find `echo $PATH | tr : ' '` \! -type d -executable -printf '%f\n' |
+          $MENU -t"OPEN WITH" -l"OPEN WITH") || exit 1
+    exec "$CMD" "$@"
+}
+
+if [ $# -gt 0 ]
+then
+    if [ "$&" = "" ]
     then
-        break
+        exit 1
+    elif [ "$&" = "." ]
+    then
+        cmd . && exit || exit 1
     fi
 
-    if [ "$FILE" = "~" ]
+    if test $# -eq 1 && cd "$1" 2>/dev/null
     then
-        FILE=$HOME
+        select_files | xargs -0 "$0"
+    else
+        cmd "$@"
     fi
-done
-echo $PWD/$FILE
-) || exit 1
-echo $FILE
-
-CMD=$(find `echo $PATH | tr : ' '` \! -type d -executable -printf '%f\n' |
-        sprinter -t"Open file" -l"OPEN WITH:" -o -w -z 196,16 -g 600) ||
-            exit 1
-
-exec "$CMD" "$FILE"
+else
+    test -z "$MENU" || exit 1
+    export MENU="$HOME/dev/sprinter-gtk/sprinter -g 400x-64-1-1"
+    printf "$FILE" | xargs -0 "$0"
+fi
 

@@ -14,3 +14,6 @@ use_ssh=0
 term=xterm-256color
 scrollback_lines=0
 scrollbar_pos=0
+full_screen=0
+font=Monospace 10
+cursor_blink_mode=2
