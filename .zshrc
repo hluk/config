@@ -1,7 +1,7 @@
 # basic configuration# {{{
 HISTFILE=~/.histfile
-HISTSIZE=3000
-SAVEHIST=3000
+HISTSIZE=10000
+SAVEHIST=10000
 bindkey -e
 
 zstyle ':completion:*' list-colors ''
@@ -127,9 +127,9 @@ fi
 Find () {
     if [ $# -gt 1 ]
     then
-        find $1 -iname "*$2*"
+        find $1 -iregex "$2"
     else
-        find -iname "*$1*"
+        find -iregex "$1"
     fi
 }
 # }}}
@@ -149,6 +149,12 @@ alias dict="~/dev/translate/translate.py"
 alias p="echo -n 'Press any key to continue...'; read -sn 1; echo"
 alias equalizer="alsamixer -D equal"
 alias S="e -S Session.vim"
+alias flash=~/dev/bin/flash.sh
+alias natsort=~/dev/natsort/natsort
+alias m="mplayer -quiet"
+#alias m="smplayer"
+#alias m="umplayer"
+alias binwalk="~/apps/binwalk/src/binwalk -m ~/apps/binwalk/src/magic.binwalk"
 
 alias ifconfig="echo \"Use 'ip addr' command.\""
 alias netstat="echo \"Use 'ss' command.\""
@@ -159,7 +165,6 @@ then
 	# aliases for X
 	#alias e="gvim"
     alias mc="mc -x"
-    alias m="ranger"
 	alias feb="$HOME/dev/bin/feb"
 	alias febt="THUMBS=1 $HOME/dev/bin/feb"
 	alias smplayer="LANG=C smplayer"
@@ -181,15 +186,17 @@ alias Gitd="git diff --color"
 alias Gitc="git commit --interactive -m"
 alias Gits="git show --color"
 alias Gitp="git push origin master"
+alias Gitl="git log --date-order --color --pretty=fuller --name-only"
 
 # yaourt
 export PACMAN=pacman-color
 alias q="yaourt"
-alias i="yaourt -S"
-alias u="yaourt -Rs"
-alias qdiff="yaourt -C"
-alias up="yaourt -Syu --aur"
-alias clean="yaourt -Qdt"
+alias i="q -S"
+alias u="q -Rs"
+alias qdiff="q -C"
+alias up="q -Syu --aur"
+alias Up="q -Qe|awk -F'[/ ]' '/^local/{if(\$2~/-(git|svn|bzr|hg)$/)print\$2}'"
+alias clean="q -Qdt"
 
 # volume and brightness
 alias volup="~/dev/bin/volume.sh 8%+"
@@ -204,36 +211,30 @@ alias reboot="sudo reboot"
 #alias adblock="su -c \"$EDITOR -c ':cd /etc/privoxy' -c ':e user.action'\""
 # }}}
 
+# open editor in GNU screen in new window
 e () {
     screen -t ">$@" "$EDITOR" $@
 }
 
-# func: flash url/command# {{{
-# play flash videos
-flash() {
+# autojump needs this
+source /etc/profile
+
+# func: mangrep {regex} [page numbers]# {{{
+# find regex in manual pages
+mangrep() {
     (
-    CMD=~/apps/get-flash-videos/get_flash_videos
-    mkdir -p ~/down/_flash &&
-    cd ~/down/_flash/ || return 1
-    case "$1" in
-        "clean")
-            rm *.(mp4|flv|mov|avi) ;;
-        "update")
-            git pull ;;
-        "")
-            "$CMD" --play `xclip -o`;;
-        *)
-            "$CMD" --play $@ ;;
-    esac
+    cd /usr/share/man &&
+    find man${2:-*} -name '*.gz' -exec zgrep --color=always "$1" {} +
     )
 }
 # }}}
 
-# autojump needs this
-source /etc/profile
-
-# pulseaudio
-#pidof pulseaudio >/dev/null || pulseaudio --start || echo "ERROR: Cannot start Pulseaudio!"
+# func: pack [files]# {{{
+# compress files
+pack() {
+    tar cvf - $@ | gzip -c > $1_`date +%Y%m%d`.tar.gz
+}
+# }}}
 
 # func: yy [files]# {{{
 # copy files recursively
@@ -268,6 +269,8 @@ pl() {
 # use G variable to set gallery name
 v_archive() {
     DIR=~/.archives/${G:-default}
+    MKGALLERY=${MKGALLERY:-~/dev/gallery/mkgallery.py}
+    #MKGALLERY=~/dev/moka/mkgallery/mkgallery.py
 
     FILES=""
     for archive in "$@"
@@ -278,12 +281,13 @@ v_archive() {
     done
     [ -n "$FILES" ] || return 1
 
-    printf "$FILES" | xargs -0 "$HOME/dev/gallery/mkgallery.py" \
+    printf "$FILES" | xargs -0 "$MKGALLERY" \
         -u http://localhost:8080/Galleries/%s/ -t ${G:-default} -fp-1
 
     echo "Press any key to delete unpacked files."; read &&
         printf "$FILES" | xargs -0 rm -r && rmdir "$DIR"
 }
+alias v2="MKGALLERY=~/dev/moka/mkgallery/mkgallery.py v_archive"
 # }}}
 
 # cd ~d
@@ -293,7 +297,23 @@ m=~/Movies
 p=~/Pictures
 w=~/wallpapers
 g=~/dev/gallery
+f=~/down/_flash
 
 # syntax highlighting
 source ~/apps/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_HIGHLIGHT_STYLES+=(
+    alias                   'fg=magenta,bold'
+    path                    'fg=cyan'
+    globbing                'fg=yellow'
+    single-hyphen-option    'bold'
+    double-hyphen-option    'bold'
+)
+# matching brackets
+ZSH_HIGHLIGHT_MATCHING_BRACKETS_STYLES=(
+    'fg=blue,bold'    # Style for first level of imbrication
+    'fg=green,bold'   # Style for second level of imbrication
+    'fg=magenta,bold' # etc... Put as many styles as you wish, or leave
+    'fg=yellow,bold'  # empty to disable brackets matching.
+    'fg=cyan,bold'
+)
 

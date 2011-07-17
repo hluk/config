@@ -1,0 +1,15 @@
+# vim: set commentstring="# %s"
+out_to_console yes
+out_to_x no
+background no
+total_run_times 0
+use_spacer none
+
+update_interval 4
+update_interval_on_battery 8
+
+if_up_strictness link
+
+TEXT
+CPU:${cpu cpu1}%${cpu cpu2}  MEM:${mem}  LOAD:${loadavg}  ROOT:${fs_free /}/${fs_size /}  BAT:${battery_percent}  TEMP:${hwmon temp 1}°${hddtemp /dev/sda}  NET:${if_up eth0}${downspeedf eth0} ${upspeedf eth0}${else}${if_up wlan0}WIFI ${downspeedf wlan0} ${upspeedf wlan0}${else}OFFLINE${endif}${endif}  $kernel ${time %a %d %b %H:%M}
+

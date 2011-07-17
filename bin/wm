@@ -1,0 +1,36 @@
+#!/bin/bash
+## compiz
+#export INTEL_BATCH=1
+#export LAUNCH_CONDITION="pidof X"
+#~/launch.sh compiz --sm-disable --indirect-rendering --replace ccp &
+#(sleep 3; exec ~/launch.sh trayer --align right --transparent true --tint black --alpha 48 --width 140 --widthtype pixel) &
+#~/launch.sh cairo-dock
+
+# KDE
+#plasma-desktop &
+#kwin --replace 
+
+## DWM
+(
+killall conky
+conky -c ~/.conkyrc_console | while read -r; do xsetroot -name "$REPLY"; done
+xsetroot -name ""
+) &
+exec ~/apps/tiling/dwm/dwm
+
+## WMFS
+#WMFS=~/apps/tiling/wmfs/wmfs
+#(
+#killall conky
+#sleep 2
+#conky -c ~/.conkyrc_console | while read -r; do "$WMFS" -s -name "$REPLY"; done
+#xsetroot -name ""
+#) &
+#exec "$WMFS"
+
+## musca
+#exec musca
+
+## evilwm
+#exec ~/apps/evilwm/evilwm
+

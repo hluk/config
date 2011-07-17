@@ -1,26 +1,29 @@
-
 [default]
 ### audio/video output
 #ao=alsa #,sdl,pulse,oss,arts
 #ao=alsa:device=hw=0.0
-ao=alsa
+#ao=alsa
+ao=pulse,pulse
 #ao=oss
-#ao=pulse
+
 vo=xv:adaptor=0
+#vo=vaapi
+
 #zoom=yes
-#vo=gl:yuv=3:swapinterval=1:force-pbo:ati-hack
 
 
 ### VIDEO
-vf=screenshot
+#vf=screenshot
+#vf=eq2
 # direct rendering
-dr=1
+#dr=0
+# double buffering
+double=1
 #full screen
 fs=1
 #autosync=30
 #framedrop=1
-#lavdopts=threads=4
-#lavdopts=skiploopfilter=all
+lavdopts=skiploopfilter=all,threads=2
 #noslices=1
 #stop-xscreensaver=1
 
@@ -42,17 +45,16 @@ embeddedfonts=1
 #fontconfig=1
 font=Aller
 #subfont-autoscale=3
+subfont-osd-scale=2.5
 #ass-font-scale=1
 subcp=CP1250
 subpos=100
 
 
 # MISC
-nocache=1
-idx=1
+#cache=4096
+cache=70000
+cache-min=1
+#nocache=1
+#idx=1
 
-[gnome-mplayer]
-vf=eq2
-ao=alsa
-msglevel=all=5
-vo=xv:adaptor=0

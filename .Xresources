@@ -8,36 +8,42 @@
 
 !#define FONT1 xft:liberation mono:size=8
 !#define FONT1 xft:Andale Mono:size=10
-!#define FONT1 xft:Dejavu Sans Mono:size=9
-!#define FONT1 xft:Inconsolata:size=13
-#define FONT1 xft:Bitstream Vera Sans Mono:pixelsize=12
+!#define FONT1 xft:Dejavu Sans Mono:pixelsize=16
+!#define FONT1 xft:Inconsolata:size=12
+#define FONT1 xft:Bitstream Vera Sans Mono:pixelsize=14
 !#define FONT1 xft:Consolas:size=11
+!#define FONT1 xft:Envy Code R:size=11
+!#define FONT1 xft:Terminus:pixelsize=19
+!#define FONT1 xft:Terminus
 
 !!!!!!XTERM:FONT
-XTerm*RenderFont: true
-XTerm*FaceName: FONT1
-XTerm*boldMode: false
+Rxvt*RenderFont: true
+Rxvt*FaceName: FONT1
+Rxvt*font: FONT1
+Rxvt*boldMode: false
+Rxvt.letterSpace: -1
+!Rxvt.letterSpace: 0
 
 !!!!!!XTERM:GEOMETRY
 !XTerm*geometry: 100x50
 
 !!!!!!XTERM:SCROLLING
-XTerm*scrollBar: false
-XTerm*saveLines: 1024
-XTerm*scrollKey: true
-XTerm*scrollTtyOutput: false
-XTerm*scrollTtyKeypress: true
-XTerm*scrollWithBuffer: false
+Rxvt*scrollBar: false
+Rxvt*saveLines: 1024
+Rxvt*scrollKey: true
+Rxvt*scrollTtyOutput: false
+Rxvt*scrollTtyKeypress: true
+Rxvt*scrollWithBuffer: false
 !XTerm*jumpScroll: true
-XTerm*skipScroll: true
-XTerm*scrollColor: #aaa894
-XTerm*troughColor: #000000
-XTerm*scrollstyle: plain
+Rxvt*skipScroll: true
+Rxvt*scrollColor: #aaa894
+Rxvt*troughColor: #000000
+Rxvt*scrollstyle: plain
 
-XTerm*tintColor: #60aadd
-XTerm*shading: 80
-XTerm*inheritPixmap: true
-XTerm*transparent: false
+Rxvt*tintColor: #444444
+Rxvt*shading: 80
+Rxvt*inheritPixmap: true
+Rxvt*transparent: false
 
 Xft.antialias:true
 !Xft.dpi:152
@@ -63,30 +69,30 @@ xpdf*background:        white
 
 !!! color schemes: http://phraktured.net/terminal-colors/
 !*cursorColor: gray
-XTerm*foreground:     rgb:dd/dd/dd
-XTerm*background:     rgb:00/00/00
+Rxvt*foreground:     rgb:cc/cc/cc
+Rxvt*background:     rgb:00/00/00
 !black
-XTerm*color0:         rgb:19/19/19
-XTerm*color8:         rgb:25/25/25
+Rxvt*color0:         rgb:19/19/19
+Rxvt*color8:         rgb:25/25/25
 !red
-XTerm*color1:         rgb:80/32/32
-XTerm*color9:         rgb:98/2b/2b
+Rxvt*color1:         rgb:80/32/32
+Rxvt*color9:         rgb:98/2b/2b
 !green
-XTerm*color2:         rgb:5b/76/2f
-XTerm*color10:        rgb:89/b8/3f
+Rxvt*color2:         rgb:5b/76/2f
+Rxvt*color10:        rgb:89/b8/3f
 !brown/yellow
-XTerm*color3:         rgb:aa/99/43
-XTerm*color11:        rgb:ef/ef/60
+Rxvt*color3:         rgb:aa/99/43
+Rxvt*color11:        rgb:ef/ef/60
 !blue
-XTerm*color4:         rgb:32/4c/80
-XTerm*color12:        rgb:2b/4f/98
+Rxvt*color4:         rgb:32/4c/80
+Rxvt*color12:        rgb:2b/4f/98
 !magenta
-XTerm*color5:         rgb:70/6c/9a
-XTerm*color13:        rgb:82/6a/b1
+Rxvt*color5:         rgb:70/6c/9a
+Rxvt*color13:        rgb:82/6a/b1
 !cyan
-XTerm*color6:         rgb:92/b1/9e
-XTerm*color14:        rgb:a1/cd/cd
+Rxvt*color6:         rgb:92/b1/9e
+Rxvt*color14:        rgb:a1/cd/cd
 !white
-XTerm*color7:         rgb:ff/ff/ff
-XTerm*color15:        rgb:dd/dd/dd
+Rxvt*color7:         rgb:dd/dd/dd
+Rxvt*color15:        rgb:ff/ff/ff
 

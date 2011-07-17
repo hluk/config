@@ -49,14 +49,14 @@
     #Menu
 
 # right button
-"xte 'mouseclick 3 &'"
-    mod4+b:1+release
-"xte 'mouseclick 3 &'"
-    mod4+shift+b:1+release
+#"xte 'mouseclick 3 &'"
+    #mod4+b:1+release
+#"xte 'mouseclick 3 &'"
+    #mod4+shift+b:1+release
 
 # middle button
-"xte 'mouseclick 2 &'"
-    mod4+alt+b:1+release
+#"xte 'mouseclick 2 &'"
+    #mod4+alt+b:1+release
 # }}}
 
 # AUDIO# {{{
@@ -71,8 +71,12 @@
     XF86AudioLowerVolume
 "~/dev/bin/togglemute.sh"
     XF86AudioMute
-"~/dev/grooveshark/grooveshark_toggle.sh toggle"
-    mod4+m
+#"~/dev/grooveshark/grooveshark_toggle.sh toggle"
+    #mod4+m
+"pactl set-card-profile 0 output:analog-stereo"
+    mod4+XF86AudioPrev
+"pactl set-card-profile 0 output:hdmi-stereo"
+    mod4+XF86AudioNext
 # }}}
 
 # SCREEN# {{{
@@ -81,6 +85,18 @@
     XF86MonBrightnessUp
 "~/dev/colors/backlight.sh -8"
     XF86MonBrightnessDown
+"~/dev/colors/backlight.sh 8"
+    mod4+control+Right
+"~/dev/colors/backlight.sh -8"
+    mod4+control+Left
+#"~/dev/colors/backlight.sh 255"
+    #mod4+control+Next
+#"~/dev/colors/backlight.sh -255"
+    #mod4+control+Prior
+"~/hw.mak MONITORS='LVDS1 --off; HDMI --primary' wallpaper > ~/hw.log"
+    mod4+control+Next
+"~/hw.mak wallpaper > ~/hw.log"
+    mod4+control+Prior
 
 # switch between redshift and invert
 #"killall redshift && redshift -l 49.0:16.7 -t 6500:3800 -r -o && ~/dev/colors/invert || redshift -l 49.0:16.7 -t 6500:3800 -r"

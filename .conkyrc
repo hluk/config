@@ -2,6 +2,7 @@
 double_buffer yes
 
 draw_shades no
+# outlines are eating lot of CPU
 #draw_outline yes
 draw_borders no
 #border_margin 0
@@ -28,6 +29,7 @@ color0 66bbff
 color1 cccccc
 color2 888888
 color3 ff0000
+color4 aa0000
 own_window_colour 000000
 
 own_window yes
@@ -59,7 +61,6 @@ xftfont Gayatri:size=10
 #xftfont Droid Sans:size=9
 #xftfont Cambria:size=9
 
-#
 template0 ${color0}\1  \n${voffset -14}${offset 55}${color1}
 template2 ${offset -55}
 # ethernet - download and upload speed
@@ -68,10 +69,10 @@ template1 ${template0 \1}${if_up eth0}${\2speedf eth0}${else}${if_up wlan0}${\2s
 TEXT
   ${font Gayatri:size=16}${color1}${time %H:%M}${font}
 ${voffset -32}
-  ${alignr}${color2}${time %a %d %b}    
+  ${alignr}${color2}${time %a %d %b} 
 ${voffset -12}
-  ${color0}$kernel
-${voffset -8}
+  ${color4}$kernel
+${voffset 4}
   ${template0 BAT} ${battery_percent} ${color2}%  ${battery_bar 8,40}${template2}
   ${template0 TEMP} ${hwmon temp 1}° ${hddtemp /dev/sda}°${template2}
 ${voffset -8}
@@ -87,5 +88,3 @@ ${voffset -8}
   ${diskiograph /dev/sda 20,120 00ff00 00ffd0}
   ${template1 DOWN down}
   ${template1 UP up}
-${voffset -8}
-  ${template0 UPTIME} $uptime_short${template2}

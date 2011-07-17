@@ -6,6 +6,8 @@
 " gf -- open file which filename is under cursor
 set nocompatible
 set mouse=a
+set ttyfast
+set lazyredraw
 " save power
 set nofsync
 let &guicursor = &guicursor . ",a:blinkon0"
@@ -60,6 +62,8 @@ filetype indent on
 
 set nobackup
 
+"set runtimepath+=~/apps/vim/clang_complete/
+
 command! Q :q
 command! W :w
 
@@ -106,8 +110,8 @@ noremap <silent> <Space> :silent noh<Bar>echo<CR>
 "}}}
 
 " Completion {{{
-"let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
-let g:SuperTabDefaultCompletionType = "context"
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+"let g:SuperTabDefaultCompletionType = "context"
 
 let g:acp_completeoptPreview = 1
 
@@ -172,19 +176,18 @@ map <F4> :bd<CR>
 "}}}
 
 " filetype-specific config {{{
-autocmd FileType c    set tags+=~/.vim/tags_c
+"autocmd FileType c    set tags+=~/.vim/tags_c
 autocmd FileType c    set omnifunc=ccomplete#Complete
 autocmd FileType cpp  set omnifunc=ccomplete#Complete
-autocmd FileType cpp  set tags+=~/.vim/tags_cpp
-autocmd FileType ruby set tags+=~/.vim/tags_ruby
-autocmd FileType java set tags+=~/.vim/tags_java
-autocmd FileType python set noexpandtab
-autocmd FileType python set omnifunc=pythoncomplete#Complete
-autocmd FileType javascript set filetype+=.doxygen
-"set tags+=~/.vim/ctags
-autocmd FileType c noremap <C-F12> :!ctags -R --c-kinds=+p --fields=+iaS --extra=+q --language-force=C 
-autocmd FileType c noremap <F12> :!ctags -R --c-kinds=+p --fields=+iaS --extra=+q --language-force=C .<CR>
-autocmd FileType cpp noremap <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q --language-force=C++ .<CR>
+"autocmd FileType cpp  set tags+=~/.vim/tags_cpp
+"autocmd FileType ruby set tags+=~/.vim/tags_ruby
+"autocmd FileType java set tags+=~/.vim/tags_java
+"autocmd FileType python set noexpandtab
+"autocmd FileType python set omnifunc=pythoncomplete#Complete
+"autocmd FileType javascript set filetype+=.doxygen
+"autocmd FileType c noremap <C-F12> :!ctags -R --c-kinds=+p --fields=+iaS --extra=+q --language-force=C 
+autocmd FileType c noremap <F12> :!ctags -R --c-kinds=+p --fields=+iaS --extra=+q .<CR>
+autocmd FileType cpp noremap <F12> :!ctags -R --c++-kinds=+p --fields=+iaS --extra=+q .<CR>
 "noremap <F12> :!exuberant-ctags -R .<CR>
 "autocmd FileType ruby noremap <F11> :!exuberant-ctags --totals --lang-map=Ruby:+.rb -f ~/.vim/tags_ruby -R /usr/lib/ruby/gems /usr/lib/ruby/site_ruby<CR>
 
@@ -319,7 +322,7 @@ inoremap <F8> <C-o>:call NextColor(-1)<CR>
 let s:mycolor='soso'
 if has("gui_running")
     gui
-    set guifont=Bitstream\ Vera\ Sans\ Mono\ 9
+    set guifont=Bitstream\ Vera\ Sans\ Mono\ 11.5
 
     let s:mycolors = ['solarized', 'soso', 'wombat', 'molokai', 'summerfruit256']
     call HourColor()
@@ -330,7 +333,8 @@ endif
 "}}}
 
 " screen
-nmap \| :!screen<CR>
+"nmap \| :call system("screen")<CR>
+nmap \| :!screen<CR><CR>
 
 " visually differentiate normal and insert modes"{{{
 "let s:n_laststatus=&laststatus

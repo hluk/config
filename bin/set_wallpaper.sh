@@ -5,6 +5,11 @@
 #   ./set_wallpaper.sh image_file
 FILE=~/wallpaper.png
 WALLPATH=${WALLPATH:-"$HOME/wallpapers"}
+
+# screen resolution
+#RES=(`xdpyinfo|sed -n '/^  dimensions:    /{s/.* \([0-9]\+\)x\([0-9]\+\).*/\1 \2/;p;q}'`) || exit $?
+RES=(1920 1080)
+
 TMPPATH="$WALLPATH/_tmp"
 TMP="/home/lukas/dev/img/wallpaper.tmp.jpg"
 
@@ -24,9 +29,6 @@ else
 fi
 
 echo -e "\tInput: `/usr/bin/identify "$IMG"`"
-
-# get screen resolution
-RES=(`xdpyinfo|sed -n '/^  dimensions:    /{s/.* \([0-9]\+\)x\([0-9]\+\).*/\1 \2/;p;q}'`) || exit $?
 
 TMPPATH="$TMPPATH/${RES[0]}x${RES[1]}"
 # create wallapaper if it doesn't exist for current resolution
@@ -68,7 +70,8 @@ then
 #then
     #pcmanfm --set-wallpaper "$FILE"
 else
-    /usr/bin/feh --no-xinerama --bg-center "$FILE" ||
+    #/usr/bin/feh --no-xinerama --bg-center "$FILE" ||
+    /usr/bin/feh --bg-fill "$FILE" ||
         /usr/bin/xv -root -quit "$FILE"
 fi &&
 echo "Done" || exit 1
