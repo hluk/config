@@ -1,8 +1,8 @@
 #!/bin/sh
 ~/hw.mak > ~/hw.log &
 
-echo ".xinit: starting pulseaudio"
-pulseaudio --start &
+#echo ".xinit: starting pulseaudio"
+#pulseaudio --start &
 
 echo ".xinit: starting redshift"
 ~/dev/bin/redshift.sh &

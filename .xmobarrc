@@ -1,18 +1,17 @@
-Config { font = "xft:Gayatri:size=12"
+Config { font = "xft:Droid Sans:size=10"
        , bgColor = "#222"
        , fgColor = "#bbb"
-       , position = Bottom
+       , position = Top
        , lowerOnStart = True
-       , commands = [ Run Network "eth0" ["--template","<rx>   <tx>","-L","1","-H","1000","--low","aquamarine3","--normal","#f0e050","--high","#ff9a50"] 50
-                    , Run Cpu ["--template","cpu <total>","-L","10","-H","90","--low","aquamarine3","--normal","#f0e050","--high","#ff9a50"] 10
-                    , Run Com "~/dev/xmobar/uptime/uptime" [] "uptime" 100
+       , commands = [ Run Network "eth0"  ["--template","<rx>   <tx>","-L","1","-H","1000","--low","aquamarine3","--normal","#f0e050","--high","#ff3333"] 50
+                    , Run Network "wlan0" ["--template","<rx>   <tx>","-L","1","-H","1000","--low","aquamarine3","--normal","#f0e050","--high","#ff3333"] 50
+                    , Run Cpu ["--template","CPU <total>%","-L","10","-H","90","--low","aquamarine3","--normal","#f0e050","--high","#ff3333"] 50
+                    , Run Memory ["--template","MEM <used> MiB","-L","400","-H","1000","--low","aquamarine3","--normal","#f0e050","--high","#ff3333"] 10
+                    , Run Com "~/dev/xmobar/uptime/uptime" [] "uptime" 600
                     , Run Com "uname" ["-r"] "" 36000
-                    , Run Com "~/dev/xmobar/mpd/mpdinfo" [] "music" 10
-                    , Run Date "%m/%_d %H:%M:%S" "date" 10
+                    , Run Date "%m/%_d %H:%M" "date" 50
                     , Run StdinReader
-                    , Run Com "df" ["--no-sync", "-h", "/","|awk 'NR==2 {print $4\"/\"$2}'"] "" 100
                     ]
        , sepChar = "%"
        , alignSep = "}{"
-       , template = "%StdinReader% %music%}{   •   %uptime%  %cpu%   •   %eth0%   •   %df%   •   %uname%   <fc=#ee9a50>%date%</fc>                         "
-       }
+       , template = "%StdinReader% }{  •  %uptime%  %cpu%  •  %memory%  •  %eth0%  •  %uname%  <fc=#ee9a50>%date%</fc>  "}

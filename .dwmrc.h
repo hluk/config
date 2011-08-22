@@ -1,15 +1,34 @@
-/* See LICENSE file for copyright and license details. */
+/* names of unmanaged windows */
+const char *unmanaged[] = {"stalonetray", "xfce4-notifyd", 0};
+/* make some space for panel window next to status text */
+const char *panel_name = "stalonetray";
+
+#define NUMCOLORS         8             // need at least 3
+static const char colors[NUMCOLORS][ColLast][8] = {
+   // border   foreground  background
+   { "#000", "#aaa", "#000" },  // 0 = normal
+   { "#06a", "#eee", "#06a" },  // 1 = selected
+   { "#06a", "#fff", "#f00" },  // 2 = urgent/warning
+   { "#f00", "#fff", "#f00" },  // 3 = error
+   { "#000", "#5af", "#000" },
+   { "#000", "#aaa", "#000" },
+   { "#000", "#d00", "#000" },
+   { "#e00", "#fff", "#e00" },
+};
 
 /* appearance */
-static const char font[]            = "-*-clean-medium-r-*-*-12-*-*-*-*-*-*-*";
-static const char normbordercolor[] = "#000000";
-static const char normbgcolor[]     = "#000000";
-static const char normfgcolor[]     = "#aaaaaa";
-static const char urgentbgcolor[]   = "#e00000";
-static const char urgentfgcolor[]   = "#ffffff";
-static const char selbordercolor[]  = "#0066ff";
-static const char selbgcolor[]      = "#0066ff";
-static const char selfgcolor[]      = "#ffffff";
+static const char font[]            =
+//"-*-clean-medium-r-*-*-12-*-*-*-*-*-*-*";
+//"-bitstream-bitstream vera sans mono-medium-r-normal--11-0-0-0-m-0-iso8859-1";
+//"-misc-droid sans mono-medium-r-normal--11-0-0-0-m-0-iso8859-1";
+//"-misc-dejavu sans mono-medium-r-normal--11-0-0-0-m-0-iso8859-1";
+//"-misc-liberation mono-medium-r-normal--12-0-0-0-m-0-iso8859-1";
+//"-misc-novamono-medium-r-normal--11-0-0-0-m-0-iso8859-1";
+//"-bitstream-charter-medium-r-normal--11-80-100-100-p-61-iso8859-1";
+//"-misc-envy code r-medium-r-normal--12-0-0-0-m-0-iso8859-1";
+"-misc-envy code r-medium-r-normal--12-0-0-0-m-0-*-*";
+//"-misc-monaco-medium-r-normal--11-0-0-0-p-0-iso8859-1";
+//"-monotype-andale mono-medium-r-normal--12-0-0-0-c-0-iso8859-1";
 static const unsigned int borderpx  = 3;        /* border pixel of windows */
 static const unsigned int snap      = 32;       /* snap pixel */
 static const Bool showbar           = True;     /* False means no bar */
@@ -20,11 +39,14 @@ static const char *tags[] = { "1", "2", "3", "4" };
 
 static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "Sprinter", NULL,       NULL,       ~0,           True,        -1 },
-    { "Gimp",     NULL,       NULL,       1 << 2,       False,       -1 },
-    { "Pidgin",   NULL,       NULL,       1 << 3,       True,        -1 },
-	{ "Firefox",  NULL,       NULL,       1 << 1,       False,       -1 },
-	{ "Chrome",   NULL,       NULL,       1 << 1,       False,       -1 },
+	{ "trayer",      NULL,       NULL,       ~0,           True,        -1 },
+	{ "stalonetray", NULL,       NULL,       ~0,           True,        -1 },
+	{ "Sprinter",    NULL,       NULL,       ~0,           True,        -1 },
+    { "Gimp",        NULL,       NULL,       1 << 2,       False,       -1 },
+    { "Pidgin",      NULL,       NULL,       1 << 3,       True,        -1 },
+	{ "Firefox",     NULL,       NULL,       1 << 1,       False,       -1 },
+	{ "Nightly",     NULL,       NULL,       1 << 1,       False,       -1 },
+	{ "Chrome",      NULL,       NULL,       1 << 1,       False,       -1 },
 };
 
 /* layout(s) */

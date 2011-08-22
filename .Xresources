@@ -5,16 +5,17 @@
 !#define FONT1 -*-proggysquare-*-*-*-*-*-80-*-*-*-*-*-*
 !#define FONT1 -xos4-terminus-medium-r-normal--17-*-*-*-*-*-iso10646-1
 !#define FONT1 -*-fixed-medium-r-normal--18-*-*-*-*-*-iso10646-1
+!#define FONT1 -misc-envy code r-medium-r-normal--14-0-0-0-m-0-iso8859-1
 
 !#define FONT1 xft:liberation mono:size=8
 !#define FONT1 xft:Andale Mono:size=10
 !#define FONT1 xft:Dejavu Sans Mono:pixelsize=16
 !#define FONT1 xft:Inconsolata:size=12
-#define FONT1 xft:Bitstream Vera Sans Mono:pixelsize=14
 !#define FONT1 xft:Consolas:size=11
 !#define FONT1 xft:Envy Code R:size=11
-!#define FONT1 xft:Terminus:pixelsize=19
+!#define FONT1 xft:Terminus:pixelsize=14
 !#define FONT1 xft:Terminus
+#define FONT1 xft:Bitstream Vera Sans Mono:pixelsize=14
 
 !!!!!!XTERM:FONT
 Rxvt*RenderFont: true
@@ -22,6 +23,7 @@ Rxvt*FaceName: FONT1
 Rxvt*font: FONT1
 Rxvt*boldMode: false
 Rxvt.letterSpace: -1
+!Rxvt.letterSpace: -2
 !Rxvt.letterSpace: 0
 
 !!!!!!XTERM:GEOMETRY

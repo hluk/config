@@ -10,27 +10,41 @@
 #plasma-desktop &
 #kwin --replace 
 
+## WMFS
+#WMFS=~/apps/tiling/wmfs/wmfs
+#killall -q stalonetray trayer systeminfo systeminfo_wmf wmfs dwm
+#(
+#sleep 2
+#~/dev/systeminfo/systeminfo_wmfs | while read -r; do "$WMFS" -s "$REPLY"; done
+#"$WMFS" -s ""
+#) &
+#"$WMFS"
+# fallback
+#killall -q $! systeminfo_wmfs wmfs
+
 ## DWM
+killall -q systeminfo
 (
-killall conky
-conky -c ~/.conkyrc_console | while read -r; do xsetroot -name "$REPLY"; done
+~/dev/systeminfo/systeminfo
 xsetroot -name ""
 ) &
 exec ~/apps/tiling/dwm/dwm
 
-## WMFS
-#WMFS=~/apps/tiling/wmfs/wmfs
-#(
-#killall conky
-#sleep 2
-#conky -c ~/.conkyrc_console | while read -r; do "$WMFS" -s -name "$REPLY"; done
-#xsetroot -name ""
-#) &
-#exec "$WMFS"
+## ratpoison
+#exec ~/apps/tiling/ratpoison/bin/ratpoison.sh
 
 ## musca
 #exec musca
 
 ## evilwm
 #exec ~/apps/evilwm/evilwm
+
+## Xmonad
+#exec xmonad
+
+## i3
+#killall -q i3bar dzen2 systeminfo_dzen2
+#~/apps/tiling/i3/i3bar/i3bar -d &
+#(sleep 1; ~/dev/systeminfo/systeminfo_dzen2 | ~/apps/dzen/dzen2 -bg black -fn "-misc-envy code r-medium-r-normal--12-0-0-0-m-0-*-*" -expand left -y -1) &
+#exec ~/apps/tiling/i3/i3
 

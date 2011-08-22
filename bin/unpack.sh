@@ -49,6 +49,7 @@ do
 		case "$mime" in
 			application/zip)    CMD="unzip"      ;;
 			application/x-rar)  CMD="unrar x"    ;;
+            application/x-xz)   CMD="tar xJvf"   ;;
 			application/x-tar | application/x-gzip | application/x-bzip2)
                 CMD="tar xvf" ;;
             application/x-7z-compressed|application/octet-stream) CMD="7z x" ;;

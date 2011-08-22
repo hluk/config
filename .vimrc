@@ -53,14 +53,25 @@ set shiftwidth=4
 "syntax
 syntax on
 
+" pathogen - plugin loader (~/.vim/bundle/*)
 " must be called before "filetype indent on"
 filetype off
-"call pathogen#runtime_append_all_bundles()
+call pathogen#runtime_append_all_bundles()
+call pathogen#helptags()
 
 filetype plugin on
 filetype indent on
 
 set nobackup
+
+" Command-t - quick file access
+noremap <leader>o <Esc>:CommandT<CR>
+noremap <leader>O <Esc>:CommandTFlush<CR>
+noremap <leader>m <Esc>:CommandTBuffer<CR>
+
+" Tagbar
+let g:tagbar_usearrows = 1
+nnoremap <leader>l :TagbarToggle<CR>
 
 "set runtimepath+=~/apps/vim/clang_complete/
 
@@ -86,8 +97,10 @@ map tt :NERDTreeToggle<CR>
 let NERDShutUp=1
 
 " make
-map <F5> :make<CR>
-imap <F5> <C-o>:make<CR>
+"map <F5> :make<CR>
+"imap <F5> <C-o>:make<CR>
+map <F5> :make!<CR><CR>
+imap <F5> <C-o>:make!<CR><CR>
 
 " run/execute current file
 map <C-CR> :w<CR>:!./%<CR>
@@ -110,8 +123,8 @@ noremap <silent> <Space> :silent noh<Bar>echo<CR>
 "}}}
 
 " Completion {{{
-let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
-"let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+let g:SuperTabDefaultCompletionType = "context"
 
 let g:acp_completeoptPreview = 1
 
@@ -121,17 +134,6 @@ imap <C-Space> <C-X><C-O>
 
 " Completion popup menu like in an IDE (Matt Zyzik)
 set completeopt=longest,menuone,preview
-"inoremap <expr> <cr> pumvisible() ? "\<c-y>" : "\<c-g>u\<cr>"
-"inoremap <expr> <c-n> pumvisible() ? "\<lt>c-n>" : "\<lt>c-n>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>" 
-"inoremap <expr> <m-;> pumvisible() ? "\<lt>c-n>" : "\<lt>c-x>\<lt>c-o>\<lt>c-n>\<lt>c-p>\<lt>c-r>=pumvisible() ? \"\\<lt>down>\" : \"\"\<lt>cr>"
-
-"inoremap <expr> <Esc>      pumvisible() ? "\<C-e>" : "\<Esc>"
-"inoremap <expr> <CR>       pumvisible() ? "\<C-y>" : "\<CR>"
-"inoremap <expr> <CR> pumvisible() ? "\<C-y>" : "\<C-g>u\<CR>"
-"inoremap <expr> <Down>     pumvisible() ? "\<C-n>" : "\<Down>"
-"inoremap <expr> <Up>       pumvisible() ? "\<C-p>" : "\<Up>"
-"inoremap <expr> <PageDown> pumvisible() ? "\<PageDown>\<C-p>\<C-n>" : "\<PageDown>"
-"inoremap <expr> <PageUp>   pumvisible() ? "\<PageUp>\<C-p>\<C-n>" : "\<PageUp>"
 "}}}
 
 " Dictionary Word Completion Using C-x C-k {{{
@@ -153,10 +155,14 @@ set foldmethod=marker
 " TABS {{{
 map tn :tabnew<space>
 map td :tabclose<CR>
+map [5^ :tabprev<CR>
+map [6^ :tabnext<CR>
 map [5;5~ :tabprev<CR>
 map [6;5~ :tabnext<CR>
 map [1;5D :tabprev<CR>
 map [1;5C :tabnext<CR>
+imap [5^ <C-o>:tabprev<CR>
+imap [6^ <C-o>:tabnext<CR>
 imap [1;5D <C-o>:tabprev<CR>
 imap [1;5C <C-o>:tabnext<CR>
 map <C-Tab> :tabnext<CR>
@@ -293,15 +299,15 @@ endfunction
 function! HourColor()
   let hr = str2nr(strftime('%H'))
   if hr <= 6
-    set background=dark
+    set background=darK
     let i = 0
-  elseif hr <= 7
+  elseif hr <= 8
     set background=light
     let i = 1
-  elseif hr <= 15
+  elseif hr <= 16
     set background=light
     let i = 2
-  elseif hr <= 17
+  elseif hr <= 18
     set background=light
     let i = 3
   else
@@ -320,6 +326,11 @@ inoremap <F8> <C-o>:call NextColor(-1)<CR>
 
 " GUI/console appearance {{{
 let s:mycolor='soso'
+set background=light
+let g:solarized_termtrans=0
+let g:solarized_termcolors=256
+let g:solarized_contrast="high"
+let g:solarized_visibility="high"
 if has("gui_running")
     gui
     set guifont=Bitstream\ Vera\ Sans\ Mono\ 11.5
@@ -327,7 +338,7 @@ if has("gui_running")
     let s:mycolors = ['solarized', 'soso', 'wombat', 'molokai', 'summerfruit256']
     call HourColor()
 else
-    let s:mycolors = ['zenburn', 'autumn2', 'soso', 'mustang', 'wombat256', 'xoria256']
+    let s:mycolors = ['autumn2', 'soso', 'solarized', 'zenburn', 'mustang', 'wombat256', 'xoria256']
     call HourColor()
 endif
 "}}}

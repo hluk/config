@@ -1,8 +1,6 @@
-/*#include <stdio.h>*/
-/*#include <linux/unistd.h>   */
+#include <stdio.h>
 #include <linux/kernel.h>   
-/*#include <time.h>*/
-/*#include <utmp.h>*/
+#include <sys/sysinfo.h>
 
 #define ONEHOUR  3600
 #define ONEMINUTE  60
@@ -18,11 +16,11 @@
 	/*printf("%02d/%02d %02d:%02d:%02d", t->tm_mday, t->tm_mon, t->tm_hour, t->tm_min, t->tm_sec);*/
 	/*return(0);*/
 /*}*/
+
 int getUptime(void) {
 	char *lcolor = "aquamarine3";
 	char *ncolor = "#f0e050";
 	char *hcolor = "#ff9a50";
-	char *hhcolor = "#ff2020";
 
 	struct sysinfo s_info;
 	sysinfo(&s_info);
@@ -42,9 +40,9 @@ int getUptime(void) {
 	av[2] = s_info.loads[2] / LOADS_SCALE;
 
 	char *upcolor;
-	if (hours >= 2)
-		upcolor = hhcolor;
-	else if (hours == 1 && minutes > 30)
+	if (hours >= 8)
+		upcolor = hcolor;
+	else if (hours >= 4)
 		upcolor = ncolor;
 	else
 		upcolor = lcolor;
@@ -60,7 +58,7 @@ int getUptime(void) {
 	}
 
 
-	printf("up <fc=%s>%i:%02i</fc>   load <fc=%s>%2.2f</fc> <fc=%s>%2.2f</fc> <fc=%s>%2.2f</fc>",
+	printf("UP <fc=%s>%i:%02i</fc>   LOAD <fc=%s>%2.2f</fc> <fc=%s>%2.2f</fc> <fc=%s>%2.2f</fc>",
 			upcolor, hours, minutes, colors[0], av[0], colors[1], av[1], colors[2], av[2]);
 	return(0);
 }

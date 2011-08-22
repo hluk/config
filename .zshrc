@@ -127,9 +127,9 @@ fi
 Find () {
     if [ $# -gt 1 ]
     then
-        find $1 -iregex "$2"
+        find $1 -iname "*$2*"
     else
-        find -iregex "$1"
+        find -iname "*$1*"
     fi
 }
 # }}}
@@ -151,7 +151,8 @@ alias equalizer="alsamixer -D equal"
 alias S="e -S Session.vim"
 alias flash=~/dev/bin/flash.sh
 alias natsort=~/dev/natsort/natsort
-alias m="mplayer -quiet"
+#alias m="mplayer -quiet"
+alias m="LD_LIBRARY_PATH=~/apps/_root/lib mplayer -quiet"
 #alias m="smplayer"
 #alias m="umplayer"
 alias binwalk="~/apps/binwalk/src/binwalk -m ~/apps/binwalk/src/magic.binwalk"
@@ -171,7 +172,7 @@ then
 	alias v="$HOME/dev/gallery/mkgallery.py -u http://localhost:8080/Galleries/%s/"
 	alias traycmd="$HOME/dev/bin/traycmd.py"
 	alias grooveshark="$HOME/dev/grooveshark/grooveshark_toggle.sh show & traycmd $HOME/dev/grooveshark/{grooveshark.png,grooveshark_toggle.sh}"
-    alias copyq="$HOME/dev/copyq-build/debug/copyq"
+    alias copyq="$HOME/dev/copyq-build/release/copyq"
     alias wallpaper="$HOME/dev/img/set_wallpaper.sh"
     alias jdownloader="java -Xmx256m -jar $HOME/apps/JDownloader/JDownloader.jar"
     #alias wine32="WINEDEBUG=fixme-all LIBGL_DRIVERS_PATH=/opt/lib32/usr/lib/xorg/modules/dri wine"
@@ -195,7 +196,7 @@ alias i="q -S"
 alias u="q -Rs"
 alias qdiff="q -C"
 alias up="q -Syu --aur"
-alias Up="q -Qe|awk -F'[/ ]' '/^local/{if(\$2~/-(git|svn|bzr|hg)$/)print\$2}'"
+alias Up="q -Qe|awk -F'[/ ]' '/^local/{if(\$2~/-(git|svn|bzr|hg|nightly)$/)print\$2}'"
 alias clean="q -Qdt"
 
 # volume and brightness
@@ -216,8 +217,8 @@ e () {
     screen -t ">$@" "$EDITOR" $@
 }
 
-# autojump needs this
-source /etc/profile
+# autojump
+source /etc/profile.d/autojump.zsh
 
 # func: mangrep {regex} [page numbers]# {{{
 # find regex in manual pages

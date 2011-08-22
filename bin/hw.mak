@@ -5,13 +5,15 @@ MONITORS = LVDS1 --mode 1366x768; HDMI1 --right-of LVDS1; HDMI1 --mode 1920x1080
 
 LABEL = @printf '\n%s\n'
 
-all: keyboard xbindkeys mouse touchpad wallpaper
+all: keyboard xbindkeys mouse touchpad monitor
 
 start:
 	$(LABEL) "Hardware setup script"
 	@date
 
-monitor: start
+monitor: start layout wallpaper tray
+
+layout: start
 	$(LABEL) "** setting monitor layout"
 	[ -n "$(MONITORS)" ] && \
 		$(subst ;,; xrandr --output ,xrandr --output $(MONITORS))
@@ -22,6 +24,8 @@ keyboard: start
 	#xmodmap ~/.Xmodmap
 	numlockx &
 	xset r rate 200 40
+	# menu key without autorepeat
+	xset -r 135
 
 mouse: start
 	$(LABEL) "** setting mouse"
@@ -35,9 +39,15 @@ touchpad: start
 
 xbindkeys: start keyboard
 	$(LABEL) "** restarting xbindkeys"
-	killall xbindkeys; xbindkeys &
+	killall -q xbindkeys; xbindkeys &
 
-wallpaper: start monitor
+wallpaper: start
 	$(LABEL) "** setting wallpaper"
 	~/dev/bin/set_wallpaper.sh &
+
+tray: start
+	-killall -q stalonetray
+	~/apps/stalonetray/src/stalonetray -i 16 --background '#06a' --geometry 1x1-0+0 --grow-gravity E &
+	#~/apps/stalonetray/src/stalonetray -i 16 --background black &
+
 

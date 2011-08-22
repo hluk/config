@@ -93,9 +93,9 @@
     #mod4+control+Next
 #"~/dev/colors/backlight.sh -255"
     #mod4+control+Prior
-"~/hw.mak MONITORS='LVDS1 --off; HDMI --primary' wallpaper > ~/hw.log"
+"~/hw.mak MONITORS='LVDS1 --off; HDMI --primary' monitor > ~/hw.log"
     mod4+control+Next
-"~/hw.mak wallpaper > ~/hw.log"
+"~/hw.mak monitor > ~/hw.log"
     mod4+control+Prior
 
 # switch between redshift and invert
@@ -129,12 +129,10 @@
     mod4+mod1+x
 "~/dev/bin/browser.sh"
     mod4+w
-"~/dev/copyq-build/release/copyq toggle || ~/dev/copyq-build/release/copyq"
-    mod4+grave
-"~/dev/copyq-build/release/copyq select 2"
-    mod4+alt+grave
-"~/dev/copyq-build/release/copyq edit"
+"~/dev/copyq-build/release/copyq toggle || exec ~/dev/copyq-build/release/copyq"
     mod4+less
+"~/dev/copyq-build/release/copyq edit"
+    mod4+shift+less
 "~/dev/copyq-build/release/copyq remove"
     mod4+alt+less
 "~/dev/menus/runmenu.sh"

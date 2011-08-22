@@ -2,8 +2,8 @@
 ### audio/video output
 #ao=alsa #,sdl,pulse,oss,arts
 #ao=alsa:device=hw=0.0
-#ao=alsa
-ao=pulse,pulse
+ao=alsa
+#ao=pulse,pulse
 #ao=oss
 
 vo=xv:adaptor=0
@@ -23,7 +23,7 @@ double=1
 fs=1
 #autosync=30
 #framedrop=1
-lavdopts=skiploopfilter=all,threads=2
+lavdopts=skiploopfilter=all:threads=2
 #noslices=1
 #stop-xscreensaver=1
 
