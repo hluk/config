@@ -93,7 +93,7 @@ zstyle ':completion::approximate*:*' prefix-needed false
 # env# {{{
 export XDG_DATA_HOME="$HOME/.config"
 #export MANPAGER=vimmanpager
-export EDITOR="vim"
+export EDITOR="vim -X"
 # - proxy
 #export http_proxy=localhost:8118
 # - C flags
@@ -150,12 +150,16 @@ alias p="echo -n 'Press any key to continue...'; read -sn 1; echo"
 alias equalizer="alsamixer -D equal"
 alias S="e -S Session.vim"
 alias flash=~/dev/bin/flash.sh
+alias fl='export F=`ls -t /tmp/Flash*|head -1`;m $F'
 alias natsort=~/dev/natsort/natsort
 #alias m="mplayer -quiet"
 alias m="LD_LIBRARY_PATH=~/apps/_root/lib mplayer -quiet"
+alias mm="m -vo vaapi"
+alias m0="m -vo null"
 #alias m="smplayer"
 #alias m="umplayer"
 alias binwalk="~/apps/binwalk/src/binwalk -m ~/apps/binwalk/src/magic.binwalk"
+alias v="~/dev/bin/mkgallery.sh"
 
 alias ifconfig="echo \"Use 'ip addr' command.\""
 alias netstat="echo \"Use 'ss' command.\""
@@ -214,21 +218,11 @@ alias reboot="sudo reboot"
 
 # open editor in GNU screen in new window
 e () {
-    screen -t ">$@" "$EDITOR" $@
+    screen -t ">$@" vim -X $@
 }
 
 # autojump
 source /etc/profile.d/autojump.zsh
-
-# func: mangrep {regex} [page numbers]# {{{
-# find regex in manual pages
-mangrep() {
-    (
-    cd /usr/share/man &&
-    find man${2:-*} -name '*.gz' -exec zgrep --color=always "$1" {} +
-    )
-}
-# }}}
 
 # func: pack [files]# {{{
 # compress files
@@ -263,32 +257,6 @@ pl() {
     test "$COPY_FILES" || return 1
     ln -sv $COPY_FILES "${1:-.}"
 }
-# }}}
-
-# func: v_archive file ... {{{
-# view archive contents (images, videos, fonts)
-# use G variable to set gallery name
-v_archive() {
-    DIR=~/.archives/${G:-default}
-    MKGALLERY=${MKGALLERY:-~/dev/gallery/mkgallery.py}
-    #MKGALLERY=~/dev/moka/mkgallery/mkgallery.py
-
-    FILES=""
-    for archive in "$@"
-    do
-        DEST="$DIR/`basename "$archive"`"
-        unpack "$archive" "$DEST" || return 1
-        FILES="$FILES""$DEST\0"
-    done
-    [ -n "$FILES" ] || return 1
-
-    printf "$FILES" | xargs -0 "$MKGALLERY" \
-        -u http://localhost:8080/Galleries/%s/ -t ${G:-default} -fp-1
-
-    echo "Press any key to delete unpacked files."; read &&
-        printf "$FILES" | xargs -0 rm -r && rmdir "$DIR"
-}
-alias v2="MKGALLERY=~/dev/moka/mkgallery/mkgallery.py v_archive"
 # }}}
 
 # cd ~d

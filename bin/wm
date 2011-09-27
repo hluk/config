@@ -1,14 +1,16 @@
 #!/bin/bash
-## compiz
-#export INTEL_BATCH=1
-#export LAUNCH_CONDITION="pidof X"
-#~/launch.sh compiz --sm-disable --indirect-rendering --replace ccp &
-#(sleep 3; exec ~/launch.sh trayer --align right --transparent true --tint black --alpha 48 --width 140 --widthtype pixel) &
-#~/launch.sh cairo-dock
+export QT_GRAPHICSSYSTEM=raster
+
+# XFCE
+pidof conky || conky &
+pidof openbox || openbox  --replace &
+#compiz --sm-disable --indirect-rendering --replace ccp &
+exec ck-launch-session startxfce4
 
 # KDE
 #plasma-desktop &
-#kwin --replace 
+#exec kwin --replace 
+exec ck-launch-session startkde 
 
 ## WMFS
 #WMFS=~/apps/tiling/wmfs/wmfs
@@ -23,9 +25,9 @@
 #killall -q $! systeminfo_wmfs wmfs
 
 ## DWM
-killall -q systeminfo
+killall -q systeminfo_dwm
 (
-~/dev/systeminfo/systeminfo
+~/dev/systeminfo/systeminfo_dwm
 xsetroot -name ""
 ) &
 exec ~/apps/tiling/dwm/dwm
@@ -47,4 +49,9 @@ exec ~/apps/tiling/dwm/dwm
 #~/apps/tiling/i3/i3bar/i3bar -d &
 #(sleep 1; ~/dev/systeminfo/systeminfo_dzen2 | ~/apps/dzen/dzen2 -bg black -fn "-misc-envy code r-medium-r-normal--12-0-0-0-m-0-*-*" -expand left -y -1) &
 #exec ~/apps/tiling/i3/i3
+
+## openbox
+#(sleep 3; exec python2 ~/apps/tiling/pytyle/pytyle2) &
+#(killall -q conky; exec conky) &
+#exec openbox --sm-disable
 

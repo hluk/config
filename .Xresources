@@ -15,7 +15,7 @@
 !#define FONT1 xft:Envy Code R:size=11
 !#define FONT1 xft:Terminus:pixelsize=14
 !#define FONT1 xft:Terminus
-#define FONT1 xft:Bitstream Vera Sans Mono:pixelsize=14
+#define FONT1 xft:Bitstream Vera Sans Mono:pixelsize=15
 
 !!!!!!XTERM:FONT
 Rxvt*RenderFont: true
@@ -42,14 +42,13 @@ Rxvt*scrollColor: #aaa894
 Rxvt*troughColor: #000000
 Rxvt*scrollstyle: plain
 
+Rxvt*inheritPixmap: true
 Rxvt*tintColor: #444444
 Rxvt*shading: 80
-Rxvt*inheritPixmap: true
-Rxvt*transparent: false
+!Rxvt*transparent: true
+!Rxvt*depth: 32
 
 Xft.antialias:true
-!Xft.dpi:152
-!Xft.dpi:101
 Xft.dpi:96
 Xft.hinting:true
 Xft.rgba:rgb
@@ -71,8 +70,9 @@ xpdf*background:        white
 
 !!! color schemes: http://phraktured.net/terminal-colors/
 !*cursorColor: gray
-Rxvt*foreground:     rgb:cc/cc/cc
-Rxvt*background:     rgb:00/00/00
+Rxvt*foreground:     rgb:c0/c0/c0
+!Rxvt.background:     rgba:2222/2222/2222/dddd
+Rxvt.background:     rgb:22/22/22
 !black
 Rxvt*color0:         rgb:19/19/19
 Rxvt*color8:         rgb:25/25/25

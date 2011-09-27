@@ -1,21 +1,23 @@
 #!/usr/bin/make -f
 MOUSE_ID = "Genius Ergo Mouse"
 TOUCHPAD_ID = "ImPS/2 Generic Wheel Mouse"
-MONITORS = LVDS1 --mode 1366x768; HDMI1 --right-of LVDS1; HDMI1 --mode 1920x1080 --primary
+#MONITORS = LVDS1 --mode 1366x768; HDMI1 --left-of LVDS1; HDMI1 --mode 1920x1080 --primary
+MONITORS = LVDS1 --off; HDMI --primary
+# TODO: check if HDMI monitor is present
 
 LABEL = @printf '\n%s\n'
 
-all: keyboard xbindkeys mouse touchpad monitor
+all: keyboard mouse touchpad monitor
 
 start:
 	$(LABEL) "Hardware setup script"
 	@date
 
-monitor: start layout wallpaper tray
+monitor: start layout tray
 
 layout: start
 	$(LABEL) "** setting monitor layout"
-	[ -n "$(MONITORS)" ] && \
+	-[ -n "$(MONITORS)" ] && \
 		$(subst ;,; xrandr --output ,xrandr --output $(MONITORS))
 
 keyboard: start
@@ -46,8 +48,9 @@ wallpaper: start
 	~/dev/bin/set_wallpaper.sh &
 
 tray: start
-	-killall -q stalonetray
-	~/apps/stalonetray/src/stalonetray -i 16 --background '#06a' --geometry 1x1-0+0 --grow-gravity E &
+	#-killall -q stalonetray
+	#~/apps/stalonetray/src/stalonetray -i 16 --background '#06a' &
+	#~/apps/stalonetray/src/stalonetray -i 16 --background '#06a' --geometry 1x1-0+0 --grow-gravity E &
 	#~/apps/stalonetray/src/stalonetray -i 16 --background black &
 
 

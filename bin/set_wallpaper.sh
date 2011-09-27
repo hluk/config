@@ -3,7 +3,6 @@
 # usage:
 #   ./set_wallpaper.sh # sets random wallpaper from WALLPATH env
 #   ./set_wallpaper.sh image_file
-FILE=~/wallpaper.png
 WALLPATH=${WALLPATH:-"$HOME/wallpapers"}
 
 # screen resolution
@@ -53,26 +52,34 @@ then
 fi &&
 echo -e "\tOutput: `/usr/bin/identify "$WALL"`" &&
 
-# create symlink
-ln -f "$WALL" "$FILE"
-
 # set wallpaper
 echo -e "\tSetting..." &&
 if pidof nautilus >/dev/null
 then
-    gconftool-2 -t str --set /desktop/gnome/background/picture_filename "$FILE"
+    gconftool-2 -t str --set /desktop/gnome/background/picture_filename "$WALL"
 elif pidof xfdesktop >/dev/null
 then
     PROPERTY="/backdrop/screen0/monitor0/image-path"
     xfconf-query -c xfce4-desktop -p $PROPERTY -s ""
-    xfconf-query -c xfce4-desktop -p $PROPERTY -s "$FILE"
+    xfconf-query -c xfce4-desktop -p $PROPERTY -s "$WALL"
+    # for terminal fake transparency
+    /usr/bin/feh --bg-fill "$WALL" ||
+        /usr/bin/xv -root -quit "$WALL"
 #elif pidof pcmanfm >/dev/null
 #then
-    #pcmanfm --set-wallpaper "$FILE"
+    #pcmanfm --set-wallpaper "$WALL"
+#elif pidof plasma-desktop >/dev/null
+#then
+    #kquitapp plasma-desktop && sleep 1
+    #kwriteconfig --file plasma-desktop-appletsrc --group Containments --group 67 \
+        #--group Wallpaper --group image --key wallpaper "$WALL"
+    #kwriteconfig --file plasma-desktop-appletsrc --group Containments --group 70 \
+        #--group Wallpaper --group image --key wallpaper "$WALL"
+    #setsid plasma-desktop
 else
-    #/usr/bin/feh --no-xinerama --bg-center "$FILE" ||
-    /usr/bin/feh --bg-fill "$FILE" ||
-        /usr/bin/xv -root -quit "$FILE"
+    #/usr/bin/feh --no-xinerama --bg-center "$WALL" ||
+    /usr/bin/feh --bg-fill "$WALL" ||
+        /usr/bin/xv -root -quit "$WALL"
 fi &&
 echo "Done" || exit 1
 

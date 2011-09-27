@@ -1,22 +1,15 @@
 /* names of unmanaged windows */
-const char *unmanaged[] = {"stalonetray", "xfce4-notifyd", 0};
+const char *unmanaged[] = {"stalonetray", "Conky (laptop)", "xfce4-notifyd", 0};
 /* make some space for panel window next to status text */
 const char *panel_name = "stalonetray";
 
-#define NUMCOLORS         8             // need at least 3
-static const char colors[NUMCOLORS][ColLast][8] = {
-   // border   foreground  background
-   { "#000", "#aaa", "#000" },  // 0 = normal
-   { "#06a", "#eee", "#06a" },  // 1 = selected
-   { "#06a", "#fff", "#f00" },  // 2 = urgent/warning
-   { "#f00", "#fff", "#f00" },  // 3 = error
-   { "#000", "#5af", "#000" },
-   { "#000", "#aaa", "#000" },
-   { "#000", "#d00", "#000" },
-   { "#e00", "#fff", "#e00" },
-};
-
 /* appearance */
+static const char normbordercolor[] = "#000000";
+static const char normbgcolor[]     = "#000000";
+static const char normfgcolor[]     = "#aaaaaa";
+static const char selbordercolor[]  = "#0066aa";
+static const char selbgcolor[]      = "#0066aa";
+static const char selfgcolor[]      = "#eeeeee";
 static const char font[]            =
 //"-*-clean-medium-r-*-*-12-*-*-*-*-*-*-*";
 //"-bitstream-bitstream vera sans mono-medium-r-normal--11-0-0-0-m-0-iso8859-1";
@@ -39,9 +32,8 @@ static const char *tags[] = { "1", "2", "3", "4" };
 
 static const Rule rules[] = {
 	/* class      instance    title       tags mask     isfloating   monitor */
-	{ "trayer",      NULL,       NULL,       ~0,           True,        -1 },
-	{ "stalonetray", NULL,       NULL,       ~0,           True,        -1 },
 	{ "Sprinter",    NULL,       NULL,       ~0,           True,        -1 },
+	{ "Copyq",       NULL,       NULL,       ~0,           True,        -1 },
     { "Gimp",        NULL,       NULL,       1 << 2,       False,       -1 },
     { "Pidgin",      NULL,       NULL,       1 << 3,       True,        -1 },
 	{ "Firefox",     NULL,       NULL,       1 << 1,       False,       -1 },

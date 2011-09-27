@@ -3,7 +3,7 @@
 ~/.config/awesome/
 ~/.config/compiz/
 ~/.config/compiz-1/
-~/.config/roxterm.sourceforge.net/
+~/.config/openbox/
 ~/.conkyrc
 ~/.conkyrc_console
 ~/.dwmrc.h
@@ -19,7 +19,6 @@
 ~/.xmobarrc
 ~/.xmonad/xmonad.hs
 ~/.zshrc
-~/Playlists/
 ~/dev/bin/
 ~/dev/colors/
 ~/dev/menus/*.sh menus/
@@ -27,8 +26,5 @@
 ~/dev/pdf/
 ~/dev/pocketpc/
 ~/dev/rss/*.sh rss/
-~/dev/translate/
 ~/dev/xmobar/
 ~/dev/zcode/{_rungame.sh,_saved} zcode/
-~/eBooks/knihy/Baka-Tsuki/bakadown.sh ebooks/
-~/eBooks/knihy/Protagonize/protagonize.sh ebooks/

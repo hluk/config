@@ -22,7 +22,7 @@ double=1
 #full screen
 fs=1
 #autosync=30
-#framedrop=1
+framedrop=1
 lavdopts=skiploopfilter=all:threads=2
 #noslices=1
 #stop-xscreensaver=1
@@ -52,9 +52,10 @@ subpos=100
 
 
 # MISC
+#cache=70000
+#cache-min=1
+
 #cache=4096
-cache=70000
-cache-min=1
 #nocache=1
 #idx=1
 

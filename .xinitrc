@@ -1,4 +1,10 @@
 #!/bin/sh
+#source /etc/skel/.xinitrc
+xrdb -merge ~/.Xresources
+
+echo ".xinit: setting mouse pointer theme"
+xsetroot -cursor_name arrow
+
 ~/hw.mak > ~/hw.log &
 
 #echo ".xinit: starting pulseaudio"
@@ -12,9 +18,6 @@ echo ".xinit: starting redshift"
 
 echo ".xinit: starting CopyQ"
 ~/dev/copyq-build/release/copyq &
-
-echo ".xinit: setting mouse pointer theme"
-( xrdb -merge ~/.Xresources && xsetroot -cursor_name arrow ) &
 
 # simple web server on port 8080
 echo ".xinit: starting webserver on port 8080"
