@@ -119,8 +119,8 @@ map tt :NERDTreeToggle<CR>
 let NERDShutUp=1
 
 " Gundo -- undo tree
-Bundle 'http://github.com/sjl/gundo.vim.git'
-nnoremap U :GundoToggle<CR>
+"Bundle 'http://github.com/sjl/gundo.vim.git'
+"nnoremap U :GundoToggle<CR>
 
 " Syntastic
 Bundle 'git://github.com/scrooloose/syntastic.git'
@@ -128,12 +128,12 @@ nnoremap <F6> :SyntasticEnable<CR>:Errors<CR>
 "}}}
 
 " MOVE LINE/BLOCK {{{
-nnoremap [1;5B :m+<CR>==
-nnoremap [1;5A :m-2<CR>==
-inoremap [1;5B <Esc>:m+<CR>==gi
-inoremap [1;5A <Esc>:m-2<CR>==gi
-vnoremap [1;5B :m'>+<CR>gv=gv
-vnoremap [1;5A :m-2<CR>gv=gv
+nnoremap Ob :m+<CR>==
+nnoremap Oa :m-2<CR>==
+inoremap Ob <Esc>:m+<CR>==gi
+inoremap Oa <Esc>:m-2<CR>==gi
+vnoremap Ob :m'>+<CR>gv=gv
+vnoremap Oa :m-2<CR>gv=gv
 "}}}
 
 " COMPLETION {{{
@@ -341,41 +341,28 @@ endif
 
 " visually differentiate normal and insert modes"{{{
 "let s:n_laststatus=&laststatus
-"function! ModeEntered(mode)
-    "if a:mode == 'i'
-        "let s:n_laststatus=&laststatus
-        "set laststatus=2
-
+set laststatus=2
+function! ModeEntered(mode)
+    if a:mode == 'i'
+        hi StatusLine term=reverse ctermbg=white ctermfg=red
+        hi LineNr ctermfg=white ctermbg=red
         "hi StatusLine term=reverse ctermfg=black ctermbg=green
         "hi LineNr ctermfg=black ctermbg=green
 
         "set cursorline
         "set cursorcolumn
-    "else
-        "let &laststatus=s:n_laststatus
-
-        "execute 'colorscheme '.s:mycolor
+    else
+        execute 'colorscheme '.s:mycolor
 
         "set nocursorline
         "set nocursorcolumn
-    "endif
-"endfunction
+    endif
+endfunction
 
 "au InsertEnter * set cursorline
 "au InsertLeave * set nocursorline
-"au InsertEnter * call ModeEntered('i')
-"au InsertLeave * call ModeEntered('n')
-if &term =~ "-256color" 
-    if &term =~ "screen" 
-        " different cursor color for normal and insert mode
-        let &t_SI = "\033P\033]12;red\007\033\\"
-        let &t_EI = "\033P\033]12;grey\007\033\\" 
-    else
-        " different cursor color for normal and insert mode
-        let &t_SI = "\033]12;red\007"
-        let &t_EI = "\033]12;grey\007" 
-    endif
-endif
+au InsertEnter * call ModeEntered('i')
+au InsertLeave * call ModeEntered('n')
 "}}}
 
 " LINE TOO LONG {{{

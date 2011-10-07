@@ -3,7 +3,7 @@ export QT_GRAPHICSSYSTEM=raster
 
 # XFCE
 pidof conky || conky &
-pidof openbox || openbox  --replace &
+(sleep 4; pidof openbox || openbox  --replace) &
 #compiz --sm-disable --indirect-rendering --replace ccp &
 exec ck-launch-session startxfce4
 

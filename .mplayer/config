@@ -15,6 +15,9 @@ vo=xv:adaptor=0
 ### VIDEO
 #vf=screenshot
 #vf=eq2
+# deinterlance
+#vf=kerndeint
+#vf=yadif
 # direct rendering
 #dr=0
 # double buffering

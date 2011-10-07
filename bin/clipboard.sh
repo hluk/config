@@ -1,8 +1,14 @@
 #!/bin/bash
 #VERSION=debug
 VERSION=release
+CMD=~/dev/copyq-build/$VERSION/copyq
 
 [ "$VERSION" = "debug" ] && ulimit -c 50000
-~/dev/copyq-build/$VERSION/copyq toggle 2>/dev/null ||
-exec ~/dev/copyq-build/$VERSION/copyq
+
+if [ $# -gt 1 ]
+then
+    "$CMD" "$@" 2>/dev/null
+else
+    "$CMD" toggle 2>/dev/null || exec "$CMD"
+fi
 
