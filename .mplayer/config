@@ -1,3 +1,4 @@
+
 [default]
 ### audio/video output
 #ao=alsa #,sdl,pulse,oss,arts
@@ -6,8 +7,8 @@ ao=alsa
 #ao=pulse,pulse
 #ao=oss
 
-vo=xv:adaptor=0
-#vo=vaapi
+#vo=xv:adaptor=0
+vo=vaapi
 
 #zoom=yes
 
@@ -34,7 +35,7 @@ lavdopts=skiploopfilter=all:threads=2
 ### AUDIO
 # reduce noise, volume normalization
 #af=sinesuppress=1:volnorm=2
-af=volnorm=2,scaletempo
+af=volnorm=1,scaletempo
 channels=2
 
 
@@ -62,3 +63,5 @@ subpos=100
 #nocache=1
 #idx=1
 
+[gnome-mplayer]
+msglevel=all=5

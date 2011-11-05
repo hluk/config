@@ -5,6 +5,7 @@
 G=`zenity --title "New gallery" --entry --text "Gallery name:" --entry-text default` || exit 1
 DIR=~/.archives/$G
 MKGALLERY=${MKGALLERY:-~/dev/moka/mkgallery/mkgallery.py}
+ARGS=${ARGS:-""}
 
 # unpack or mount archives
 UNPACK=`dirname "$0"`/unpack.sh
@@ -20,22 +21,31 @@ then
 fi
 
 FILES=()
+TMPDIRS=()
 i=0
-for archive in "$@"
+j=0
+for file in "$@"
 do
-    DEST=`basename "$archive"`
-    mkdir -p  "$DIR/$DEST"
-    $UNPACK "$archive" "$DIR/$DEST" || exit 1
-    FILES[$((i++))]="$DEST"
+    if file -b "$file"|grep -q archive
+    then
+        DEST=$DIR/`basename "$file"`
+        mkdir -p "$DEST"
+        $UNPACK "$file" "$DEST" || exit 1
+        TMPDIRS[$((j++))]=$DEST
+        FILES[$((i++))]=$DEST
+    else
+        FILES[$((i++))]=$file
+    fi
 done
-[ -n "$FILES" ] || exit 1
+[ -n "$FILES" ] || FILES=(.)
 
-(
-cd "$DIR" &&
-"$MKGALLERY" -u http://localhost:8080/Galleries/%s/ -t ${G:-default} -fp-1 \
+"$MKGALLERY" -u http://localhost:8080/Galleries/%s/ \
+    -t ${G:-default} -fp-1 $ARGS \
     "${FILES[@]}"
 
-zenity --question --text "Remove gallery \"$G\"?" &&
-    $RM "${FILES[@]}" && echo "Gallery was removed." && rmdir "$DIR"
-)
+if [ -n "$TMPDIRS" ]
+then
+    zenity --question --text "Remove gallery \"$G\"?" &&
+        $RM "${TMPDIRS[@]}" && echo "Gallery was removed." && rmdir "$DIR"
+fi
 

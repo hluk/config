@@ -2,19 +2,20 @@
 double_buffer yes
 
 draw_shades no
-#draw_outline yes
+draw_outline yes
 draw_borders no
 
 gap_x 0
-gap_y -6
-alignment top_left
-#alignment bottom_left
+gap_y 0
+#alignment top_left
+alignment bottom_left
+#alignment bottom_right
 border_inner_margin 0
 border_outer_margin 0
 border_width 0
 draw_graph_borders no
-#maximum_width 1366
-minimum_size 1920 0
+maximum_width 520
+minimum_size 520
 
 #update_interval 1
 update_interval 4
@@ -28,42 +29,43 @@ update_interval_on_battery 6
 #own_window_colour 2060a0
 
 default_color 000000
-#default_outline_color 202020
-color0 999999
-color1 555555
+default_outline_color 000000
+color0 0099bb
+color1 aaaaaa
 color2 777777
-own_window_colour dddddd
+color3 dd3300
+color4 0066dd
+own_window_colour 303030
 
 own_window yes
 #own_window_class Conky
-#own_window_type panel
+own_window_type panel
 #own_window_type dock
 #own_window_type desktop
 #own_window_type override
-own_window_type normal
-own_window_hints undecorated,below,skip_taskbar,skip_pager
-#own_window_hints undecorated,above,skip_taskbar,skip_pager
+#own_window_type normal
+own_window_hints undecorated,above,sticky,skip_taskbar,skip_pager
 #own_window_transparent yes
 #own_window_argb_visual yes
 #own_window_argb_value 215
-own_window_hints sticky
+#own_window_hints sticky
 
-#use_xft no
-#font -misc-envy code r-medium-r-normal--12-0-0-0-m-0-*-*
-use_xft yes
-xftfont Aller:pixelsize=11:bold
+use_xft no
+font -misc-envy code r-medium-r-normal--12-0-0-0-m-0-*-*
+#use_xft yes
+#xftfont Aller:pixelsize=13:bold
 #xftfont Aller:size=9:bold
 #xftfont URW Gothic L:size=11:bold
 #xftfont Linux Libertine C:size=12:bold
 #xftfont Quicksand:size=12:bold
 #xftfont Fertigo Pro:size=8:bold
 #xftfont Terminus:size=5
-#xftfont Aller Display:size=12
+#xftfont Aller Display:size=14
 #xftfont Anivers:size=12:bold
 #xftfont Juicy Hunt:size=18
 #xftfont Tenderness:size=12.5:bold
 #xftfont Yanone Kaffeesatz:size=10
-#xftfont Diavlo:size=11
+#xftfont Diavlo:size=13:bold
 #xftfont Gayatri:size=8
 #xftfont Envy Code R:size=8:bold
 #xftfont Andale Mono:size=8:bold
@@ -72,7 +74,8 @@ xftfont Aller:pixelsize=11:bold
 #xftfont Inconsolata:size=9:bold
 #xftfont Droid Sans:size=11:bold
 
-template0 ${voffset -7}${\1graph \2 17,120 \3 \4 -t}${voffset 7}
+template0 ${offset 398}${\1graph \2 12,120}${offset -516}
 
 TEXT
-     ${voffset 8}${color0}BAT ${color1}${battery_percent} ${color2}%      ${color0}TEMP ${color1}${hwmon temp 1}$color      ${if_up eth0}${color0}DOWN ${color1}${downspeedf eth0}      ${color0}UP ${color1}${upspeedf eth0}${else}${if_up wlan0}${color0}WIFI DOWN ${color1}${downspeedf wlan0}      ${color0}UP ${color1}${upspeedf wlan0}${else}OFFLINE${endif}${endif}      ${template0 diskio /dev/sda ddddff 0099ff}${color0} ROOT ${color1}${fs_free /}${color2}/${color1}${fs_size /}      ${color0}MEM ${color1}${mem}      ${color0}SWAP ${color1}${swap}      ${color0}LOAD ${color1}${loadavg}      ${template0 cpu cpu0 ffdddd ff0000}${color0} CPU ${color1}${cpu cpu1} ${color2}% ${color1}${cpu cpu2} $color      ${alignr}$color      ${color0}$kernel  ${color2}${time %a %d %b}  ${voffset -24}${font Fertigo Pro:pixelsize=18:bold}${color1}${time %H:%M}                 
+${color4}${template0 diskio /dev/sda}${color0}ROOT ${color1}${fs_free /}   ${if_up eth0}${color0}DOWN ${color1}${downspeedf eth0}   ${color0}UP ${color1}${upspeedf eth0}${else}${if_up wlan0}${color0}WIFI DOWN ${color1}${downspeedf wlan0}   ${color0}UP ${color1}${upspeedf wlan0}${else}OFFLINE${endif}${endif}   ${color0}MEM ${color1}${mem}   ${color0}SWAP ${color1}${swap}
+${color3}${template0 cpu cpu0}${color0}BAT ${color1}${battery_percent} ${color2}%   ${color0}TEMP ${color1}${hwmon temp 1}$color   ${color0}LOAD ${color1}${loadavg}   ${color0}CPU ${color1}${cpu cpu1} ${color2}% ${color1}${cpu cpu2}

@@ -137,8 +137,7 @@ Find () {
 # aliases {{{
 alias ls="ls --color=auto"
 alias ll="ls --color=auto -lA"
-alias grep="grep --colour=auto"
-alias fgrep="fgrep --colour=auto"
+alias grep="grep --mmap --colour=auto"
 alias man="LANG=C man"
 alias psx="ps auxf"
 alias s="screen"
@@ -155,11 +154,11 @@ alias natsort=~/dev/natsort/natsort
 #alias m="mplayer -quiet"
 alias m="LD_LIBRARY_PATH=~/apps/_root/lib mplayer -quiet"
 alias mm="m -vo vaapi"
-alias m0="m -vo null"
+alias m0="m -vo null -vc null -novideo"
 #alias m="smplayer"
 #alias m="umplayer"
 alias binwalk="~/apps/binwalk/src/binwalk -m ~/apps/binwalk/src/magic.binwalk"
-alias v="~/dev/bin/mkgallery.sh"
+alias v2="~/dev/bin/mkgallery.sh"
 
 alias ifconfig="echo \"Use 'ip addr' command.\""
 alias netstat="echo \"Use 'ss' command.\""

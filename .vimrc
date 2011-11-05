@@ -125,21 +125,32 @@ let NERDShutUp=1
 " Syntastic
 Bundle 'git://github.com/scrooloose/syntastic.git'
 nnoremap <F6> :SyntasticEnable<CR>:Errors<CR>
+
+" ctrlp - file/buffer finder
+" C-p - open list
+" C-z and C-o - mark files and open them
+Bundle 'git://github.com/kien/ctrlp.vim.git'
 "}}}
 
 " MOVE LINE/BLOCK {{{
-nnoremap Ob :m+<CR>==
-nnoremap Oa :m-2<CR>==
-inoremap Ob <Esc>:m+<CR>==gi
-inoremap Oa <Esc>:m-2<CR>==gi
-vnoremap Ob :m'>+<CR>gv=gv
-vnoremap Oa :m-2<CR>gv=gv
+"nnoremap Ob :m+<CR>==
+"nnoremap Oa :m-2<CR>==
+"inoremap Ob <Esc>:m+<CR>==gi
+"inoremap Oa <Esc>:m-2<CR>==gi
+"vnoremap Ob :m'>+<CR>gv=gv
+"vnoremap Oa :m-2<CR>gv=gv
+nnoremap [1;5B :m+<CR>
+nnoremap [1;5A :m-2<CR>
+inoremap [1;5B <Esc>:m+<CR>gi
+inoremap [1;5A <Esc>:m-2<CR>gi
+vnoremap [1;5B :m'>+<CR>gv
+vnoremap [1;5A :m-2<CR>gv
 "}}}
 
 " COMPLETION {{{
-"let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
+let g:SuperTabDefaultCompletionType = "<C-X><C-O>"
 "let g:SuperTabDefaultCompletionType = "<C-X><C-U>"
-let g:SuperTabDefaultCompletionType = "context"
+"let g:SuperTabDefaultCompletionType = "context"
 let g:acp_completeoptPreview = 1
 
 " don't complete on files you never need to open
@@ -220,96 +231,84 @@ endfunc
 "}}}
 
 " Change the color scheme {{{
-"   :SetColors all              (all $VIMRUNTIME/colors/*.vim)
-"   :SetColors blue slate ron   (these schemes)
-"   :SetColors                  (display current scheme names)
+"   :SetSchemes all              (all $VIMRUNTIME/colors/*.vim)
+"   :SetSchemes blue slate ron   (these schemes)
+"   :SetSchemes                  (display current scheme names)
+
+let s:scheme_index = 0
+let s:current_scheme = []
+let s:schemes = []
 
 " Set list of color scheme names that we will use, except
 " argument 'now' actually changes the current color scheme.
-function! s:SetColors(args)
-  if len(a:args) == 0
-    echo 'Current color scheme names:'
-    let i = 0
-    while i < len(s:mycolors)
-      echo '  '.join(map(s:mycolors[i : i+4], 'printf("%-14s", v:val)'))
-      let i += 5
-    endwhile
-  elseif a:args == 'all'
-    let paths = split(globpath(&runtimepath, 'colors/*.vim'), "\n")
-    let s:mycolors = map(paths, 'fnamemodify(v:val, ":t:r")')
-    echo 'List of colors set from all installed color schemes'
-  else
-    let s:mycolors = split(a:args)
-    echo 'List of colors set from argument (space-separated names)'
-  endif
+function! s:SetSchemes(args)
+    if len(a:args) == 0
+        echo 'Current color scheme names:'
+        let i = 0
+        while i < len(s:schemes)
+            echo '  '.join(map(s:schemes[i : i+4], 'printf("%-14s", v:val)'))
+            let i += 5
+        endwhile
+    elseif a:args == 'all'
+        let paths = split(globpath(&runtimepath, 'colors/*.vim'), "\n")
+        let s:schemes = map(copy(paths), 'fnamemodify(v:val, ":t:r").":light"')
+        let s:schemes += map(paths, 'fnamemodify(v:val, ":t:r").":dark"')
+        echo 'List of colors set from all installed color schemes'
+        call SetScheme(0)
+    else
+        let s:schemes = split(a:args)
+        echo 'List of colors set from argument (space-separated names)'
+        call SetScheme(0)
+    endif
 endfunction
 
-command! -nargs=* SetColors call <SID>SetColors('<args>')
+command! -nargs=* SetSchemes call <SID>SetSchemes('<args>')
 
-function! NextColor(how)
-  if len(s:mycolors) == 0
-    call s:SetColors('all')
-  endif
-  if exists('s:mycolor')
-    let current = index(s:mycolors, s:mycolor)
-  else
-    let current = -1
-  endif
-  let missing = []
-  let how = a:how
-  for i in range(len(s:mycolors))
-    let current += how
-    if !(0 <= current && current < len(s:mycolors))
-      let current = (how>0 ? 0 : len(s:mycolors)-1)
-    endif
+function! SetScheme(i)
+    let s:scheme_index = a:i % len(s:schemes)
+    let s:current_scheme = split(s:schemes[s:scheme_index], ':')
     try
-      let s:mycolor=s:mycolors[current]
-      execute 'colorscheme '.s:mycolor
-      break
-   catch /E185:/
-      call add(missing, s:mycolors[current])
+        execute 'colorscheme '.s:current_scheme[0]
+        if len(s:current_scheme) > 1
+            execute 'set background='.s:current_scheme[1]
+        endif
+    catch /E185:/
+        echo 'Selected colorscheme not found ('.s:current_scheme[0].')!'
     endtry
-  endfor
-  redraw
-  if len(missing) > 0
-    echo 'Error: colorscheme not found:' join(missing)
-  endif
-  echo s:mycolor
+    redraw
+endfunction
+
+function! NextScheme(how)
+    call SetScheme(s:scheme_index + a:how)
+    echo 'colorscheme '.join(s:current_scheme)
 endfunction
 
 " Set color scheme according to current time of day.
-function! HourColor()
+function! HourScheme()
   let hr = str2nr(strftime('%H'))
-  if hr <= 6
-    set background=dark
+  if hr <= 7
     let i = 0
   elseif hr <= 8
-    set background=light
+    let i = 1
+  elseif hr <= 10
     let i = 1
   elseif hr <= 16
-    set background=light
     let i = 2
   elseif hr <= 18
-    set background=light
     let i = 3
   else
-    set background=dark
     let i = 4
   endif
-  let s:mycolor=s:mycolors[i]
-  execute 'colorscheme '.s:mycolor
+  call SetScheme(i)
 endfunction
 
-nnoremap <F9> :call NextColor(1)<CR>
-nnoremap <F8> :call NextColor(-1)<CR>
-inoremap <F9> <C-o>:call NextColor(1)<CR>
-inoremap <F8> <C-o>:call NextColor(-1)<CR>
+nnoremap <F9> :call NextScheme(1)<CR>
+nnoremap <F8> :call NextScheme(-1)<CR>
+inoremap <F9> <C-o>:call NextScheme(1)<CR>
+inoremap <F8> <C-o>:call NextScheme(-1)<CR>
 "}}}
 
 " GUI/console appearance {{{
-let s:mycolor='soso'
-set background=light
-
 " solarized color theme
 Bundle 'git://github.com/altercation/vim-colors-solarized.git'
 let g:solarized_termtrans=0
@@ -331,11 +330,11 @@ if has("gui_running")
     map <C-F2> :execute Zoom(-0.5)<CR>
     "}}}
 
-    let s:mycolors = ['solarized', 'soso', 'wombat', 'molokai', 'summerfruit256']
-    call HourColor()
+    let s:schemes = ['solarized', 'soso', 'wombat', 'molokai', 'summerfruit256']
+    call HourScheme()
 else
-    let s:mycolors = ['autumn2', 'soso', 'solarized', 'zenburn', 'mustang', 'wombat256', 'xoria256']
-    call HourColor()
+    let s:schemes = ['solarized:dark', 'solarized:light', 'soso', 'zenburn', 'mustang', 'wombat256', 'xoria256']
+    call HourScheme()
 endif
 "}}}
 
@@ -345,14 +344,14 @@ set laststatus=2
 function! ModeEntered(mode)
     if a:mode == 'i'
         hi StatusLine term=reverse ctermbg=white ctermfg=red
-        hi LineNr ctermfg=white ctermbg=red
+        "hi LineNr ctermfg=white ctermbg=red
         "hi StatusLine term=reverse ctermfg=black ctermbg=green
         "hi LineNr ctermfg=black ctermbg=green
 
         "set cursorline
         "set cursorcolumn
     else
-        execute 'colorscheme '.s:mycolor
+        execute 'colorscheme '.s:schemes
 
         "set nocursorline
         "set nocursorcolumn
@@ -361,8 +360,8 @@ endfunction
 
 "au InsertEnter * set cursorline
 "au InsertLeave * set nocursorline
-au InsertEnter * call ModeEntered('i')
-au InsertLeave * call ModeEntered('n')
+"au InsertEnter * call ModeEntered('i')
+"au InsertLeave * call ModeEntered('n')
 "}}}
 
 " LINE TOO LONG {{{
