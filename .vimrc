@@ -130,21 +130,16 @@ nnoremap <F6> :SyntasticEnable<CR>:Errors<CR>
 " C-p - open list
 " C-z and C-o - mark files and open them
 Bundle 'git://github.com/kien/ctrlp.vim.git'
-"}}}
 
-" MOVE LINE/BLOCK {{{
-"nnoremap Ob :m+<CR>==
-"nnoremap Oa :m-2<CR>==
-"inoremap Ob <Esc>:m+<CR>==gi
-"inoremap Oa <Esc>:m-2<CR>==gi
-"vnoremap Ob :m'>+<CR>gv=gv
-"vnoremap Oa :m-2<CR>gv=gv
-nnoremap [1;5B :m+<CR>
-nnoremap [1;5A :m-2<CR>
-inoremap [1;5B <Esc>:m+<CR>gi
-inoremap [1;5A <Esc>:m-2<CR>gi
-vnoremap [1;5B :m'>+<CR>gv
-vnoremap [1;5A :m-2<CR>gv
+" :Ack [options] {pattern} [{directory}]
+" o    to open (same as enter)
+" go   to preview file (open but maintain focus on ack.vim results)
+" t    to open in new tab
+" T    to open in new tab silently
+" v    to open in vertical split
+" gv   to open in vertical split silently
+" q    to close the quickfix window
+Bundle 'git://github.com/mileszs/ack.vim.git'
 "}}}
 
 " COMPLETION {{{
@@ -170,6 +165,21 @@ let g:clang_snippets = 1
 let g:clang_library_path = '/usr/lib/llvm/'
 let g:clang_complete_copen = 1
 let g:clang_complete_auto = 0
+"}}}
+
+" MOVE LINE/BLOCK {{{
+"nnoremap Ob :m+<CR>==
+"nnoremap Oa :m-2<CR>==
+"inoremap Ob <Esc>:m+<CR>==gi
+"inoremap Oa <Esc>:m-2<CR>==gi
+"vnoremap Ob :m'>+<CR>gv=gv
+"vnoremap Oa :m-2<CR>gv=gv
+nnoremap [1;5B :m+<CR>
+nnoremap [1;5A :m-2<CR>
+inoremap [1;5B <Esc>:m+<CR>gi
+inoremap [1;5A <Esc>:m-2<CR>gi
+vnoremap [1;5B :m'>+<CR>gv
+vnoremap [1;5A :m-2<CR>gv
 "}}}
 
 " DICTIONARY (C-x C-k) {{{

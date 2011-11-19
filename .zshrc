@@ -135,6 +135,7 @@ Find () {
 # }}}
 
 # aliases {{{
+alias rm="rm -vI"
 alias ls="ls --color=auto"
 alias ll="ls --color=auto -lA"
 alias grep="grep --mmap --colour=auto"
@@ -151,8 +152,8 @@ alias S="e -S Session.vim"
 alias flash=~/dev/bin/flash.sh
 alias fl='export F=`ls -t /tmp/Flash*|head -1`;m $F'
 alias natsort=~/dev/natsort/natsort
-#alias m="mplayer -quiet"
-alias m="LD_LIBRARY_PATH=~/apps/_root/lib mplayer -quiet"
+alias m="mplayer -quiet"
+#alias m="LD_LIBRARY_PATH=~/apps/_root/lib mplayer -quiet"
 alias mm="m -vo vaapi"
 alias m0="m -vo null -vc null -novideo"
 #alias m="smplayer"
@@ -178,9 +179,6 @@ then
     alias copyq="$HOME/dev/copyq-build/release/copyq"
     alias wallpaper="$HOME/dev/img/set_wallpaper.sh"
     alias jdownloader="java -Xmx256m -jar $HOME/apps/JDownloader/JDownloader.jar"
-    #alias wine32="WINEDEBUG=fixme-all LIBGL_DRIVERS_PATH=/opt/lib32/usr/lib/xorg/modules/dri wine"
-    #alias q4wine="LIBGL_DRIVERS_PATH=/opt/lib32/usr/lib/xorg/modules/dri q4wine"
-    #alias blender="LIBGL_ALWAYS_SOFTWARE=1 blender"
 else
 	alias x="startx > $HOME/.xsession 2>&1 &"
 fi
