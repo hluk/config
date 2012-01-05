@@ -1,0 +1,18 @@
+#!/bin/bash
+# Prints Czech and Slovak TV channels in XMLTV format.
+URL='http://tvpc.cz/xmltv.xml'
+# http://frantisheq.sk/xmltv-page/
+#URL='http://dl.dropbox.com/u/441189/tv/xmltv/sk/sk.xmltv'
+
+if [ "$1" == "--description" ]; then
+    echo "Czech Republic"
+elif [ $# -eq 0 ]; then
+    wget -O - "$URL" | sed \
+        -e 's/ lang="sk"/ lang="cz"/g' \
+        -e 's/_sk">/"  >/g' \
+        -e 's/\/logo\/tv\/\([^.]\+\).jpg/\/hires\/\1.png/g' \
+        || exit 1
+else
+    exit 1
+fi
+
