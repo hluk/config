@@ -61,7 +61,7 @@
       S: shade (roll up/down)
       D: omnipresent (on all desktops).
   -->
-  <keepBorder>yes</keepBorder>
+  <keepBorder>no</keepBorder>
   <animateIconify>yes</animateIconify>
   <font place="ActiveWindow">
     <name>sans</name>
@@ -764,8 +764,26 @@
     <desktop>2</desktop>
     <maximized>true</maximized>
 </application>
+<application name="chromium">
+    <decor>no</decor>
+    <desktop>2</desktop>
+    <maximized>true</maximized>
+</application>
+<application name="chrome">
+    <decor>no</decor>
+    <desktop>2</desktop>
+    <maximized>true</maximized>
+</application>
+<application name="opera">
+    <decor>no</decor>
+    <desktop>2</desktop>
+    <maximized>true</maximized>
+</application>
 <application name="Pidgin">
     <desktop>3</desktop>
+</application>
+<application name="xbmc.bin">
+    <fullscreen>yes</fullscreen>
 </application>
 </applications>
 

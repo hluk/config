@@ -39,16 +39,16 @@ own_window_colour 303030
 
 own_window yes
 #own_window_class Conky
-own_window_type panel
+#own_window_type panel
 #own_window_type dock
-#own_window_type desktop
+own_window_type desktop
 #own_window_type override
 #own_window_type normal
 own_window_hints undecorated,above,sticky,skip_taskbar,skip_pager
 #own_window_transparent yes
 #own_window_argb_visual yes
 #own_window_argb_value 215
-#own_window_hints sticky
+own_window_hints sticky
 
 use_xft no
 font -misc-envy code r-medium-r-normal--12-0-0-0-m-0-*-*

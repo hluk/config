@@ -55,7 +55,7 @@ syntax on
 " X11 clipboard
 "   command 'vim -X' provides faster startup and
 "   serverlist() enables usage of X11 clipboard
-call serverlist()
+"call serverlist()
 set clipboard=unnamed
 
 " plugin loader (~/.vim/bundle/*)
@@ -68,7 +68,14 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 " run :BundleInstall
 
+" coffee-script filetype plugin
 Bundle 'git://github.com/kchmck/vim-coffee-script.git'
+" folds based on indentation
+au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
+
+" vala
+au BufRead *.vala,*.vapi set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
+au BufRead,BufNewFile *.vala,*.vapi setfiletype vala
 
 filetype plugin on
 filetype indent on
@@ -93,7 +100,7 @@ imap <F2> <C-o>:w<CR>
 
 " screen
 "nmap \| :call system("screen")<CR>
-nmap \| :!screen<CR><CR>
+"nmap \| :!screen<CR><CR>
 
 " run/execute current file
 map <C-CR> :w<CR>:!./%<CR>
@@ -124,7 +131,7 @@ let NERDShutUp=1
 
 " Syntastic
 Bundle 'git://github.com/scrooloose/syntastic.git'
-nnoremap <F6> :SyntasticEnable<CR>:Errors<CR>
+nnoremap <F6> :Errors<CR>
 
 " ctrlp - file/buffer finder
 " C-p - open list
@@ -140,6 +147,13 @@ Bundle 'git://github.com/kien/ctrlp.vim.git'
 " gv   to open in vertical split silently
 " q    to close the quickfix window
 Bundle 'git://github.com/mileszs/ack.vim.git'
+
+" snippets
+Bundle 'git://github.com/msanders/snipmate.vim.git'
+" view/edit snippets; call ReloadAllSnippets() after editing
+noremap <C-n> :execute 'sv ~/.vim/bundle/snipmate.vim/snippets/'.&ft.'.snippets'<CR>
+noremap <C-m> :execute 'vs ~/.vim/snippets/'.&ft.'.snippets'<CR>
+noremap <S-m> :call ReloadAllSnippets()<CR>
 "}}}
 
 " COMPLETION {{{
@@ -168,18 +182,18 @@ let g:clang_complete_auto = 0
 "}}}
 
 " MOVE LINE/BLOCK {{{
-"nnoremap Ob :m+<CR>==
-"nnoremap Oa :m-2<CR>==
-"inoremap Ob <Esc>:m+<CR>==gi
-"inoremap Oa <Esc>:m-2<CR>==gi
-"vnoremap Ob :m'>+<CR>gv=gv
-"vnoremap Oa :m-2<CR>gv=gv
-nnoremap [1;5B :m+<CR>
-nnoremap [1;5A :m-2<CR>
-inoremap [1;5B <Esc>:m+<CR>gi
-inoremap [1;5A <Esc>:m-2<CR>gi
-vnoremap [1;5B :m'>+<CR>gv
-vnoremap [1;5A :m-2<CR>gv
+nnoremap Ob :m+<CR>==
+nnoremap Oa :m-2<CR>==
+inoremap Ob <Esc>:m+<CR>==gi
+inoremap Oa <Esc>:m-2<CR>==gi
+vnoremap Ob :m'>+<CR>gv=gv
+vnoremap Oa :m-2<CR>gv=gv
+"nnoremap [1;5B :m+<CR>
+"nnoremap [1;5A :m-2<CR>
+"inoremap [1;5B <Esc>:m+<CR>gi
+"inoremap [1;5A <Esc>:m-2<CR>gi
+"vnoremap [1;5B :m'>+<CR>gv
+"vnoremap [1;5A :m-2<CR>gv
 "}}}
 
 " DICTIONARY (C-x C-k) {{{
@@ -196,6 +210,7 @@ map <S-F7> :set nospell<CR>
 " FOLDS {{{
 set foldmethod=marker
 "set foldmethod=syntax
+set foldnestmax=2
 "}}}
 
 " TABS {{{
@@ -220,9 +235,6 @@ imap <S-C-Tab> <C-o>:tabprev<CR>
 " WINDOWS {{{
 map <TAB> <C-W><C-W>
 map <S-TAB> <C-W><S-W>
-"let g:miniBufExplMapCTabSwitchBufs = 1
-"imap <C-Tab> <C-o><C-Tab>
-"imap <S-C-Tab> <C-o><S-C-Tab>
 "}}}
 
 " HEX {{{
@@ -293,25 +305,6 @@ function! NextScheme(how)
     echo 'colorscheme '.join(s:current_scheme)
 endfunction
 
-" Set color scheme according to current time of day.
-function! HourScheme()
-  let hr = str2nr(strftime('%H'))
-  if hr <= 7
-    let i = 0
-  elseif hr <= 8
-    let i = 1
-  elseif hr <= 10
-    let i = 1
-  elseif hr <= 16
-    let i = 2
-  elseif hr <= 18
-    let i = 3
-  else
-    let i = 4
-  endif
-  call SetScheme(i)
-endfunction
-
 nnoremap <F9> :call NextScheme(1)<CR>
 nnoremap <F8> :call NextScheme(-1)<CR>
 inoremap <F9> <C-o>:call NextScheme(1)<CR>
@@ -341,37 +334,10 @@ if has("gui_running")
     "}}}
 
     let s:schemes = ['solarized', 'soso', 'wombat', 'molokai', 'summerfruit256']
-    call HourScheme()
 else
     let s:schemes = ['solarized:dark', 'solarized:light', 'soso', 'zenburn', 'mustang', 'wombat256', 'xoria256']
-    call HourScheme()
 endif
-"}}}
-
-" visually differentiate normal and insert modes"{{{
-"let s:n_laststatus=&laststatus
-set laststatus=2
-function! ModeEntered(mode)
-    if a:mode == 'i'
-        hi StatusLine term=reverse ctermbg=white ctermfg=red
-        "hi LineNr ctermfg=white ctermbg=red
-        "hi StatusLine term=reverse ctermfg=black ctermbg=green
-        "hi LineNr ctermfg=black ctermbg=green
-
-        "set cursorline
-        "set cursorcolumn
-    else
-        execute 'colorscheme '.s:schemes
-
-        "set nocursorline
-        "set nocursorcolumn
-    endif
-endfunction
-
-"au InsertEnter * set cursorline
-"au InsertLeave * set nocursorline
-"au InsertEnter * call ModeEntered('i')
-"au InsertLeave * call ModeEntered('n')
+call SetScheme(0)
 "}}}
 
 " LINE TOO LONG {{{

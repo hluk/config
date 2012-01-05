@@ -93,7 +93,7 @@ zstyle ':completion::approximate*:*' prefix-needed false
 # env# {{{
 export XDG_DATA_HOME="$HOME/.config"
 #export MANPAGER=vimmanpager
-export EDITOR="vim -X"
+export EDITOR="vim"
 # - proxy
 #export http_proxy=localhost:8118
 # - C flags
@@ -173,7 +173,6 @@ then
 	alias feb="$HOME/dev/bin/feb"
 	alias febt="THUMBS=1 $HOME/dev/bin/feb"
 	alias smplayer="LANG=C smplayer"
-	alias v="$HOME/dev/gallery/mkgallery.py -u http://localhost:8080/Galleries/%s/"
 	alias traycmd="$HOME/dev/bin/traycmd.py"
 	alias grooveshark="$HOME/dev/grooveshark/grooveshark_toggle.sh show & traycmd $HOME/dev/grooveshark/{grooveshark.png,grooveshark_toggle.sh}"
     alias copyq="$HOME/dev/copyq-build/release/copyq"
@@ -215,11 +214,16 @@ alias reboot="sudo reboot"
 
 # open editor in GNU screen in new window
 e () {
-    screen -t ">$@" vim -X $@
+    screen -t ">$@" vim $@
 }
 
-# autojump
-source /etc/profile.d/autojump.zsh
+# productivity
+#source /etc/profile.d/autojump.zsh
+source ~/apps/z/z.sh
+function precmd () {
+    _z --add "$(pwd -P)"
+}
+alias v='~/apps/v/v'
 
 # func: pack [files]# {{{
 # compress files
@@ -267,6 +271,7 @@ f=~/down/_flash
 
 # syntax highlighting
 source ~/apps/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
 ZSH_HIGHLIGHT_STYLES+=(
     alias                   'fg=magenta,bold'
     path                    'fg=cyan'
@@ -274,12 +279,8 @@ ZSH_HIGHLIGHT_STYLES+=(
     single-hyphen-option    'bold'
     double-hyphen-option    'bold'
 )
-# matching brackets
-ZSH_HIGHLIGHT_MATCHING_BRACKETS_STYLES=(
-    'fg=blue,bold'    # Style for first level of imbrication
-    'fg=green,bold'   # Style for second level of imbrication
-    'fg=magenta,bold' # etc... Put as many styles as you wish, or leave
-    'fg=yellow,bold'  # empty to disable brackets matching.
-    'fg=cyan,bold'
-)
+ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=green,bold'
+ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=red,bold'
+ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=yellow,bold'
+ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta,bold'
 

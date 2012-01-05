@@ -8,7 +8,9 @@ ao=alsa
 #ao=oss
 
 #vo=xv:adaptor=0
+#vo=vaapi:gl
 vo=vaapi
+va=vaapi
 
 #zoom=yes
 
