@@ -4,7 +4,8 @@
 #G=${G:-default}
 G=`zenity --title "New gallery" --entry --text "Gallery name:" --entry-text default` || exit 1
 DIR=~/.archives/$G
-MKGALLERY=${MKGALLERY:-~/dev/moka/mkgallery/mkgallery.py}
+#MKGALLERY=${MKGALLERY:-~/dev/moka/mkgallery/mkgallery.py}
+MKGALLERY=${MKGALLERY:-~/dev/imagepeek/peeks}
 ARGS=${ARGS:-""}
 
 # unpack or mount archives
@@ -39,9 +40,10 @@ do
 done
 [ -n "$FILES" ] || FILES=(.)
 
-"$MKGALLERY" -u http://localhost:8080/Galleries/%s/ \
-    -t ${G:-default} -fp-1 $ARGS \
-    "${FILES[@]}"
+#"$MKGALLERY" -u http://localhost:8080/Galleries/%s/ \
+    #-t ${G:-default} -fp-1 $ARGS \
+    #"${FILES[@]}"
+"$MKGALLERY" "${G:-default}" "${FILES[@]}"
 
 if [ -n "$TMPDIRS" ]
 then

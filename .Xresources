@@ -15,7 +15,11 @@
 !#define FONT1 xft:Envy Code R:size=11
 !#define FONT1 xft:Terminus:pixelsize=14
 !#define FONT1 xft:Terminus
-#define FONT1 xft:Bitstream Vera Sans Mono:pixelsize=15
+!#define FONT1 xft:Bitstream Vera Sans Mono:pixelsize=15
+
+!! patched fonts for Powerline vim plugin
+!! https://github.com/Lokaltog/vim-powerline/wiki/Patched-fonts
+#define FONT1 xft:DejaVu Sans Mono for Powerline:pixelsize=15
 
 !!!!!!XTERM:FONT
 Rxvt*RenderFont: true
@@ -55,7 +59,8 @@ Xft.rgba:rgb
 Xft.hintstyle:hintfull
 Xft.lcdfilter:lcddefault
 
-Xcursor.theme: pearl
+!Xcursor.theme: pearl
+Xcursor.theme: cross
 !Xcursor.theme: Human
 !Xcursor.theme: neutral
 !Xcursor.theme: Ecliz_Full

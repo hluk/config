@@ -26,6 +26,12 @@ bindkey "^[OD" backward-word
 bindkey "^[OC" forward-word
 # ALT-H is command help
 
+# edit command line on C-x C-e
+autoload edit-command-line
+zle -N edit-command-line
+bindkey '^Xe' edit-command-line
+bindkey '^X^e' edit-command-line
+
 #setopt menucomplete
 
 # This makes cd=pushd
@@ -92,46 +98,14 @@ zstyle ':completion::approximate*:*' prefix-needed false
 
 # env# {{{
 export XDG_DATA_HOME="$HOME/.config"
-#export MANPAGER=vimmanpager
 export EDITOR="vim"
-# - proxy
-#export http_proxy=localhost:8118
-# - C flags
-export CHOST="x86_64-pc-linux-gnu"
-export CFLAGS="-march=native -pipe -O3 -flto -funroll-loops -fomit-frame-pointer"
-export CXXFLAGS="${CFLAGS}"
-export MAKEOPTS="-j3"
-# - ccache
-export PATH="/usr/lib/ccache/bin/:${PATH}"
-export CCACHE_DIR="$HOME/.ccache"
-export CCACHE_SIZE="4G"
-export SANDBOX_WRITE="${SANDBOX_WRITE}:${CCACHE_DIR}"
 
 # X11# {{{
 if [ -n "$DISPLAY" ]
 then
     export BROWSER=~/dev/bin/browser.sh
-	#export TERM=xterm-color 
-	#export TERMINFO=$HOME/lib/terminfo
-
-	case $TERM in (xterm*)
-		bindkey '\e[H' beginning-of-line
-		bindkey '\e[F' end-of-line ;;
-	esac
 fi
 # }}}
-
-# }}}
-
-# func: Find # {{{
-Find () {
-    if [ $# -gt 1 ]
-    then
-        find $1 -iname "*$2*"
-    else
-        find -iname "*$1*"
-    fi
-}
 # }}}
 
 # aliases {{{
@@ -140,26 +114,16 @@ alias ls="ls --color=auto"
 alias ll="ls --color=auto -lA"
 alias grep="grep --mmap --colour=auto"
 alias man="LANG=C man"
-alias psx="ps auxf"
 alias s="screen"
 alias unpack="~/dev/bin/unpack.sh"
-alias unpackall='for x in *; do unpack "$x" "x_$x" || ERROR="$ERROR\n$x"; done; echo "unpacking failed on:$ERROR"'
-alias rcdiff="vimdiff {~/.config,/etc/xdg}/awesome/rc.lua"
-alias dict="~/dev/translate/translate.py"
-alias p="echo -n 'Press any key to continue...'; read -sn 1; echo"
-alias equalizer="alsamixer -D equal"
 alias S="e -S Session.vim"
 alias flash=~/dev/bin/flash.sh
 alias fl='export F=`ls -t /tmp/Flash*|head -1`;m $F'
 alias natsort=~/dev/natsort/natsort
 alias m="mplayer -quiet"
-#alias m="LD_LIBRARY_PATH=~/apps/_root/lib mplayer -quiet"
-alias mm="m -vo vaapi"
 alias m0="m -vo null -vc null -novideo"
-#alias m="smplayer"
-#alias m="umplayer"
 alias binwalk="~/apps/binwalk/src/binwalk -m ~/apps/binwalk/src/magic.binwalk"
-alias v2="~/dev/bin/mkgallery.sh"
+alias mkgallery='PATH="/home/lukas/dev/imagepeek:$PATH" ~/dev/bin/mkgallery.sh'
 
 alias ifconfig="echo \"Use 'ip addr' command.\""
 alias netstat="echo \"Use 'ss' command.\""
@@ -168,16 +132,15 @@ alias netstat="echo \"Use 'ss' command.\""
 if [ -n "$DISPLAY" ]
 then
 	# aliases for X
-	#alias e="gvim"
     alias mc="mc -x"
-	alias feb="$HOME/dev/bin/feb"
-	alias febt="THUMBS=1 $HOME/dev/bin/feb"
-	alias smplayer="LANG=C smplayer"
-	alias traycmd="$HOME/dev/bin/traycmd.py"
-	alias grooveshark="$HOME/dev/grooveshark/grooveshark_toggle.sh show & traycmd $HOME/dev/grooveshark/{grooveshark.png,grooveshark_toggle.sh}"
+	alias feb="$HOME/dev/bin/feb.sh"
+	alias febt="THUMBS=1 $HOME/dev/bin/feb.hs"
     alias copyq="$HOME/dev/copyq-build/release/copyq"
-    alias wallpaper="$HOME/dev/img/set_wallpaper.sh"
-    alias jdownloader="java -Xmx256m -jar $HOME/apps/JDownloader/JDownloader.jar"
+
+    export IMAGEPEEK_SESSION="$HOME/.imagepeek"
+    alias peek="$HOME/dev/imagepeek/imagepeek"
+    alias peeks="PATH=\"$HOME/dev/imagepeek:$PATH\" peeks"
+    alias quick="~/dev/imagequick-build-desktop-Qt_in_PATH_Release/imagequick"
 else
 	alias x="startx > $HOME/.xsession 2>&1 &"
 fi
@@ -208,58 +171,6 @@ alias brightdown="~/dev/colors/backlight.sh -8"
 alias poweroff="sudo poweroff"
 alias reboot="sudo reboot"
 
-# edit privoxy user settings
-#alias adblock="su -c \"$EDITOR -c ':cd /etc/privoxy' -c ':e user.action'\""
-# }}}
-
-# open editor in GNU screen in new window
-e () {
-    screen -t ">$@" vim $@
-}
-
-# productivity
-#source /etc/profile.d/autojump.zsh
-source ~/apps/z/z.sh
-function precmd () {
-    _z --add "$(pwd -P)"
-}
-alias v='~/apps/v/v'
-
-# func: pack [files]# {{{
-# compress files
-pack() {
-    tar cvf - $@ | gzip -c > $1_`date +%Y%m%d`.tar.gz
-}
-# }}}
-
-# func: yy [files]# {{{
-# copy files recursively
-yy() {
-    COPY_FILES=()
-    for x in $@
-    do
-        COPY_FILES=( ${COPY_FILES[@]} "$(readlink -f "$x")" )
-    done
-    export COPY_FILES
-}
-# }}}
-
-# func: pp|pm|pl [directory]# {{{
-# paste copied files recursively to given directory
-pp() {
-    test "$COPY_FILES" || return 1
-    cp -rv $COPY_FILES "${1:-.}"
-}
-pm() {
-    test "$COPY_FILES" || return 1
-    mv -v $COPY_FILES "${1:-.}"
-}
-pl() {
-    test "$COPY_FILES" || return 1
-    ln -sv $COPY_FILES "${1:-.}"
-}
-# }}}
-
 # cd ~d
 d=~/down
 v=~/dev
@@ -268,6 +179,29 @@ p=~/Pictures
 w=~/wallpapers
 g=~/dev/gallery
 f=~/down/_flash
+c=~/dev/copyq
+i=~/dev/imagepeek
+# }}}
+
+# plugins {{{
+# productivity
+source ~/apps/z/z.sh
+function precmd () {
+    _z --add "$(pwd -P)"
+}
+alias v='~/apps/v/v'
+
+# simple find
+f () {
+    name=$1
+    shift
+    find "$@" -iname "*$name*"
+}
+
+# open editor in GNU screen in new window
+e () {
+    screen -t ">$@" vim $@
+}
 
 # syntax highlighting
 source ~/apps/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -283,4 +217,5 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=green,bold'
 ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=red,bold'
 ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=yellow,bold'
 ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta,bold'
+# }}}
 

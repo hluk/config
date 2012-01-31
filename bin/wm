@@ -2,15 +2,15 @@
 export QT_GRAPHICSSYSTEM=raster
 
 # XFCE
-pidof conky || conky &
-(sleep 4; pidof openbox || openbox  --replace) &
-#compiz --sm-disable --indirect-rendering --replace ccp &
+echo ".xinit: starting desktop environment"
+gconftool-2 --type boolean --set /desktop/gnome/interface/buttons_have_icons true
+gconftool-2 --type boolean --set /desktop/gnome/interface/menus_have_icons true
 exec ck-launch-session startxfce4
 
 # KDE
 #plasma-desktop &
-#exec kwin --replace 
-exec ck-launch-session startkde 
+#exec kwin --replace
+#exec ck-launch-session startkde
 
 ## WMFS
 #WMFS=~/apps/tiling/wmfs/wmfs
@@ -25,12 +25,12 @@ exec ck-launch-session startkde
 #killall -q $! systeminfo_wmfs wmfs
 
 ## DWM
-killall -q systeminfo_dwm
-(
-~/dev/systeminfo/systeminfo_dwm
-xsetroot -name ""
-) &
-exec ~/apps/tiling/dwm/dwm
+#killall -q systeminfo_dwm
+#(
+#~/dev/systeminfo/systeminfo_dwm
+#xsetroot -name ""
+#) &
+#exec ~/apps/tiling/dwm/dwm
 
 ## ratpoison
 #exec ~/apps/tiling/ratpoison/bin/ratpoison.sh

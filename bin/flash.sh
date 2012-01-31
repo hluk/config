@@ -14,7 +14,7 @@ default () {
 default PLAY 1 <<.
     play video
 .
-default PLAYER mplayer <<.
+default PLAYER vlc <<.
     video player command
 .
 default PLAYLIST 0 <<.
