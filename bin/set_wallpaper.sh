@@ -54,10 +54,7 @@ echo -e "\tOutput: `/usr/bin/identify "$WALL"`" &&
 
 # set wallpaper
 echo -e "\tSetting..." &&
-if pidof nautilus >/dev/null
-then
-    gconftool-2 -t str --set /desktop/gnome/background/picture_filename "$WALL"
-elif pidof xfdesktop >/dev/null
+if pidof xfdesktop >/dev/null
 then
     PROPERTY="/backdrop/screen0/monitor0/image-path"
     xfconf-query -c xfce4-desktop -p $PROPERTY -s ""
@@ -76,6 +73,10 @@ then
     #kwriteconfig --file plasma-desktop-appletsrc --group Containments --group 70 \
         #--group Wallpaper --group image --key wallpaper "$WALL"
     #setsid plasma-desktop
+elif pidof nautilus >/dev/null
+then
+    #gconftool-2 -t str --set /desktop/gnome/background/picture_filename "$WALL"
+    gsettings set org.gnome.desktop.background picture-uri file:///"$WALL"
 else
     #/usr/bin/feh --no-xinerama --bg-center "$WALL" ||
     /usr/bin/feh --bg-fill "$WALL" ||

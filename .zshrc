@@ -146,12 +146,6 @@ else
 fi
 # }}}
 
-alias Gitd="git diff --color"
-alias Gitc="git commit --interactive -m"
-alias Gits="git show --color"
-alias Gitp="git push origin master"
-alias Gitl="git log --date-order --color --pretty=fuller --name-only"
-
 # yaourt
 export PACMAN=pacman-color
 alias q="yaourt"

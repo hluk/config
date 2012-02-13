@@ -11,11 +11,11 @@ fi
 
 # view changed volume
 amixer set Master $1
-amixer set Headphone $1
-amixer set Speaker $1
-amixer set PCM $1
+#amixer set Headphone $1
+#amixer set Speaker $1
+#amixer set PCM $1
 
-VOL=`amixer sget Master|sed -n '/^  Front/{s/.*\[\([0-9]\+\)%\].*/\1/p;q}'`
+VOL=`amixer sget Master|sed -n '/^  \(Front\|Mono\)/{s/.*\[\([0-9]\+\)%\].*/\1/p;q}'`
 
 # show osd
 killall -q osd_cat

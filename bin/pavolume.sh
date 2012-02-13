@@ -1,9 +1,9 @@
 #!/bin/bash
-VOL=`amixer sget Master|sed -n '/^  Front/{s/.*Playback \([0-9]\+\).*/\1/p;q}'`
-VOL=$((VOL+$1))
+VOL=`amixer sget Master|sed -n '/^  \(Front\|Mono: \)/{s/.*Playback \([0-9]\+\).*/\1/p;q}'`
+[ -n "$1" ] && VOL=$((VOL+$1))
 
-pactl set-sink-volume 0 -- "$VOL"
-pactl set-sink-volume 1 -- "$VOL"
+pactl set-sink-volume 0 -- "$VOL" 2>/dev/null
+pactl set-sink-volume 1 -- "$VOL" 2>/dev/null
 
 # show osd
 killall -q osd_cat

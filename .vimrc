@@ -4,6 +4,10 @@
 " q/ -- search history
 " q: -- command history
 " gf -- open file which filename is under cursor
+" gi -- go to last insert mode place
+" g; -- go to last change
+" g, -- go to next change
+" ~  -- change case of letter
 
 " OPTIONS {{{
 set nocompatible
@@ -55,6 +59,8 @@ set scrolloff=5
 syntax on
 " X11 clipboard
 set clipboard=unnamed
+" use ~ with movement
+set tildeop
 " }}}
 
 " BASE PLUGINS {{{
@@ -111,6 +117,8 @@ map <C-u> :source ~/.vimrc <CR>
 
 " clear highlighted search term on space
 noremap <silent> <Space> :silent noh<Bar>echo<CR>
+
+inoremap jj <Esc>
 " }}}
 
 " PLUGINS {{{
@@ -123,33 +131,23 @@ imap <C-C> <C-o><leader>c<SPACE><DOWN>
 Bundle 'git://github.com/vim-scripts/taglist.vim.git'
 map tt :TlistToggle<CR>
 
-"" NERDTree
-"Bundle 'git://github.com/scrooloose/nerdtree.git'
-"map ff :NERDTreeToggle<CR>
-"let NERDShutUp=1
-
 " Syntastic
 Bundle 'git://github.com/scrooloose/syntastic.git'
 nnoremap <F6> :Errors<CR>
+let g:syntastic_mode_map = {
+            \ 'mode': 'active',
+            \ 'active_filetypes': [],
+            \ 'passive_filetypes': ['c', 'cpp']
+            \ }
 
 " ctrlp - file/buffer finder
 " C-p - open list
 " C-z and C-o - mark files and open them
 Bundle 'git://github.com/kien/ctrlp.vim.git'
-" browse nearest parent directory with .git, .hg, root.dir etc.
-"let g:ctrlp_working_path_mode = 2
 let g:ctrlp_working_path_mode = 1
 let g:ctrlp_dotfiles = -1
 let g:ctrlp_max_files = 5000
 let g:ctrlp_max_depth = 6
-let g:ctrlp_custom_ignore = '\.\(jpg\|png\|gif\|jpe\|jpeg\|flv\|mp4\|mp3\|wmv\|avi\|mkv\|mov\)$'
-
-" Command-t
-"Bundle 'git://github.com/wincent/Command-T.git'
-
-"Bundle 'L9'
-"Bundle 'FuzzyFinder'
-"noremap <leader>t :FufFile<CR>
 
 " :Ack [options] {pattern} [{directory}]
 " o    to open (same as enter)
@@ -168,14 +166,57 @@ noremap <C-n>n :execute 'sv ~/.vim/bundle/snipmate.vim/snippets/'.&ft.'.snippets
 noremap <C-n>m :execute 'vs ~/.vim/snippets/'.&ft.'.snippets'<CR>
 noremap <C-n>r :call ReloadAllSnippets()<CR>
 
+" snippets
+"Bundle 'git://github.com/rygwdn/ultisnips.git'
+
 " powerline - statusline
-Bundle "git://github.com/Lokaltog/vim-powerline.git"
+Bundle 'git://github.com/Lokaltog/vim-powerline.git'
 let g:Powerline_symbols='fancy'
+
+" a.vim
+" Alternate between source and header files
+" :A switches to the header file corresponding to the current file being edited (or vise versa)
+" :AS splits and switches
+" :AV vertical splits and switches
+" :AT new tab and switches
+" :IH switches to file under cursor
+" :IHS splits and switches
+" :IHV vertical splits and switches
+" :IHT new tab and switches
+" :IHN cycles through matches
+" <Leader>ih switches to file under cursor
+" <Leader>is switches to the alternate file of file under cursor (e.g. on  <foo.h> switches to foo.cpp)
+" <Leader>ihn cycles through matches
+Bundle 'a.vim'
+let g:alternateSearchPath='sfr:../source,sfr:../src,sfr:../include,sfr:../inc'
+let g:alternateExtensions_H="cpp,c"
+noremap <F3> :IHT<CR>
+inoremap <F3> <C-o>:IHT<CR>
+noremap <F4> :AT<CR>
+inoremap <F4> <C-o>:AT<CR>
+
+" easytags
+" :UpdateTags -R
+" C-]
+Bundle 'easytags.vim'
+set tags=./.tags
+let g:easytags_dynamic_files = 1
+let g:easytags_file = './.tags'
 "}}}
 
 " COMPLETION {{{
 " don't complete some filenames
-set wildignore=*.o,*.pyc
+set wildignore+=.hg,.git,.svn                    " Version control
+set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
+set wildignore+=*.o,*.obj,*.exe,*.dll            " compiled object files
+set wildignore+=*.spl                            " compiled spelling word lists
+set wildignore+=*.sw?                            " Vim swap files
+set wildignore+=*.DS_Store                       " OSX bullshit
+set wildignore+=*.pyc                            " python binaries
+set wildignore+=*.luac                           " Lua byte code
+" don't complete multimedia binary files
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
+set wildignore+=*.flv,.*mp4,*.mp3,*.wav,*.wmv,*.avi,*.mkv,*.mov
 
 "set completeopt=longest,menuone,preview
 set completeopt=longest,menuone,menu
@@ -188,15 +229,16 @@ let g:clang_snippets = 1
 let g:clang_library_path = '/usr/lib/llvm/'
 let g:clang_complete_copen = 1
 let g:clang_complete_auto = 0
+let g:clang_periodic_quickfix = 1
 "}}}
 
 " MOVE LINE/BLOCK {{{
-nnoremap Ob :m+<CR>==
-nnoremap Oa :m-2<CR>==
-inoremap Ob <Esc>:m+<CR>==gi
-inoremap Oa <Esc>:m-2<CR>==gi
-vnoremap Ob :m'>+<CR>gv=gv
-vnoremap Oa :m-2<CR>gv=gv
+nnoremap <C-J> :m+<CR>==
+nnoremap <C-K> :m-2<CR>==
+inoremap <C-J> <Esc>:m+<CR>==gi
+inoremap <C-K> <Esc>:m-2<CR>==gi
+vnoremap <C-J> :m'>+<CR>gv=gv
+vnoremap <C-K> :m-2<CR>gv=gv
 "}}}
 
 " DICTIONARY (C-x C-k) {{{
@@ -213,12 +255,12 @@ set foldnestmax=2
 "}}}
 
 " TABS {{{
-map tn :tabnew<space>
-map td :tabclose<CR>
-map <C-T> :tabnext<CR>
-map <S-C-T> :tabprev<CR>
-imap <C-T> <C-o>:tabnext<CR>
-imap <S-C-T> <C-o>:tabprev<CR>
+noremap tn :tabnew<space>
+noremap td :tabclose<CR>
+noremap <C-L> :tabnext<CR>
+noremap <C-H> :tabprev<CR>
+inoremap <C-L> <C-o>:tabnext<CR>
+inoremap <C-H> <C-o>:tabprev<CR>
 "}}}
 
 " WINDOWS {{{
@@ -238,13 +280,7 @@ hi def link ExtraWhitespace Error
 au BufNewFile,BufReadPost,InsertLeave,InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
 " Show syntax highlighting groups for word under cursor
-function! <SID>SynStack()
-  if !exists("*synstack")
-    return
-  endif
-  echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')
-endfunc
-nmap <C-H> :call <SID>SynStack()<CR>
+nmap <C-G> :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<CR>
 "}}}
 
 " Change the color scheme {{{
@@ -304,6 +340,9 @@ let g:solarized_termcolors=256
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 
+" Bad Wolf
+Bundle 'git://github.com/sjl/badwolf.git'
+
 if has("gui_running")
     gui
     let &guicursor = &guicursor . ",a:blinkon0"
@@ -319,7 +358,7 @@ if has("gui_running")
 
     SetSchemes soso solarized wombat molokai summerfruit256
 else
-    SetSchemes kellys denim morning solarized:light soso zenburn mustang wombat256
+    SetSchemes badwolf kellys denim morning solarized:light soso zenburn mustang wombat256
 endif
 call SetScheme(0)
 "}}}

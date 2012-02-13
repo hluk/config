@@ -1,8 +1,9 @@
 #!/bin/bash
 # ./gconf-shortcut.sh 1 /home/lukas/dev/bin/console.sh '<Mod4>Q'
 # ./gconf-shortcut.sh 2 /home/lukas/dev/bin/browser.sh '<Mod4>W'
-# ./gconf-shortcut.sh 3 "/home/lukas/dev/bin/red.sh +100" '<Mod4>Right'
-# ./gconf-shortcut.sh 4 "/home/lukas/dev/bin/red.sh -100" '<Mod4>Left'
+# ./gconf-shortcut.sh 3 "/home/lukas/dev/bin/red.sh +100" '<Mod4><Control>Right'
+# ./gconf-shortcut.sh 4 "/home/lukas/dev/bin/red.sh -100" '<Mod4><Control>Left'
+# ./gconf-shortcut.sh 5 "nautilus" '<Mod4>E'
 if [ $# -eq 3 ]; then
     gconftool-2 \
         -s /apps/metacity/keybinding_commands/command_"$1" --type=string "$2"  \
