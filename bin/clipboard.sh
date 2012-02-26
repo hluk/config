@@ -1,7 +1,8 @@
 #!/bin/bash
 #VERSION=debug
-VERSION=release
-CMD=~/dev/copyq-build/$VERSION/copyq
+#VERSION=release
+#CMD=~/dev/copyq-build/$VERSION/copyq
+CMD=~/dev/copyq/build/copyq
 
 [ "$VERSION" = "debug" ] && ulimit -c 50000
 

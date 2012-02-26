@@ -779,8 +779,11 @@
     <desktop>2</desktop>
     <maximized>true</maximized>
 </application>
-<application name="Pidgin">
+<application name="qtcreator">
     <desktop>3</desktop>
+</application>
+<application name="Pidgin">
+    <desktop>4</desktop>
 </application>
 <application name="xbmc.bin">
     <fullscreen>yes</fullscreen>

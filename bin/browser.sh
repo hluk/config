@@ -12,6 +12,7 @@
 B=/usr/bin/chromium
 #B=/usr/bin/chromium-browser
 #B=/usr/bin/opera
+#B=/usr/bin/opera-next
 
 exec $B "$@" &>/dev/null
 

@@ -19,9 +19,9 @@
 
 !! patched fonts for Powerline vim plugin
 !! https://github.com/Lokaltog/vim-powerline/wiki/Patched-fonts
-!#define FONT1 xft:DejaVu Sans Mono for Powerline:pixelsize=15
-#define FONT1 xft:Bitstream Vera Sans Mono for Powerline:pixelsize=15
-!#define FONT1 xft:Ubuntu Mono for Powerline:pixelsize=17.5
+#define FONT1 xft:DejaVu Sans Mono for Powerline:pixelsize=15
+!#define FONT1 xft:Bitstream Vera Sans Mono for Powerline:pixelsize=15
+!#define FONT1 xft:Ubuntu Mono for Powerline:pixelsize=17.5,style=RegularForPowerline
 
 !!!!!!XTERM:FONT
 Rxvt*RenderFont: true
