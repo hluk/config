@@ -9,18 +9,11 @@
 " g, -- go to next change
 " ~  -- change case of letter
 
+" http://vimbits.com/bits?sort=top
+
 " OPTIONS {{{
 set nocompatible
 set mouse=a
-set ttyfast
-set lazyredraw
-" save power
-set nofsync
-set nobackup
-" file format/encoding
-"set fileencodings=utf-8,iso8859-2,cp852,cp1250
-"set fileformats=unix,dos
-"set binary
 " highlight matched
 set hlsearch
 " command history size
@@ -32,16 +25,12 @@ set smartcase
 set incsearch
 " show numbers
 set number
-" highlight cursor line (slow)
-"set cursorline
 " C indent
 set cin
 " cursor show next/prev parenthesis
 set showmatch
 " show pressed keys in lower right corner
 set showcmd
-" backspace deletes
-"set backspace=indent,eol,start
 " completion menu
 set wildmenu
 set wildmode=longest:full,full
@@ -65,7 +54,7 @@ set tildeop
 
 " BASE PLUGINS {{{
 " plugin loader (~/.vim/bundle/*)
-" must be called before "filetype indent on"
+" must be called before 'filetype indent on'
 filetype off
 set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
@@ -77,13 +66,6 @@ Bundle 'gmarik/vundle'
 Bundle 'git://github.com/kchmck/vim-coffee-script.git'
 " folds based on indentation
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
-
-" vala
-au BufRead *.vala,*.vapi set efm=%f:%l.%c-%[%^:]%#:\ %t%[%^:]%#:\ %m
-au BufRead,BufNewFile *.vala,*.vapi setfiletype vala
-
-" qml
-au BufRead,BufNewFile *.qml setfiletype javascript
 
 filetype plugin on
 filetype indent on
@@ -100,23 +82,27 @@ command! Wq :wq
 command! WQ :wq
 
 " F5 to make
-map <F5> :make!<CR><CR>
-imap <F5> <C-o>:make!<CR><CR>
+noremap <F5> :make!<CR><CR>
+inoremap <F5> <C-o>:make!<CR><CR>
 
 " F2 to save
-map <F2> :w<CR>
-imap <F2> <C-o>:w<CR>
+noremap <F2> :w<CR>
+inoremap <F2> <C-o>:w<CR>
 
 " run/execute current file
-map <C-.> :w<CR>:!./%<CR>
-imap <C-.> <C-o>:w<CR><C-o>:!./%<CR>
+noremap <C-.> :w<CR>:!./%<CR>
+inoremap <C-.> <C-o>:w<CR><C-o>:!./%<CR>
 
-" edit/reload configuration
-map <C-e> :split ~/.vimrc <CR>
-map <C-u> :source ~/.vimrc <CR>
+" edit/source configuration
+noremap <C-e> :split ~/.vimrc <CR>
+noremap <C-u> :source ~/.vimrc <CR>
 
 " clear highlighted search term on space
-noremap <silent> <Space> :silent noh<Bar>echo<CR>
+noremap <silent> <Space> :nohls<CR>
+
+" reselect visual block after indent
+vnoremap < <gv
+vnoremap > >gv
 
 inoremap jj <Esc>
 " }}}
@@ -124,12 +110,12 @@ inoremap jj <Esc>
 " PLUGINS {{{
 "" toggle comment (NERD commenter)
 Bundle 'git://github.com/scrooloose/nerdcommenter.git'
-map <C-C> <leader>c<SPACE>j
-imap <C-C> <C-o><leader>c<SPACE><DOWN>
+noremap <C-C> <leader>c<SPACE>j
+inoremap <C-C> <C-o><leader>c<SPACE><DOWN>
 
 "" taglist
 Bundle 'git://github.com/vim-scripts/taglist.vim.git'
-map tt :TlistToggle<CR>
+noremap tt :TlistToggle<CR>
 
 " Syntastic
 Bundle 'git://github.com/scrooloose/syntastic.git'
@@ -211,7 +197,6 @@ set wildignore+=*.aux,*.out,*.toc                " LaTeX intermediate files
 set wildignore+=*.o,*.obj,*.exe,*.dll            " compiled object files
 set wildignore+=*.spl                            " compiled spelling word lists
 set wildignore+=*.sw?                            " Vim swap files
-set wildignore+=*.DS_Store                       " OSX bullshit
 set wildignore+=*.pyc                            " python binaries
 set wildignore+=*.luac                           " Lua byte code
 " don't complete multimedia binary files
@@ -250,7 +235,6 @@ map <S-F7> :set nospell<CR>
 
 " FOLDS {{{
 set foldmethod=marker
-"set foldmethod=syntax
 set foldnestmax=2
 "}}}
 
@@ -275,15 +259,18 @@ command! Xxdr :%!xxd -r
 
 " HIGHLIGHT {{{
 " highlight extra spaces
-"highlight ExtraWhitespace ctermbg=red guibg=red
 hi def link ExtraWhitespace Error
 au BufNewFile,BufReadPost,InsertLeave,InsertEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
-" Show syntax highlighting groups for word under cursor
+" show tabs and trailing spaces
+set list
+set listchars=tab:▸\ ,trail:⋅
+
+" show syntax highlighting groups for word under cursor
 nmap <C-G> :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<CR>
 "}}}
 
-" Change the color scheme {{{
+" CHANGE COLOR SCHEME {{{
 "   :SetSchemes                  (all $VIMRUNTIME/colors/*.vim)
 "   :SetSchemes blue slate ron   (these schemes)
 
@@ -332,15 +319,15 @@ inoremap <F9> <C-o>:call NextScheme(1)<CR>
 inoremap <F8> <C-o>:call NextScheme(-1)<CR>
 "}}}
 
-" GUI/console appearance {{{
-" solarized color theme
+" APPEARANCE {{{
+" solarized color scheme
 Bundle 'git://github.com/altercation/vim-colors-solarized.git'
 let g:solarized_termtrans=0
 let g:solarized_termcolors=256
 let g:solarized_contrast="high"
 let g:solarized_visibility="high"
 
-" Bad Wolf
+" Bad Wolf color scheme
 Bundle 'git://github.com/sjl/badwolf.git'
 
 if has("gui_running")
@@ -360,6 +347,7 @@ if has("gui_running")
 else
     SetSchemes badwolf kellys denim morning solarized:light soso zenburn mustang wombat256
 endif
+
 call SetScheme(0)
 "}}}
 

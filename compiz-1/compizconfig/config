@@ -1,9 +1,0 @@
-[general]
-profile = 
-integration = true
-backend = ini
-plugin_list_autosort = true
-
-[gnome_session]
-profile = 
-
