@@ -112,7 +112,7 @@ fi
 alias rm="rm -vI"
 alias ls="ls --color=auto"
 alias ll="ls --color=auto -lA"
-alias grep="grep --mmap --colour=auto"
+alias grep="grep --colour=auto"
 alias man="LANG=C man"
 alias s="screen"
 alias unpack="~/dev/bin/unpack.sh"
@@ -135,7 +135,7 @@ then
     alias mc="mc -x"
 	alias feb="$HOME/dev/bin/feb.sh"
 	alias febt="THUMBS=1 $HOME/dev/bin/feb.hs"
-    alias copyq="$HOME/dev/copyq-build/release/copyq"
+    alias copyq="$HOME/dev/copyq/build/copyq"
 
     export IMAGEPEEK_SESSION="$HOME/.imagepeek"
     alias peek="$HOME/dev/imagepeek/imagepeek"

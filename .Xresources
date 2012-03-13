@@ -28,8 +28,8 @@ Rxvt*RenderFont: true
 Rxvt*FaceName: FONT1
 Rxvt*font: FONT1
 Rxvt*boldMode: false
-Rxvt.letterSpace: -1
-!Rxvt.letterSpace: -2
+!Rxvt.letterSpace: -1
+Rxvt.letterSpace: -2
 !Rxvt.letterSpace: 0
 
 !!!!!!XTERM:GEOMETRY

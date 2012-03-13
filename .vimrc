@@ -110,8 +110,8 @@ inoremap jj <Esc>
 " PLUGINS {{{
 "" toggle comment (NERD commenter)
 Bundle 'git://github.com/scrooloose/nerdcommenter.git'
-noremap <C-C> <leader>c<SPACE>j
-inoremap <C-C> <C-o><leader>c<SPACE><DOWN>
+map <C-\> <leader>c<SPACE>j
+imap <C-\> <C-o><leader>c<SPACE><DOWN>
 
 "" taglist
 Bundle 'git://github.com/vim-scripts/taglist.vim.git'
@@ -188,6 +188,9 @@ Bundle 'easytags.vim'
 set tags=./.tags
 let g:easytags_dynamic_files = 1
 let g:easytags_file = './.tags'
+
+" fugitive (git)
+Bundle 'git://github.com/tpope/vim-fugitive.git'
 "}}}
 
 " COMPLETION {{{
@@ -245,11 +248,6 @@ noremap <C-L> :tabnext<CR>
 noremap <C-H> :tabprev<CR>
 inoremap <C-L> <C-o>:tabnext<CR>
 inoremap <C-H> <C-o>:tabprev<CR>
-"}}}
-
-" WINDOWS {{{
-map <TAB> <C-W><C-W>
-map <S-TAB> <C-W><S-W>
 "}}}
 
 " HEX {{{
