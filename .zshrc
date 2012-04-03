@@ -194,7 +194,15 @@ f () {
 
 # open editor in GNU screen in new window
 e () {
-    screen -t ">$@" vim $@
+    screen -t ">$*" vim "$@"
+}
+
+# play flash movies
+pflv() {
+    pid=$(pgrep -f flashplayer | tail -l)
+    file=$(lsof -p ${pid} | awk \
+        '/\/tmp\/Flash/ {sub(/[rwu]$/, "", $4); print "/proc/" $2 "/fd/" $4}')
+    vlc ${file}
 }
 
 # syntax highlighting

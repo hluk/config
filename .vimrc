@@ -134,6 +134,7 @@ let g:ctrlp_working_path_mode = 1
 let g:ctrlp_dotfiles = -1
 let g:ctrlp_max_files = 5000
 let g:ctrlp_max_depth = 6
+let g:ctrlp_custom_ignore = 'build$'
 
 " :Ack [options] {pattern} [{directory}]
 " o    to open (same as enter)
@@ -211,13 +212,14 @@ set completeopt=longest,menuone,menu
 
 " Clang complete
 Bundle 'https://github.com/Rip-Rip/clang_complete.git'
-let g:clang_use_library = 1
 let g:clang_auto_select = 1
 let g:clang_snippets = 1
-let g:clang_library_path = '/usr/lib/llvm/'
 let g:clang_complete_copen = 1
 let g:clang_complete_auto = 1
 let g:clang_periodic_quickfix = 0
+let g:clang_use_library = 1
+let g:clang_library_path = '/usr/lib/llvm/'
+let g:clang_user_options = '-I/usr/lib/clang/3.0/include'
 "}}}
 
 " MOVE LINE/BLOCK {{{

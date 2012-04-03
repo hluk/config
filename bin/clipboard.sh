@@ -10,6 +10,9 @@ if [ $# -gt 1 ]
 then
     "$CMD" "$@" 2>/dev/null
 else
-    "$CMD" toggle 2>/dev/null || exec "$CMD"
+    "$CMD" toggle 2>/dev/null || {
+        exec 2> ~/copyq.log
+        exec "$CMD"
+    }
 fi
 

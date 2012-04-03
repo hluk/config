@@ -3,6 +3,8 @@ HELP="Download flash videos from specified URLs or from URLs in clipboard.\n"
 CMD=~/apps/get-flash-videos/get_flash_videos
 CMD2=~/apps/get-flash-videos/list_flash_videos
 DIR=~/down/_flash
+CURLLIMIT=""
+CURLARGS="--silent"
 
 # default {VARIABLE} [value]
 # set default value of variable (do not override if exists)
@@ -44,7 +46,12 @@ fi
 
 if [[ "$PLAYLIST" = "1" || -n "$M3U" ]]
 then
-    URLS=`curl --silent $URLS | sed -rn '/data-video-ids=/{s/.*data-video-ids="/,/;s/".*//;s_,([^,]*)_http://www.youtube.com/watch?v=\1 _g;p}' | tail -1 | tr ' ' \\\\n | tail -n +$((SKIP+1))`
+    PLAY=0
+    if [ -n "$CURLLIMIT" ]
+    then
+        CURLARGS="$CURLARGS --limit-rate $CURLLIMIT"
+    fi
+    URLS=`curl $CURLARGS $URLS | sed -rn '/data-video-ids=/{s/.*data-video-ids="/,/;s/".*//;s_,([^,]*)_http://www.youtube.com/watch?v=\1 _g;p}' | tail -1 | tr ' ' \\\\n | tail -n +$((SKIP+1))`
 fi
 
 if [ -n "$M3U" ]

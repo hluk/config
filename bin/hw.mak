@@ -1,8 +1,8 @@
 #!/usr/bin/make -f
 MOUSE_ID = "Genius Ergo Mouse"
 TOUCHPAD_ID = "ImPS/2 Generic Wheel Mouse"
-#MONITORS = LVDS1 --mode 1366x768; HDMI1 --left-of LVDS1; HDMI1 --mode 1920x1080 --primary
-MONITORS = LVDS1 --off; HDMI --primary
+MONITORS = LVDS1 --mode 1366x768; HDMI1 --left-of LVDS1; HDMI1 --mode 1920x1080 --primary
+#MONITORS = LVDS1 --off; HDMI --primary
 # TODO: check if HDMI monitor is present
 
 LABEL = @printf '\n%s\n'
@@ -31,7 +31,7 @@ keyboard: start
 
 mouse: start
 	$(LABEL) "** setting mouse"
-	xinput set-prop $(MOUSE_ID) "Device Accel Constant Deceleration" 2
+	xinput set-prop $(MOUSE_ID) "Device Accel Constant Deceleration" 1
 
 touchpad: start
 	$(LABEL) "** setting touchpad"
