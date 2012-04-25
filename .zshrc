@@ -202,7 +202,13 @@ pflv() {
     pid=$(pgrep -f flashplayer | tail -l)
     file=$(lsof -p ${pid} | awk \
         '/\/tmp\/Flash/ {sub(/[rwu]$/, "", $4); print "/proc/" $2 "/fd/" $4}')
+    echo "$file"
     vlc ${file}
+}
+
+# make directory if it does not exist and cd to it
+mkcd() {
+    mkdir -p "$*" && cd "$*"
 }
 
 # syntax highlighting

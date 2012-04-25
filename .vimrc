@@ -14,6 +14,8 @@
 " OPTIONS {{{
 set nocompatible
 set mouse=a
+set ttyfast
+set lazyredraw
 " highlight matched
 set hlsearch
 " command history size
@@ -67,6 +69,9 @@ Bundle 'git://github.com/kchmck/vim-coffee-script.git'
 " folds based on indentation
 au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 
+" doxygen
+au BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
+
 filetype plugin on
 filetype indent on
 " }}}
@@ -84,6 +89,8 @@ command! WQ :wq
 " F5 to make
 noremap <F5> :make!<CR><CR>
 inoremap <F5> <C-o>:make!<CR><CR>
+noremap <F1> :set makeprg=cat\ ../build/make.log\|make<CR>
+inoremap <F5> <C-o>:set makeprg=cat\ ../build/make.log\|make<CR>
 
 " F2 to save
 noremap <F2> :w<CR>
@@ -105,6 +112,11 @@ vnoremap < <gv
 vnoremap > >gv
 
 inoremap jj <Esc>
+
+" tag
+map tg :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+map tj  :exec("pta ".expand("<cword>"))<CR>
+map TT :!~/dev/bin/tags.sh<CR>
 " }}}
 
 " PLUGINS {{{
@@ -185,10 +197,12 @@ inoremap <F4> <C-o>:AT<CR>
 " easytags
 " :UpdateTags -R
 " C-]
-Bundle 'easytags.vim'
-set tags=./.tags
-let g:easytags_dynamic_files = 1
-let g:easytags_file = './.tags'
+"Bundle 'git://github.com/xolox/vim-easytags.git'
+"set tags=~/.tags
+"let g:easytags_include_members = 1
+"let g:easytags_resolve_links = 1
+"let g:easytags_dynamic_files = 1
+"let g:easytags_file = './.tags'
 
 " fugitive (git)
 Bundle 'git://github.com/tpope/vim-fugitive.git'
@@ -208,14 +222,13 @@ set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
 set wildignore+=*.flv,.*mp4,*.mp3,*.wav,*.wmv,*.avi,*.mkv,*.mov
 
 "set completeopt=longest,menuone,preview
-set completeopt=longest,menuone,menu
+"set completeopt=longest,menuone,menu
 
 " Clang complete
 Bundle 'https://github.com/Rip-Rip/clang_complete.git'
 let g:clang_auto_select = 1
-let g:clang_snippets = 1
 let g:clang_complete_copen = 1
-let g:clang_complete_auto = 1
+let g:clang_complete_auto = 0
 let g:clang_periodic_quickfix = 0
 let g:clang_use_library = 1
 let g:clang_library_path = '/usr/lib/llvm/'

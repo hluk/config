@@ -1,4 +1,2 @@
 #!/bin/bash
-includes=`echo "$@"|grep -o -- '-I\s*\S\+'`
-cppcheck --enable=all --force --inline-suppr -q .
-
+cppcheck --enable=all --force --inline-suppr -q -I include "$@" .
