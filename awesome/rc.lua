@@ -35,6 +35,24 @@ end
 -- {{{ Variable definitions
 beautiful.init( awful.util.getdir("config") .. "/theme.lua" )
 
+-- Notifications
+--naughty.config.default_preset.timeout          = 5
+--naughty.config.default_preset.screen           = 1
+naughty.config.default_preset.position         = "bottom_right"
+naughty.config.default_preset.margin           = 12
+--naughty.config.default_preset.height           = 16
+--naughty.config.default_preset.width            = 300
+--naughty.config.default_preset.gap              = 1
+--naughty.config.default_preset.ontop            = true
+naughty.config.default_preset.font             = "Ubuntu 11"
+--naughty.config.default_preset.icon             = nil
+naughty.config.default_preset.icon_size        = 24
+--naughty.config.default_preset.fg               = beautiful.fg_focus or '#ffffff'
+--naughty.config.default_preset.bg               = beautiful.bg_focus or '#535d6c'
+--naughty.config.presets.normal.border_color     = beautiful.border_focus or '#535d6c'
+--naughty.config.default_preset.border_width     = 1
+--naughty.config.default_preset.hover_timeout    = nil
+
 modkey = "Mod4"
 
 layouts =
@@ -195,7 +213,6 @@ awful.rules.rules = {
     -- All clients will match this rule.
     { rule = { },
       properties = {
-          border_width = beautiful.border_width,
           border_color = beautiful.border_normal,
           focus = true,
           keys = clientkeys,
@@ -209,20 +226,22 @@ awful.rules.rules = {
       properties = { floating = true } },
     { rule = { class = "Chromium" },
       properties = { tag = tags[1][2] } },
+    { rule = { class = "Pidgin" },
+      properties = {
+          tag = tags[1][4],
+          floating = true,
+      } },
     { rule = { class = "Copyq" },
       properties = {
           floating = true,
           -- fix position restoring
           border_width = 0,
       } },
-    -- Set Firefox to always map on tags number 2 of screen 1.
-    -- { rule = { class = "Firefox" },
-    --   properties = { tag = tags[1][2] } },
 }
 -- }}}
 
 -- {{{ Signals
--- Signal function to execute when a new client appears.
+-- {{{ Signal function to execute when a new client appears.
 client.add_signal("manage", function (c, startup)
     -- Add a titlebar
     -- awful.titlebar.add(c, { modkey = modkey })
@@ -247,6 +266,31 @@ client.add_signal("manage", function (c, startup)
         end
     end
 end)
+-- }}}
+
+-- {{{ Arrange signal handler
+for s = 1, screen.count() do screen[s]:add_signal("arrange",
+    function ()
+        local clients = awful.client.visible(s)
+        local layout  = awful.layout.getname(awful.layout.get(s))
+
+        -- omit border on maximized windows
+        for _, c in pairs(clients) do
+            local w = beautiful.border_width
+            if layout == "max" then
+                w = 0
+            elseif layout ~= "floating" then
+                local cg = c:geometry()
+                local sg = screen[s].geometry
+                if cg.width > sg.width - 64 and cg.height > sg.height - 64 then
+                    w = 0
+                end
+            end
+            c.border_width = w
+        end
+    end)
+end
+-- }}}
 
 client.add_signal("focus", function(c) c.border_color = beautiful.border_focus end)
 client.add_signal("unfocus", function(c) c.border_color = beautiful.border_normal end)
