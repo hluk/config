@@ -4,7 +4,8 @@
 
 theme = {}
 
-theme.font          = "Aller bold 9.2"
+theme.font          = "Ubuntu 9"
+--theme.font          = "Aller bold 9.2"
 --theme.font          = "Envy Code R 9"
 --theme.font          = "Yanone Kaffeesatz 10"
 --theme.font          = "Forgotten Futurist bold 8"
@@ -19,7 +20,7 @@ theme.fg_focus      = "#000000"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.border_width  = "3"
+theme.border_width  = "2"
 theme.border_normal = "#000000"
 theme.border_focus  = "#ffdd00"
 theme.border_marked = "#ff0000"
@@ -44,7 +45,7 @@ theme.tasklist_floating_icon = "/usr/share/awesome/themes/default/tasklist/float
 -- menu_[bg|fg]_[normal|focus]
 -- menu_[border_color|border_width]
 theme.menu_submenu_icon = "/usr/share/awesome/themes/default/submenu.png"
-theme.menu_height = "12"
+theme.menu_height = "10"
 theme.menu_width  = "100"
 
 -- You can add as many variables as
@@ -77,7 +78,7 @@ theme.titlebar_maximized_button_normal_active = "/usr/share/awesome/themes/defau
 theme.titlebar_maximized_button_focus_active  = "/usr/share/awesome/themes/default/titlebar/maximized_focus_active.png"
 
 -- You can use your own command to set your wallpaper
---theme.wallpaper_cmd = { "/home/lukas/dev/img/set_wallpaper.sh" }
+theme.wallpaper_cmd = { "sh -c 'sleep 5 && /home/lukas/dev/bin/set_wallpaper.sh'" }
 
 -- You can use your own layout icons like this:
 theme.layout_fairh = "/usr/share/awesome/themes/default/layouts/fairhw.png"
@@ -96,4 +97,4 @@ theme.layout_dwindle = "/usr/share/awesome/themes/default/layouts/dwindlew.png"
 theme.awesome_icon = "/usr/share/awesome/icons/awesome16.png"
 
 return theme
--- vim: filetype=lua:expandtab:shiftwidth=4:tabstop=8:softtabstop=4:encoding=utf-8:textwidth=80
+

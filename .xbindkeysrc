@@ -18,7 +18,7 @@
 #"rxvt"
 #  Control + b:2 + Release
 
-"xbindkeys_show" 
+"xbindkeys_show"
   control+shift+q
 
 # enable/disable wlan
@@ -117,6 +117,12 @@
 # random wallpaper
 "~/dev/img/set_wallpaper.sh"
     mod4+a
+
+# red
+"~/dev/bin/red.sh +100"
+    mod4+control+Right
+"~/dev/bin/red.sh -100"
+    mod4+control+Left
 # }}}
 
 # APPS# {{{
@@ -129,8 +135,8 @@
     mod4+mod1+x
 "~/dev/bin/browser.sh"
     mod4+w
-"~/dev/copyq-build/release/copyq toggle || exec ~/dev/copyq-build/release/copyq"
-    mod4+less
+"~/dev/bin/clipboard.sh"
+    control+grave
 "~/dev/copyq-build/release/copyq edit"
     mod4+shift+less
 "~/dev/copyq-build/release/copyq remove"

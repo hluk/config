@@ -10,6 +10,10 @@ gconftool-2 -t string --set /system/gstreamer/0.10/default/audiosink pulsesink
 gconftool-2 -t string --set /system/gstreamer/0.10/default/audiosrc pulsesrc
 gconftool-2 -t string --set /system/gstreamer/0.10/default/musicaudiosink pulsesink
 
+# XFCE
 exec ck-launch-session startxfce4
+
+# GNOME
+#xbindkeys &
 #exec ck-launch-session gnome-session
 

@@ -62,12 +62,13 @@ Xft.hintstyle:hintfull
 Xft.lcdfilter:lcddefault
 
 !Xcursor.theme: pearl
-Xcursor.theme: cross
+!Xcursor.theme: cross
 !Xcursor.theme: Human
 !Xcursor.theme: neutral
 !Xcursor.theme: Ecliz_Full
 !Xcursor.theme: aero
 !Xcursor.theme: PROTOZOA
+!Xcursor.theme: Adwaita
 
 xpdf*enableFreetype:    yes
 xpdf*antialias:         yes

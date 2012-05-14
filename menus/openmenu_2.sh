@@ -1,4 +1,5 @@
 #!/bin/sh
+SPRINTER=~/dev/sprinter-gtk/sprinter
 FILE="$PWD"
 FILE=$(
 while :
@@ -9,7 +10,7 @@ do
            find -maxdepth 1 -type d -not -name '.*' -printf '%f/\n' | sort
            find -maxdepth 1 -not -type d -not -name '.*' -printf '%f\n' | sort
            ) |
-        sprinter -t"Open file" -l"OPEN:" -g 400,300` ||
+        $SPRINTER -t"Open file" -l"OPEN:" -g 400,300` ||
             exit 1
 
     if [ -z "$FILE" ]
@@ -27,7 +28,7 @@ echo $PWD/$FILE
 echo $FILE
 
 CMD=$(find `echo $PATH | tr : ' '` \! -type d -executable -printf '%f\n' |
-        sprinter -t"Open file" -l"OPEN WITH:" -o -w -z 196,16 -g 600) ||
+        $SPRINTER -t"Open file" -l"OPEN WITH:" -o -w -z 196,16 -g 600) ||
             exit 1
 
 exec "$CMD" "$FILE"
