@@ -8,6 +8,8 @@
 " g; -- go to last change
 " g, -- go to next change
 " ~  -- change case of letter
+"
+" :g/PATTERN/norm ... -- do something with each matched line (e.g. delete with dd)
 
 " http://vimbits.com/bits?sort=top
 

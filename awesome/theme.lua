@@ -11,7 +11,7 @@ theme.font          = "Ubuntu 9"
 --theme.font          = "Forgotten Futurist bold 8"
 
 theme.bg_normal     = "#333333"
-theme.bg_focus      = "#ffdd00"
+theme.bg_focus      = "#00aaff"
 theme.bg_urgent     = "#ff0000"
 theme.bg_minimize   = "#444444"
 
@@ -20,9 +20,9 @@ theme.fg_focus      = "#000000"
 theme.fg_urgent     = "#ffffff"
 theme.fg_minimize   = "#ffffff"
 
-theme.border_width  = "2"
+theme.border_width  = "3"
 theme.border_normal = "#000000"
-theme.border_focus  = "#ffdd00"
+theme.border_focus  = "#00aaff"
 theme.border_marked = "#ff0000"
 
 -- There are other variable sets

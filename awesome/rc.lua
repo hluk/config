@@ -46,7 +46,7 @@ naughty.config.default_preset.margin           = 12
 --naughty.config.default_preset.ontop            = true
 naughty.config.default_preset.font             = "Ubuntu 11"
 --naughty.config.default_preset.icon             = nil
-naughty.config.default_preset.icon_size        = 24
+naughty.config.default_preset.icon_size        = 32
 --naughty.config.default_preset.fg               = beautiful.fg_focus or '#ffffff'
 --naughty.config.default_preset.bg               = beautiful.bg_focus or '#535d6c'
 --naughty.config.presets.normal.border_color     = beautiful.border_focus or '#535d6c'
@@ -272,18 +272,19 @@ end)
 for s = 1, screen.count() do screen[s]:add_signal("arrange",
     function ()
         local clients = awful.client.visible(s)
-        local layout  = awful.layout.getname(awful.layout.get(s))
-
-        -- omit border on maximized windows
+        local layout = awful.layout.getname(awful.layout.get(s))
         for _, c in pairs(clients) do
             local w = beautiful.border_width
-            if layout == "max" then
-                w = 0
-            elseif layout ~= "floating" then
-                local cg = c:geometry()
-                local sg = screen[s].geometry
-                if cg.width > sg.width - 64 and cg.height > sg.height - 64 then
+            if not awful.client.floating.get(c) then
+                if layout == "max" then
                     w = 0
+                else
+                    local cg = c:geometry()
+                    local sg = screen[s].geometry
+
+                    if cg.width > sg.width - 64 and cg.height > sg.height - 64 then
+                        w = 0
+                    end
                 end
             end
             c.border_width = w
