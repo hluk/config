@@ -1,5 +1,7 @@
-#!/bin/sh
+#!/bin/bash
 echo ".xinit: starting desktop environment"
+
+xrandr --output LVDS1 --off
 
 # icons in menus (for Qt apps)
 gconftool-2 --type boolean --set /desktop/gnome/interface/buttons_have_icons true

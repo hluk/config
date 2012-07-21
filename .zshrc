@@ -99,6 +99,7 @@ zstyle ':completion::approximate*:*' prefix-needed false
 # env# {{{
 export XDG_DATA_HOME="$HOME/.config"
 export EDITOR="vim"
+export PAGER=most
 
 # X11# {{{
 if [ -n "$DISPLAY" ]
@@ -110,17 +111,19 @@ fi
 
 # aliases {{{
 alias rm="rm -vI"
+alias cp="cp -v"
+alias mv="mv -v"
 alias ls="ls --color=auto"
 alias ll="ls --color=auto -lA"
 alias grep="grep --colour=auto"
 alias man="LANG=C man"
 alias s="screen"
 alias unpack="~/dev/bin/unpack.sh"
-alias S="e -S Session.vim"
 alias flash=~/dev/bin/flash.sh
 alias fl='export F=`ls -t /tmp/Flash*|head -1`;m $F'
 alias natsort=~/dev/natsort/natsort
-alias m="mplayer -quiet"
+#alias m="mplayer -quiet"
+alias m="smplayer"
 alias m0="m -vo null -vc null -novideo"
 alias binwalk="~/apps/binwalk/src/binwalk -m ~/apps/binwalk/src/magic.binwalk"
 alias mkgallery='PATH="/home/lukas/dev/imagepeek:$PATH" ~/dev/bin/mkgallery.sh'
@@ -141,6 +144,7 @@ then
     alias peek="$HOME/dev/imagepeek/imagepeek"
     alias peeks="PATH=\"$HOME/dev/imagepeek:$PATH\" peeks"
     alias quick="~/dev/imagequick-build-desktop-Qt_in_PATH_Release/imagequick"
+    alias qtcreator="~/apps/qt-creator/build/bin/qtcreator -lastsession"
 else
 	alias x="startx > $HOME/.xsession 2>&1 &"
 fi
@@ -173,6 +177,7 @@ p=~/Pictures
 w=~/wallpapers
 g=~/dev/gallery
 f=~/down/_flash
+t=~/down/_torrents
 c=~/dev/copyq
 i=~/dev/imagepeek
 # }}}
@@ -186,15 +191,25 @@ function precmd () {
 alias v='~/apps/v/v'
 
 # simple find
-f () {
+f ()
+{
     name=$1
     shift
     find "$@" -iname "*$name*"
 }
 
 # open editor in GNU screen in new window
-e () {
+e ()
+{
     screen -t ">$*" vim "$@"
+}
+
+S ()
+{
+    (
+    cd "$1"
+    screen -t "#${1:-`basename "$PWD"`}" vim -S Session.vim
+    )
 }
 
 # play flash movies

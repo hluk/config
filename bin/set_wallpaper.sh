@@ -13,7 +13,7 @@ TMPPATH="$WALLPATH/_tmp"
 TMP="/home/lukas/dev/img/wallpaper.tmp.jpg"
 
 # redirect output to LOGFILE
-test -n "$LOGFILE" && exec 1>>"$LOGFILE"
+exec 1> ~/wallpaper.log
 
 trap 'echo "FAILED!"; exit 1' TERM QUIT INT
 
@@ -22,8 +22,9 @@ if [ -n "$1" ]
 then
 	echo "`date -R`: Setting wallpaper \"$1\""
 	/usr/bin/curl -s -o "$TMP" "$1" && IMG="$TMP" || IMG="$1"
-else 
-	IMG="$WALLPATH/`cd $WALLPATH && /bin/ls -1 | sort -R | head -1`" || exit $?
+else
+	IMG="`find "$WALLPATH" -type f | sort -R | head -1`" || exit $?
+	#IMG="$WALLPATH/`cd $WALLPATH && /bin/ls -1 *.* | sort -R | head -1`" || exit $?
 	echo "`date -R`: Setting random wallpaper \"$IMG\""
 fi
 

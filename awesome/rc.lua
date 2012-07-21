@@ -144,7 +144,7 @@ clientkeys = awful.util.table.join(
     awful.key({ modkey, "Control" }, "space",  awful.client.floating.toggle                     ),
     awful.key({ modkey, "Control" }, "Return", function (c) c:swap(awful.client.getmaster()) end),
     --awful.key({ modkey,           }, "o",      awful.client.movetoscreen                        ),
-    --awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
+    awful.key({ modkey, "Shift"   }, "r",      function (c) c:redraw()                       end),
     awful.key({ modkey,           }, "t",      function (c) c.ontop = not c.ontop            end),
     awful.key({ modkey,           }, "s",      function (c) c.sticky = not c.sticky          end),
     awful.key({ modkey,           }, "n",
@@ -220,6 +220,13 @@ awful.rules.rules = {
           -- remove gaps around urxvt window
           size_hints_honor = false,
       } },
+    { rule = { class = "VirtualBox" },
+      properties = {
+          -- FIXME: keys are not pass through
+          tag = tags[1][3],
+          floating = true,
+          size_hints_honor = true,
+      } },
     { rule = { class = "MPlayer" },
       properties = { floating = true } },
     { rule = { class = "gimp" },
@@ -275,19 +282,25 @@ for s = 1, screen.count() do screen[s]:add_signal("arrange",
         local layout = awful.layout.getname(awful.layout.get(s))
         for _, c in pairs(clients) do
             local w = beautiful.border_width
-            if not awful.client.floating.get(c) then
-                if layout == "max" then
-                    w = 0
-                else
-                    local cg = c:geometry()
-                    local sg = screen[s].geometry
 
-                    if cg.width > sg.width - 64 and cg.height > sg.height - 64 then
-                        w = 0
-                    end
+            if c.fullscreen or (layout == "max" and not awful.client.floating.get(c)) then
+                w = 0
+            else
+                local cg = c:geometry()
+                local sg = screen[s].geometry
+
+                if cg.width > sg.width - 64 and cg.height > sg.height - 64 then
+                    w = 0
                 end
             end
+
             c.border_width = w
+            if c.class == "MPlayer" then
+                naughty.notify({
+                    preset = naughty.config.presets.critical,
+                    title = "DEBUG",
+                    text = w .. "," .. c.border_width })
+            end
         end
     end)
 end

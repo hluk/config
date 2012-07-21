@@ -9,7 +9,7 @@
 
 #B=/usr/bin/firefox
 #B=/usr/bin/firefox-nightly
-B=/usr/bin/chromium
+B="/usr/bin/chromium --ignore-gpu-blacklist"
 #B=/usr/bin/chromium-browser
 #B=/usr/bin/opera
 #B=/usr/bin/opera-next

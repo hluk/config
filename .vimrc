@@ -8,6 +8,7 @@
 " g; -- go to last change
 " g, -- go to next change
 " ~  -- change case of letter
+" gq -- reformat
 "
 " :g/PATTERN/norm ... -- do something with each matched line (e.g. delete with dd)
 
@@ -56,7 +57,7 @@ set clipboard=unnamed
 set tildeop
 " }}}
 
-" BASE PLUGINS {{{
+" PLUGINS {{{
 " plugin loader (~/.vim/bundle/*)
 " must be called before 'filetype indent on'
 filetype off
@@ -74,54 +75,9 @@ au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
 " doxygen
 au BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
 
-filetype plugin on
-filetype indent on
-" }}}
+" qml
+au BufRead,BufNewFile *.qml setfiletype javascript
 
-" KEYS {{{
-" faster commands
-nnoremap ; :
-
-" typos
-command! Q :q
-command! W :w
-command! Wq :wq
-command! WQ :wq
-
-" F5 to make
-noremap <F5> :make!<CR><CR>
-inoremap <F5> <C-o>:make!<CR><CR>
-noremap <F1> :set makeprg=cat\ ../build/make.log\|make<CR>
-inoremap <F5> <C-o>:set makeprg=cat\ ../build/make.log\|make<CR>
-
-" F2 to save
-noremap <F2> :w<CR>
-inoremap <F2> <C-o>:w<CR>
-
-" run/execute current file
-noremap <C-.> :w<CR>:!./%<CR>
-inoremap <C-.> <C-o>:w<CR><C-o>:!./%<CR>
-
-" edit/source configuration
-noremap <C-e> :split ~/.vimrc <CR>
-noremap <C-u> :source ~/.vimrc <CR>
-
-" clear highlighted search term on space
-noremap <silent> <Space> :nohls<CR>
-
-" reselect visual block after indent
-vnoremap < <gv
-vnoremap > >gv
-
-inoremap jj <Esc>
-
-" tag
-map tg :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
-map tj  :exec("pta ".expand("<cword>"))<CR>
-map TT :!~/dev/bin/tags.sh<CR>
-" }}}
-
-" PLUGINS {{{
 "" toggle comment (NERD commenter)
 Bundle 'git://github.com/scrooloose/nerdcommenter.git'
 map <C-\> <leader>c<SPACE>j
@@ -199,16 +155,67 @@ inoremap <F4> <C-o>:AT<CR>
 " easytags
 " :UpdateTags -R
 " C-]
-"Bundle 'git://github.com/xolox/vim-easytags.git'
-"set tags=~/.tags
-"let g:easytags_include_members = 1
-"let g:easytags_resolve_links = 1
-"let g:easytags_dynamic_files = 1
-"let g:easytags_file = './.tags'
+Bundle 'git://github.com/xolox/vim-easytags.git'
+set tags=~/.tags
+let g:easytags_include_members = 1
+let g:easytags_resolve_links = 1
+let g:easytags_dynamic_files = 2
+let g:easytags_file = './.tags'
 
 " fugitive (git)
 Bundle 'git://github.com/tpope/vim-fugitive.git'
-"}}}
+
+" Clang complete
+Bundle 'https://github.com/Rip-Rip/clang_complete.git'
+let g:clang_auto_select = 1
+let g:clang_complete_copen = 1
+let g:clang_complete_auto = 0
+let g:clang_periodic_quickfix = 0
+let g:clang_use_library = 1
+let g:clang_library_path = '/usr/lib/llvm/'
+let g:clang_user_options = '-I/usr/lib/clang/3.0/include'
+
+filetype plugin indent on
+" }}}
+
+" KEYS {{{
+" faster commands
+nnoremap ; :
+
+" typos
+command! Q :q
+command! W :w
+command! Wq :wq
+command! WQ :wq
+
+" F5 to make
+noremap <F5> :make!<CR><CR>
+inoremap <F5> <C-o>:make!<CR><CR>
+noremap <F1> :set makeprg=cat\ ../build/make.log\|make<CR>
+inoremap <F5> <C-o>:set makeprg=cat\ ../build/make.log\|make<CR>
+
+" run/execute current file
+noremap <C-.> :w<CR>:!./%<CR>
+inoremap <C-.> <C-o>:w<CR><C-o>:!./%<CR>
+
+" edit/source configuration
+noremap <C-e>e :split ~/.vimrc <CR>
+noremap <C-e>r :source ~/.vimrc <CR>
+
+" clear highlighted search term on space
+noremap <silent> <Space> :nohls<CR>
+
+" reselect visual block after indent
+vnoremap < <gv
+vnoremap > >gv
+
+inoremap jj <Esc>
+
+" tag
+map tg :vsp <CR>:exec("tag ".expand("<cword>"))<CR>
+map tj  :exec("pta ".expand("<cword>"))<CR>
+map TT :!~/dev/bin/tags.sh<CR>
+" }}}
 
 " COMPLETION {{{
 " don't complete some filenames
@@ -225,16 +232,6 @@ set wildignore+=*.flv,.*mp4,*.mp3,*.wav,*.wmv,*.avi,*.mkv,*.mov
 
 "set completeopt=longest,menuone,preview
 "set completeopt=longest,menuone,menu
-
-" Clang complete
-Bundle 'https://github.com/Rip-Rip/clang_complete.git'
-let g:clang_auto_select = 1
-let g:clang_complete_copen = 1
-let g:clang_complete_auto = 0
-let g:clang_periodic_quickfix = 0
-let g:clang_use_library = 1
-let g:clang_library_path = '/usr/lib/llvm/'
-let g:clang_user_options = '-I/usr/lib/clang/3.0/include'
 "}}}
 
 " MOVE LINE/BLOCK {{{
