@@ -19,15 +19,25 @@
 
 !! patched fonts for Powerline vim plugin
 !! https://github.com/Lokaltog/vim-powerline/wiki/Patched-fonts
-#define FONT1 xft:DejaVu Sans Mono for Powerline:pixelsize=15
+!#define FONT1 xft:DejaVu Sans Mono for Powerline:pixelsize=15
 !#define FONT1 xft:Bitstream Vera Sans Mono for Powerline:pixelsize=15
 !#define FONT1 xft:Ubuntu Mono for Powerline:pixelsize=17.5,style=RegularForPowerline
+!#define FONT1 xft:Ubuntu Mono for Powerline:size=12
+!#define FONT1 xft:Menlo for Powerline:h=12
 
 !!!!!!XTERM:FONT
-Rxvt*RenderFont: true
-Rxvt*FaceName: FONT1
-Rxvt*font: FONT1
-Rxvt*boldMode: false
+!#define FONT Envy Code R for Powerline:pixelsize=14
+!#define FONT Ubuntu Mono for Powerline:pixelsize=14
+#define FONT DejaVu Sans Mono for Powerline:pixelsize=14
+Rxvt*font:           xft:FONT:regular
+Rxvt*imFont:         xft:FONT:regular
+Rxvt*boldFont:       xft:FONT:bold
+Rxvt*italicFont:     xft:FONT:italic
+Rxvt*boldItalicFont: xft:FONT:bold:italic
+!Rxvt*RenderFont: true
+!Rxvt*FaceName: FONT1
+!Rxvt*font: FONT1
+!Rxvt*boldMode: false
 !Rxvt.letterSpace: -1
 Rxvt.letterSpace: -2
 !Rxvt.letterSpace: 0
@@ -54,6 +64,7 @@ Rxvt*shading: 80
 !Rxvt*transparent: true
 !Rxvt*depth: 32
 
+Xft.autohint:false
 Xft.antialias:true
 Xft.dpi:96
 Xft.hinting:true

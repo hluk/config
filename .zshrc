@@ -32,6 +32,9 @@ zle -N edit-command-line
 bindkey '^Xe' edit-command-line
 bindkey '^X^e' edit-command-line
 
+# vi mode
+#bindkey -v
+
 #setopt menucomplete
 
 # This makes cd=pushd
@@ -99,7 +102,16 @@ zstyle ':completion::approximate*:*' prefix-needed false
 # env# {{{
 export XDG_DATA_HOME="$HOME/.config"
 export EDITOR="vim"
-export PAGER=most
+#export PAGER=most
+
+# support colors in less
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;33m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
 
 # X11# {{{
 if [ -n "$DISPLAY" ]
@@ -113,8 +125,9 @@ fi
 alias rm="rm -vI"
 alias cp="cp -v"
 alias mv="mv -v"
-alias ls="ls --color=auto"
-alias ll="ls --color=auto -lA"
+alias ls="ls --color=auto -h"
+alias ll="ls -lA"
+alias l="ls -lAtr"
 alias grep="grep --colour=auto"
 alias man="LANG=C man"
 alias s="screen"
@@ -139,6 +152,7 @@ then
 	alias feb="$HOME/dev/bin/feb.sh"
 	alias febt="THUMBS=1 $HOME/dev/bin/feb.hs"
     alias copyq="$HOME/dev/copyq/build/copyq"
+    alias copyq-debug="$HOME/dev/copyq-build/debug/copyq"
 
     export IMAGEPEEK_SESSION="$HOME/.imagepeek"
     alias peek="$HOME/dev/imagepeek/imagepeek"
@@ -182,14 +196,7 @@ c=~/dev/copyq
 i=~/dev/imagepeek
 # }}}
 
-# plugins {{{
-# productivity
-source ~/apps/z/z.sh
-function precmd () {
-    _z --add "$(pwd -P)"
-}
-alias v='~/apps/v/v'
-
+# functions {{{
 # simple find
 f ()
 {
@@ -213,7 +220,8 @@ S ()
 }
 
 # play flash movies
-pflv() {
+pflv()
+{
     pid=$(pgrep -f flashplayer | tail -l)
     file=$(lsof -p ${pid} | awk \
         '/\/tmp\/Flash/ {sub(/[rwu]$/, "", $4); print "/proc/" $2 "/fd/" $4}')
@@ -222,9 +230,19 @@ pflv() {
 }
 
 # make directory if it does not exist and cd to it
-mkcd() {
+mkcd()
+{
     mkdir -p "$*" && cd "$*"
 }
+# }}}
+
+# plugins {{{
+# productivity
+source ~/apps/z/z.sh
+function precmd () {
+    _z --add "$(pwd -P)"
+}
+alias v='~/apps/v/v'
 
 # syntax highlighting
 source ~/apps/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -240,5 +258,10 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=green,bold'
 ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=red,bold'
 ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=yellow,bold'
 ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta,bold'
+# }}}
+
+# ccache {{{
+PATH=/usr/lib/ccache/bin:$PATH
+ccache --max-size=8G >/dev/null
 # }}}
 

@@ -1,19 +1,17 @@
-~/.Xresources
 ~/.asoundrc
 ~/.config/awesome/
+~/.config/fontconfig/fonts.conf
 ~/.config/openbox/
 ~/.conkyrc
 ~/.conkyrc_console
 ~/.dwmrc.h
-~/.easystroke
 ~/.mplayer/
 ~/.screenrc
-~/.tint2rc
 ~/.vimrc
 ~/.xbindkeysrc
 ~/.xinitrc
-~/.xmobarrc
-~/.xmonad/xmonad.hs
+~/.Xmodmap
+~/.Xresources
 ~/.zshrc
 ~/dev/bin/
 ~/dev/colors/
@@ -24,3 +22,4 @@
 ~/dev/rss/*.sh rss/
 ~/dev/xmobar/
 ~/dev/zcode/{_rungame.sh,_saved} zcode/
+/usr/lib/udev/keymaps/microsoft-ergonomic-keyboard udev/keymaps/microsoft-ergonomic-keyboard

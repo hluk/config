@@ -1,4 +1,6 @@
 " USAGE:
+" :h index
+" :options
 " :read -- open file read only
 " :setl ar -- automatically reload file if changed
 " q/ -- search history
@@ -189,10 +191,10 @@ command! Wq :wq
 command! WQ :wq
 
 " F5 to make
-noremap <F5> :make!<CR><CR>
-inoremap <F5> <C-o>:make!<CR><CR>
-noremap <F1> :set makeprg=cat\ ../build/make.log\|make<CR>
-inoremap <F5> <C-o>:set makeprg=cat\ ../build/make.log\|make<CR>
+"noremap <F5> :make!<CR><CR>
+"inoremap <F5> <C-o>:make!<CR><CR>
+"noremap <F1> :set makeprg=cat\ ../build/make.log\|make<CR>
+"inoremap <F5> <C-o>:set makeprg=cat\ ../build/make.log\|make<CR>
 
 " run/execute current file
 noremap <C-.> :w<CR>:!./%<CR>
@@ -346,7 +348,8 @@ if has("gui_running")
     gui
     let &guicursor = &guicursor . ",a:blinkon0"
     "set guifont=Bitstream\ Vera\ Sans\ Mono\ 11.5
-    set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11.5
+    "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11.5
+    set guifont=Ubuntu\ Mono\ for\ Powerline\ 11
 
     " zoom
     function! Zoom(how)

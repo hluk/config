@@ -41,7 +41,7 @@ then
     URLS=$@
 else
     #URLS=`xclip -o`
-    URLS=`~/dev/copyq-build/release/copyq read`
+    URLS=`~/dev/copyq/build/copyq read`
 fi
 
 if [[ "$PLAYLIST" = "1" || -n "$M3U" ]]
