@@ -23,3 +23,4 @@
 ~/dev/xmobar/
 ~/dev/zcode/{_rungame.sh,_saved} zcode/
 /usr/lib/udev/keymaps/microsoft-ergonomic-keyboard udev/keymaps/microsoft-ergonomic-keyboard
+/usr/lib/udev/rules.d/95-keymap.rules udev/rules.d/95-keymap.rules
