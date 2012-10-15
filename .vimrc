@@ -195,6 +195,7 @@ command! WQ :wq
 "inoremap <F5> <C-o>:make!<CR><CR>
 "noremap <F1> :set makeprg=cat\ ../build/make.log\|make<CR>
 "inoremap <F5> <C-o>:set makeprg=cat\ ../build/make.log\|make<CR>
+map <F6> run
 
 " run/execute current file
 noremap <C-.> :w<CR>:!./%<CR>

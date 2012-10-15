@@ -137,7 +137,7 @@ alias fl='export F=`ls -t /tmp/Flash*|head -1`;m $F'
 alias natsort=~/dev/natsort/natsort
 #alias m="mplayer -quiet"
 alias m="smplayer"
-alias m0="m -vo null -vc null -novideo"
+alias m0="mplayer -vo null -vc null -novideo"
 alias binwalk="~/apps/binwalk/src/binwalk -m ~/apps/binwalk/src/magic.binwalk"
 alias mkgallery='PATH="/home/lukas/dev/imagepeek:$PATH" ~/dev/bin/mkgallery.sh'
 
@@ -264,4 +264,13 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta,bold'
 PATH=/usr/lib/ccache/bin:$PATH
 ccache --max-size=8G >/dev/null
 # }}}
+
+export QBS_SOURCE_DIR=$HOME/apps/qbs
+export QBS_BUILD_DIR=$QBS_SOURCE_DIR/build
+export PATH=$QBS_SOURCE_DIR/build/bin:$PATH
+#qbs config --global modules.qt.core.binPath /usr/bin
+#qbs config --global modules.qt.core.incPath /usr/include
+#qbs config --global modules.qt.core.libPath /usr/lib
+#qbs config --global modules.qt.core.mkspecsPath /usr/share/qt/mkspecs
+#qbs config --global modules.qt.core.version 5.0.0
 

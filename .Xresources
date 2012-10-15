@@ -27,8 +27,8 @@
 
 !!!!!!XTERM:FONT
 !#define FONT Envy Code R for Powerline:pixelsize=14
-!#define FONT Ubuntu Mono for Powerline:pixelsize=14
-#define FONT DejaVu Sans Mono for Powerline:pixelsize=14
+#define FONT Ubuntu Mono for Powerline:pixelsize=15
+!#define FONT DejaVu Sans Mono for Powerline:pixelsize=14
 Rxvt*font:           xft:FONT:regular
 Rxvt*imFont:         xft:FONT:regular
 Rxvt*boldFont:       xft:FONT:bold
@@ -38,12 +38,12 @@ Rxvt*boldItalicFont: xft:FONT:bold:italic
 !Rxvt*FaceName: FONT1
 !Rxvt*font: FONT1
 !Rxvt*boldMode: false
-!Rxvt.letterSpace: -1
-Rxvt.letterSpace: -2
+Rxvt.letterSpace: -1
+!Rxvt.letterSpace: -2
 !Rxvt.letterSpace: 0
 
 !!!!!!XTERM:GEOMETRY
-!XTerm*geometry: 100x50
+!Rxvt*geometry: 100x50
 
 !!!!!!XTERM:SCROLLING
 Rxvt*scrollBar: false
@@ -52,7 +52,7 @@ Rxvt*scrollKey: true
 Rxvt*scrollTtyOutput: false
 Rxvt*scrollTtyKeypress: true
 Rxvt*scrollWithBuffer: false
-!XTerm*jumpScroll: true
+!Rxvt*jumpScroll: true
 Rxvt*skipScroll: true
 Rxvt*scrollColor: #aaa894
 Rxvt*troughColor: #000000
@@ -64,13 +64,13 @@ Rxvt*shading: 80
 !Rxvt*transparent: true
 !Rxvt*depth: 32
 
-Xft.autohint:false
-Xft.antialias:true
-Xft.dpi:96
-Xft.hinting:true
-Xft.rgba:rgb
-Xft.hintstyle:hintfull
-Xft.lcdfilter:lcddefault
+!Xft.autohint:true
+!Xft.antialias:true
+!Xft.dpi:102
+!Xft.hinting:true
+!Xft.rgba:rgb
+!Xft.hintstyle:hintslight
+!Xft.lcdfilter:lcddefault
 
 !Xcursor.theme: pearl
 !Xcursor.theme: cross

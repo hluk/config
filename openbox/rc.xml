@@ -65,7 +65,7 @@
   <animateIconify>yes</animateIconify>
   <font place="ActiveWindow">
     <name>sans</name>
-    <size>8</size>
+    <size>9</size>
     <!-- font size in points -->
     <weight>bold</weight>
     <!-- 'bold' or 'normal' -->
@@ -74,7 +74,7 @@
   </font>
   <font place="InactiveWindow">
     <name>sans</name>
-    <size>8</size>
+    <size>9</size>
     <!-- font size in points -->
     <weight>bold</weight>
     <!-- 'bold' or 'normal' -->
@@ -372,7 +372,7 @@
     </mousebind>
     <mousebind button="A-Right" action="Drag">
       <action name="Resize"/>
-    </mousebind> 
+    </mousebind>
 
     <mousebind button="A-Middle" action="Press">
       <action name="Lower"/>
@@ -624,7 +624,7 @@
     <!-- Menus -->
     <mousebind button="Middle" action="Press">
       <action name="ShowMenu"><menu>client-list-combined-menu</menu></action>
-    </mousebind> 
+    </mousebind>
     <mousebind button="Right" action="Press">
       <action name="ShowMenu"><menu>root-menu</menu></action>
     </mousebind>
@@ -756,6 +756,10 @@
   # end of the example
 -->
 <application name="urxvt">
+    <decor>no</decor>
+    <maximized>true</maximized>
+</application>
+<application name="konsole">
     <decor>no</decor>
     <maximized>true</maximized>
 </application>

@@ -2,8 +2,8 @@
 ### audio/video output
 #ao=alsa #,sdl,pulse,oss,arts
 #ao=alsa:device=hw=0.0
-#ao=alsa
-ao=pulse
+ao=alsa
+#ao=pulse
 #ao=oss
 
 #vo=xv:adaptor=0

@@ -55,8 +55,7 @@ echo -e "\tOutput: `/usr/bin/identify "$WALL"`" &&
 
 # set wallpaper
 echo -e "\tSetting..." &&
-if pidof xfdesktop >/dev/null
-then
+if pidof xfdesktop >/dev/null; then
     PROPERTY="/backdrop/screen0/monitor0/image-path"
     xfconf-query -c xfce4-desktop -p $PROPERTY -s ""
     xfconf-query -c xfce4-desktop -p $PROPERTY -s "$WALL"
@@ -66,16 +65,15 @@ then
 #elif pidof pcmanfm >/dev/null
 #then
     #pcmanfm --set-wallpaper "$WALL"
-#elif pidof plasma-desktop >/dev/null
-#then
+elif pidof plasma-desktop >/dev/null; then
+    ln -f "$WALL" ~/wallpaper.png
     #kquitapp plasma-desktop && sleep 1
     #kwriteconfig --file plasma-desktop-appletsrc --group Containments --group 67 \
         #--group Wallpaper --group image --key wallpaper "$WALL"
     #kwriteconfig --file plasma-desktop-appletsrc --group Containments --group 70 \
         #--group Wallpaper --group image --key wallpaper "$WALL"
     #setsid plasma-desktop
-elif pidof nautilus >/dev/null
-then
+elif pidof nautilus >/dev/null; then
     #gconftool-2 -t str --set /desktop/gnome/background/picture_filename "$WALL"
     gsettings set org.gnome.desktop.background picture-uri file:///"$WALL"
 else
