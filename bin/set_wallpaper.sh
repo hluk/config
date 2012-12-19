@@ -18,8 +18,7 @@ exec 1> ~/wallpaper.log
 trap 'echo "FAILED!"; exit 1' TERM QUIT INT
 
 # take image as parameter or random image from WALLPATH
-if [ -n "$1" ]
-then
+if [ -n "$1" ]; then
 	echo "`date -R`: Setting wallpaper \"$1\""
 	/usr/bin/curl -s -o "$TMP" "$1" && IMG="$TMP" || IMG="$1"
 else
@@ -33,8 +32,7 @@ echo -e "\tInput: `/usr/bin/identify "$IMG"`"
 TMPPATH="$TMPPATH/${RES[0]}x${RES[1]}"
 # create wallapaper if it doesn't exist for current resolution
 WALL="$TMPPATH/`basename "$IMG"`.png"
-if [ ! -f "$WALL" ]
-then
+if [ ! -f "$WALL" ]; then
 	echo -e "\tResizing..."
 	SIZE=(`/usr/bin/identify -format "%w %h" "$IMG"`)
 	X=$((SIZE[0]*RES[1]))
@@ -44,8 +42,8 @@ then
 	WCUT=0
 	HCUT=0
 	test $X -ge $Y &&
-	W=$((X/SIZE[1])) H=${RES[1]}      WCUT=$(((W-RES[0])/2)) ||
-	W=${RES[0]}      H=$((Y/SIZE[0])) HCUT=$(((H-RES[1])/2))
+    W=$((X/SIZE[1])) H=${RES[1]}      WCUT=$(((W-RES[0])/2)) ||
+    W=${RES[0]}      H=$((Y/SIZE[0])) HCUT=$(((H-RES[1])/2))
 
 	# create wallpaper
 	mkdir -p "$TMPPATH" &&
@@ -65,8 +63,8 @@ if pidof xfdesktop >/dev/null; then
 #elif pidof pcmanfm >/dev/null
 #then
     #pcmanfm --set-wallpaper "$WALL"
-elif pidof plasma-desktop >/dev/null; then
-    ln -f "$WALL" ~/wallpaper.png
+#elif pidof plasma-desktop >/dev/null; then
+    #ln -f "$WALL" ~/wallpaper.png
     #kquitapp plasma-desktop && sleep 1
     #kwriteconfig --file plasma-desktop-appletsrc --group Containments --group 67 \
         #--group Wallpaper --group image --key wallpaper "$WALL"

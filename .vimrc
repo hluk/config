@@ -57,6 +57,8 @@ syntax on
 set clipboard=unnamed
 " use ~ with movement
 set tildeop
+" persistent undo history
+"set undofile
 " }}}
 
 " PLUGINS {{{
@@ -79,6 +81,9 @@ au BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
 
 " qml
 au BufRead,BufNewFile *.qml setfiletype javascript
+
+" git commit message
+au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])|set spell|set nosmartindent|set noautoindent|set nocindent
 
 "" toggle comment (NERD commenter)
 Bundle 'git://github.com/scrooloose/nerdcommenter.git'
@@ -157,12 +162,12 @@ inoremap <F4> <C-o>:AT<CR>
 " easytags
 " :UpdateTags -R
 " C-]
-Bundle 'git://github.com/xolox/vim-easytags.git'
-set tags=~/.tags
-let g:easytags_include_members = 1
-let g:easytags_resolve_links = 1
-let g:easytags_dynamic_files = 2
-let g:easytags_file = './.tags'
+"Bundle 'git://github.com/xolox/vim-easytags.git'
+"set tags=~/.tags
+"let g:easytags_include_members = 1
+"let g:easytags_resolve_links = 1
+"let g:easytags_dynamic_files = 2
+"let g:easytags_file = './.tags'
 
 " fugitive (git)
 Bundle 'git://github.com/tpope/vim-fugitive.git'
@@ -235,15 +240,6 @@ set wildignore+=*.flv,.*mp4,*.mp3,*.wav,*.wmv,*.avi,*.mkv,*.mov
 
 "set completeopt=longest,menuone,preview
 "set completeopt=longest,menuone,menu
-"}}}
-
-" MOVE LINE/BLOCK {{{
-nnoremap <C-J> :m+<CR>==
-nnoremap <C-K> :m-2<CR>==
-inoremap <C-J> <Esc>:m+<CR>==gi
-inoremap <C-K> <Esc>:m-2<CR>==gi
-vnoremap <C-J> :m'>+<CR>gv=gv
-vnoremap <C-K> :m-2<CR>gv=gv
 "}}}
 
 " DICTIONARY (C-x C-k) {{{
@@ -367,3 +363,13 @@ endif
 call SetScheme(0)
 "}}}
 
+" MOVE LINE/BLOCK {{{
+nnoremap <C-S-J> :m+<CR>==
+nnoremap <C-S-K> :m-2<CR>==
+inoremap <C-S-J> <Esc>:m+<CR>==gi
+inoremap <C-S-K> <Esc>:m-2<CR>==gi
+vnoremap <C-S-J> :m'>+<CR>gv=gv
+vnoremap <C-S-K> :m-2<CR>gv=gv
+"}}}
+map X /$<cr>
+map Z /[a-z]*<cr>

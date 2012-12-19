@@ -15,7 +15,11 @@ promptinit
 
 # prompts: /usr/share/zsh/4.3.4/functions/Prompts/
 prompt zefram
-export PS1='%B%F{blue}%n%(2v.%B@%b.@)%f%(!.%F{red}.%F{green})%m%f:%~%(?..%F{red}[%v]%f)%(!.#.>)%b '
+git_branch()
+{
+    git branch 2> /dev/null | sed -n -e 's/^* (no branch)/%F{red}(*)%f/p' -e 's/^* \(.*\)/%F{cyan}(\1)%f/p'
+}
+export PS1='%B%F{blue}%n%(2v.%B@%b.@)%f%(!.%F{red}.%F{green})%m%f:%~$(git_branch)%(?..%F{red}[%v]%f)%(!.#.>)%b '
 
 # keys
 bindkey '^[[1~' beginning-of-line
