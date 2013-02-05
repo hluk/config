@@ -148,6 +148,10 @@ alias mkgallery='PATH="/home/lukas/dev/imagepeek:$PATH" ~/dev/bin/mkgallery.sh'
 alias ifconfig="echo \"Use 'ip addr' command.\""
 alias netstat="echo \"Use 'ss' command.\""
 
+# helgrind: detect race conditions
+#alias helgrind="QT_NO_GLIB=1 valgrind --tool=helgrind --track-lockorders=no"
+alias helgrind="QT_NO_GLIB=1 valgrind --tool=helgrind"
+
 # X11# {{{
 if [ -n "$DISPLAY" ]
 then
@@ -237,6 +241,12 @@ pflv()
 mkcd()
 {
     mkdir -p "$*" && cd "$*"
+}
+
+# "top" for processes with given names
+topp()
+{
+    htop -p $(pidof "$@" | tr ' ' ,)
 }
 # }}}
 

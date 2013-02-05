@@ -71,6 +71,8 @@ if pidof xfdesktop >/dev/null; then
     #kwriteconfig --file plasma-desktop-appletsrc --group Containments --group 70 \
         #--group Wallpaper --group image --key wallpaper "$WALL"
     #setsid plasma-desktop
+elif pidof plasma-desktop >/dev/null; then
+    echo -e "\tWarning: Cannot set wallpaper for KDE Plasma Desktop";
 elif pidof nautilus >/dev/null; then
     #gconftool-2 -t str --set /desktop/gnome/background/picture_filename "$WALL"
     gsettings set org.gnome.desktop.background picture-uri file:///"$WALL"

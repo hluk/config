@@ -16,7 +16,7 @@ default () {
 default PLAY 1 <<.
     play video
 .
-default PLAYER vlc <<.
+default PLAYER smplayer <<.
     video player command
 .
 default PLAYLIST 0 <<.
@@ -62,7 +62,7 @@ then
     exit
 fi
 
-if [ "$PLAY" = "1" ]
+if [ "$PLAY" = "1" ] && ! pidof -s "$PLAYER" &>/dev/null
 then
     ARGS="$ARGS --player '$PLAYER' --subtitles --play"
 fi

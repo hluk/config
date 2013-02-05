@@ -58,7 +58,8 @@ set clipboard=unnamed
 " use ~ with movement
 set tildeop
 " persistent undo history
-"set undofile
+set undodir=~/.vim/undofiles/
+set undofile
 " }}}
 
 " PLUGINS {{{
@@ -245,8 +246,7 @@ set wildignore+=*.flv,.*mp4,*.mp3,*.wav,*.wmv,*.avi,*.mkv,*.mov
 " DICTIONARY (C-x C-k) {{{
 "set dictionary+=/usr/share/dict/words
 "set spelllang=cs
-map <F7> :set spell<CR>
-map <S-F7> :set nospell<CR>
+map <F7> :set spell!<CR>
 "}}}
 
 " FOLDS {{{
@@ -371,5 +371,4 @@ inoremap <C-S-K> <Esc>:m-2<CR>==gi
 vnoremap <C-S-J> :m'>+<CR>gv=gv
 vnoremap <C-S-K> :m-2<CR>gv=gv
 "}}}
-map X /$<cr>
-map Z /[a-z]*<cr>
+
