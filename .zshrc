@@ -160,12 +160,11 @@ then
 	alias feb="$HOME/dev/bin/feb.sh"
 	alias febt="THUMBS=1 $HOME/dev/bin/feb.hs"
     alias copyq="$HOME/dev/copyq/build/copyq"
-    alias copyq-debug="$HOME/dev/copyq-build/debug/copyq"
 
     export IMAGEPEEK_SESSION="$HOME/.imagepeek"
     alias peek="$HOME/dev/imagepeek/imagepeek"
     alias peeks="PATH=\"$HOME/dev/imagepeek:$PATH\" peeks"
-    alias quick="~/dev/imagequick-build-desktop-Qt_in_PATH_Release/imagequick"
+    alias quick="~/dev/imagequick/build/bin/imagequick"
     alias qtcreator="~/apps/qt-creator/build/bin/qtcreator -lastsession"
 else
 	alias x="startx > $HOME/.xsession 2>&1 &"
@@ -216,7 +215,8 @@ f ()
 # open editor in GNU screen in new window
 e ()
 {
-    screen -t ">$*" vim "$@"
+    #screen -t ">$*" vim "$@"
+    tmux new-window -n ">$*" "vim \"$*\""
 }
 
 S ()

@@ -62,14 +62,18 @@ then
     exit
 fi
 
-if [ "$PLAY" = "1" ] && ! pidof -s "$PLAYER" &>/dev/null
-then
-    ARGS="$ARGS --player '$PLAYER' --subtitles --play"
-fi
-
 mkdir -p "$DIR" || exit 1
-(
-cd "$DIR" &&
-"$CMD" $ARGS $URLS
-)
+while [ $? -eq 0 ]; do
+    args="$ARGS"
+    if [ "$PLAY" = "1" ] && ! pidof -s "$PLAYER" &>/dev/null
+    then
+        PLAY=0
+        args="$args --player '$PLAYER' --subtitles --play"
+    fi
+
+    (
+    cd "$DIR" &&
+    "$CMD" $args $URLS
+    )
+done
 

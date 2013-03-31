@@ -1,8 +1,8 @@
 #!/bin/bash
 #screen -x default $@ || screen -R default $@
-exec screen -d -RR default $@
+#exec screen -d -RR default $@
 
-#cd ~
-#export TMUX=""
-#tmux attach -d || tmux -2
+cd ~
+export TMUX=""
+tmux attach -d || tmux -2
 

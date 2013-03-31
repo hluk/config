@@ -3,6 +3,7 @@
 #VERSION=release
 #CMD=~/dev/copyq-build/$VERSION/copyq
 CMD=~/dev/copyq/build/copyq
+#CMD=~/dev/copyq/build-qt5/copyq
 
 [ "$VERSION" = "debug" ] && ulimit -c 50000
 

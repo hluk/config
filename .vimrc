@@ -172,6 +172,7 @@ inoremap <F4> <C-o>:AT<CR>
 
 " fugitive (git)
 Bundle 'git://github.com/tpope/vim-fugitive.git'
+no gitd :Gd master<CR>
 
 " Clang complete
 Bundle 'https://github.com/Rip-Rip/clang_complete.git'
@@ -197,8 +198,8 @@ command! Wq :wq
 command! WQ :wq
 
 " F5 to make
-"noremap <F5> :make!<CR><CR>
-"inoremap <F5> <C-o>:make!<CR><CR>
+noremap <F5> :w<CR>:make!<CR><CR>
+inoremap <F5> <C-o>:w<CR><C-O>:make!<CR><CR>
 "noremap <F1> :set makeprg=cat\ ../build/make.log\|make<CR>
 "inoremap <F5> <C-o>:set makeprg=cat\ ../build/make.log\|make<CR>
 map <F6> run
