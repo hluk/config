@@ -72,6 +72,10 @@ Bundle 'gmarik/vundle'
 " :BundleInstall to install new plugins
 " :BundleInstall! to update plugins
 
+" sip syntax
+Bundle 'https://github.com/vim-scripts/sip.vim'
+au BufNewFile,BufRead *.sip set syntax=sip
+
 " coffee-script filetype plugin
 Bundle 'git://github.com/kchmck/vim-coffee-script.git'
 " folds based on indentation
@@ -181,15 +185,15 @@ let g:clang_complete_copen = 1
 let g:clang_complete_auto = 0
 let g:clang_periodic_quickfix = 0
 let g:clang_use_library = 1
-let g:clang_library_path = '/usr/lib/llvm/'
-let g:clang_user_options = '-I/usr/lib/clang/3.0/include'
+let g:clang_library_path = '/usr/lib'
+let g:clang_user_options = '-I/usr/lib/clang/include'
 
 filetype plugin indent on
 " }}}
 
 " KEYS {{{
 " faster commands
-nnoremap ; :
+"nnoremap ; :
 
 " typos
 command! Q :q
@@ -356,7 +360,7 @@ if has("gui_running")
     map <C-F1> :execute Zoom(0.5)<CR>
     map <C-F2> :execute Zoom(-0.5)<CR>
 
-    SetSchemes soso solarized wombat molokai summerfruit256
+    SetSchemes molokai soso solarized wombat summerfruit256
 else
     SetSchemes badwolf kellys denim morning solarized:light soso zenburn mustang wombat256
 endif
@@ -371,5 +375,30 @@ inoremap <C-S-J> <Esc>:m+<CR>==gi
 inoremap <C-S-K> <Esc>:m-2<CR>==gi
 vnoremap <C-S-J> :m'>+<CR>gv=gv
 vnoremap <C-S-K> :m-2<CR>gv=gv
+"}}}
+
+" HARD MODE {{{
+nnoremap <Left> <NOP>
+nnoremap <Right> <NOP>
+nnoremap <Up> <NOP>
+nnoremap <Down> <NOP>
+nnoremap <PageUp> <NOP>
+nnoremap <PageDown> <NOP>
+
+inoremap <Left> <NOP>
+inoremap <Right> <NOP>
+inoremap <Up> <NOP>
+inoremap <Down> <NOP>
+inoremap <PageUp> <NOP>
+inoremap <PageDown> <NOP>
+
+vnoremap <Left> <NOP>
+vnoremap <Right> <NOP>
+vnoremap <Up> <NOP>
+vnoremap <Down> <NOP>
+vnoremap <PageUp> <NOP>
+vnoremap <PageDown> <NOP>
+
+set backspace=0
 "}}}
 

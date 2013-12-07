@@ -9,5 +9,6 @@ ccache --max-size=8G
 ulimit -c unlimited
 [ "`ulimit -c`" = "unlimited" ] || { echo "Core files cannot be generated!"; exit 1; }
 
+source /etc/profile
 exec "$bin" -lastsession
 

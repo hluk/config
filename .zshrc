@@ -159,20 +159,19 @@ then
     alias mc="mc -x"
 	alias feb="$HOME/dev/bin/feb.sh"
 	alias febt="THUMBS=1 $HOME/dev/bin/feb.hs"
-    alias copyq="$HOME/dev/copyq/build/copyq"
+    alias copyq="$HOME/dev/build/copyq/debug/copyq"
 
     export IMAGEPEEK_SESSION="$HOME/.imagepeek"
     alias peek="$HOME/dev/imagepeek/imagepeek"
     alias peeks="PATH=\"$HOME/dev/imagepeek:$PATH\" peeks"
-    alias quick="~/dev/imagequick/build/bin/imagequick"
-    alias qtcreator="~/apps/qt-creator/build/bin/qtcreator -lastsession"
+    alias quick="~/dev/imagequick/build/imagequick"
+    alias qtcreator="~/apps/qtcreator-test/bin/qtcreator -lastsession"
 else
 	alias x="startx > $HOME/.xsession 2>&1 &"
 fi
 # }}}
 
 # yaourt
-export PACMAN=pacman-color
 alias q="yaourt"
 alias i="q -S"
 alias u="q -Rs"
@@ -234,7 +233,7 @@ pflv()
     file=$(lsof -p ${pid} | awk \
         '/\/tmp\/Flash/ {sub(/[rwu]$/, "", $4); print "/proc/" $2 "/fd/" $4}')
     echo "$file"
-    vlc ${file}
+    smplayer ${file}
 }
 
 # make directory if it does not exist and cd to it
@@ -278,6 +277,9 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta,bold'
 PATH=/usr/lib/ccache/bin:$PATH
 ccache --max-size=8G >/dev/null
 # }}}
+
+export GEM_HOME=$HOME/.gem/ruby/2.0.0
+export PATH=$GEM_HOME/bin:$PATH
 
 export QBS_SOURCE_DIR=$HOME/apps/qbs
 export QBS_BUILD_DIR=$QBS_SOURCE_DIR/build

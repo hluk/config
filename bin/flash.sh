@@ -1,7 +1,8 @@
 #!/bin/bash
 HELP="Download flash videos from specified URLs or from URLs in clipboard.\n"
+#CMD=youtube-dl
 CMD=~/apps/get-flash-videos/get_flash_videos
-CMD2=~/apps/get-flash-videos/list_flash_videos
+#CMD2=~/apps/get-flash-videos/list_flash_videos
 DIR=~/down/_flash
 CURLLIMIT=""
 CURLARGS="--silent"
@@ -29,6 +30,11 @@ default SKIP 0 <<.
 default M3U "" <<.
     M3U playlist filename
 .
+
+is_running () {
+    #ps -ho '%c' | grep -q "$1"
+    pgrep "$1" >/dev/null
+}
 
 if [[ "$1" =~ ^(|-|--)(h|help|\?)$ ]]
 then
@@ -65,8 +71,7 @@ fi
 mkdir -p "$DIR" || exit 1
 while [ $? -eq 0 ]; do
     args="$ARGS"
-    if [ "$PLAY" = "1" ] && ! pidof -s "$PLAYER" &>/dev/null
-    then
+    if [ "$PLAY" = "1" ] && ! is_running "$PLAYER"; then
         PLAY=0
         args="$args --player '$PLAYER' --subtitles --play"
     fi

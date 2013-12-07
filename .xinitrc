@@ -1,4 +1,7 @@
 #!/bin/bash
+#exec gnome-session
+exec gnome-session-cinnamon
+
 echo ".xinit: starting desktop environment"
 
 #xrandr --output LVDS1 --off
