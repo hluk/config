@@ -6,12 +6,16 @@ ao=alsa
 #ao=pulse
 #ao=oss
 
-vo=xv:adaptor=0
+#vo=xv:adaptor=0
 #vo=vaapi:gl
 #vo=vaapi
 #va=vaapi
+
 #vo=vdpau,
 #vc=ffh264vdpau,ffmpeg12vdpau,ffodivxvdpau,ffwmv3vdpau,ffvc1vdpau,
+
+vo=vdpau,
+vc=ffmpeg12vdpau,ffwmv3vdpau,ffvc1vdpau,ffh264vdpau,ffodivxvdpau,
 
 #zoom=yes
 

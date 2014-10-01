@@ -164,7 +164,7 @@ then
     export IMAGEPEEK_SESSION="$HOME/.imagepeek"
     alias peek="$HOME/dev/imagepeek/imagepeek"
     alias peeks="PATH=\"$HOME/dev/imagepeek:$PATH\" peeks"
-    alias quick="~/dev/imagequick/build/imagequick"
+    alias quick="~/dev/bin/imagequick.sh"
     alias qtcreator="~/apps/qtcreator-test/bin/qtcreator -lastsession"
 else
 	alias x="startx > $HOME/.xsession 2>&1 &"
@@ -289,4 +289,5 @@ export PATH=$QBS_SOURCE_DIR/build/bin:$PATH
 #qbs config --global modules.qt.core.libPath /usr/lib
 #qbs config --global modules.qt.core.mkspecsPath /usr/share/qt/mkspecs
 #qbs config --global modules.qt.core.version 5.0.0
+
 

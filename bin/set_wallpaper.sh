@@ -13,7 +13,7 @@ TMPPATH="$WALLPATH/_tmp"
 TMP="/home/lukas/dev/img/wallpaper.tmp.jpg"
 
 # redirect output to LOGFILE
-#exec 1> ~/wallpaper.log
+exec 1> ~/wallpaper.log
 
 trap 'echo "FAILED!"; exit 1' TERM QUIT INT
 

@@ -38,8 +38,8 @@ Rxvt*boldItalicFont: xft:FONT:bold:italic
 !Rxvt*FaceName: FONT1
 !Rxvt*font: FONT1
 !Rxvt*boldMode: false
-!Rxvt.letterSpace: -1
-Rxvt.letterSpace: -2
+Rxvt.letterSpace: -1
+!Rxvt.letterSpace: -2
 !Rxvt.letterSpace: 0
 
 !!!!!!XTERM:GEOMETRY
@@ -61,7 +61,7 @@ Rxvt*scrollstyle: plain
 Rxvt*inheritPixmap: true
 Rxvt*tintColor: #444444
 Rxvt*shading: 80
-!Rxvt*transparent: true
+Rxvt*transparent: true
 !Rxvt*depth: 32
 
 !Xft.autohint:true
@@ -90,8 +90,8 @@ xpdf*background:        white
 !!! color schemes: http://phraktured.net/terminal-colors/
 !*cursorColor: gray
 Rxvt*foreground:     rgb:c0/c0/c0
-!Rxvt.background:     rgba:2222/2222/2222/dddd
-Rxvt.background:     rgb:22/22/22
+Rxvt.background:     rgba:2222/2222/2222/dddd
+!Rxvt.background:     rgb:22/22/22
 !black
 Rxvt*color0:         rgb:19/19/19
 Rxvt*color8:         rgb:25/25/25

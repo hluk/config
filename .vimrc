@@ -139,8 +139,8 @@ noremap <C-n>r :call ReloadAllSnippets()<CR>
 "Bundle 'git://github.com/rygwdn/ultisnips.git'
 
 " powerline - statusline
-Bundle 'git://github.com/Lokaltog/vim-powerline.git'
-let g:Powerline_symbols='fancy'
+"Bundle 'git://github.com/Lokaltog/vim-powerline.git'
+"let g:Powerline_symbols='fancy'
 
 " a.vim
 " Alternate between source and header files
@@ -187,6 +187,8 @@ let g:clang_periodic_quickfix = 0
 let g:clang_use_library = 1
 let g:clang_library_path = '/usr/lib'
 let g:clang_user_options = '-I/usr/lib/clang/include'
+
+Bundle 'https://github.com/jaxbot/github-issues.vim.git'
 
 filetype plugin indent on
 " }}}
@@ -362,7 +364,7 @@ if has("gui_running")
 
     SetSchemes molokai soso solarized wombat summerfruit256
 else
-    SetSchemes badwolf kellys denim morning solarized:light soso zenburn mustang wombat256
+    SetSchemes badwolf soso zenburn wombat256
 endif
 
 call SetScheme(0)
@@ -399,6 +401,6 @@ vnoremap <Down> <NOP>
 vnoremap <PageUp> <NOP>
 vnoremap <PageDown> <NOP>
 
-set backspace=0
+"set backspace=0
 "}}}
 

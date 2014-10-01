@@ -7,7 +7,7 @@
     <screen_edge_strength>20</screen_edge_strength>
   </resistance>
   <focus>
-    <focusNew>yes</focusNew>
+    <focusNew>no</focusNew>
     <!-- always try to focus new windows when they appear. other rules do
        apply -->
     <followMouse>no</followMouse>
@@ -120,7 +120,7 @@
 
        use obconf if you want to change these without having to log out
        and back in -->
-    <number>4</number>
+    <number>5</number>
     <firstdesk>1</firstdesk>
     <names>
       <!-- set names up here if you want to, like this:
@@ -204,6 +204,18 @@
         <wrap>no</wrap>
       </action>
     </keybind>
+    <keybind key="C-W-5">
+      <action name="SendToDesktop">
+        <to>5</to>
+        <wrap>no</wrap>
+      </action>
+    </keybind>
+    <keybind key="C-W-6">
+      <action name="SendToDesktop">
+        <to>6</to>
+        <wrap>no</wrap>
+      </action>
+    </keybind>
     <keybind key="W-1">
       <action name="GoToDesktop">
         <to>1</to>
@@ -222,6 +234,16 @@
     <keybind key="W-4">
       <action name="GoToDesktop">
         <to>4</to>
+      </action>
+    </keybind>
+    <keybind key="W-5">
+      <action name="GoToDesktop">
+        <to>5</to>
+      </action>
+    </keybind>
+    <keybind key="W-6">
+      <action name="GoToDesktop">
+        <to>6</to>
       </action>
     </keybind>
     <keybind key="W-d">
@@ -822,6 +844,9 @@
     </application>
     <application title="Buddy List">
       <skip_taskbar>true</skip_taskbar>
+    </application>
+    <application name="spotify">
+      <desktop>4</desktop>
     </application>
     <application name="xbmc.bin">
       <fullscreen>yes</fullscreen>

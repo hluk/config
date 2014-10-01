@@ -7,10 +7,10 @@
 # this will leave all flash videos in /tmp
 #export LD_PRELOAD="$HOME/dev/flash_unlink/flash_unlink.so"
 
-#B=/usr/bin/firefox
-#B=/usr/bin/firefox-nightly
-B="/usr/bin/chromium --ignore-gpu-blacklist"
+B=/usr/bin/firefox
+#B="/usr/bin/chromium --ignore-gpu-blacklist"
 #B=/usr/bin/chromium-browser
+#B=/usr/bin/firefox-nightly
 #B=/usr/bin/opera
 #B=/usr/bin/opera-next
 
