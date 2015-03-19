@@ -1,6 +1,6 @@
 ~/.asoundrc
 ~/.config/awesome/
-~/.config/fish/fish.config
+~/.config/fish/config.fish
 ~/.config/fontconfig/fonts.conf
 ~/.config/openbox/
 ~/.conkyrc

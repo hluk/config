@@ -352,8 +352,8 @@ if has("gui_running")
     gui
     let &guicursor = &guicursor . ",a:blinkon0"
     "set guifont=Bitstream\ Vera\ Sans\ Mono\ 11.5
-    "set guifont=DejaVu\ Sans\ Mono\ for\ Powerline\ 11.5
-    set guifont=Ubuntu\ Mono\ for\ Powerline\ 11
+    "set guifont=DejaVu\ Sans\ Mono\ 11.5
+    set guifont=Ubuntu\ Mono\ 11
 
     " zoom
     function! Zoom(how)

@@ -43,7 +43,8 @@ lavdopts=threads=4
 ### AUDIO
 # reduce noise, volume normalization
 #af=sinesuppress=1:volnorm=2
-af=volnorm=1,scaletempo
+#af=volnorm=1,scaletempo
+af=scaletempo
 channels=2
 
 

@@ -171,10 +171,11 @@ else
 fi
 # }}}
 
-# yaourt
+# package manager
+#alias q="packer"
 alias q="yaourt"
 alias i="q -S"
-alias u="q -Rs"
+alias u="sudo pacman -Rs"
 alias qdiff="q -C"
 alias up="q -Syu --aur"
 alias Up="q -Qe|awk -F'[/ ]' '/^local/{if(\$2~/-(git|svn|bzr|hg|nightly)$/)print\$2}'"
@@ -290,4 +291,5 @@ export PATH=$QBS_SOURCE_DIR/build/bin:$PATH
 #qbs config --global modules.qt.core.mkspecsPath /usr/share/qt/mkspecs
 #qbs config --global modules.qt.core.version 5.0.0
 
+ttyctl -f
 
