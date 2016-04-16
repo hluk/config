@@ -42,7 +42,7 @@
                   'Active' - where the active window is -->
   </placement>
   <theme>
-    <name>Fog</name>
+    <name>Bland</name>
     <titleLayout>NLIMC</titleLayout>
     <!--
       available characters are NDSLIMC, each can occur at most once.
@@ -812,7 +812,7 @@
       <decor>no</decor>
       <maximized>true</maximized>
     </application>
-    <application name="xfce4-terminal">
+    <application name="xfce4-terminal" title="Terminal">
       <decor>no</decor>
       <maximized>true</maximized>
     </application>
@@ -821,17 +821,7 @@
       <desktop>2</desktop>
       <maximized>true</maximized>
     </application>
-    <application name="Chromium">
-      <decor>no</decor>
-      <desktop>2</desktop>
-      <maximized>true</maximized>
-    </application>
-    <application name="chrome">
-      <decor>no</decor>
-      <desktop>2</desktop>
-      <maximized>true</maximized>
-    </application>
-    <application name="opera">
+    <application name="chromium">
       <decor>no</decor>
       <desktop>2</desktop>
       <maximized>true</maximized>
@@ -839,17 +829,9 @@
     <application title="Qt Creator">
       <desktop>3</desktop>
     </application>
-    <application name="Pidgin">
+    <!-- Spotify -->
+    <application title="Unnamed Window">
       <desktop>4</desktop>
-    </application>
-    <application title="Buddy List">
-      <skip_taskbar>true</skip_taskbar>
-    </application>
-    <application name="spotify">
-      <desktop>4</desktop>
-    </application>
-    <application name="xbmc.bin">
-      <fullscreen>yes</fullscreen>
     </application>
   </applications>
 </openbox_config>

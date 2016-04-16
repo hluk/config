@@ -1,16 +1,22 @@
 D=:${D:-"1"}
-Xnest $D -geometry 800x600 &
+Xnest $D -geometry 1200x800 &
 export DISPLAY=$D
 
 sleep 1
-openbox &
 #awesome &
 #mutter &
 #muffin &
-sleep 3
 
-"${@:-xterm}"
+#cinnamon-settings &
+#cinnamon-session
+lxsession
+#sleep 3
+#"${@:-xterm}"
+
 exit_code=$?
+
+echo "Press Enter to continue..."
+read
 
 killall Xnest
 wait

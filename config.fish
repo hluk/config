@@ -53,6 +53,7 @@ set fish_greeting ""
 
 # Aliases {{{
 alias m="smplayer"
+alias copyq=~/dev/build/copyq/debug/install/bin/copyq
 
 # yaourt
 alias q="yaourt"
@@ -120,11 +121,11 @@ function fish_prompt
     set errors "$error_color""[$last_status]"
   end
 
-  echo -n -s "$basic_prompt$git_info$errors$prompt_color% $normal_color"
+  echo -n -s "$basic_prompt$git_info$errors$prompt_color> $normal_color"
 end
 # }}}
 
-set EDITOR -U "vim"
+set EDITOR -Ux "vim"
 
 # autojump
 source /etc/profile.d/autojump.fish
@@ -141,3 +142,5 @@ set -x LESS_TERMCAP_se \e'[0m'
 set -x LESS_TERMCAP_so \e'[01;44;33m'
 set -x LESS_TERMCAP_ue \e'[0m'
 set -x LESS_TERMCAP_us \e'[01;32m'
+
+set fish_new_pager 1

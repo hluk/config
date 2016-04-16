@@ -72,15 +72,6 @@ Bundle 'gmarik/vundle'
 " :BundleInstall to install new plugins
 " :BundleInstall! to update plugins
 
-" sip syntax
-Bundle 'https://github.com/vim-scripts/sip.vim'
-au BufNewFile,BufRead *.sip set syntax=sip
-
-" coffee-script filetype plugin
-Bundle 'git://github.com/kchmck/vim-coffee-script.git'
-" folds based on indentation
-au BufNewFile,BufReadPost *.coffee setl foldmethod=indent
-
 " doxygen
 au BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
 
@@ -112,7 +103,7 @@ let g:syntastic_mode_map = {
 " C-p - open list
 " C-z and C-o - mark files and open them
 Bundle 'git://github.com/kien/ctrlp.vim.git'
-let g:ctrlp_working_path_mode = 1
+let g:ctrlp_working_path_mode = 'ra'
 let g:ctrlp_dotfiles = -1
 let g:ctrlp_max_files = 5000
 let g:ctrlp_max_depth = 6
@@ -129,68 +120,34 @@ let g:ctrlp_custom_ignore = 'build$'
 Bundle 'git://github.com/mileszs/ack.vim.git'
 
 " snippets
-Bundle 'git://github.com/msanders/snipmate.vim.git'
+"Bundle 'git://github.com/msanders/snipmate.vim.git'
 " view/edit snippets; call ReloadAllSnippets() after editing
-noremap <C-n>n :execute 'sv ~/.vim/bundle/snipmate.vim/snippets/'.&ft.'.snippets'<CR>
-noremap <C-n>m :execute 'vs ~/.vim/snippets/'.&ft.'.snippets'<CR>
-noremap <C-n>r :call ReloadAllSnippets()<CR>
-
-" snippets
-"Bundle 'git://github.com/rygwdn/ultisnips.git'
-
-" powerline - statusline
-"Bundle 'git://github.com/Lokaltog/vim-powerline.git'
-"let g:Powerline_symbols='fancy'
-
-" a.vim
-" Alternate between source and header files
-" :A switches to the header file corresponding to the current file being edited (or vise versa)
-" :AS splits and switches
-" :AV vertical splits and switches
-" :AT new tab and switches
-" :IH switches to file under cursor
-" :IHS splits and switches
-" :IHV vertical splits and switches
-" :IHT new tab and switches
-" :IHN cycles through matches
-" <Leader>ih switches to file under cursor
-" <Leader>is switches to the alternate file of file under cursor (e.g. on  <foo.h> switches to foo.cpp)
-" <Leader>ihn cycles through matches
-Bundle 'a.vim'
-let g:alternateSearchPath='sfr:../source,sfr:../src,sfr:../include,sfr:../inc'
-let g:alternateExtensions_H="cpp,c"
-noremap <F3> :IHT<CR>
-inoremap <F3> <C-o>:IHT<CR>
-noremap <F4> :AT<CR>
-inoremap <F4> <C-o>:AT<CR>
-
-" easytags
-" :UpdateTags -R
-" C-]
-"Bundle 'git://github.com/xolox/vim-easytags.git'
-"set tags=~/.tags
-"let g:easytags_include_members = 1
-"let g:easytags_resolve_links = 1
-"let g:easytags_dynamic_files = 2
-"let g:easytags_file = './.tags'
+"noremap <C-n>n :execute 'sv ~/.vim/bundle/snipmate.vim/snippets/'.&ft.'.snippets'<CR>
+"noremap <C-n>m :execute 'vs ~/.vim/snippets/'.&ft.'.snippets'<CR>
+"noremap <C-n>r :call ReloadAllSnippets()<CR>
 
 " fugitive (git)
 Bundle 'git://github.com/tpope/vim-fugitive.git'
 no gitd :Gd master<CR>
 
-" Clang complete
-Bundle 'https://github.com/Rip-Rip/clang_complete.git'
-let g:clang_auto_select = 1
-let g:clang_complete_copen = 1
-let g:clang_complete_auto = 0
-let g:clang_periodic_quickfix = 0
-let g:clang_use_library = 1
-let g:clang_library_path = '/usr/lib'
-let g:clang_user_options = '-I/usr/lib/clang/include'
-
-Bundle 'https://github.com/jaxbot/github-issues.vim.git'
-
 filetype plugin indent on
+
+" Vim omnicompletion (intellisense) and more for c# http://www.omnisharp.net
+Bundle 'git://github.com/OmniSharp/omnisharp-vim.git'
+" Update server: cd ~/.vim/bundle/omnisharp-vim/omnisharp-roslyn && ./build.sh
+let g:OmniSharp_selector_ui = 'ctrlp'
+let g:OmniSharp_server_type = 'v1'
+let g:OmniSharp_server_type = 'roslyn'
+
+" asynchronous build and test dispatcher
+Bundle 'git://github.com/tpope/vim-dispatch.git'
+
+" Perform all your vim insert mode completions with Tab
+Bundle 'https://github.com/ervandew/supertab'
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
+let g:SuperTabClosePreviewOnPopupClose = 1
 " }}}
 
 " KEYS {{{
@@ -204,8 +161,8 @@ command! Wq :wq
 command! WQ :wq
 
 " F5 to make
-noremap <F5> :w<CR>:make!<CR><CR>
-inoremap <F5> <C-o>:w<CR><C-O>:make!<CR><CR>
+noremap <F5> :w<CR>:Make<CR><CR>
+inoremap <F5> <C-o>:w<CR><C-O>:Make<CR><CR>
 "noremap <F1> :set makeprg=cat\ ../build/make.log\|make<CR>
 "inoremap <F5> <C-o>:set makeprg=cat\ ../build/make.log\|make<CR>
 map <F6> run
@@ -338,13 +295,6 @@ inoremap <F8> <C-o>:call NextScheme(-1)<CR>
 "}}}
 
 " APPEARANCE {{{
-" solarized color scheme
-Bundle 'git://github.com/altercation/vim-colors-solarized.git'
-let g:solarized_termtrans=0
-let g:solarized_termcolors=256
-let g:solarized_contrast="high"
-let g:solarized_visibility="high"
-
 " Bad Wolf color scheme
 Bundle 'git://github.com/sjl/badwolf.git'
 
@@ -362,7 +312,7 @@ if has("gui_running")
     map <C-F1> :execute Zoom(0.5)<CR>
     map <C-F2> :execute Zoom(-0.5)<CR>
 
-    SetSchemes molokai soso solarized wombat summerfruit256
+    SetSchemes molokai soso wombat summerfruit256
 else
     SetSchemes badwolf soso zenburn wombat256
 endif

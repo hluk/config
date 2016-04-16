@@ -6,18 +6,6 @@
 #keystate_capslock = enable
 #keystate_scrolllock= enable
 
-## set directly keycode (here control+alt+mod2 + f with my keyboard)
-#"xterm"
-#  alt + c:0x29 + m:4 + mod2
-#
-## Control+Shift+a  release event starts rxvt
-#"rxvt"
-#  release+control+shift + a
-#
-## Control + mouse button 2 release event starts rxvt
-#"rxvt"
-#  Control + b:2 + Release
-
 "xbindkeys_show"
   control+shift+q
 
@@ -32,33 +20,6 @@
 "setxkbmap -print|grep -q cz && setxkbmap us || setxkbmap cz"
     mod4+v
 
-# MOUSE# {{{
-# enable/disable touchpad
-#"~/dev/bin/togglemodule.sh psmouse"
-    #XF86TouchpadToggle
-
-# left button
-"xte 'mouseclick 1 &'"
-    Mod4+F1
-# right button
-"xte 'mouseclick 3 &'"
-    Mod4+F2
-#"xte 'mouseup 1 &'"
-    #Menu+Release
-#"xte 'keydown Control_L' 'keydown t' 'usleep 10000' 'keyup Control_L' 'keyup t' 'usleep 10000'"
-    #Menu
-
-# right button
-#"xte 'mouseclick 3 &'"
-    #mod4+b:1+release
-#"xte 'mouseclick 3 &'"
-    #mod4+shift+b:1+release
-
-# middle button
-#"xte 'mouseclick 2 &'"
-    #mod4+alt+b:1+release
-# }}}
-
 # AUDIO# {{{
 # volume
 "~/dev/bin/volume_up.sh"
@@ -71,48 +32,12 @@
     XF86AudioLowerVolume
 "~/dev/bin/togglemute.sh"
     XF86AudioMute
-#"~/dev/grooveshark/grooveshark_toggle.sh toggle"
-    #mod4+m
-"pactl set-card-profile 0 output:analog-stereo"
-    mod4+XF86AudioPrev
-"pactl set-card-profile 0 output:hdmi-stereo"
-    mod4+XF86AudioNext
 # }}}
 
 # SCREEN# {{{
-# brightness
-"~/dev/colors/backlight.sh 8"
-    XF86MonBrightnessUp
-"~/dev/colors/backlight.sh -8"
-    XF86MonBrightnessDown
-"~/dev/colors/backlight.sh 8"
-    mod4+control+Right
-"~/dev/colors/backlight.sh -8"
-    mod4+control+Left
-#"~/dev/colors/backlight.sh 255"
-    #mod4+control+Next
-#"~/dev/colors/backlight.sh -255"
-    #mod4+control+Prior
-"~/hw.mak MONITORS='LVDS1 --off; HDMI --primary' monitor > ~/hw.log"
-    mod4+control+Next
-"~/hw.mak monitor > ~/hw.log"
-    mod4+control+Prior
-
-# switch between redshift and invert
-#"killall redshift && redshift -l 49.0:16.7 -t 6500:3800 -r -o && ~/dev/colors/invert || redshift -l 49.0:16.7 -t 6500:3800 -r"
-    #mod4+KP_Divide
-
 # turnoff redshift and invert
 "killall redshift; redshift -x"
     mod4+KP_Multiply
-
-# rotate
-"xrandr -o right"
-    mod4+control+shift+Left
-"xrandr -o left"
-    mod4+control+shift+Right
-"xrandr -o normal"
-    mod4+control+shift+Down
 
 # random wallpaper
 "~/dev/img/set_wallpaper.sh"
@@ -129,7 +54,7 @@
 # terminal
 "~/dev/bin/console.sh"
     mod4+q
-"pcmanfm"
+"nemo"
     mod4+e
 "xkill"
     mod4+mod1+x
@@ -137,16 +62,10 @@
     mod4+w
 "~/dev/bin/clipboard.sh"
     control+grave
-"~/dev/copyq-build/release/copyq edit"
-    mod4+shift+less
-"~/dev/copyq-build/release/copyq remove"
-    mod4+alt+less
 "~/dev/menus/runmenu.sh"
     mod4+r
 "PATH=~/dev/sprinter-gtk/:$PATH ~/dev/sprinter-gtk/openmenu.sh ~/down"
     mod4+o
-"SHELL=~/dev/bin/calc.sh sakura -t calc -e 'screen -d -RR calc'"
-    mod4+c
 "~/dev/menus/gamemenu.sh"
     mod4+g
 # }}}
