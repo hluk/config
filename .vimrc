@@ -132,13 +132,6 @@ no gitd :Gd master<CR>
 
 filetype plugin indent on
 
-" Vim omnicompletion (intellisense) and more for c# http://www.omnisharp.net
-Bundle 'git://github.com/OmniSharp/omnisharp-vim.git'
-" Update server: cd ~/.vim/bundle/omnisharp-vim/omnisharp-roslyn && ./build.sh
-let g:OmniSharp_selector_ui = 'ctrlp'
-let g:OmniSharp_server_type = 'v1'
-let g:OmniSharp_server_type = 'roslyn'
-
 " asynchronous build and test dispatcher
 Bundle 'git://github.com/tpope/vim-dispatch.git'
 
@@ -148,6 +141,9 @@ let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
 let g:SuperTabClosePreviewOnPopupClose = 1
+
+" Rust syntax
+Bundle 'rust-lang/rust.vim'
 " }}}
 
 " KEYS {{{

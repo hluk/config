@@ -829,9 +829,16 @@
     <application title="Qt Creator">
       <desktop>3</desktop>
     </application>
-    <!-- Spotify -->
-    <application title="Unnamed Window">
+    <application title="Visual Studio Code">
+      <desktop>3</desktop>
+    </application>
+    <application title="Kodi">
       <desktop>4</desktop>
+    </application>
+    <!-- WORKAROUND: Android Emulator minimizes when desktop is switched
+                     and cannot be unminimized unless maximized before. -->
+    <application title="Emulator">
+      <desktop>all</desktop>
     </application>
   </applications>
 </openbox_config>

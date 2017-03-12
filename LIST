@@ -1,10 +1,7 @@
 ~/.asoundrc
 ~/.config/awesome/
-~/.config/fish/config.fish
 ~/.config/fontconfig/fonts.conf
 ~/.config/openbox/
-~/.conkyrc
-~/.conkyrc_console
 ~/.dwmrc.h
 ~/.i3/
 ~/.mplayer/
@@ -21,7 +18,6 @@
 ~/dev/menus/*.sh menus/
 ~/dev/menus/dmenu/ menus/
 ~/dev/pdf/
-~/dev/pocketpc/
 ~/dev/rss/*.sh rss/
 ~/dev/xmobar/
 ~/dev/zcode/{_rungame.sh,_saved} zcode/

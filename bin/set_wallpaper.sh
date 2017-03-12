@@ -83,6 +83,8 @@ else
 fi &&
 #echo "Done" || exit 1
 
+ln -sf "$WALL" ~/wallpaper.png
+
 # clean
 rm -rf "$TMP"
 

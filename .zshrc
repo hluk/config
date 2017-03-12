@@ -104,9 +104,9 @@ zstyle ':completion::approximate*:*' prefix-needed false
 # }}}
 
 # env# {{{
-export XDG_DATA_HOME="$HOME/.config"
 export EDITOR="vim"
 #export PAGER=most
+export LESS="--ignore-case --quit-if-one-screen"
 
 # support colors in less
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -134,7 +134,6 @@ alias ll="ls -lA"
 alias l="ls -lAtr"
 alias grep="grep --colour=auto"
 alias man="LANG=C man"
-alias s="screen"
 alias unpack="~/dev/bin/unpack.sh"
 alias flash=~/dev/bin/flash.sh
 alias fl='export F=`ls -t /tmp/Flash*|head -1`;m $F'
@@ -160,6 +159,7 @@ then
 	alias feb="$HOME/dev/bin/feb.sh"
 	alias febt="THUMBS=1 $HOME/dev/bin/feb.hs"
     alias copyq="$HOME/dev/build/copyq/debug/copyq"
+    alias xcopyq="$HOME/dev/build/copyq/Qt_5-Debug/copyq -s test1"
 
     export IMAGEPEEK_SESSION="$HOME/.imagepeek"
     alias peek="$HOME/dev/imagepeek/imagepeek"
@@ -173,11 +173,14 @@ fi
 
 # package manager
 #alias q="packer"
-alias q="yaourt"
+#alias q="yaourt"
+alias q="pacaur"
+alias s="q -Ss"
 alias i="q -S"
 alias u="sudo pacman -Rs"
 alias qdiff="q -C"
-alias up="q -Syu --aur"
+#alias up="q -Syu --aur"
+alias up="q -Syu"
 alias Up="q -Qe|awk -F'[/ ]' '/^local/{if(\$2~/-(git|svn|bzr|hg|nightly)$/)print\$2}'"
 alias clean="q -Qdt"
 

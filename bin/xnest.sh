@@ -1,15 +1,24 @@
-D=:${D:-"1"}
-Xnest $D -geometry 1200x800 &
+D=:${D:-"9"}
+#Xnest $D -geometry 800x600 &
+#Xnest $D -scrns 2 -geometry 800x600 &
+Xephyr $D -ac -br -reset -terminate +iglx +extension Composite -screen 1280x960 &
 export DISPLAY=$D
 
 sleep 1
-#awesome &
+openbox & sleep 1
 #mutter &
-#muffin &
+#startkde &
+
+#xfce4-terminal
+#~/dev/build/copyq/debug/install/bin/copyq -s test1
+#~/dev/build/copyq/Qt_5-Debug/copyq tests "$@"
+"$@"
 
 #cinnamon-settings &
 #cinnamon-session
-lxsession
+#cinnamon
+#lxsession
+#xfce4-session
 #sleep 3
 #"${@:-xterm}"
 
@@ -19,6 +28,7 @@ echo "Press Enter to continue..."
 read
 
 killall Xnest
+killall Xephyr
 wait
 
 exit $exit_code

@@ -20,5 +20,6 @@ MENU_SELFG="#000000"
 #~/apps/dmenu/dmenu-4.2.1/dmenu -t -i -p "$@" -fn "$MENU_FONT" -nb "$MENU_BG" -nf "$MENU_FG" -sb "$MENU_SELBG" -sf "$MENU_SELFG"
 #sprinter -t"$@" -l"$@" -w -z 194,16 -g 400
 #~/dev/sprinter-gtk/sprinter -t"$@" -l"$@" -g -64-1-1
-~/dev/sprinter/build/sprinter
+#~/dev/sprinter/build/sprinter
+~/dev/build/sprinter/Qt_in_PATH-Default/sprinter
 
