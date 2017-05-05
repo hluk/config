@@ -4,6 +4,7 @@
 ~/.config/openbox/
 ~/.dwmrc.h
 ~/.i3/
+~/.gitconfig
 ~/.mplayer/
 ~/.screenrc
 ~/.tmux.conf

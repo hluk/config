@@ -1,0 +1,37 @@
+[user]
+    name = Lukas Holecek
+    email = hluk@email.cz
+[color]
+    ui = auto
+[alias]
+    co = checkout
+    ci = commit --interactive -m
+    st = status --branch --short
+    d  = diff
+    p  = push origin master
+    l  = log --date-order --pretty=fuller --name-only --branches --tags
+    la = log --date-order --oneline --all --graph --decorate --branches --tags -50
+    c = commit --allow-empty
+    pr = pull --rebase
+    f = fetch --all --prune
+[core]
+    whitespace = cr-at-eol
+    autocrlf = input
+    pager = less -FRSX
+    editor = vim
+    trustctime = false
+[push]
+    default = tracking
+[rerere]
+    enabled = true
+    autoupdate = true
+[rebase]
+    stat = true
+[merge]
+    tool = vimdiff
+[commit]
+    template = /home/lukas/.gitmessage.txt
+[difftool]
+    prompt = false
+[mergetool]
+	keepBackup = false

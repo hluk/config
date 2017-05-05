@@ -25,6 +25,7 @@ export PS1='%B%F{blue}%n%(2v.%B@%b.@)%f%(!.%F{red}.%F{green})%m%f:%~$(git_branch
 bindkey '^[[1~' beginning-of-line
 bindkey '^[[4~' end-of-line
 bindkey '^[[3~' delete-char
+bindkey '^[[P' delete-char
 bindkey '^[[Z' reverse-menu-complete
 bindkey "^[OD" backward-word
 bindkey "^[OC" forward-word
@@ -117,12 +118,7 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
-# X11# {{{
-if [ -n "$DISPLAY" ]
-then
-    export BROWSER=~/dev/bin/browser.sh
-fi
-# }}}
+export PATH="$HOME/.cargo/bin:$PATH"
 # }}}
 
 # aliases {{{
@@ -151,6 +147,9 @@ alias netstat="echo \"Use 'ss' command.\""
 #alias helgrind="QT_NO_GLIB=1 valgrind --tool=helgrind --track-lockorders=no"
 alias helgrind="QT_NO_GLIB=1 valgrind --tool=helgrind"
 
+alias wine32="WINEARCH=win32 WINEPREFIX=$HOME/.wine32 wine"
+alias winetricks32="WINEARCH=win32 WINEPREFIX=$HOME/.wine32 winetricks"
+
 # X11# {{{
 if [ -n "$DISPLAY" ]
 then
@@ -165,7 +164,6 @@ then
     alias peek="$HOME/dev/imagepeek/imagepeek"
     alias peeks="PATH=\"$HOME/dev/imagepeek:$PATH\" peeks"
     alias quick="~/dev/bin/imagequick.sh"
-    alias qtcreator="~/apps/qtcreator-test/bin/qtcreator -lastsession"
 else
 	alias x="startx > $HOME/.xsession 2>&1 &"
 fi
@@ -293,12 +291,6 @@ alsarestart() {
 # }}}
 
 # plugins {{{
-# productivity
-#source ~/apps/z/z.sh
-#function precmd () {
-    #_z --add "$(pwd -P)"
-#}
-
 # syntax highlighting
 source ~/apps/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
@@ -320,19 +312,17 @@ PATH=/usr/lib/ccache/bin:$PATH
 ccache --max-size=8G >/dev/null
 # }}}
 
-export GEM_HOME=$HOME/.gem/ruby/2.0.0
-export PATH=$GEM_HOME/bin:$PATH
+# oh-my-zsh {{{
 
-export QBS_SOURCE_DIR=$HOME/apps/qbs
-export QBS_BUILD_DIR=$QBS_SOURCE_DIR/build
-export PATH=$QBS_SOURCE_DIR/build/bin:$PATH
-#qbs config --global modules.qt.core.binPath /usr/bin
-#qbs config --global modules.qt.core.incPath /usr/include
-#qbs config --global modules.qt.core.libPath /usr/lib
-#qbs config --global modules.qt.core.mkspecsPath /usr/share/qt/mkspecs
-#qbs config --global modules.qt.core.version 5.0.0
+# x - Smart extract
+source ~/.oh-my-zsh/plugins/extract/extract.plugin.zsh
 
-ttyctl -f
+#export ZSH="$HOME/.oh-my-zsh"
+# https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
+#ZSH_THEME="tjkirch"
+#ZSH_THEME="agnoster"
+#plugins=(git)
+#source "$ZSH/oh-my-zsh.sh"
 
+# }}}
 
-[ -s "/home/lukas/.dnx/dnvm/dnvm.sh" ] && . "/home/lukas/.dnx/dnvm/dnvm.sh" # Load dnvm

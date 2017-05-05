@@ -9,5 +9,6 @@ x=`dirname $0`/screen.sh
 #exec xterm -e "$x"
 #exec Terminal -e "$x"
 exec xfce4-terminal --maximize -e "$x"
+#exec ~/apps/alacritty/target/release/alacritty -e bash -c "$x"
 #exec roxterm
 

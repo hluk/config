@@ -7,7 +7,8 @@ WALLPATH=${WALLPATH:-"$HOME/wallpapers"}
 
 # screen resolution
 #RES=(`xdpyinfo|sed -n '/^  dimensions:    /{s/.* \([0-9]\+\)x\([0-9]\+\).*/\1 \2/;p;q}'`) || exit $?
-RES=(1920 1080)
+#RES=(1920 1080)
+RES=(3840 2160)
 
 TMPPATH="$WALLPATH/_tmp"
 TMP="/home/lukas/dev/img/wallpaper.tmp.jpg"

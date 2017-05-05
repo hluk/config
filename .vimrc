@@ -47,7 +47,7 @@ set modeline
 set laststatus=2
 " tab -> spaces
 set expandtab
-set tabstop=4
+set tabstop=8
 set shiftwidth=4
 " keep a 5 line buffer for the cursor from top/bottom of window
 set scrolloff=5
@@ -91,13 +91,16 @@ Bundle 'git://github.com/vim-scripts/taglist.vim.git'
 noremap tt :TlistToggle<CR>
 
 " Syntastic
-Bundle 'git://github.com/scrooloose/syntastic.git'
-nnoremap <F6> :Errors<CR>
-let g:syntastic_mode_map = {
-            \ 'mode': 'active',
-            \ 'active_filetypes': [],
-            \ 'passive_filetypes': ['c', 'cpp']
-            \ }
+"Bundle 'git://github.com/scrooloose/syntastic.git'
+"nnoremap <F6> :Errors<CR>
+"let g:syntastic_mode_map = {
+"            \ 'mode': 'active',
+"            \ 'active_filetypes': [],
+"            \ 'passive_filetypes': ['c', 'cpp']
+"            \ }
+
+" Asynchronous Lint Engine
+Bundle 'w0rp/ale'
 
 " ctrlp - file/buffer finder
 " C-p - open list
