@@ -101,6 +101,9 @@ noremap tt :TlistToggle<CR>
 
 " Asynchronous Lint Engine
 Bundle 'w0rp/ale'
+let g:ale_linters = {
+\   'python': ['flake8',],
+\}
 
 " ctrlp - file/buffer finder
 " C-p - open list
@@ -120,7 +123,7 @@ let g:ctrlp_custom_ignore = 'build$'
 " v    to open in vertical split
 " gv   to open in vertical split silently
 " q    to close the quickfix window
-Bundle 'git://github.com/mileszs/ack.vim.git'
+"Bundle 'git://github.com/mileszs/ack.vim.git'
 
 " snippets
 "Bundle 'git://github.com/msanders/snipmate.vim.git'
@@ -144,6 +147,10 @@ let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
 let g:SuperTabClosePreviewOnPopupClose = 1
+
+" Python
+" PEP 8
+Plugin 'nvie/vim-flake8'
 
 " Rust syntax
 Bundle 'rust-lang/rust.vim'

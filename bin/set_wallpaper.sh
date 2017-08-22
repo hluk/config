@@ -1,91 +1,80 @@
 #!/bin/bash
-# vim: foldmarker=<<<,>>>
 # usage:
-#   ./set_wallpaper.sh # sets random wallpaper from WALLPATH env
+#   ./set_wallpaper.sh # sets random wallpaper from WALLPATH env or ~/wallpapers
 #   ./set_wallpaper.sh image_file
-WALLPATH=${WALLPATH:-"$HOME/wallpapers"}
-
-# screen resolution
-#RES=(`xdpyinfo|sed -n '/^  dimensions:    /{s/.* \([0-9]\+\)x\([0-9]\+\).*/\1 \2/;p;q}'`) || exit $?
-#RES=(1920 1080)
-RES=(3840 2160)
-
-TMPPATH="$WALLPATH/_tmp"
-TMP="/home/lukas/dev/img/wallpaper.tmp.jpg"
+set -o errexit
+set -o nounset
+set -o pipefail
 
 # redirect output to LOGFILE
 exec 1> ~/wallpaper.log
 
+WALLPATH=${WALLPATH:-"$HOME/wallpapers"}
+
+# screen resolution
+#RES=(1920 1080)
+RES=(3840 2160)
+
+CACHE_PATH="$WALLPATH/_tmp"
+TMP="$HOME/.wallpaper.tmp.jpg"
+
+remove_tmp() {
+    rm -rf "$TMP"
+}
+trap remove_tmp EXIT
+
 trap 'echo "FAILED!"; exit 1' TERM QUIT INT
 
 # take image as parameter or random image from WALLPATH
-if [ -n "$1" ]; then
-	echo "`date -R`: Setting wallpaper \"$1\""
-	/usr/bin/curl -s -o "$TMP" "$1" && IMG="$TMP" || IMG="$1"
+IMG="${1:-}"
+if [ -n "$IMG" ]; then
+    echo "$(date -R): Setting wallpaper \"$IMG\""
+    if /usr/bin/curl -s -o "$TMP" "$1"; then
+        IMG="$TMP"
+    fi
 else
-	IMG="`find "$WALLPATH" -maxdepth 1 -type f | sort -R | head -1`" || exit $?
-	#IMG="$WALLPATH/`cd $WALLPATH && /bin/ls -1 *.* | sort -R | head -1`" || exit $?
-	echo "`date -R`: Setting random wallpaper \"$IMG\""
+    IMG="$(find "$WALLPATH" -maxdepth 1 -type f | shuf | head -1)"
+    echo "$(date -R): Setting random wallpaper \"$IMG\""
 fi
 
-#echo -e "\tInput: `/usr/bin/identify "$IMG"`"
-
-TMPPATH="$TMPPATH/${RES[0]}x${RES[1]}"
+CACHE_PATH="$CACHE_PATH/${RES[0]}x${RES[1]}"
 # create wallapaper if it doesn't exist for current resolution
-WALL="$TMPPATH/`basename "$IMG"`.png"
+WALL="$CACHE_PATH/$(basename "$IMG").png"
 if [ ! -f "$WALL" ]; then
-	echo -e "\tResizing..."
-	SIZE=(`/usr/bin/identify -format "%w %h" "$IMG"`)
-	X=$((SIZE[0]*RES[1]))
-	Y=$((SIZE[1]*RES[0]))
+    echo -e "  Resizing..."
+    SIZE=($(/usr/bin/identify -format "%w %h" "$IMG"))
+    X=$((SIZE[0]*RES[1]))
+    Y=$((SIZE[1]*RES[0]))
 
-	# calc wallpaper size and area to cut
-	WCUT=0
-	HCUT=0
-	test $X -ge $Y &&
-    W=$((X/SIZE[1])) H=${RES[1]}      WCUT=$(((W-RES[0])/2)) ||
-    W=${RES[0]}      H=$((Y/SIZE[0])) HCUT=$(((H-RES[1])/2))
+    # calc wallpaper size and area to cut
+    if [[ $X > $Y ]]; then
+        W=$((X/SIZE[1]))
+        H=${RES[1]}
+        WCUT=$(((W-RES[0])/2))
+        HCUT=0
+    else
+        W=${RES[0]}
+        H=$((Y/SIZE[0]))
+        WCUT=0
+        HCUT=$(((H-RES[1])/2))
+    fi
 
-	# create wallpaper
-	mkdir -p "$TMPPATH" &&
-	convert "$IMG" -resize ${W}x${H} -shave ${WCUT}x${HCUT} "$WALL"
-fi &&
-#echo -e "\tOutput: `/usr/bin/identify "$WALL"`" &&
+    # create wallpaper
+    mkdir -p "$CACHE_PATH"
+    convert "$IMG" -resize "${W}x${H}" -shave "${WCUT}x${HCUT}" "$WALL"
+fi
 
 # set wallpaper
-#echo -e "\tSetting..." &&
 if pgrep xfdesktop >/dev/null; then
     PROPERTY="/backdrop/screen0/monitor0/image-path"
-    xfconf-query -c xfce4-desktop -p $PROPERTY -s ""
     xfconf-query -c xfce4-desktop -p $PROPERTY -s "$WALL"
     # for terminal fake transparency
     /usr/bin/feh --bg-fill "$WALL" ||
         /usr/bin/xv -root -quit "$WALL"
-#elif pgrep pcmanfm >/dev/null
-#then
-    #pcmanfm --set-wallpaper "$WALL"
-#elif pgrep plasma-desktop >/dev/null; then
-    #ln -f "$WALL" ~/wallpaper.png
-    #kquitapp plasma-desktop && sleep 1
-    #kwriteconfig --file plasma-desktop-appletsrc --group Containments --group 67 \
-        #--group Wallpaper --group image --key wallpaper "$WALL"
-    #kwriteconfig --file plasma-desktop-appletsrc --group Containments --group 70 \
-        #--group Wallpaper --group image --key wallpaper "$WALL"
-    #setsid plasma-desktop
-elif pgrep plasma-desktop >/dev/null; then
-    true # echo -e "\tWarning: Cannot set wallpaper for KDE Plasma Desktop";
-#elif pgrep nautilus >/dev/null; then
-    #gconftool-2 -t str --set /desktop/gnome/background/picture_filename "$WALL"
-    #gsettings set org.gnome.desktop.background picture-uri file://"$WALL"
 else
-    #/usr/bin/feh --no-xinerama --bg-center "$WALL" ||
     /usr/bin/feh --bg-fill "$WALL" ||
         /usr/bin/xv -root -quit "$WALL"
-fi &&
-#echo "Done" || exit 1
+fi
 
 ln -sf "$WALL" ~/wallpaper.png
-
-# clean
-rm -rf "$TMP"
 

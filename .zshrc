@@ -13,13 +13,16 @@ promptinit
 
 #export REPORTTIME=1
 
-# prompts: /usr/share/zsh/4.3.4/functions/Prompts/
-prompt zefram
+setopt prompt_subst
 git_branch()
 {
-    git branch 2> /dev/null | sed -n -e 's/^* (no branch)/%F{red}(*)%f/p' -e 's/^* \(.*\)/%F{cyan}(\1)%f/p'
+    git branch 2> /dev/null | sed -n -e 's/^* (no branch)/%F{red}(*)%f/p' -e 's/^* \(.*\)/%F{magenta}(\1)%f/p'
 }
-export PS1='%B%F{blue}%n%(2v.%B@%b.@)%f%(!.%F{red}.%F{green})%m%f:%~$(git_branch)%(?..%F{red}[%v]%f)%(!.#.>)%b '
+ps1()
+{
+    export PS1='%B%F{blue}%n%(2v.%B@%b.@)%f%(!.%F{red}.%F{green})%m%f:%~$(git_branch)%(?..%F{red}[%v]%f)%(!.#.>)%b '
+}
+ps1
 
 # keys
 bindkey '^[[1~' beginning-of-line
@@ -118,6 +121,7 @@ export LESS_TERMCAP_so=$'\E[01;44;33m'
 export LESS_TERMCAP_ue=$'\E[0m'
 export LESS_TERMCAP_us=$'\E[01;32m'
 
+export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 # }}}
 
@@ -129,7 +133,7 @@ alias ls="ls --color=auto -h"
 alias ll="ls -lA"
 alias l="ls -lAtr"
 alias grep="grep --colour=auto"
-alias man="LANG=C man"
+alias man="LESS='' LANG=C man"
 alias unpack="~/dev/bin/unpack.sh"
 alias flash=~/dev/bin/flash.sh
 alias fl='export F=`ls -t /tmp/Flash*|head -1`;m $F'
@@ -176,9 +180,9 @@ alias q="pacaur"
 alias s="q -Ss"
 alias i="q -S"
 alias u="sudo pacman -Rs"
-alias qdiff="q -C"
+alias qdiff="sudo pacdiff"
 #alias up="q -Syu --aur"
-alias up="q -Syu"
+alias up="q -Syu --devel --needed"
 alias Up="q -Qe|awk -F'[/ ]' '/^local/{if(\$2~/-(git|svn|bzr|hg|nightly)$/)print\$2}'"
 alias clean="q -Qdt"
 
@@ -323,6 +327,30 @@ source ~/.oh-my-zsh/plugins/extract/extract.plugin.zsh
 #ZSH_THEME="agnoster"
 #plugins=(git)
 #source "$ZSH/oh-my-zsh.sh"
+
+# }}}
+
+# work {{{
+
+work()
+{
+    # Wrapper for Python's virtualenv
+    # Use: mkvirtualenv ENV && workon ENV
+    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
+    export WORKON_HOME=~/.virtualenvs
+    source ~/.local/bin/virtualenvwrapper.sh
+
+    cd ~/work/fedora/home/dev
+    export PS1='%B%1~%(?..%F{red}[%v]%f)$(git_branch)%(!.#.>)%b '
+    workon pdc
+    clear
+}
+
+work_stop()
+{
+    deactivate
+    ps1
+}
 
 # }}}
 
