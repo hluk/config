@@ -20,7 +20,7 @@ git_branch()
 }
 ps1()
 {
-    export PS1='%B%F{blue}%n%(2v.%B@%b.@)%f%(!.%F{red}.%F{green})%m%f:%~$(git_branch)%(?..%F{red}[%v]%f)%(!.#.>)%b '
+    export PS1='%B%F{blue}%n%(2v.%B@%b.@)%f%(!.%F{red}.%F{green})%m%f:%~$(git_branch)%(?..%F{red}[%?]%f)%(!.#.>)%b '
 }
 ps1
 
@@ -210,21 +210,12 @@ b=~/dev/bin
 # }}}
 
 # functions {{{
-# simple find
-f ()
-{
-    name=$1
-    shift
-    find "$@" -iname "*$name*"
-}
-
 # open editor in GNU screen in new window
 e ()
 {
     #screen -t ">$*" vim "$@"
     tmux new-window -n ">$*" "vim \"$*\""
 }
-
 S ()
 {
     (
@@ -294,6 +285,16 @@ alsarestart() {
 }
 # }}}
 
+# {{{ fd, fzf, rg
+# A-c: cd
+# C-t: complete path
+# C-r: history
+source /usr/share/fzf/key-bindings.zsh
+
+export FZF_DEFAULT_COMMAND='rg --files'
+#export FZF_DEFAULT_COMMAND='fd --type f'
+# }}}
+
 # plugins {{{
 # syntax highlighting
 source ~/apps/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
@@ -340,14 +341,21 @@ work()
     export WORKON_HOME=~/.virtualenvs
     source ~/.local/bin/virtualenvwrapper.sh
 
-    cd ~/work/fedora/home/dev
-    export PS1='%B%1~%(?..%F{red}[%v]%f)$(git_branch)%(!.#.>)%b '
+    WORK=$HOME/work/fedora/home/dev
+    cd "$WORK"
+    export PS1='%B%1~%(?..%F{red}[%?]%f)$(git_branch)%(!.#.>)%b '
     workon pdc
     clear
+
+    alias pdc='PYTHONPATH="$WORK/pdc-client:$PYTHONPATH" "$WORK/pdc-client/bin/pdc" -s local'
+    alias pdc_client='PYTHONPATH="$WORK/pdc-client:$PYTHONPATH" "$WORK/pdc-client/bin/pdc_client" -s local'
 }
 
 work_stop()
 {
+    unalias pdc
+    unalias pdc_client
+
     deactivate
     ps1
 }

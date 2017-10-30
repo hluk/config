@@ -60,17 +60,20 @@ set tildeop
 " persistent undo history
 set undodir=~/.vim/undofiles/
 set undofile
+" 256 and more colors
+set termguicolors
+let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " }}}
 
 " PLUGINS {{{
-" plugin loader (~/.vim/bundle/*)
-" must be called before 'filetype indent on'
-filetype off
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
-Bundle 'gmarik/vundle'
-" :BundleInstall to install new plugins
-" :BundleInstall! to update plugins
+" https://github.com/junegunn/vim-plug
+"   curl -fLo ~/.vim/autoload/plug.vim --create-dirs \
+"      https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" :PlugInstall to install new plugins
+" :PlugUpdate to update plugins
+" :PlugUpgrade to upgrade vim-plug
+call plug#begin('~/.vim/plugged')
 
 " doxygen
 au BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
@@ -82,16 +85,16 @@ au BufRead,BufNewFile *.qml setfiletype javascript
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])|set spell|set nosmartindent|set noautoindent|set nocindent
 
 "" toggle comment (NERD commenter)
-Bundle 'git://github.com/scrooloose/nerdcommenter.git'
+Plug 'scrooloose/nerdcommenter'
 map <C-\> <leader>c<SPACE>j
 imap <C-\> <C-o><leader>c<SPACE><DOWN>
 
 "" taglist
-Bundle 'git://github.com/vim-scripts/taglist.vim.git'
-noremap tt :TlistToggle<CR>
+"Plug 'vim-scripts/taglist.vim'
+"noremap tt :TlistToggle<CR>
 
 " Syntastic
-"Bundle 'git://github.com/scrooloose/syntastic.git'
+"Plug 'scrooloose/syntastic'
 "nnoremap <F6> :Errors<CR>
 "let g:syntastic_mode_map = {
 "            \ 'mode': 'active',
@@ -100,49 +103,32 @@ noremap tt :TlistToggle<CR>
 "            \ }
 
 " Asynchronous Lint Engine
-Bundle 'w0rp/ale'
+Plug 'w0rp/ale'
 let g:ale_linters = {
 \   'python': ['flake8',],
 \}
 
-" ctrlp - file/buffer finder
-" C-p - open list
-" C-z and C-o - mark files and open them
-Bundle 'git://github.com/kien/ctrlp.vim.git'
-let g:ctrlp_working_path_mode = 'ra'
-let g:ctrlp_dotfiles = -1
-let g:ctrlp_max_files = 5000
-let g:ctrlp_max_depth = 6
-let g:ctrlp_custom_ignore = 'build$'
-
-" :Ack [options] {pattern} [{directory}]
-" o    to open (same as enter)
-" go   to preview file (open but maintain focus on ack.vim results)
-" t    to open in new tab
-" T    to open in new tab silently
-" v    to open in vertical split
-" gv   to open in vertical split silently
-" q    to close the quickfix window
-"Bundle 'git://github.com/mileszs/ack.vim.git'
-
 " snippets
-"Bundle 'git://github.com/msanders/snipmate.vim.git'
+"Plug 'msanders/snipmate.vim'
 " view/edit snippets; call ReloadAllSnippets() after editing
 "noremap <C-n>n :execute 'sv ~/.vim/bundle/snipmate.vim/snippets/'.&ft.'.snippets'<CR>
 "noremap <C-n>m :execute 'vs ~/.vim/snippets/'.&ft.'.snippets'<CR>
 "noremap <C-n>r :call ReloadAllSnippets()<CR>
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger="<tab>"
 
 " fugitive (git)
-Bundle 'git://github.com/tpope/vim-fugitive.git'
+Plug 'tpope/vim-fugitive'
 no gitd :Gd master<CR>
 
 filetype plugin indent on
 
 " asynchronous build and test dispatcher
-Bundle 'git://github.com/tpope/vim-dispatch.git'
+Plug 'tpope/vim-dispatch'
 
 " Perform all your vim insert mode completions with Tab
-Bundle 'https://github.com/ervandew/supertab'
+Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = 'context'
 let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
 let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
@@ -150,10 +136,36 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 
 " Python
 " PEP 8
-Plugin 'nvie/vim-flake8'
+Plug 'nvie/vim-flake8'
 
 " Rust syntax
-Bundle 'rust-lang/rust.vim'
+Plug 'rust-lang/rust.vim'
+
+" fzf
+"Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
+Plug 'junegunn/fzf.vim'
+let g:fzf_layout = { 'right': '~40%' }
+imap <c-x><c-f> <plug>(fzf-complete-path)
+command! -bang -nargs=* Rg
+  \ call fzf#vim#grep(
+  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
+  \   <bang>0 ? fzf#vim#with_preview('up:60%')
+  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
+  \   <bang>0)
+" Files command with preview window
+command! -bang -nargs=? -complete=dir Files
+  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
+" Insert mode completion
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Color schemes
+Plug 'sjl/badwolf'
+Plug 'morhetz/gruvbox'
+
+call plug#end()
 " }}}
 
 " KEYS {{{
@@ -251,79 +263,16 @@ set listchars=tab:▸\ ,trail:⋅
 nmap <C-G> :echo map(synstack(line('.'), col('.')), 'synIDattr(v:val, "name")')<CR>
 "}}}
 
-" CHANGE COLOR SCHEME {{{
-"   :SetSchemes                  (all $VIMRUNTIME/colors/*.vim)
-"   :SetSchemes blue slate ron   (these schemes)
-
-let s:scheme_index = 0
-let s:current_scheme = []
-let s:schemes = []
-
-" Set list of color scheme names that we will use, except
-" argument 'now' actually changes the current color scheme.
-function! s:SetSchemes(args)
-    if len(a:args) == 0
-        let paths = split(globpath(&runtimepath, 'colors/*.vim'), "\n")
-        let s:schemes = map(copy(paths), 'fnamemodify(v:val, ":t:r").":light"')
-        let s:schemes += map(paths, 'fnamemodify(v:val, ":t:r").":dark"')
-        call SetScheme(0)
-    else
-        let s:schemes = split(a:args)
-        call SetScheme(0)
-    endif
-endfunction
-
-command! -nargs=* SetSchemes call <SID>SetSchemes('<args>')
-
-function! SetScheme(i)
-    let s:scheme_index = a:i % len(s:schemes)
-    let s:current_scheme = split(s:schemes[s:scheme_index], ':')
-    try
-        execute 'colorscheme '.s:current_scheme[0]
-        if len(s:current_scheme) > 1
-            execute 'set background='.s:current_scheme[1]
-        endif
-    catch /E185:/
-        echo 'Selected colorscheme not found ('.s:current_scheme[0].')!'
-    endtry
-    redraw
-endfunction
-
-function! NextScheme(how)
-    call SetScheme(s:scheme_index + a:how)
-    echo 'colorscheme '.join(s:current_scheme)
-endfunction
-
-nnoremap <F9> :call NextScheme(1)<CR>
-nnoremap <F8> :call NextScheme(-1)<CR>
-inoremap <F9> <C-o>:call NextScheme(1)<CR>
-inoremap <F8> <C-o>:call NextScheme(-1)<CR>
-"}}}
-
 " APPEARANCE {{{
-" Bad Wolf color scheme
-Bundle 'git://github.com/sjl/badwolf.git'
-
-if has("gui_running")
-    gui
-    let &guicursor = &guicursor . ",a:blinkon0"
-    "set guifont=Bitstream\ Vera\ Sans\ Mono\ 11.5
-    "set guifont=DejaVu\ Sans\ Mono\ 11.5
-    set guifont=Ubuntu\ Mono\ 11
-
-    " zoom
-    function! Zoom(how)
-      let &guifont = substitute(&guifont, '[0-9.]\+$', '\=str2float(submatch(0))+' . string(a:how), '')
-    endfunction
-    map <C-F1> :execute Zoom(0.5)<CR>
-    map <C-F2> :execute Zoom(-0.5)<CR>
-
-    SetSchemes molokai soso wombat summerfruit256
-else
-    SetSchemes badwolf soso zenburn wombat256
-endif
-
-call SetScheme(0)
+set bg=dark
+"colorscheme badwolf
+"colorscheme zenburn
+"colorscheme mustang
+"colorscheme desert
+"colorscheme wombat
+"colorscheme onedark
+"colorscheme molokai
+colorscheme gruvbox
 "}}}
 
 " MOVE LINE/BLOCK {{{

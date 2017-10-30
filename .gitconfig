@@ -5,15 +5,12 @@
     ui = auto
 [alias]
     co = checkout
-    ci = commit --interactive -m
     st = status --branch --short
     d  = diff
-    p  = push origin master
-    l  = log --date-order --pretty=fuller --name-only --branches --tags
     la = log --date-order --oneline --all --graph --decorate --branches --tags -50
     c = commit --allow-empty
     pr = pull --rebase
-    f = fetch --all --prune
+    f = fetch --all --tags --prune
 [core]
     whitespace = cr-at-eol
     autocrlf = input
@@ -34,4 +31,4 @@
 [difftool]
     prompt = false
 [mergetool]
-	keepBackup = false
+    keepBackup = false

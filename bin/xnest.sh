@@ -6,12 +6,13 @@ Xephyr $D -ac -br -reset -terminate +iglx +extension Composite -screen 1280x960 
 export DISPLAY=$D
 sleep 1
 
-openbox & sleep 1
+#openbox & sleep 1
 #mutter &
 #startkde &
 
 #xfce4-terminal
 #~/dev/build/copyq/debug/install/bin/copyq -s test1
+#~/dev/build/copyq/debug/install/bin/copyq &
 #~/dev/build/copyq/Qt_5-Debug/copyq tests "$@"
 "$@"
 
