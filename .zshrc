@@ -14,12 +14,10 @@ promptinit
 #export REPORTTIME=1
 
 setopt prompt_subst
-git_branch()
-{
+git_branch() {
     git branch 2> /dev/null | sed -n -e 's/^* (no branch)/%F{red}(*)%f/p' -e 's/^* \(.*\)/%F{magenta}(\1)%f/p'
 }
-ps1()
-{
+ps1() {
     export PS1='%B%F{blue}%n%(2v.%B@%b.@)%f%(!.%F{red}.%F{green})%m%f:%~$(git_branch)%(?..%F{red}[%?]%f)%(!.#.>)%b '
 }
 ps1
@@ -211,22 +209,20 @@ b=~/dev/bin
 
 # functions {{{
 # open editor in GNU screen in new window
-e ()
-{
-    #screen -t ">$*" vim "$@"
-    tmux new-window -n ">$*" "vim \"$*\""
+e() {
+    #screen -t ">$*" $EDITOR "$@"
+    tmux new-window -n ">$*" "$EDITOR \"$*\""
 }
-S ()
-{
+
+S() {
     (
     cd "$1"
-    screen -t "#${1:-`basename "$PWD"`}" vim -S Session.vim
+    screen -t "#${1:-`basename "$PWD"`}" $EDITOR -S Session.vim
     )
 }
 
 # play flash movies
-pflv()
-{
+pflv() {
     pid=$(pgrep -f flashplayer | tail -l)
     file=$(lsof -p ${pid} | awk \
         '/\/tmp\/Flash/ {sub(/[rwu]$/, "", $4); print "/proc/" $2 "/fd/" $4}')
@@ -235,19 +231,17 @@ pflv()
 }
 
 # make directory if it does not exist and cd to it
-mkcd()
-{
+mkcd() {
     mkdir -p "$*" && cd "$*"
 }
 
 # "top" for processes with given names
-topp()
-{
+topp() {
     htop -p $(pidof "$@" | tr ' ' ,)
 }
 
 # alsa equalizer
-alsaequal_set(){
+alsaequal_set() {
     amixer -D equal -q set '00. 31 Hz' $1
     amixer -D equal -q set '01. 63 Hz' $2
     amixer -D equal -q set '02. 125 Hz' $3
@@ -260,15 +254,14 @@ alsaequal_set(){
     amixer -D equal -q set '09. 16 kHz' ${10}
 }
 
-alsaequal_save()
-{
+alsaequal_save() {
     amixer -D equal -q contents |
         grep -o ': values=[0-9]\+' |
             grep -o '[0-9]\+' |
                 tr '\n' ' '
 }
 
-alsaequal(){
+alsaequal() {
     if [ -z "$1" ]; then
         alsamixer -D equal
     elif [[ $1 -eq 1 ]]; then
@@ -332,9 +325,10 @@ source ~/.oh-my-zsh/plugins/extract/extract.plugin.zsh
 # }}}
 
 # work {{{
+alias kinit-redhat="kinit lholecek@REDHAT.COM"
+alias kinit-fedora="kinit lholecek@FEDORAPROJECT.ORG"
 
-work()
-{
+work() {
     # Wrapper for Python's virtualenv
     # Use: mkvirtualenv ENV && workon ENV
     export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
@@ -347,8 +341,14 @@ work()
     workon pdc
     clear
 
-    alias pdc='PYTHONPATH="$WORK/pdc-client:$PYTHONPATH" "$WORK/pdc-client/bin/pdc" -s local'
-    alias pdc_client='PYTHONPATH="$WORK/pdc-client:$PYTHONPATH" "$WORK/pdc-client/bin/pdc_client" -s local'
+    pdc_client_path="$WORK/pdc-client"
+    export PYTHONPATH="$pdc_client_path:$PYTHONPATH"
+    export PATH="$pdc_client_path/bin:$PATH"
+    alias pdc="pdc -s local"
+    alias pdc_client="pdc_client -s local"
+    autoload bashcompinit
+    bashcompinit
+    source "$pdc_client_path/pdc.bash"
 }
 
 work_stop()
@@ -360,5 +360,7 @@ work_stop()
     ps1
 }
 
+db_start() {
+    pg_ctl -D ~/db -l ~/db/db.log start
+}
 # }}}
-
