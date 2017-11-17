@@ -5,6 +5,7 @@
 ~/.dwmrc.h
 ~/.i3/
 ~/.gitconfig
+~/.mozilla/firefox/*/chrome/userChrome.css firefox
 ~/.mplayer/
 ~/.screenrc
 ~/.tmux.conf

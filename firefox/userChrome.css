@@ -1,0 +1,9 @@
+/* Hide title for tab tree sidebar. */
+#sidebar-header {
+  display: none;
+}
+
+/* Hide top toolbar with tabs. */
+#TabsToolbar {
+    visibility: collapse;
+}

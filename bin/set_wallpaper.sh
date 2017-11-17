@@ -61,7 +61,7 @@ if [ ! -f "$WALL" ]; then
 
     # create wallpaper
     mkdir -p "$CACHE_PATH"
-    convert "$IMG" -resize "${W}x${H}" -shave "${WCUT}x${HCUT}" "$WALL"
+    MAGICK_OCL_DEVICE=OFF convert "$IMG" -resize "${W}x${H}" -shave "${WCUT}x${HCUT}" "$WALL"
 fi
 
 # set wallpaper
