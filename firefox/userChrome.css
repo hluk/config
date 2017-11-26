@@ -3,7 +3,8 @@
   display: none;
 }
 
-/* Hide top toolbar with tabs. */
+/* Hide top toolbar with tabs (not in private browsing mode). */
+#main-window:not([privatebrowsingmode="temporary"])
 #TabsToolbar {
     visibility: collapse;
 }
