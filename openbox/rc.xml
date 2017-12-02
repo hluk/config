@@ -826,8 +826,7 @@
       <decor>no</decor>
       <maximized>true</maximized>
     </application>
-    <!-- Alacritty -->
-    <application title="Unnamed Window" name="" class="">
+    <application name="Alacritty">
       <decor>no</decor>
       <maximized>true</maximized>
     </application>

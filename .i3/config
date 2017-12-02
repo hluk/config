@@ -15,6 +15,11 @@ set $mod Mod4
 set $alt Mod1
 set $ctrl Control
 
+set $monitor1 DP-1
+set $monitor2 HDMI-0
+set $monitor1_dpi 168
+set $monitor2_dpi 96
+
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below.
 #font pango:monospace 18
@@ -170,7 +175,7 @@ bindsym $mod+$alt+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        tray_output primary
+        tray_output $monitor1
         status_command i3status --config ~/.i3/status.conf
         colors {
                 background #33393b
@@ -214,9 +219,9 @@ bindsym XF86Launch8 exec --no-startup-id redshift -O 4000
 bindsym XF86Launch9 exec --no-startup-id redshift -O 3500
 
 # Monitors
-bindsym $mod+$alt+m exec --no-startup-id xrandr --output HDMI-0 --off
-bindsym $mod+$alt+n exec --no-startup-id xrandr --output HDMI-0 --auto --left-of DP-1
-exec --no-startup-id "xrandr --dpi 96/HDMI-0 --dpi 168/DP-1 --output HDMI-0 --off --output DP-1 --panning 0x0 --primary"
+bindsym $mod+$alt+m exec --no-startup-id xrandr --output $monitor2 --off
+bindsym $mod+$alt+n exec --no-startup-id xrandr --output $monitor2 --auto --left-of $monitor1
+exec --no-startup-id "xrandr --dpi $monitor2_dpi/$monitor2 --dpi $monitor1_dpi/$monitor1 --output $monitor2 --off --output $monitor1 --panning 0x0 --primary"
 
 # Keyboard
 exec --no-startup-id "xset r rate 200 50"
