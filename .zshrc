@@ -106,7 +106,7 @@ zstyle ':completion::approximate*:*' prefix-needed false
 # }}}
 
 # env# {{{
-export EDITOR="vim"
+export EDITOR="nvim"
 #export PAGER=most
 export LESS="--ignore-case --quit-if-one-screen"
 
@@ -172,9 +172,8 @@ fi
 # }}}
 
 # package manager
-#alias q="packer"
-#alias q="yaourt"
-alias q="pacaur"
+#alias q="pacaur"
+alias q="trizen"
 alias s="q -Ss"
 alias i="q -S"
 alias u="sudo pacman -Rs"
@@ -324,6 +323,17 @@ source ~/.oh-my-zsh/plugins/extract/extract.plugin.zsh
 
 # }}}
 
+# brew {{{
+brew_init() {
+    export BREW_PREFIX="$HOME/.linuxbrew"
+    export PATH="$BREW_PREFIX/sbin:$BREW_PREFIX/bin:/usr/bin"
+    export MANPATH="$(brew --prefix)/share/man:$MANPATH"
+    export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
+    export HOMEBREW_TEMP="$BREW_PREFIX/tmp"
+    export PS1='%B%F{yellow}[brew]%B%F{blue}%n%(2v.%B@%b.@)%f%(!.%F{red}.%F{green})%m%f:%~$(git_branch)%(?..%F{red}[%?]%f)%(!.#.>)%b '
+}
+# }}}
+
 # work {{{
 alias kinit-redhat="kinit lholecek@REDHAT.COM"
 alias kinit-fedora="kinit lholecek@FEDORAPROJECT.ORG"
@@ -364,3 +374,5 @@ db_start() {
     pg_ctl -D ~/db -l ~/db/db.log start
 }
 # }}}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

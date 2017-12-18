@@ -2,6 +2,7 @@
 ~/.config/alacritty.yml
 ~/.config/fontconfig/fonts.conf
 ~/.config/openbox/
+~/.config/nvim/init.vim nvim/init.vim
 ~/.dwmrc.h
 ~/.i3/
 ~/.gitconfig
