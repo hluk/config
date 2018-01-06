@@ -6,7 +6,7 @@ Xephyr $D -ac -br -reset -terminate +iglx +extension Composite -screen 1280x960 
 export DISPLAY=$D
 sleep 1
 
-#openbox & sleep 1
+openbox & sleep 1
 #mutter &
 #startkde &
 

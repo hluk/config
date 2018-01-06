@@ -15,7 +15,7 @@
     whitespace = cr-at-eol
     autocrlf = input
     pager = less -FRSX
-    editor = vim
+    editor = nvim
     trustctime = false
 [push]
     default = tracking

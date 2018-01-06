@@ -15,6 +15,7 @@
 " :g/PATTERN/norm ... -- do something with each matched line (e.g. delete with dd)
 
 " http://vimbits.com/bits?sort=top
+" https://www.reddit.com/r/vim/wiki/vimrctips
 
 " OPTIONS {{{
 set mouse=a
@@ -29,8 +30,9 @@ set smartcase
 set incsearch
 " show numbers
 set number
-" C indent
-set cin
+" automatic indentation
+set autoindent
+filetype plugin indent on
 " cursor show next/prev parenthesis
 set showmatch
 " completion menu
@@ -156,7 +158,7 @@ noremap <C-e>e :split ~/.config/nvim/init.vim <CR>
 noremap <C-e>r :source ~/.config/nvim/init.vim <CR>
 
 " clear highlighted search term on space
-noremap <silent> <Space> :nohls<CR>
+noremap <silent> <Space> :nohlsearch<CR>
 
 " reselect visual block after indent
 vnoremap < <gv
@@ -217,30 +219,5 @@ set bg=dark
 "colorscheme onedark
 "colorscheme molokai
 colorscheme gruvbox
-"}}}
-
-" HARD MODE {{{
-nnoremap <Left> <NOP>
-nnoremap <Right> <NOP>
-nnoremap <Up> <NOP>
-nnoremap <Down> <NOP>
-nnoremap <PageUp> <NOP>
-nnoremap <PageDown> <NOP>
-
-inoremap <Left> <NOP>
-inoremap <Right> <NOP>
-inoremap <Up> <NOP>
-inoremap <Down> <NOP>
-inoremap <PageUp> <NOP>
-inoremap <PageDown> <NOP>
-
-vnoremap <Left> <NOP>
-vnoremap <Right> <NOP>
-vnoremap <Up> <NOP>
-vnoremap <Down> <NOP>
-vnoremap <PageUp> <NOP>
-vnoremap <PageDown> <NOP>
-
-"set backspace=0
 "}}}
 
