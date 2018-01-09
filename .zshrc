@@ -2,6 +2,7 @@
 HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
+setopt hist_ignore_dups
 bindkey -e
 
 zstyle ':completion:*' list-colors ''
@@ -281,7 +282,7 @@ alsarestart() {
 # A-c: cd
 # C-t: complete path
 # C-r: history
-source /usr/share/fzf/key-bindings.zsh
+source /usr/share/fzf/**/key-bindings.zsh
 
 export FZF_DEFAULT_COMMAND='rg --files'
 #export FZF_DEFAULT_COMMAND='fd --type f'

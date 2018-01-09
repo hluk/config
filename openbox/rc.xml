@@ -814,6 +814,9 @@
 
   # end of the example
 -->
+    <application name="xfce4-panel">
+      <desktop>all</desktop>
+    </application>
     <application name="urxvt">
       <decor>no</decor>
       <maximized>true</maximized>

@@ -144,7 +144,7 @@ Plug 'rust-lang/rust.vim'
 " fzf
 "Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-let g:fzf_layout = { 'right': '~40%' }
+let g:fzf_layout = { 'right': '~100%' }
 imap <c-x><c-f> <plug>(fzf-complete-path)
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
