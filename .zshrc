@@ -198,7 +198,6 @@ d=~/down
 v=~/dev
 m=~/Movies
 p=~/Pictures
-w=~/wallpapers
 g=~/dev/gallery
 f=~/down/_flash
 t=~/down/_torrents
@@ -347,8 +346,13 @@ work() {
     source ~/.local/bin/virtualenvwrapper.sh
 
     WORK=$HOME/work/fedora/home/dev
-    cd "$WORK"
-    export PS1='%B%1~%(?..%F{red}[%?]%f)$(git_branch)%(!.#.>)%b '
+    w=$WORK
+    wp=~w/product-definition-center
+    wp2=~w/product-definition-center2
+    wpc=~w/pdc-client
+    wr=~w/../rhpkg
+    wf=~w/../fedpkg
+
     workon pdc
     clear
 
@@ -371,8 +375,8 @@ work_stop()
     ps1
 }
 
-db_start() {
-    pg_ctl -D ~/db -l ~/db/db.log start
+db() {
+    pg_ctl -D ~/db -l ~/db/db.log "$@"
 }
 # }}}
 

@@ -37,9 +37,11 @@ create_or_diff() {
 }
 
 update_firefox() {
-    profile=(~/.mozilla/firefox/*.default/)
-
-    create_or_diff "firefox/userChrome.css" "$profile/chrome/userChrome.css"
+    for profile in ~/.mozilla/firefox/*.*/; do
+        if [[ -d "$profile" ]]; then
+            create_or_diff "firefox/userChrome.css" "$profile/chrome/userChrome.css"
+        fi
+    done
 }
 
 for config in "${home_configs[@]}"; do
