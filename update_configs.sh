@@ -25,7 +25,7 @@ create_or_diff() {
 
     if [[ -f "$dest" ]]; then
         if ! diff --brief -- "$src" "$dest"; then
-            $DIFF -- "$src" "$dest"
+            $diff -- "$src" "$dest"
         else
             echo "Config '$src' ('$dest') is up to date."
         fi
