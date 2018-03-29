@@ -281,10 +281,11 @@ alsarestart() {
 # A-c: cd
 # C-t: complete path
 # C-r: history
-source /usr/share/fzf/**/key-bindings.zsh
-
-export FZF_DEFAULT_COMMAND='rg --files'
-#export FZF_DEFAULT_COMMAND='fd --type f'
+if [ -f ~/.fzf.zsh ]; then
+    source ~/.fzf.zsh
+    export FZF_DEFAULT_COMMAND='rg --files'
+    #export FZF_DEFAULT_COMMAND='fd --type f'
+fi
 # }}}
 
 # plugins {{{
@@ -379,5 +380,3 @@ db() {
     pg_ctl -D ~/db -l ~/db/db.log "$@"
 }
 # }}}
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

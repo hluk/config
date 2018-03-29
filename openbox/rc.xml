@@ -852,6 +852,9 @@
     <application title="Kodi">
       <desktop>4</desktop>
     </application>
+    <application name="hexchat">
+      <desktop>4</desktop>
+    </application>
     <!-- WORKAROUND: Android Emulator minimizes when desktop is switched
                      and cannot be unminimized unless maximized before. -->
     <application title="Emulator">
