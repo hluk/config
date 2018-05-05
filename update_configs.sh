@@ -6,6 +6,7 @@ shopt -s failglob
 diff=${DIFF:-vimdiff}
 
 home_configs=(
+    .gitconfig
     .i3/*
     .tmux.conf
     .vimrc

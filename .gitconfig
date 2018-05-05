@@ -11,6 +11,7 @@
     c = commit --allow-empty
     pr = pull --rebase
     f = fetch --all --tags --prune
+    ca = commit --all --amend --no-edit
 [core]
     whitespace = cr-at-eol
     autocrlf = input
