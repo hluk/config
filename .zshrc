@@ -173,16 +173,32 @@ fi
 # }}}
 
 # package manager
-#alias q="pacaur"
-alias q="trizen"
-alias s="q -Ss"
-alias i="q -S"
-alias u="sudo pacman -Rs"
-alias qdiff="sudo pacdiff"
-#alias up="q -Syu --aur"
-alias up="q -Syu --devel --needed"
-alias Up="q -Qe|awk -F'[/ ]' '/^local/{if(\$2~/-(git|svn|bzr|hg|nightly)$/)print\$2}'"
-alias clean="q -Qdt"
+. /etc/os-release
+if [[ $NAME == "Arch Linux" ]]; then
+    #alias q="pacaur"
+    #alias q="trizen"
+    alias q="yay"
+    alias s="q -Ss"
+    alias i="q -S"
+    alias u="sudo pacman -Rs"
+    alias up="q -Syu --devel --needed"
+    alias Up="q -Qe|awk -F'[/ ]' '/^local/{if(\$2~/-(git|svn|bzr|hg|nightly)$/)print\$2}'"
+    alias qdiff="sudo pacdiff"
+    #alias up="q -Syu --aur"
+    alias clean="q -Qdt"
+elif [[ $NAME == "Fedora" ]]; then
+    alias q="dnf"
+    alias s="q search"
+    alias i="q install"
+    alias u="q remove"
+    alias up="q upgrade"
+elif [[ $NAME == "Ubuntu" ]]; then
+    alias q="apt"
+    alias s="q search"
+    alias i="q install"
+    alias u="q remove"
+    alias up="q update && q upgrade"
+fi
 
 # volume and brightness
 alias volup="~/dev/bin/volume.sh 8%+"
@@ -339,7 +355,7 @@ brew_init() {
 alias kinit-redhat="kinit lholecek@REDHAT.COM"
 alias kinit-fedora="kinit lholecek@FEDORAPROJECT.ORG"
 
-work() {
+work_pdc() {
     # Wrapper for Python's virtualenv
     # Use: mkvirtualenv ENV && workon ENV
     export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
@@ -367,13 +383,25 @@ work() {
     source "$pdc_client_path/pdc.bash"
 }
 
-work_stop()
-{
-    unalias pdc
-    unalias pdc_client
+work() {
+    # Wrapper for Python's virtualenv
+    # Use: mkvirtualenv ENV && workon ENV
+    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
+    export WORKON_HOME=~/.virtualenvs
+    source ~/.local/bin/virtualenvwrapper.sh
 
-    deactivate
-    ps1
+    WORK=$HOME/work/fedora/home/dev
+    w=$WORK
+
+    wr=~w/../rhpkg
+    wf=~w/../fedpkg
+
+    gw=~w/greenwave
+    wdb=~w/waiverdb
+    rdb=~w/resultsdb
+
+    workon factory
+    clear
 }
 
 db() {
