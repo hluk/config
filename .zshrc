@@ -187,13 +187,13 @@ if [[ $NAME == "Arch Linux" ]]; then
     #alias up="q -Syu --aur"
     alias clean="q -Qdt"
 elif [[ $NAME == "Fedora" ]]; then
-    alias q="dnf"
+    alias q="sudo dnf"
     alias s="q search"
     alias i="q install"
     alias u="q remove"
     alias up="q upgrade"
 elif [[ $NAME == "Ubuntu" ]]; then
-    alias q="apt"
+    alias q="sudo apt"
     alias s="q search"
     alias i="q install"
     alias u="q remove"
