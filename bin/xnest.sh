@@ -7,6 +7,7 @@ export DISPLAY=$D
 sleep 1
 
 openbox & sleep 1
+#i3 & sleep 1
 #mutter &
 #startkde &
 

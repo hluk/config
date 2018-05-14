@@ -1,27 +1,21 @@
 #!/bin/bash
-CONF=~/.redshift
-MAX=6500
+set -xeuo pipefail
 
-killall -q redshift
+config=~/.redshift
+min_amount=2000
+max_amount=5700
 
-if [ $# -gt 0 ]
-then
-    # restore configuration
-    [ -r "$CONF" ] && T=`< "$CONF"` || T=$MAX
+pkill redshift || true
 
-    # add argument
-    T=$(($T+$1))
-    [ $T -lt $MAX ] || T=$MAX
-else
-    T=$MAX
+diff=$1
+amount=$(cat "$config" || echo $max_amount)
+new_amount=$((amount + diff))
+
+if [[ $new_amount < $min_amount ]]; then
+    new_amount=$min_amount
+elif [[ $new_amount > $max_amount ]]; then
+    new_amount=$max_amount
 fi
 
-# set and store new value
-#redshift -v -O $T && echo $T > "$CONF"
-#redshift -v -O $T && echo $T > "$CONF" && notify-send -i redshift -u low -t 1000 Redshift "<b>$T</b>"
-redshift -v -O $T && echo $T > "$CONF"
-
-# show osd
-killall -q osd_cat
-osd_cat -c white -O 1 -d 1 -A center -p middle -b percentage -P "$((T*100/MAX))" -T "redshift $T" &
-
+redshift -O "$new_amount"
+echo "$new_amount" > "$config"

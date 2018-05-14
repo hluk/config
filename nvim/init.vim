@@ -89,9 +89,9 @@ let g:ale_linters = {
 \}
 
 " snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-let g:UltiSnipsExpandTrigger="<tab>"
+"Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
+"let g:UltiSnipsExpandTrigger="<tab>"
 
 " fugitive (git)
 Plug 'tpope/vim-fugitive'

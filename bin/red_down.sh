@@ -1,3 +1,2 @@
 #!/bin/bash
-~/dev/red/red -100
-
+"`dirname $0`/red.sh" -500
