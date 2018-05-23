@@ -200,15 +200,6 @@ elif [[ $NAME == "Ubuntu" ]]; then
     alias up="sudo apt update && sudo apt upgrade"
 fi
 
-# volume and brightness
-alias volup="~/dev/bin/volume.sh 8%+"
-alias voldown="~/dev/bin/volume.sh 8%-"
-alias brightup="~/dev/colors/backlight.sh 8"
-alias brightdown="~/dev/colors/backlight.sh -8"
-
-alias poweroff="sudo poweroff"
-alias reboot="sudo reboot"
-
 # cd ~d
 d=~/down
 v=~/dev
