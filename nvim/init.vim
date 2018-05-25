@@ -89,9 +89,12 @@ let g:ale_linters = {
 \}
 
 " snippets
-"Plug 'SirVer/ultisnips'
-"Plug 'honza/vim-snippets'
-"let g:UltiSnipsExpandTrigger="<tab>"
+Plug 'SirVer/ultisnips'
+Plug 'honza/vim-snippets'
+let g:UltiSnipsExpandTrigger="<tab>"
+let g:UltiSnipsJumpForwardTrigger="<c-b>"
+let g:UltiSnipsJumpBackwardTrigger="<c-z>"
+let g:UltiSnipsEditSplit="vertical"
 
 " fugitive (git)
 Plug 'tpope/vim-fugitive'
@@ -101,11 +104,11 @@ no gitd :Gd master<CR>
 Plug 'tpope/vim-dispatch'
 
 " Perform all your vim insert mode completions with Tab
-Plug 'ervandew/supertab'
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
-let g:SuperTabClosePreviewOnPopupClose = 1
+"Plug 'ervandew/supertab'
+"let g:SuperTabDefaultCompletionType = 'context'
+"let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+"let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
+"let g:SuperTabClosePreviewOnPopupClose = 1
 
 " Python
 " PEP 8

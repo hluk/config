@@ -3,6 +3,8 @@ HISTFILE=~/.histfile
 HISTSIZE=10000
 SAVEHIST=10000
 setopt hist_ignore_dups
+setopt hist_ignore_all_dups
+setopt hist_expire_dups_first
 bindkey -e
 
 zstyle ':completion:*' list-colors ''

@@ -50,6 +50,11 @@ floating_modifier $mod
 #bindsym $mod+Shift+q kill
 bindsym $alt+F4 kill
 
+# The middle button over a titlebar kills the window
+bindsym --release button2 kill
+# The right button toggles floating
+bindsym button3 floating toggle
+
 # start dmenu (a program launcher)
 bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
