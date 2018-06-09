@@ -1,14 +1,10 @@
 #!/bin/bash
+set -xeuo pipefail
+
 music_dir=$HOME/Music
 
-for x in "$@"; do
-    mv -v "$x" "$music_dir" || exit $?
+for zip in "$@"; do
+    dir="${zip%.*}"
+    unzip -d "$music_dir/$dir" "$zip" || exit $?
+    rm -v "$zip"
 done
-
-(
-cd "$music_dir" &&
-for x in "$@"; do
-    unzip -d "${x%.*}" "$x" || exit $?
-done
-)
-

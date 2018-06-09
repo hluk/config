@@ -1,5 +1,0 @@
-all: mpdinfo
-	
-mpdinfo: mpdinfo.c
-	gcc ${CFLAGS} `pkg-config --cflags --libs libmpd` -Wall mpdinfo.c -o mpdinfo
-

@@ -14,16 +14,19 @@ autoload -Uz compinit promptinit
 compinit
 promptinit
 
-#export REPORTTIME=1
-
 setopt prompt_subst
 git_branch() {
     git branch 2> /dev/null | sed -n -e 's/^* (no branch)/%F{red}(*)%f/p' -e 's/^* \(.*\)/%F{magenta}(\1)%f/p'
 }
 ps1() {
-    export PS1='%B%F{blue}%n%(2v.%B@%b.@)%f%(!.%F{red}.%F{green})%m%f:%~$(git_branch)%(?..%F{red}[%?]%f)%(!.#.>)%b '
+    export PS1='%B%~$(git_branch)%(?..%F{red}[%?]%f)%(!.#.>)%b '
 }
-ps1
+if [[ $DEMO == 1 ]]; then
+    export PS1='%B%F{green}DEMO%f:%(?..%F{red}[%?]%f)%(!.#.>)%b '
+    alias waiverdb-cli='python ~/dev/factory/waiverdb/waiverdb/cli.py -C ~/dev/factory/waiverdb/conf/client.conf'
+else
+    ps1
+fi
 
 # keys
 bindkey '^[[1~' beginning-of-line
@@ -41,23 +44,8 @@ zle -N edit-command-line
 bindkey '^Xe' edit-command-line
 bindkey '^X^e' edit-command-line
 
-# vi mode
-#bindkey -v
-
-#setopt menucomplete
-
-# This makes cd=pushd
-setopt AUTO_PUSHD
-setopt PUSHD_IGNORE_DUPS
-
 # no CTRL-S
 setopt NO_FLOW_CONTROL
-
-# Case insensitive globbing
-#setopt NO_CASE_GLOB
-
-# extended globbing - e.g. (all files except *.txt): ^*.txt
-#setopt extendedglob
 # }}}
 
 # completion# {{{
@@ -110,8 +98,8 @@ zstyle ':completion::approximate*:*' prefix-needed false
 
 # env# {{{
 export EDITOR="nvim"
-#export PAGER=most
-export LESS="--ignore-case --quit-if-one-screen"
+export PAGER=less
+export LESS="--ignore-case --quit-if-one-screen --LONG-PROMPT --jump-target=10 --shift=5"
 
 # support colors in less
 export LESS_TERMCAP_mb=$'\E[01;31m'
@@ -190,7 +178,7 @@ if [[ $NAME == "Arch Linux" ]]; then
     alias clean="q -Qdt"
 elif [[ $NAME == "Fedora" ]]; then
     alias q="dnf"
-    alias s="q search"
+    alias s="q search --all"
     alias i="sudo dnf install"
     alias u="sudo dnf remove"
     alias up="sudo dnf upgrade"
@@ -204,15 +192,8 @@ fi
 
 # cd ~d
 d=~/down
-v=~/dev
-m=~/Movies
-p=~/Pictures
-g=~/dev/gallery
-f=~/down/_flash
-t=~/down/_torrents
-c=~/dev/copyq
-i=~/dev/imagepeek
 b=~/dev/bin
+f=~/dev/factory
 # }}}
 
 # functions {{{
@@ -290,8 +271,10 @@ alsarestart() {
 # A-c: cd
 # C-t: complete path
 # C-r: history
-if [ -f ~/.fzf.zsh ]; then
-    source ~/.fzf.zsh
+if [ -d ~/.fzf ]; then
+    export PATH="$HOME/.fzf/bin:$PATH"
+    source "$HOME/.fzf/shell/completion.zsh"
+    source "$HOME/.fzf/shell/key-bindings.zsh"
     export FZF_DEFAULT_COMMAND='rg --files'
     #export FZF_DEFAULT_COMMAND='fd --type f'
 fi
@@ -347,57 +330,12 @@ brew_init() {
 # work {{{
 alias kinit-redhat="kinit lholecek@REDHAT.COM"
 alias kinit-fedora="kinit lholecek@FEDORAPROJECT.ORG"
+alias tig=~/dev/tig/src/tig
 
-work_pdc() {
-    # Wrapper for Python's virtualenv
-    # Use: mkvirtualenv ENV && workon ENV
-    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
-    export WORKON_HOME=~/.virtualenvs
-    source ~/.local/bin/virtualenvwrapper.sh
-
-    WORK=$HOME/work/fedora/home/dev
-    w=$WORK
-    wp=~w/product-definition-center
-    wp2=~w/product-definition-center2
-    wpc=~w/pdc-client
-    wr=~w/../rhpkg
-    wf=~w/../fedpkg
-
-    workon pdc
-    clear
-
-    pdc_client_path="$WORK/pdc-client"
-    export PYTHONPATH="$pdc_client_path:$PYTHONPATH"
-    export PATH="$pdc_client_path/bin:$PATH"
-    alias pdc="pdc -s local"
-    alias pdc_client="pdc_client -s local"
-    autoload bashcompinit
-    bashcompinit
-    source "$pdc_client_path/pdc.bash"
-}
-
-work() {
-    # Wrapper for Python's virtualenv
-    # Use: mkvirtualenv ENV && workon ENV
-    export VIRTUALENVWRAPPER_PYTHON=/usr/bin/python2
-    export WORKON_HOME=~/.virtualenvs
-    source ~/.local/bin/virtualenvwrapper.sh
-
-    WORK=$HOME/work/fedora/home/dev
-    w=$WORK
-
-    wr=~w/../rhpkg
-    wf=~w/../fedpkg
-
-    gw=~w/greenwave
-    wdb=~w/waiverdb
-    rdb=~w/resultsdb
-
-    workon factory
-    clear
-}
-
-db() {
-    pg_ctl -D ~/db -l ~/db/db.log "$@"
-}
+# oc completion zsh > ~/.zsh.d/oc-completion.zsh
+#source ~/.zsh.d/oc-completion.zsh
+#source ~/.oh-my-zsh/plugins/oc/oc.plugin.zsh
+#source <(oc completion zsh)
 # }}}
+
+[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

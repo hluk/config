@@ -18,7 +18,6 @@
 " https://www.reddit.com/r/vim/wiki/vimrctips
 
 " OPTIONS {{{
-set mouse=a
 " highlight matched
 set hlsearch
 " command history size
@@ -53,6 +52,10 @@ set undofile
 set termguicolors
 let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+" workaround garbage characters displayed in terminal emulator
+" (https://github.com/neovim/neovim/wiki/FAQ#nvim-shows-weird-symbols-2-q-when-changing-modes)
+set guicursor=
+autocmd OptionSet guicursor noautocmd set guicursor=
 " }}}
 
 " PLUGINS {{{
@@ -69,6 +72,9 @@ au BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
 
 " qml
 au BufRead,BufNewFile *.qml setfiletype javascript
+
+" Jenkinsfile
+au BufRead,BufNewFile Jenkinsfile setfiletype groovy
 
 " git commit message
 au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])|set spell|set nosmartindent|set noautoindent|set nocindent
@@ -214,6 +220,7 @@ command! Xxdr :%!xxd -r
 
 " APPEARANCE {{{
 set bg=dark
+"set bg=light
 "colorscheme badwolf
 "colorscheme zenburn
 "colorscheme mustang
