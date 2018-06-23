@@ -99,7 +99,7 @@ zstyle ':completion::approximate*:*' prefix-needed false
 # env# {{{
 export EDITOR="nvim"
 export PAGER=less
-export LESS="--ignore-case --quit-if-one-screen --LONG-PROMPT --jump-target=10 --shift=5"
+export LESS="--ignore-case --quit-if-one-screen --LONG-PROMPT --shift=5"
 
 # support colors in less
 export LESS_TERMCAP_mb=$'\E[01;31m'

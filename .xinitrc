@@ -1,24 +1,23 @@
 #!/bin/bash
-#exec gnome-session
-exec gnome-session-cinnamon
+if [ -z "$SCALE" ]; then
+    echo "Set SCALE variable first!"
+    exit 1
+fi
 
-echo ".xinit: starting desktop environment"
+export QT_SCALE_FACTOR=1
+export QT_AUTO_SCREEN_SCALE_FACTOR=0
+export QT_SCREEN_SCALE_FACTORS='eDP-1=1;DP-2=1;DP-2-1=1;DP-2-2=1;HDMI-2=2'
+export GDK_SCALE=$SCALE
 
-#xrandr --output LVDS1 --off
+for dpi in 96/DP-1 96/DP-2 168/HDMI-2; do
+    for suffix in "" -1 -2; do
+        xrandr --dpi "$dpi$suffix" || exit 1
+    done
+done
 
-# icons in menus (for Qt apps)
-gconftool-2 --type boolean --set /desktop/gnome/interface/buttons_have_icons true
-gconftool-2 --type boolean --set /desktop/gnome/interface/menus_have_icons true
+#gsettings set org.gnome.desktop.interface text-scaling-factor $SCALE
+gsettings set org.gnome.desktop.interface scaling-factor $SCALE
 
-# pulseaudio for gstreamer
-gconftool-2 -t string --set /system/gstreamer/0.10/default/audiosink pulsesink
-gconftool-2 -t string --set /system/gstreamer/0.10/default/audiosrc pulsesrc
-gconftool-2 -t string --set /system/gstreamer/0.10/default/musicaudiosink pulsesink
+. /etc/X11/xinit/xinitrc-common
 
-# XFCE
-exec ck-launch-session startxfce4
-
-# GNOME
-#xbindkeys &
-#exec ck-launch-session gnome-session
-
+exec startkde

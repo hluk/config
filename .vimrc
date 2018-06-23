@@ -214,7 +214,6 @@ command! Xxdr :%!xxd -r
 
 " APPEARANCE {{{
 set bg=dark
-"set bg=light
 "colorscheme badwolf
 "colorscheme zenburn
 "colorscheme mustang

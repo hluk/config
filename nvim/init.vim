@@ -27,6 +27,8 @@ set ignorecase
 set smartcase
 " search while typing
 set incsearch
+" shows the effects of a command as you type
+set inccommand=nosplit
 " show numbers
 set number
 " automatic indentation
@@ -68,16 +70,19 @@ autocmd OptionSet guicursor noautocmd set guicursor=
 call plug#begin('~/.config/nvim/plugged')
 
 " doxygen
-au BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
+autocmd BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
 
 " qml
-au BufRead,BufNewFile *.qml setfiletype javascript
+autocmd BufRead,BufNewFile *.qml setfiletype javascript
 
 " Jenkinsfile
-au BufRead,BufNewFile Jenkinsfile setfiletype groovy
+autocmd BufRead,BufNewFile Jenkinsfile setfiletype groovy
 
 " git commit message
-au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])|set spell|set nosmartindent|set noautoindent|set nocindent
+autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])|set spell|set nosmartindent|set noautoindent|set nocindent
+
+" yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 
 "" toggle comment (NERD commenter)
 Plug 'scrooloose/nerdcommenter'
@@ -98,9 +103,6 @@ let g:ale_linters = {
 Plug 'SirVer/ultisnips'
 Plug 'honza/vim-snippets'
 let g:UltiSnipsExpandTrigger="<tab>"
-let g:UltiSnipsJumpForwardTrigger="<c-b>"
-let g:UltiSnipsJumpBackwardTrigger="<c-z>"
-let g:UltiSnipsEditSplit="vertical"
 
 " fugitive (git)
 Plug 'tpope/vim-fugitive'
@@ -110,11 +112,11 @@ no gitd :Gd master<CR>
 Plug 'tpope/vim-dispatch'
 
 " Perform all your vim insert mode completions with Tab
-"Plug 'ervandew/supertab'
-"let g:SuperTabDefaultCompletionType = 'context'
-"let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-"let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
-"let g:SuperTabClosePreviewOnPopupClose = 1
+Plug 'ervandew/supertab'
+let g:SuperTabDefaultCompletionType = 'context'
+let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
+let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
+let g:SuperTabClosePreviewOnPopupClose = 1
 
 " Python
 " PEP 8
@@ -220,7 +222,6 @@ command! Xxdr :%!xxd -r
 
 " APPEARANCE {{{
 set bg=dark
-"set bg=light
 "colorscheme badwolf
 "colorscheme zenburn
 "colorscheme mustang
@@ -230,4 +231,3 @@ set bg=dark
 "colorscheme molokai
 colorscheme gruvbox
 "}}}
-
