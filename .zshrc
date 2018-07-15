@@ -158,7 +158,8 @@ then
     alias peeks="PATH=\"$HOME/dev/imagepeek:$PATH\" peeks"
     alias quick="~/dev/bin/imagequick.sh"
 else
-	alias x="startx > $HOME/.xsession 2>&1 &"
+    alias x1="SCALE=1 startx"
+    alias x2="SCALE=2 startx"
 fi
 # }}}
 
@@ -273,10 +274,13 @@ alsarestart() {
 # C-r: history
 if [ -d ~/.fzf ]; then
     export PATH="$HOME/.fzf/bin:$PATH"
-    source "$HOME/.fzf/shell/completion.zsh"
-    source "$HOME/.fzf/shell/key-bindings.zsh"
     export FZF_DEFAULT_COMMAND='rg --files'
     #export FZF_DEFAULT_COMMAND='fd --type f'
+    export FZF_DEFAULT_OPTS="--history=$HOME/.fzf_history"
+
+    source ~/.fzf.zsh
+    source "$HOME/.fzf/shell/completion.zsh"
+    source "$HOME/.fzf/shell/key-bindings.zsh"
 fi
 # }}}
 
@@ -332,10 +336,9 @@ alias kinit-redhat="kinit lholecek@REDHAT.COM"
 alias kinit-fedora="kinit lholecek@FEDORAPROJECT.ORG"
 alias tig=~/dev/tig/src/tig
 
+# Sourcing completion for oc is slow.
 # oc completion zsh > ~/.zsh.d/oc-completion.zsh
 #source ~/.zsh.d/oc-completion.zsh
 #source ~/.oh-my-zsh/plugins/oc/oc.plugin.zsh
 #source <(oc completion zsh)
 # }}}
-
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh

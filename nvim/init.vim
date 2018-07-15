@@ -111,6 +111,11 @@ no gitd :Gd master<CR>
 " asynchronous build and test dispatcher
 Plug 'tpope/vim-dispatch'
 
+" file helpers:
+" - :Mkdir, :Rename, :SudoWrite, ...
+" - automatic chmod +x for new scripts
+Plug 'tpope/vim-eunuch'
+
 " Perform all your vim insert mode completions with Tab
 Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = 'context'
@@ -146,6 +151,9 @@ imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" grammar checker
+Plug 'rhysd/vim-grammarous'
 
 " Color schemes
 Plug 'sjl/badwolf'
