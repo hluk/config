@@ -1,7 +1,8 @@
 #!/bin/bash
-if [ -z "$SCALE" ]; then
-    echo "Set SCALE variable first!"
-    exit 1
+if lsusb | grep -q Ergonomic; then
+    export SCALE=2
+else
+    export SCALE=1
 fi
 
 export QT_SCALE_FACTOR=1

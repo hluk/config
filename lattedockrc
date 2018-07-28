@@ -1,0 +1,11 @@
+[ScreenConnectors]
+10=eDP-1
+11=HDMI-2
+
+[UniversalSettings]
+currentLayout=My Layout
+lastNonAssignedLayout=My Layout
+launchers=
+layoutsWindowSize=700,450
+showInfoWindow=true
+version=2

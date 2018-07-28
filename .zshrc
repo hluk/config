@@ -133,9 +133,6 @@ alias m0="mplayer -vo null -vc null -novideo"
 alias binwalk="~/apps/binwalk/src/binwalk -m ~/apps/binwalk/src/magic.binwalk"
 alias mkgallery='PATH="/home/lukas/dev/imagepeek:$PATH" ~/dev/bin/mkgallery.sh'
 
-alias ifconfig="echo \"Use 'ip addr' command.\""
-alias netstat="echo \"Use 'ss' command.\""
-
 # helgrind: detect race conditions
 #alias helgrind="QT_NO_GLIB=1 valgrind --tool=helgrind --track-lockorders=no"
 alias helgrind="QT_NO_GLIB=1 valgrind --tool=helgrind"
@@ -158,8 +155,7 @@ then
     alias peeks="PATH=\"$HOME/dev/imagepeek:$PATH\" peeks"
     alias quick="~/dev/bin/imagequick.sh"
 else
-    alias x1="SCALE=1 startx"
-    alias x2="SCALE=2 startx"
+    alias xx="startx"
 fi
 # }}}
 

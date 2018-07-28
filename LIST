@@ -1,8 +1,10 @@
 ~/.asoundrc
 ~/.config/alacritty.yml
 ~/.config/fontconfig/fonts.conf
-~/.config/openbox/
+~/.config/latte/
+~/.config/lattedockrc
 ~/.config/nvim/init.vim nvim/
+~/.config/openbox/
 ~/.dwmrc.h
 ~/.i3/
 ~/.gitconfig
