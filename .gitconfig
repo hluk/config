@@ -27,8 +27,6 @@
     stat = true
 [merge]
     tool = vimdiff
-[commit]
-    template = /home/lukas/.gitmessage.txt
 [difftool]
     prompt = false
 [mergetool]

@@ -1,6 +1,8 @@
 ~/.asoundrc
 ~/.config/alacritty.yml
 ~/.config/fontconfig/fonts.conf
+~/.config/hexchat/hexchat.conf hexchat
+~/.config/hexchat/servlist.conf hexchat
 ~/.config/latte/
 ~/.config/lattedockrc
 ~/.config/nvim/init.vim nvim/

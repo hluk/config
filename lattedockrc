@@ -1,6 +1,7 @@
 [ScreenConnectors]
 10=eDP-1
 11=HDMI-2
+12=DP-2-2
 
 [UniversalSettings]
 currentLayout=My Layout

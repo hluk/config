@@ -282,7 +282,7 @@ fi
 
 # plugins {{{
 # syntax highlighting
-source ~/apps/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
 ZSH_HIGHLIGHT_STYLES+=(
     alias                   'fg=magenta,bold'
@@ -330,7 +330,6 @@ brew_init() {
 # work {{{
 alias kinit-redhat="kinit lholecek@REDHAT.COM"
 alias kinit-fedora="kinit lholecek@FEDORAPROJECT.ORG"
-alias tig=~/dev/tig/src/tig
 
 # Sourcing completion for oc is slow.
 # oc completion zsh > ~/.zsh.d/oc-completion.zsh
