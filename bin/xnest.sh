@@ -1,3 +1,6 @@
+#!/bin/bash
+set -euo pipefail
+
 D=:${D:-"9"}
 #Xnest $D -geometry 800x600 &
 #Xnest $D -scrns 2 -geometry 800x600 &
@@ -6,10 +9,12 @@ Xephyr $D -ac -br -reset -terminate +iglx +extension Composite -screen 1280x960 
 export DISPLAY=$D
 sleep 1
 
-openbox & sleep 1
-#i3 & sleep 1
+openbox &
+#xfwm4 &
+#i3 &
 #mutter &
 #startkde &
+sleep 1
 
 #xfce4-terminal
 #~/dev/build/copyq/debug/install/bin/copyq -s test1

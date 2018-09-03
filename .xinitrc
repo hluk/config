@@ -27,3 +27,4 @@ gsettings set org.gnome.desktop.interface scaling-factor $SCALE
 . /etc/X11/xinit/xinitrc-common
 
 exec startkde
+#exec startxfce4

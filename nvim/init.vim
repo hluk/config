@@ -83,6 +83,7 @@ autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1
 
 " yaml
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd BufRead,BufNewFile ~/.config/yamllint/config setfiletype yaml
 
 "" toggle comment (NERD commenter)
 Plug 'scrooloose/nerdcommenter'
@@ -158,6 +159,9 @@ Plug 'rhysd/vim-grammarous'
 " Color schemes
 Plug 'sjl/badwolf'
 Plug 'morhetz/gruvbox'
+
+" reopen files at your last edit position
+Plug 'farmergreg/vim-lastplace'
 
 call plug#end()
 " }}}

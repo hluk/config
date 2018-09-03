@@ -191,7 +191,7 @@ bar {
 }
 
 # Window behavior
-#for_window [instance="^copyq$" class="^[Cc]opyq"] floating enable
+for_window [instance="^copyq$" class="^[Cc]opyq"] floating enable
 assign [instance="^chromium$"] 2
 assign [class="^Firefox$"] 2
 assign [instance="^qtcreator-bin$"] 3
@@ -229,7 +229,7 @@ exec --no-startup-id "xset r rate 200 50"
 exec --no-startup-id "numlockx"
 
 # Autostart
-exec --no-startup-id "~/dev/bin/clipboard.sh"
+#exec --no-startup-id "~/dev/bin/clipboard.sh"
 exec --no-startup-id nm-applet
 exec --no-startup-id pasystray
 #exec --no-startup-id redshift-gtk

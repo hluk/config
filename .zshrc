@@ -226,41 +226,10 @@ topp() {
     htop -p $(pidof "$@" | tr ' ' ,)
 }
 
-# alsa equalizer
-alsaequal_set() {
-    amixer -D equal -q set '00. 31 Hz' $1
-    amixer -D equal -q set '01. 63 Hz' $2
-    amixer -D equal -q set '02. 125 Hz' $3
-    amixer -D equal -q set '03. 250 Hz' $4
-    amixer -D equal -q set '04. 500 Hz' $5
-    amixer -D equal -q set '05. 1 kHz' $6
-    amixer -D equal -q set '06. 2 kHz' $7
-    amixer -D equal -q set '07. 4 kHz' $8
-    amixer -D equal -q set '08. 8 kHz' $9
-    amixer -D equal -q set '09. 16 kHz' ${10}
-}
-
-alsaequal_save() {
-    amixer -D equal -q contents |
-        grep -o ': values=[0-9]\+' |
-            grep -o '[0-9]\+' |
-                tr '\n' ' '
-}
-
-alsaequal() {
-    if [ -z "$1" ]; then
-        alsamixer -D equal
-    elif [[ $1 -eq 1 ]]; then
-        alsaequal_set 77 74 72 66 70 76 78 79 78 78
-        echo "Equalizer enabled"
-    else
-        alsaequal_set 66 66 66 66 66 66 66 66 66 66
-        echo "Equalizer disabled"
-    fi
-}
-
-alsarestart() {
-    alsactl kill rescan
+backup() {
+    file=$1
+    date=$(date --iso-8601)
+    7z a -p "$file-$date".7z "$file"
 }
 # }}}
 

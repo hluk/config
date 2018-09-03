@@ -7,6 +7,8 @@
 ~/.config/lattedockrc
 ~/.config/nvim/init.vim nvim/
 ~/.config/openbox/
+~/.config/tig/
+~/.config/yamllint/
 ~/.dwmrc.h
 ~/.i3/
 ~/.gitconfig
