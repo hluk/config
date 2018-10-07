@@ -84,6 +84,11 @@ autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1
 " yaml
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd BufRead,BufNewFile ~/.config/yamllint/config setfiletype yaml
+autocmd BufRead,BufNewFile */ansible/inventory/* setfiletype yaml
+
+" ruby
+autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType eruby setlocal ts=2 sts=2 sw=2 expandtab
 
 "" toggle comment (NERD commenter)
 Plug 'scrooloose/nerdcommenter'
@@ -130,6 +135,9 @@ Plug 'nvie/vim-flake8'
 
 " Rust syntax
 Plug 'rust-lang/rust.vim'
+
+" Ruby on Rails
+Plug 'tpope/vim-rails'
 
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -211,6 +219,7 @@ set wildignore+=*.flv,.*mp4,*.mp3,*.wav,*.wmv,*.avi,*.mkv,*.mov
 "set dictionary+=/usr/share/dict/words
 "set spelllang=cs
 map <F7> :set spell!<CR>
+set spell
 "}}}
 
 " FOLDS {{{

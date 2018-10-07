@@ -26,5 +26,7 @@ gsettings set org.gnome.desktop.interface scaling-factor $SCALE
 
 . /etc/X11/xinit/xinitrc-common
 
-exec startkde
+exec openbox-kde-session
+#exec startkde
 #exec startxfce4
+#exec awesome
