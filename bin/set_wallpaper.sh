@@ -18,6 +18,12 @@ RES=(3840 2160)
 CACHE_PATH="$WALLPATH/_tmp"
 TMP="$HOME/.wallpaper.tmp.jpg"
 
+if [[ ! -d "$WALLPATH" ]]; then
+    echo "Wallpaper directory \"$WALLPATH\" does not exist. Setting empty wallpaper."
+    feh --bg-fill "/usr/share/wallpapers/Next/contents/images/${RES[0]}x${RES[1]}.png"
+    exit
+fi
+
 remove_tmp() {
     rm -rf "$TMP"
 }

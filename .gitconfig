@@ -12,6 +12,7 @@
     pr = pull --rebase
     f = fetch --all --tags --prune
     ca = commit --all --amend --no-edit
+    up = !git checkout master && git pull --rebase upstream master && git push origin master
 [core]
     whitespace = cr-at-eol
     autocrlf = input

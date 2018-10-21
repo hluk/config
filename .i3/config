@@ -21,7 +21,7 @@ set $ctrl Control
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:DejaVu Sans Mono 8
+font pango:Cantarell 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -60,7 +60,7 @@ bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
-bindsym $alt+F2 exec --no-startup-id i3-dmenu-desktop
+#bindsym $alt+F2 exec --no-startup-id i3-dmenu-desktop
 
 # change focus
 bindsym $mod+$left focus left
@@ -175,7 +175,7 @@ bindsym $mod+$alt+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        tray_output eDP-1
+        #tray_output eDP0
         status_command i3status --config ~/.i3/status.conf
         colors {
                 background #33393b
@@ -190,8 +190,21 @@ bar {
         }
 }
 
+default_border pixel 4
+default_floating_border normal
+hide_edge_borders smart
+
+# class                 border  backgr. text    indicator child_border
+client.focused          #4c7899 #285577 #ffffff #2e9ef4   #00aaff
+client.focused_inactive #333333 #5f676a #ffffff #484e50   #5f676a
+client.unfocused        #333333 #222222 #888888 #292d2e   #222222
+client.urgent           #2f343a #900000 #ffffff #900000   #900000
+client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
+client.background       #ffffff
+
 # Window behavior
-for_window [instance="^copyq$" class="^[Cc]opyq"] floating enable
+for_window [instance="^copyq$" class="^[Cc]opyq"] floating enable, border normal
+for_window [instance="^xfce4-appfinder$" class="^Xfce4-appfinder$"] floating enable, border normal
 assign [instance="^chromium$"] 2
 assign [class="^Firefox$"] 2
 assign [instance="^qtcreator-bin$"] 3
@@ -205,6 +218,7 @@ bindsym $ctrl+grave exec --no-startup-id "~/dev/bin/clipboard.sh"
 bindsym $mod+w exec --no-startup-id "~/dev/bin/browser.sh"
 bindsym $mod+$alt+d exec --no-startup-id "qtcreator -lastsession"
 bindsym $ctrl+$alt+l exec --no-startup-id "i3lock --color=000000"
+bindsym $mod+F5 exec --no-startup-id "~/dev/bin/work.sh"
 
 # Volume
 bindsym XF86AudioLowerVolume exec --no-startup-id "~/dev/bin/volume_down.sh"
@@ -229,7 +243,7 @@ exec --no-startup-id "xset r rate 200 50"
 exec --no-startup-id "numlockx"
 
 # Autostart
-#exec --no-startup-id "~/dev/bin/clipboard.sh"
-exec --no-startup-id nm-applet
+exec --no-startup-id "~/dev/bin/clipboard.sh"
 exec --no-startup-id pasystray
+#exec --no-startup-id nm-applet
 #exec --no-startup-id redshift-gtk

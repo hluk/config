@@ -1,7 +1,7 @@
 #!/bin/bash
 set -xeuo pipefail
 
-music_dir=$HOME/Music
+music_dir=$HOME/Music/disk
 
 for zip in "$@"; do
     dir="${zip%.*}"

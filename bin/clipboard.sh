@@ -8,9 +8,9 @@ export COPYQ_LOG_LEVEL=debug
 [ "$VERSION" = "debug" ] && ulimit -c unlimited
 
 if [ $# -gt 1 ]; then
-    exec "$cmd" "$@" 2>/dev/null
+    exec "$cmd" "$@"
 else
     cd "$rundir" &&
-    "$cmd" toggle 2>/dev/null || exec "$cmd"
-fi
+    "$cmd" toggle || exec "$cmd"
+fi &>/dev/null
 

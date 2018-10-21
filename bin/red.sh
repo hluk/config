@@ -3,7 +3,7 @@ set -xeuo pipefail
 
 config=~/.redshift
 min_amount=2000
-max_amount=5700
+max_amount=6500
 
 pkill redshift || true
 

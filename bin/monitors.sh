@@ -31,4 +31,4 @@ for arg in "$@"; do
     xrandr "${!args}"
 done
 
-~/dev/bin/set_wallpaper.sh || xsetroot -solid "#000000"
+~/dev/bin/set_wallpaper.sh

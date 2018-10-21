@@ -1,3 +1,13 @@
 #!/bin/bash
 # Fixes vsync on nvidia.
-/usr/bin/compton --backend glx --vsync opengl-swc
+options=(
+    --backend glx
+    --vsync opengl-swc
+    --unredir-if-possible
+
+    --sw-opti
+    --glx-no-stencil
+    #--glx-copy-from-front
+    #--glx-use-copysubbuffermesa
+)
+/usr/bin/compton "${options[@]}"

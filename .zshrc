@@ -247,6 +247,7 @@ if [ -d ~/.fzf ]; then
     source "$HOME/.fzf/shell/completion.zsh"
     source "$HOME/.fzf/shell/key-bindings.zsh"
 fi
+alias rg="rg --max-columns 999"
 # }}}
 
 # plugins {{{
