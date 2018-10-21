@@ -1,10 +1,10 @@
 #!/bin/bash
 set -e
 
-nmcli con up id 'Brno (BRQ)'
+nmcli --ask con up id 'Brno (BRQ)'
 
-klist || xfce4-terminal -e kinit
+klist || kinit
 
-pgrep hexchat || hexchat &
+pgrep hexchat || hexchat & disown
 
-pgrep --full 'firefox -P work' || exec firefox -P work
+pgrep --full 'firefox -P work' || firefox -P work & disown

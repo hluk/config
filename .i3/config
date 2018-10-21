@@ -175,7 +175,9 @@ bindsym $mod+$alt+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        #tray_output eDP0
+        tray_output DP-1
+        tray_output DP-2
+        tray_output HDMI-2
         status_command i3status --config ~/.i3/status.conf
         colors {
                 background #33393b
@@ -193,6 +195,8 @@ bar {
 default_border pixel 4
 default_floating_border normal
 hide_edge_borders smart
+
+workspace_auto_back_and_forth yes
 
 # class                 border  backgr. text    indicator child_border
 client.focused          #4c7899 #285577 #ffffff #2e9ef4   #00aaff
@@ -221,7 +225,7 @@ bindsym $ctrl+grave exec --no-startup-id "~/dev/bin/clipboard.sh"
 bindsym $mod+w exec --no-startup-id "~/dev/bin/browser.sh"
 bindsym $mod+$alt+d exec --no-startup-id "qtcreator -lastsession"
 bindsym $ctrl+$alt+l exec --no-startup-id "i3lock --color=000000"
-bindsym $mod+F5 exec --no-startup-id "~/dev/bin/work.sh"
+bindsym $mod+F4 exec --no-startup-id "xfce4-session-logout"
 
 # Volume
 bindsym XF86AudioLowerVolume exec --no-startup-id "~/dev/bin/volume_down.sh"
@@ -230,8 +234,8 @@ bindsym XF86AudioMute exec --no-startup-id "~/dev/bin/togglemute.sh"
 bindsym $mod+p exec --no-startup-id "pavucontrol"
 
 # redshift (manual)
-bindsym $mod+$alt+Up exec --no-startup-id "~/dev/bin/red_up.sh"
-bindsym $mod+$alt+Down exec --no-startup-id "~/dev/bin/red_down.sh"
+bindsym $mod+$ctrl+Up exec --no-startup-id "~/dev/bin/red_up.sh"
+bindsym $mod+$ctrl+Down exec --no-startup-id "~/dev/bin/red_down.sh"
 bindsym XF86Launch8 exec --no-startup-id "~/dev/bin/red_up.sh"
 bindsym XF86Launch9 exec --no-startup-id "~/dev/bin/red_down.sh"
 

@@ -2,13 +2,27 @@
 fix_dpi() {
     export QT_SCALE_FACTOR=1
     export QT_AUTO_SCREEN_SCALE_FACTOR=0
-    export QT_SCREEN_SCALE_FACTORS='eDP-1=1;DP-2=1;DP-2-1=1;DP-2-2=1;HDMI-2=2;'
+    #export QT_SCREEN_SCALE_FACTORS='eDP-1=1;DP-2=1;DP-2-1=1;DP-2-2=1;HDMI-2=2;'
 
     for dpi in 96/DP-1 96/DP-2 168/HDMI-2; do
         for suffix in "" -1 -2; do
             xrandr --dpi "$dpi$suffix" || exit 1
         done
     done
+
+    if lsusb | grep -q Ergonomic; then
+        #export GDK_SCALE=2
+        dpi=168
+    else
+        #export GDK_SCALE=1
+        dpi=96
+    fi
+
+    #gsettings set org.gnome.desktop.interface text-scaling-factor $GDK_SCALE
+    #gsettings set org.gnome.desktop.interface scaling-factor $GDK_SCALE
+
+    sed -i 's/^Xft\.dpi: .*/Xft.dpi: '"$dpi/" ~/.Xresources
+    xrdb -merge ~/.Xresources
 }
 
 fix_dpi_kde() {
@@ -16,17 +30,6 @@ fix_dpi_kde() {
         ~/.config/kdeglobals
     sed -i 's/^\(kdeglobals_kscreen_screenscalefactors=\).*/\1'"$QT_SCREEN_SCALE_FACTORS/" \
         ~/.config/startupconfig
-}
-
-fix_dpi_gtk() {
-    if lsusb | grep -q Ergonomic; then
-        export GDK_SCALE=2
-    else
-        export GDK_SCALE=1
-    fi
-
-    #gsettings set org.gnome.desktop.interface text-scaling-factor $GDK_SCALE
-    gsettings set org.gnome.desktop.interface scaling-factor $GDK_SCALE
 }
 
 kde() {
@@ -41,8 +44,8 @@ dwm() {
 }
 
 xfce_i3() {
-    fix_dpi
     xfsettingsd
+    fix_dpi
     i3 &
     exec startxfce4
 }
@@ -66,4 +69,4 @@ openbox() {
 
 . /etc/X11/xinit/xinitrc-common
 
-i3_session
+xfce_i3
