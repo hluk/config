@@ -15,12 +15,27 @@ compinit
 promptinit
 
 setopt prompt_subst
-git_branch() {
+
+ps_git_branch() {
     git branch 2> /dev/null | sed -n -e 's/^* (no branch)/%F{red}(*)%f/p' -e 's/^* \(.*\)/%F{magenta}(\1)%f/p'
 }
-ps1() {
-    export PS1='%B%~$(git_branch)%(?..%F{red}[%?]%f)%(!.#.>)%b '
+
+ps_path() {
+    printf '%s' '%F{blue}%~%f'
 }
+
+ps_error_code() {
+    printf '%s' '%(?..%F{red}[%?]%f)'
+}
+
+ps_prompt() {
+    printf '%s' '%F{blue}%(!.#.>)%f'
+}
+
+ps1() {
+    export PS1='%B$(ps_path)$(ps_git_branch)$(ps_error_code)$(ps_prompt)%b '
+}
+
 if [[ $DEMO == 1 ]]; then
     export PS1='%B%F{green}DEMO%f:%(?..%F{red}[%?]%f)%(!.#.>)%b '
     alias waiverdb-cli='python ~/dev/factory/waiverdb/waiverdb/cli.py -C ~/dev/factory/waiverdb/conf/client.conf'

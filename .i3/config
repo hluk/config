@@ -21,7 +21,7 @@ set $ctrl Control
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Cantarell 8
+font pango:Cantarell Bold 10
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -76,10 +76,10 @@ bindsym $mod+Up focus up
 bindsym $mod+Right focus right
 
 # move focused window
-bindsym $mod+Shift+$left move left
-bindsym $mod+Shift+$down move down
-bindsym $mod+Shift+$up move up
-bindsym $mod+Shift+$right move right
+bindsym $mod+$ctrl+$left move left
+bindsym $mod+$ctrl+$down move down
+bindsym $mod+$ctrl+$up move up
+bindsym $mod+$ctrl+$right move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -88,7 +88,7 @@ bindsym $mod+Shift+Up move up
 bindsym $mod+Shift+Right move right
 
 # split in horizontal orientation
-bindsym $mod+$ctrl+h split h
+#bindsym $mod+$ctrl+h split h
 
 # split in vertical orientation
 bindsym $mod+v split v
@@ -139,6 +139,8 @@ bindsym $mod+Shift+8 move container to workspace 8
 bindsym $mod+Shift+9 move container to workspace 9
 bindsym $mod+Shift+0 move container to workspace 10
 
+bindsym $mod+m move workspace to output right
+
 # reload the configuration file
 bindsym $mod+Shift+c reload
 # restart i3 inplace (preserves your layout/session, can be used to upgrade i3)
@@ -175,8 +177,7 @@ bindsym $mod+$alt+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        tray_output DP-1
-        tray_output DP-2
+        tray_output DP-2-2
         tray_output HDMI-2
         status_command i3status --config ~/.i3/status.conf
         colors {
@@ -213,6 +214,9 @@ for_window [instance="^xfce4-appfinder$" class="^Xfce4-appfinder$"] floating ena
 assign [class="^Firefox$"] 2
 
 assign [instance="^qtcreator$"] 3
+assign [instance="^code$"] 3
+
+assign [instance="^bluejeans$"] 4
 
 assign [class="^Hexchat$"] 0
 assign [class="^cantata$"] 0
@@ -239,12 +243,6 @@ bindsym $mod+$ctrl+Down exec --no-startup-id "~/dev/bin/red_down.sh"
 bindsym XF86Launch8 exec --no-startup-id "~/dev/bin/red_up.sh"
 bindsym XF86Launch9 exec --no-startup-id "~/dev/bin/red_down.sh"
 
-# Monitors
-bindsym $mod+$alt+m exec --no-startup-id "~/dev/bin/monitors.sh off"
-bindsym $mod+$alt+n exec --no-startup-id "~/dev/bin/monitors.sh on"
-exec --no-startup-id "~/dev/bin/monitors.sh init on"
-exec --no-startup-id "~/dev/bin/vsync.sh"
-
 # Keyboard
 exec --no-startup-id "xset r rate 200 50"
 exec --no-startup-id "numlockx"
@@ -254,3 +252,10 @@ exec --no-startup-id "~/dev/bin/clipboard.sh"
 exec --no-startup-id pasystray
 #exec --no-startup-id nm-applet
 #exec --no-startup-id redshift-gtk
+
+workspace 0 output eDP-1
+workspace 1 output primary
+workspace 2 output primary
+workspace 3 output primary
+workspace 4 output primary
+exec --no-startup-id i3-msg 'workspace 1'

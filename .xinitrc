@@ -1,28 +1,24 @@
 #!/bin/bash
 fix_dpi() {
-    export QT_SCALE_FACTOR=1
-    export QT_AUTO_SCREEN_SCALE_FACTOR=0
-    #export QT_SCREEN_SCALE_FACTORS='eDP-1=1;DP-2=1;DP-2-1=1;DP-2-2=1;HDMI-2=2;'
-
-    for dpi in 96/DP-1 96/DP-2 168/HDMI-2; do
-        for suffix in "" -1 -2; do
-            xrandr --dpi "$dpi$suffix" || exit 1
-        done
-    done
-
     if lsusb | grep -q Ergonomic; then
-        #export GDK_SCALE=2
+        export GDK_SCALE=2
         dpi=168
     else
-        #export GDK_SCALE=1
+        export GDK_SCALE=1
         dpi=96
     fi
 
     #gsettings set org.gnome.desktop.interface text-scaling-factor $GDK_SCALE
-    #gsettings set org.gnome.desktop.interface scaling-factor $GDK_SCALE
+    gsettings set org.gnome.desktop.interface scaling-factor $GDK_SCALE
+
+    export QT_SCALE_FACTOR=1
+    export QT_AUTO_SCREEN_SCALE_FACTOR=0
+    export QT_SCREEN_SCALE_FACTORS='eDP-1=1;DP-2=1;DP-2-1=1;DP-2-2=1;HDMI-2=2;'
 
     sed -i 's/^Xft\.dpi: .*/Xft.dpi: '"$dpi/" ~/.Xresources
     xrdb -merge ~/.Xresources
+
+    #xfconf-query -c xsettings -p /Xft/DPI -s $dpi
 }
 
 fix_dpi_kde() {
@@ -32,37 +28,40 @@ fix_dpi_kde() {
         ~/.config/startupconfig
 }
 
-kde() {
+xfce_settings() {
+    xfsettingsd
+    sleep 1
     fix_dpi
+}
+
+kde() {
     fix_dpi_kde
     exec startkde
 }
 
-dwm() {
-    ~/dev/bin/vsync.sh &
-    exec ~/dev/dwm/dwm
-}
-
 xfce_i3() {
-    xfsettingsd
-    fix_dpi
+    ~/dev/bin/vsync.sh &
+    ~/dev/bin/set_wallpaper.sh &
+    xfce_settings
     i3 &
     exec startxfce4
 }
 
 i3_session() {
-    fix_dpi
-    xfsettingsd
+    ~/dev/bin/vsync.sh &
+    xfce_settings
     exec i3
 }
 
 xfce_openbox() {
+    fix_dpi
     ~/dev/bin/vsync.sh &
     openbox &
     exec startxfce4
 }
 
 openbox() {
+    fix_dpi
     ~/dev/bin/vsync.sh &
     exec openbox-kde-session
 }

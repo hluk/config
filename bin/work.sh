@@ -1,7 +1,8 @@
 #!/bin/bash
 set -e
 
-nmcli --ask con up id 'Brno (BRQ)'
+grep -q redhat /etc/resolv.conf ||
+    nmcli --ask con up id 'Brno (BRQ)'
 
 klist || kinit
 

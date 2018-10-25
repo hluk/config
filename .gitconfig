@@ -7,7 +7,7 @@
     co = checkout
     st = status --branch --short
     d  = diff
-    la = log --date-order --oneline --all --graph --decorate --branches --tags -50
+    la = log --date-order --oneline --all --graph --decorate --branches --tags -30
     c = commit --allow-empty --signoff
     pr = pull --rebase
     f = fetch --all --tags --prune
