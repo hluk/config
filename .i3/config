@@ -127,17 +127,17 @@ bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
 # move focused container to workspace
-bindsym $mod+Shift+grave move container to workspace 0
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
+bindsym $mod+$ctrl+grave move container to workspace 0
+bindsym $mod+$ctrl+1 move container to workspace 1
+bindsym $mod+$ctrl+2 move container to workspace 2
+bindsym $mod+$ctrl+3 move container to workspace 3
+bindsym $mod+$ctrl+4 move container to workspace 4
+bindsym $mod+$ctrl+5 move container to workspace 5
+bindsym $mod+$ctrl+6 move container to workspace 6
+bindsym $mod+$ctrl+7 move container to workspace 7
+bindsym $mod+$ctrl+8 move container to workspace 8
+bindsym $mod+$ctrl+9 move container to workspace 9
+bindsym $mod+$ctrl+0 move container to workspace 10
 
 bindsym $mod+m move workspace to output right
 
@@ -182,8 +182,8 @@ bar {
         status_command i3status --config ~/.i3/status.conf
         colors {
                 background #33393b
-                statusline #ffffff
-                separator #666666
+                statusline #aaaaaa
+                separator #505050
 
                 focused_workspace  #4c7899 #285577 #ffffff
                 active_workspace   #333333 #5f676a #ffffff
@@ -249,7 +249,7 @@ exec --no-startup-id "numlockx"
 
 # Autostart
 exec --no-startup-id "~/dev/bin/clipboard.sh"
-exec --no-startup-id pasystray
+#exec --no-startup-id pasystray
 #exec --no-startup-id nm-applet
 #exec --no-startup-id redshift-gtk
 

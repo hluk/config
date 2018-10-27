@@ -1,15 +1,10 @@
 #!/bin/bash
 fix_dpi() {
     if lsusb | grep -q Ergonomic; then
-        export GDK_SCALE=2
         dpi=168
     else
-        export GDK_SCALE=1
         dpi=96
     fi
-
-    #gsettings set org.gnome.desktop.interface text-scaling-factor $GDK_SCALE
-    gsettings set org.gnome.desktop.interface scaling-factor $GDK_SCALE
 
     export QT_SCALE_FACTOR=1
     export QT_AUTO_SCREEN_SCALE_FACTOR=0
@@ -18,7 +13,7 @@ fix_dpi() {
     sed -i 's/^Xft\.dpi: .*/Xft.dpi: '"$dpi/" ~/.Xresources
     xrdb -merge ~/.Xresources
 
-    #xfconf-query -c xsettings -p /Xft/DPI -s $dpi
+    xfconf-query -c xsettings -p /Xft/DPI -s $dpi
 }
 
 fix_dpi_kde() {
@@ -58,12 +53,6 @@ xfce_openbox() {
     ~/dev/bin/vsync.sh &
     openbox &
     exec startxfce4
-}
-
-openbox() {
-    fix_dpi
-    ~/dev/bin/vsync.sh &
-    exec openbox-kde-session
 }
 
 . /etc/X11/xinit/xinitrc-common
