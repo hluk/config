@@ -1,7 +1,7 @@
 #!/bin/bash
 set -xeuo pipefail
 
-config=~/.redshift
+config=/tmp/redshift-$USER
 min_amount=2000
 max_amount=6500
 

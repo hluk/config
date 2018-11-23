@@ -139,6 +139,9 @@ Plug 'rust-lang/rust.vim'
 " Ruby on Rails
 Plug 'tpope/vim-rails'
 
+" Jinja2
+Plug 'Glench/Vim-Jinja2-Syntax'
+
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'

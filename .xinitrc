@@ -1,9 +1,18 @@
 #!/bin/bash
 fix_dpi() {
+    laptop_height=1080
+
     if lsusb | grep -q Ergonomic; then
         dpi=168
+        monitor_height=2160
+        font_size=9
+        nmcli radio wifi off &
+        export GDK_SCALE=2
+        export GDK_DPI_SCALE=0.5
     else
         dpi=96
+        monitor_height=1080
+        font_size=15
     fi
 
     export QT_SCALE_FACTOR=1
@@ -14,6 +23,11 @@ fix_dpi() {
     xrdb -merge ~/.Xresources
 
     xfconf-query -c xsettings -p /Xft/DPI -s $dpi
+
+    laptop_vertical_pos=$((monitor_height - laptop_height))
+    xrandr --output eDP-1 --pos 0x$laptop_vertical_pos
+
+    sed -i 's/^\(text_font.*\) [0-9]\+/\1 '"$font_size"'/' ~/.config/hexchat/hexchat.conf
 }
 
 fix_dpi_kde() {
@@ -24,9 +38,13 @@ fix_dpi_kde() {
 }
 
 xfce_settings() {
+    fix_dpi
     xfsettingsd
     sleep 1
     fix_dpi
+    xfconf-query \
+        --channel xfce4-session --property /general/LockCommand \
+        --create --type string --set 'i3lock --color=000000'
 }
 
 kde() {
@@ -56,5 +74,7 @@ xfce_openbox() {
 }
 
 . /etc/X11/xinit/xinitrc-common
+
+export QT_QPA_PLATFORMTHEME=qt5ct
 
 xfce_i3

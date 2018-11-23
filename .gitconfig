@@ -19,6 +19,9 @@
     pager = less -FRSX
     editor = nvim
     trustctime = false
+[diff]
+    colorMoved = true
+    noprefix = true
 [push]
     default = tracking
 [rerere]
