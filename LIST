@@ -12,6 +12,7 @@
 ~/.config/yamllint/
 ~/.dwmrc.h
 ~/.i3/
+~/.inputrc
 ~/.gdbinit
 ~/.gitconfig
 ~/.mozilla/firefox/*/chrome/userChrome.css firefox
