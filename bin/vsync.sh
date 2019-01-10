@@ -24,4 +24,4 @@ options=(
     #--glx-use-copysubbuffermesa
 )
 pkill compton
-exec ~/dev/compton/compton "${options[@]}"
+exec ~/dev/compton/build/src/compton "${options[@]}"

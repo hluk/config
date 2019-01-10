@@ -1,5 +1,5 @@
 #!/bin/bash
-version=debug
+version=release
 rundir=~/dev/build/copyq
 cmd=$rundir/$version/copyq
 

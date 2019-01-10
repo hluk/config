@@ -17,5 +17,5 @@ elif [[ $new_amount > $max_amount ]]; then
     new_amount=$max_amount
 fi
 
-redshift -O "$new_amount"
+redshift -P -O "$new_amount"
 echo "$new_amount" > "$config"

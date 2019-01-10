@@ -15,7 +15,7 @@ WALLPATH=${WALLPATH:-"$HOME/wallpapers"}
 #RES=(1920 1080)
 RES=(3840 2160)
 
-CACHE_PATH="$WALLPATH/_tmp"
+CACHE_PATH="$WALLPATH/.tmp"
 TMP="$HOME/.wallpaper.tmp.jpg"
 
 if [[ ! -d "$WALLPATH" ]]; then
@@ -39,7 +39,7 @@ if [ -n "$IMG" ]; then
         IMG="$TMP"
     fi
 else
-    IMG="$(find "$WALLPATH" -maxdepth 1 -type f | shuf | head -1)"
+    IMG="$(find -L "$WALLPATH"/* -type f | shuf | head -1)"
     echo "$(date -R): Setting random wallpaper \"$IMG\""
 fi
 

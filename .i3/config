@@ -215,6 +215,7 @@ assign [class="^Firefox$"] 2
 assign [instance="^qtcreator$"] 3
 assign [instance="^code$"] 3
 
+assign [class="^Steam$"] 4
 assign [instance="^bluejeans$"] 4
 
 assign [class="^Hexchat$"] 0
@@ -235,6 +236,8 @@ bindsym XF86AudioLowerVolume exec --no-startup-id "~/dev/bin/volume_down.sh"
 bindsym XF86AudioRaiseVolume exec --no-startup-id "~/dev/bin/volume_up.sh"
 bindsym XF86AudioMute exec --no-startup-id "~/dev/bin/togglemute.sh"
 bindsym $mod+p exec --no-startup-id "pavucontrol"
+
+bindsym XF86AudioPlay exec --no-startup-id "~/dev/bin/toggleplay.sh"
 
 # redshift (manual)
 bindsym $mod+$ctrl+Up exec --no-startup-id "~/dev/bin/red_up.sh"
@@ -257,4 +260,5 @@ workspace 1 output primary
 workspace 2 output primary
 workspace 3 output primary
 workspace 4 output primary
-exec --no-startup-id i3-msg 'workspace 1'
+
+exec --no-startup-id i3-msg 'workspace --no-auto-back-and-forth number 1'

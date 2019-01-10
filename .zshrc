@@ -162,8 +162,7 @@ then
     alias mc="mc -x"
 	alias feb="$HOME/dev/bin/feb.sh"
 	alias febt="THUMBS=1 $HOME/dev/bin/feb.hs"
-    alias copyq="$HOME/dev/build/copyq/debug/copyq"
-    alias xcopyq="$HOME/dev/build/copyq/Qt_5-Debug/copyq -s test1"
+    alias copyq="$HOME/dev/build/copyq/release/copyq"
 
     export IMAGEPEEK_SESSION="$HOME/.imagepeek"
     alias peek="$HOME/dev/imagepeek/imagepeek"
