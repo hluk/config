@@ -16,11 +16,16 @@ openbox &
 #startkde &
 sleep 1
 
+/usr/libexec/gsd-xsettings &
+settings_pid=$!
+
 #xfce4-terminal
 #~/dev/build/copyq/debug/install/bin/copyq -s test1
 #~/dev/build/copyq/debug/install/bin/copyq &
 #~/dev/build/copyq/Qt_5-Debug/copyq tests "$@"
 "$@"
+
+kill "$settings_pid"
 
 #cinnamon-settings &
 #cinnamon-session

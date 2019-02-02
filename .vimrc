@@ -47,6 +47,7 @@ set clipboard=unnamed
 " use ~ with movement
 set tildeop
 " persistent undo history
+call system('mkdir -p ~/.vim/undofiles/')
 set undodir=~/.vim/undofiles/
 set undofile
 " 256 and more colors
@@ -68,16 +69,25 @@ set diffopt+=indent-heuristic
 call plug#begin('~/.vim/plugged')
 
 " doxygen
-au BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
+autocmd BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
 
 " qml
-au BufRead,BufNewFile *.qml setfiletype javascript
+autocmd BufRead,BufNewFile *.qml setfiletype javascript
 
 " Jenkinsfile
-au BufRead,BufNewFile Jenkinsfile setfiletype groovy
+autocmd BufRead,BufNewFile Jenkinsfile setfiletype groovy
 
 " git commit message
-au FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])|set spell|set nosmartindent|set noautoindent|set nocindent
+autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])|set spell|set nosmartindent|set noautoindent|set nocindent
+
+" yaml
+autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
+autocmd BufRead,BufNewFile ~/.config/yamllint/config setfiletype yaml
+autocmd BufRead,BufNewFile */ansible/inventory/* setfiletype yaml
+
+" ruby
+autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
+autocmd FileType eruby setlocal ts=2 sts=2 sw=2 expandtab
 
 "" toggle comment (NERD commenter)
 Plug 'scrooloose/nerdcommenter'
@@ -106,6 +116,11 @@ no gitd :Gd master<CR>
 " asynchronous build and test dispatcher
 Plug 'tpope/vim-dispatch'
 
+" file helpers:
+" - :Mkdir, :Rename, :SudoWrite, ...
+" - automatic chmod +x for new scripts
+Plug 'tpope/vim-eunuch'
+
 " Perform all your vim insert mode completions with Tab
 Plug 'ervandew/supertab'
 let g:SuperTabDefaultCompletionType = 'context'
@@ -119,6 +134,12 @@ Plug 'nvie/vim-flake8'
 
 " Rust syntax
 Plug 'rust-lang/rust.vim'
+
+" Ruby on Rails
+Plug 'tpope/vim-rails'
+
+" Jinja2
+Plug 'Glench/Vim-Jinja2-Syntax'
 
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -142,9 +163,15 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
+" grammar checker
+Plug 'rhysd/vim-grammarous'
+
 " Color schemes
 Plug 'sjl/badwolf'
 Plug 'morhetz/gruvbox'
+
+" reopen files at your last edit position
+Plug 'farmergreg/vim-lastplace'
 
 call plug#end()
 " }}}
@@ -194,6 +221,7 @@ set wildignore+=*.flv,.*mp4,*.mp3,*.wav,*.wmv,*.avi,*.mkv,*.mov
 "set dictionary+=/usr/share/dict/words
 "set spelllang=cs
 map <F7> :set spell!<CR>
+set spell
 "}}}
 
 " FOLDS {{{
@@ -226,4 +254,3 @@ set bg=dark
 "colorscheme molokai
 colorscheme gruvbox
 "}}}
-

@@ -66,16 +66,19 @@ focus() {
 
 case "$1" in
     "terminal")
-        focus 1 "Gnome-terminal" || ~/dev/bin/console.sh
+        if ! find_window 1 "Gnome-terminal" windowactivate; then
+            set_desktop 1
+            exec ~/dev/bin/console.sh
+        fi
         ;;
     "web")
-        focus 1 "firefox" || ~/dev/bin/browser.sh
+        focus 1 "firefox" || exec ~/dev/bin/browser.sh
         ;;
     "work")
         focus 2 "firefox"
         ;;
     [1-9])
-        set_desktop "$1"
+        focus "$1" ".*"
         ;;
     *)
         echo "Unknown argument: $1"

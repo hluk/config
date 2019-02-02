@@ -26,8 +26,6 @@ fix_dpi() {
 
     laptop_vertical_pos=$((monitor_height - laptop_height))
     xrandr --output eDP-1 --pos 0x$laptop_vertical_pos
-
-    sed -i 's/^\(text_font.*\) [0-9]\+/\1 '"$font_size"'/' ~/.config/hexchat/hexchat.conf
 }
 
 fix_dpi_kde() {
