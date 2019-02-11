@@ -124,7 +124,7 @@ def open_devel():
 
 
 def open_music():
-    focus_or_execute(4, 'clementine', 'ls ~/Music/disk/ && clementine')
+    focus_or_execute(4, 'clementine', '/usr/bin/clementine')
 
 
 def main():

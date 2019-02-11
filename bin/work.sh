@@ -1,11 +1,13 @@
 #!/bin/bash
 set -ex
 
+VPN=${VPN:-'Brno (BRQ)'}
+
 if grep -q redhat /etc/resolv.conf; then
     nmcli radio wifi on
 else
     nmcli radio wifi off
-    nmcli --ask con up id 'Brno (BRQ)'
+    nmcli --ask con up id "$VPN"
 fi
 
 # Fix hexchat scaling.

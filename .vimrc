@@ -57,6 +57,8 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " diff
 set diffopt+=algorithm:patience
 set diffopt+=indent-heuristic
+" always show status line
+set laststatus=2
 " }}}
 
 " PLUGINS {{{
@@ -88,6 +90,9 @@ autocmd BufRead,BufNewFile */ansible/inventory/* setfiletype yaml
 " ruby
 autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType eruby setlocal ts=2 sts=2 sw=2 expandtab
+
+" meson
+autocmd BufRead,BufNewFile meson.build setlocal ts=2 sts=2 sw=2 expandtab
 
 "" toggle comment (NERD commenter)
 Plug 'scrooloose/nerdcommenter'
@@ -140,6 +145,9 @@ Plug 'tpope/vim-rails'
 
 " Jinja2
 Plug 'Glench/Vim-Jinja2-Syntax'
+
+" meson
+Plug 'igankevich/mesonic'
 
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
