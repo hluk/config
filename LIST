@@ -4,6 +4,7 @@
 ~/.config/fontconfig/fonts.conf
 ~/.config/hexchat/hexchat.conf hexchat
 ~/.config/hexchat/servlist.conf hexchat
+~/.config/kwinrc
 ~/.config/nvim/init.vim nvim/
 ~/.config/openbox/
 ~/.config/tig/

@@ -112,7 +112,7 @@ zstyle ':completion::approximate*:*' prefix-needed false
 # }}}
 
 # env# {{{
-export EDITOR="vimx"
+export EDITOR="nvim"
 export PAGER=less
 export LESS="--ignore-case --quit-if-one-screen --LONG-PROMPT --shift=5"
 
@@ -244,6 +244,13 @@ backup() {
     file=$1
     date=$(date --iso-8601)
     7z a -p "$file-$date".7z "$file"
+}
+
+lyrics() {
+    (
+        source ~/dev/python-metallum/.venv/bin/activate &&
+            ~/dev/bin/lyrics.py "$@"
+    )
 }
 # }}}
 

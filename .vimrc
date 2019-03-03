@@ -77,7 +77,7 @@ autocmd BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
 autocmd BufRead,BufNewFile *.qml setfiletype javascript
 
 " Jenkinsfile
-autocmd BufRead,BufNewFile Jenkinsfile setfiletype groovy
+autocmd BufRead,BufNewFile Jenkinsfile,*.Jenkinsfile setfiletype groovy
 
 " git commit message
 autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])|set spell|set nosmartindent|set noautoindent|set nocindent
@@ -108,6 +108,7 @@ Plug 'w0rp/ale'
 let g:ale_linters = {
 \   'python': ['flake8',],
 \}
+autocmd BufEnter schema.rb ALEDisable
 
 " snippets
 Plug 'SirVer/ultisnips'

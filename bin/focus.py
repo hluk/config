@@ -57,7 +57,7 @@ def find_window(desktop, class_name, *args):
 
 def wait_for_desktop_activated(desktop):
     current_desktop = get_desktop()
-    # Return immediatelly if different desktop is active
+    # Return immediately if different desktop is active
     # (can be active on different screen).
     if current_desktop != desktop:
         return
@@ -89,6 +89,9 @@ def focus(desktop, class_name=None):
         if current_window in matching_windows:
             # If matching window is already active, activate next matching.
             matching_windows.remove(current_window)
+            if not matching_windows:
+                return False
+
             activate_window(matching_windows[0])
         else:
             # If matching window is not already active,
@@ -109,6 +112,7 @@ def focus_or_execute(desktop, class_name, cmd):
 
 def open_terminal():
     focus_or_execute(1, 'Gnome-terminal', '~/dev/bin/console.sh')
+    # focus_or_execute(1, 'konsole', '~/dev/bin/console.sh')
 
 
 def open_web():
@@ -124,7 +128,8 @@ def open_devel():
 
 
 def open_music():
-    focus_or_execute(4, 'clementine', '/usr/bin/clementine')
+    # focus_or_execute(4, 'deadbeef', '/usr/bin/deadbeef')
+    focus_or_execute(4, 'Quod Libet', '/usr/bin/quodlibet')
 
 
 def main():

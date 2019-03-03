@@ -13,6 +13,7 @@
     f = fetch --all --tags --prune
     ca = commit --all --amend --no-edit
     up = !git checkout master && git pull --rebase upstream master && git push origin master
+    upd = !git checkout develop && git pull --rebase upstream develop && git push origin develop
 [core]
     whitespace = cr-at-eol
     autocrlf = input
