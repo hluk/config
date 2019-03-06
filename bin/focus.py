@@ -89,10 +89,8 @@ def focus(desktop, class_name=None):
         if current_window in matching_windows:
             # If matching window is already active, activate next matching.
             matching_windows.remove(current_window)
-            if not matching_windows:
-                return False
-
-            activate_window(matching_windows[0])
+            if matching_windows:
+                activate_window(matching_windows[0])
         else:
             # If matching window is not already active,
             # reactivate last active matching window.
