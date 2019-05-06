@@ -10,16 +10,8 @@ else
     nmcli --ask con up id "$VPN"
 fi
 
-# Fix hexchat scaling.
-if lsusb | grep -q Ergonomic; then
-    font_size=9
-else
-    font_size=15
-fi
-sed -i 's/^\(text_font.*\) [0-9]\+/\1 '"$font_size"'/' ~/.config/hexchat/hexchat.conf
-
 klist || kinit
 
-pgrep hexchat || hexchat & disown
+pgrep konversation || konversation & disown
 pgrep firefox || firefox & disown
 pgrep --full 'firefox -P work' || firefox -P work & disown

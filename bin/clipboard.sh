@@ -11,6 +11,9 @@ if [ $# -gt 1 ]; then
     exec "$cmd" "$@"
 else
     cd "$rundir" &&
-    "$cmd" toggle || exec "$cmd"
+    "$cmd" toggle || {
+        source /etc/profile.d/hidpi.sh
+        exec "$cmd"
+    }
 fi &>/dev/null
 

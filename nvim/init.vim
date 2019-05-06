@@ -44,7 +44,7 @@ set shiftwidth=4
 " keep a 5 line buffer for the cursor from top/bottom of window
 set scrolloff=5
 " X11 clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 " use ~ with movement
 set tildeop
 " persistent undo history

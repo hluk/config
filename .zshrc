@@ -112,7 +112,7 @@ zstyle ':completion::approximate*:*' prefix-needed false
 # }}}
 
 # env# {{{
-export EDITOR="nvim"
+export EDITOR="vimx"
 export PAGER=less
 export LESS="--ignore-case --quit-if-one-screen --LONG-PROMPT --shift=5"
 
@@ -189,7 +189,7 @@ if [[ $NAME == "Arch Linux" ]]; then
     alias clean="q -Qdt"
 elif [[ $NAME == "Fedora" ]]; then
     alias q="dnf"
-    alias s="q search --all"
+    alias s="q search --cacheonly --all"
     alias i="sudo dnf install"
     alias u="sudo dnf remove"
     alias up="sudo dnf upgrade"
@@ -262,7 +262,8 @@ if [ -d ~/.fzf ]; then
     export PATH="$HOME/.fzf/bin:$PATH"
     export FZF_DEFAULT_COMMAND='rg --files'
     #export FZF_DEFAULT_COMMAND='fd --type f'
-    export FZF_DEFAULT_OPTS="--history=$HOME/.fzf_history"
+    export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
+    export FZF_DEFAULT_OPTS="--history=$HOME/.local/share/fzf_history"
 
     source ~/.fzf.zsh
     source "$HOME/.fzf/shell/completion.zsh"

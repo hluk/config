@@ -10,6 +10,8 @@ import time
 
 logger = logging.getLogger(__name__)
 
+TERMINAL_WINDOW_CLASS = 'xfce4-terminal|Gnome-terminal|konsole'
+
 
 def execute(cmd):
     logger.info('Executing: %s', cmd)
@@ -109,8 +111,7 @@ def focus_or_execute(desktop, class_name, cmd):
 
 
 def open_terminal():
-    focus_or_execute(1, 'Gnome-terminal', '~/dev/bin/console.sh')
-    # focus_or_execute(1, 'konsole', '~/dev/bin/console.sh')
+    focus_or_execute(1, TERMINAL_WINDOW_CLASS, '~/dev/bin/console.sh')
 
 
 def open_web():

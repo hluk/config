@@ -36,6 +36,7 @@ filetype plugin indent on
 " cursor show next/prev parenthesis
 set showmatch
 " completion menu
+set wildmenu
 set wildmode=longest:full,full
 " tab -> spaces
 set expandtab
@@ -43,7 +44,7 @@ set shiftwidth=4
 " keep a 5 line buffer for the cursor from top/bottom of window
 set scrolloff=5
 " X11 clipboard
-set clipboard=unnamed
+set clipboard=unnamedplus
 " use ~ with movement
 set tildeop
 " persistent undo history
@@ -154,6 +155,7 @@ Plug 'igankevich/mesonic'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 let g:fzf_layout = { 'right': '~70%' }
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 imap <c-x><c-f> <plug>(fzf-complete-path)
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -191,6 +193,7 @@ nnoremap ; :
 
 " typos
 command! Q :q
+command! Qa :qa
 command! W :w
 command! Wq :wq
 command! WQ :wq
