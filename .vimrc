@@ -167,6 +167,7 @@ command! -bang -nargs=* Rg
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 map <c-t> :Files<CR>
+map <c-k> :Files<CR>
 map <c-g> :Rg<CR>
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)

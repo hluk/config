@@ -7,7 +7,7 @@ options=(
     # See https://github.com/chjj/compton/issues/494
     #--backend xr_glx_hybrid
 
-    --vsync opengl-swc
+    --vsync
     --unredir-if-possible
 
     # Minimize flicker when switching windows.
@@ -16,7 +16,7 @@ options=(
     "--fade-exclude" 'I3_FLOATING_WINDOW@:32c = 1'
     "--fading"
 
-    --sw-opti
+    #--sw-opti
     --glx-no-stencil
     --glx-no-rebind-pixmap
 
@@ -24,4 +24,5 @@ options=(
     #--glx-use-copysubbuffermesa
 )
 pkill compton
-exec ~/dev/compton/build/src/compton "${options[@]}"
+#exec ~/dev/compton/build/src/compton "${options[@]}"
+exec compton --backend glx --vsync opengl-swc

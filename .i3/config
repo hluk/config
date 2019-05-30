@@ -21,7 +21,7 @@ set $ctrl Control
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Noto Sans Bold 10
+font pango:Noto Sans Bold 16
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -98,8 +98,8 @@ bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 bindsym $mod+s layout stacking
-bindsym $mod+t layout tabbed
-bindsym $mod+e layout toggle split
+bindsym $mod+Shift+t layout tabbed
+bindsym $mod+Shift+s layout toggle split
 
 # toggle tiling / floating
 bindsym $mod+Shift+space floating toggle
@@ -125,6 +125,12 @@ bindsym $mod+7 workspace 7
 bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
+
+bindsym $mod+q workspace 1
+bindsym $mod+w workspace 2
+bindsym $mod+e workspace 3
+bindsym $mod+r workspace 4
+bindsym $mod+t workspace 5
 
 # move focused container to workspace
 bindsym $mod+$ctrl+grave move container to workspace 0
@@ -177,7 +183,8 @@ bindsym $mod+$alt+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-        tray_output eDP-1
+        #tray_output eDP-1
+        tray_output DP-2-1
         status_command i3status --config ~/.i3/status.conf
         colors {
                 background #33393b
@@ -209,24 +216,17 @@ client.background       #ffffff
 # Window behavior
 for_window [instance="^copyq$" class="^[Cc]opyq"] floating enable, border normal
 for_window [instance="^xfce4-appfinder$" class="^Xfce4-appfinder$"] floating enable, border normal
-
-assign [class="^Firefox$"] 2
-
-assign [instance="^qtcreator$"] 3
-assign [instance="^code$"] 3
+for_window [instance="^xev$"] floating enable, border normal
 
 assign [class="^Steam$"] 4
-assign [instance="^bluejeans$"] 4
-
-assign [class="^Hexchat$"] 0
-assign [class="^cantata$"] 0
 
 # Shortcuts
-bindsym $mod+q exec --no-startup-id "~/dev/bin/console.sh"
+bindsym $mod+Shift+q exec --no-startup-id "~/dev/bin/console.sh"
+bindsym $mod+Shift+w exec --no-startup-id "~/dev/bin/browser.sh"
+
 bindsym $ctrl+grave exec --no-startup-id "~/dev/bin/clipboard.sh"
 #bindsym $alt+F2 exec --no-startup-id "rofi -show run"
 #bindsym $mod+Tab exec --no-startup-id "rofi -show window"
-bindsym $mod+w exec --no-startup-id "~/dev/bin/browser.sh"
 bindsym $mod+$alt+d exec --no-startup-id "qtcreator -lastsession"
 bindsym $ctrl+$alt+l exec --no-startup-id "xflock4"
 bindsym $mod+F4 exec --no-startup-id "xfce4-session-logout"

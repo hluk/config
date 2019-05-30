@@ -5,15 +5,18 @@
 ~/.config/hexchat/hexchat.conf hexchat
 ~/.config/hexchat/servlist.conf hexchat
 ~/.config/kwinrc
+~/.config/latte/
+~/.config/lattedockrc
 ~/.config/nvim/init.vim nvim/
 ~/.config/openbox/
 ~/.config/tig/
 ~/.config/yamllint/
 ~/.dwmrc.h
-~/.i3/
-~/.inputrc
 ~/.gdbinit
 ~/.gitconfig
+~/.i3/
+~/.inputrc
+~/.local/share/konsole/Screen.profile konsole
 ~/.mozilla/firefox/*/chrome/userChrome.css firefox
 ~/.mplayer/
 ~/.screenrc

@@ -10,7 +10,7 @@ import time
 
 logger = logging.getLogger(__name__)
 
-TERMINAL_WINDOW_CLASS = 'xfce4-terminal|Gnome-terminal|konsole'
+TERMINAL_WINDOW_CLASS = 'xfce4-terminal|Gnome-terminal|konsole|st-256color'
 
 
 def execute(cmd):
@@ -75,7 +75,7 @@ def wait_for_desktop_activated(desktop):
         current_window = get_current_window()
 
 
-def focus(desktop, class_name=None):
+def focus(desktop, class_name=None, retry=2):
     previous_desktop = get_desktop()
     if previous_desktop != desktop:
         set_desktop(desktop)
@@ -83,7 +83,11 @@ def focus(desktop, class_name=None):
 
     matching_windows = find_window(desktop, class_name)
     if not matching_windows:
-        return False
+        retry -= 1
+        if retry <= 0:
+            return False
+
+        return focus(desktop, class_name, retry)
 
     current_window = get_current_window()
 
@@ -110,44 +114,45 @@ def focus_or_execute(desktop, class_name, cmd):
     focus(desktop, class_name) or execute(cmd)
 
 
-def open_terminal():
-    focus_or_execute(1, TERMINAL_WINDOW_CLASS, '~/dev/bin/console.sh')
+def open_terminal(desktop):
+    focus_or_execute(desktop or 1, TERMINAL_WINDOW_CLASS, '~/dev/bin/console.sh')
 
 
-def open_web():
-    focus_or_execute(1, 'firefox', '~/dev/bin/browser.sh')
+def open_web(desktop):
+    focus_or_execute(desktop or 2, 'firefox', '~/dev/bin/browser.sh')
 
 
-def open_work():
-    focus(2, 'firefox')
+def open_work(desktop):
+    focus(desktop or 3, 'firefox')
 
 
-def open_devel():
-    focus(3, 'code|qtcreator')
+def open_devel(desktop):
+    focus(desktop or 4, 'code|qtcreator')
 
 
-def open_music():
+def open_music(desktop):
     # focus_or_execute(4, 'deadbeef', '/usr/bin/deadbeef')
-    focus_or_execute(4, 'Quod Libet', '/usr/bin/quodlibet')
+    focus_or_execute(desktop or 5, 'Quod Libet', '/usr/bin/quodlibet')
 
 
 def main():
     arg = sys.argv[1]
+    desktop = int(sys.argv[2]) if len(sys.argv) > 2 else 0
 
     log_format = '%(levelname)s: %(message)s'
     log_level = logging.DEBUG
     logging.basicConfig(level=log_level, format=log_format)
 
     if arg == 'terminal':
-        open_terminal()
+        open_terminal(desktop)
     elif arg == 'web':
-        open_web()
+        open_web(desktop)
     elif arg == 'work':
-        open_work()
+        open_work(desktop)
     elif arg == 'devel':
-        open_devel()
+        open_devel(desktop)
     elif arg == 'music':
-        open_music()
+        open_music(desktop)
     else:
         desktop = int(arg)
         focus(desktop, '.*')

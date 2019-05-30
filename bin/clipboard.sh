@@ -12,7 +12,7 @@ if [ $# -gt 1 ]; then
 else
     cd "$rundir" &&
     "$cmd" toggle || {
-        source /etc/profile.d/hidpi.sh
+        #source /etc/profile.d/hidpi.sh
         exec "$cmd"
     }
 fi &>/dev/null

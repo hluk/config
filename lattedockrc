@@ -1,0 +1,19 @@
+[ScreenConnectors]
+10=HDMI-2
+11=eDP-1
+12=DP-2-1
+
+[UniversalSettings]
+canDisableBorders=false
+currentLayout=My Layout
+downloadWindowSize=800,550
+lastNonAssignedLayout=My Layout
+launchers=
+layoutsColumnWidths=
+layoutsWindowSize=700,450
+memoryUsage=0
+mouseSensitivity=2
+screenTrackerInterval=2500
+showInfoWindow=true
+unifiedGlobalShortcuts=true
+version=2

@@ -7,8 +7,9 @@ if grep -q redhat /etc/resolv.conf; then
     nmcli radio wifi on
 else
     nmcli radio wifi off
-    nmcli --ask con up id "$VPN"
 fi
+
+nmcli --ask con up id "$VPN"
 
 klist || kinit
 

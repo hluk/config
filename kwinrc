@@ -1,5 +1,5 @@
 [$Version]
-update_info=kwin.upd:replace-scalein-with-scale
+update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js
 
 [Compositing]
 AnimationSpeed=0
@@ -14,6 +14,12 @@ WindowsBlockCompositing=true
 XRenderSmoothScale=false
 
 [Desktops]
+Id_1=dc512de3-cf1c-4b13-b2bc-ac71abbe20cd
+Id_2=2223e562-968b-4be5-8eb9-a7664b549741
+Id_3=d7d766e6-8c07-4a55-b655-8811686c3b2a
+Id_4=c7b50940-b324-4de3-97ca-182b27ce332a
+Id_5=ece0005e-15af-47ed-baa4-35956a3fcf1f
+Id_6=df1ae3d0-8de5-4cb4-b3b9-ad0ec195053f
 Name_1=desktop 1
 Number=6
 Rows=6
@@ -85,20 +91,20 @@ cubeslideEnabled=false
 desktopchangeosdEnabled=false
 desktopgridEnabled=false
 enforcedecoEnabled=true
-flipswitchEnabled=true
 highlightwindowEnabled=true
 kwin4_effect_dialogparentEnabled=false
 kwin4_effect_fadeEnabled=false
 kwin4_effect_fadedesktopEnabled=false
+kwin4_effect_fadingpopupsEnabled=false
 kwin4_effect_frozenappEnabled=false
 kwin4_effect_loginEnabled=false
 kwin4_effect_logoutEnabled=false
 kwin4_effect_maximizeEnabled=false
 kwin4_effect_morphingpopupsEnabled=false
+kwin4_effect_squashEnabled=false
 kwin4_effect_translucencyEnabled=false
 kwin4_effect_windowapertureEnabled=false
 minimizeallEnabled=false
-minimizeanimationEnabled=false
 presentwindowsEnabled=false
 screenedgeEnabled=false
 slideEnabled=false
@@ -121,7 +127,7 @@ DesktopLayout=org.kde.breeze.desktop
 DesktopListLayout=org.kde.breeze.desktop
 DesktopMode=1
 HighlightWindows=false
-LayoutName=present_windows
+LayoutName=org.fedoraproject.fedora.desktop
 MinimizedMode=0
 MultiScreenMode=0
 ShowDesktopMode=0
@@ -166,7 +172,7 @@ ElectricBorderMaximize=true
 ElectricBorderTiling=true
 ElectricBorders=0
 FocusPolicy=ClickToFocus
-FocusStealingPreventionLevel=1
+FocusStealingPreventionLevel=0
 GeometryTip=false
 HideUtilityWindowsForInactive=true
 InactiveTabsSkipTaskbar=false
