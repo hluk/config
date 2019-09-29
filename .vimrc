@@ -138,6 +138,8 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 " Python
 " PEP 8
 Plug 'nvie/vim-flake8'
+" :Black
+Plug 'python/black'
 
 " Rust syntax
 Plug 'rust-lang/rust.vim'

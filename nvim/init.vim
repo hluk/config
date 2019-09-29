@@ -37,6 +37,7 @@ filetype plugin indent on
 " cursor show next/prev parenthesis
 set showmatch
 " completion menu
+set wildmenu
 set wildmode=longest:full,full
 " tab -> spaces
 set expandtab
@@ -48,6 +49,7 @@ set clipboard=unnamedplus
 " use ~ with movement
 set tildeop
 " persistent undo history
+call system('mkdir -p ~/.config/nvim/undofiles/')
 set undodir=~/.config/nvim/undofiles/
 set undofile
 " 256 and more colors
@@ -58,6 +60,11 @@ let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " (https://github.com/neovim/neovim/wiki/FAQ#nvim-shows-weird-symbols-2-q-when-changing-modes)
 set guicursor=
 autocmd OptionSet guicursor noautocmd set guicursor=
+
+" Fix resetting nopaste after pasting. (The issue breaks expandtab config.)
+" Fixed in version v0.4.2.
+" See: https://github.com/neovim/neovim/issues/7994
+au InsertLeave * set nopaste
 " }}}
 
 " PLUGINS {{{
@@ -90,6 +97,9 @@ autocmd BufRead,BufNewFile */ansible/inventory/* setfiletype yaml
 autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
 autocmd FileType eruby setlocal ts=2 sts=2 sw=2 expandtab
 
+" meson
+autocmd BufRead,BufNewFile meson.build setlocal ts=2 sts=2 sw=2 expandtab
+
 "" toggle comment (NERD commenter)
 Plug 'scrooloose/nerdcommenter'
 map <C-\> <leader>c<SPACE>j
@@ -104,6 +114,7 @@ Plug 'w0rp/ale'
 let g:ale_linters = {
 \   'python': ['flake8',],
 \}
+autocmd BufEnter schema.rb ALEDisable
 
 " snippets
 Plug 'SirVer/ultisnips'
@@ -132,6 +143,8 @@ let g:SuperTabClosePreviewOnPopupClose = 1
 " Python
 " PEP 8
 Plug 'nvie/vim-flake8'
+" :Black
+Plug 'python/black'
 
 " Rust syntax
 Plug 'rust-lang/rust.vim'
@@ -149,6 +162,7 @@ Plug 'igankevich/mesonic'
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
 let g:fzf_layout = { 'right': '~70%' }
+let g:fzf_history_dir = '~/.local/share/fzf-history'
 imap <c-x><c-f> <plug>(fzf-complete-path)
 command! -bang -nargs=* Rg
   \ call fzf#vim#grep(
@@ -160,6 +174,7 @@ command! -bang -nargs=* Rg
 command! -bang -nargs=? -complete=dir Files
   \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
 map <c-t> :Files<CR>
+map <c-k> :Files<CR>
 map <c-g> :Rg<CR>
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -186,6 +201,7 @@ nnoremap ; :
 
 " typos
 command! Q :q
+command! Qa :qa
 command! W :w
 command! Wq :wq
 command! WQ :wq

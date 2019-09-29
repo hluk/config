@@ -112,7 +112,7 @@ zstyle ':completion::approximate*:*' prefix-needed false
 # }}}
 
 # env# {{{
-export EDITOR="vimx"
+export EDITOR="nvim"
 export PAGER=less
 export LESS="--ignore-case --quit-if-one-screen --LONG-PROMPT --shift=5"
 

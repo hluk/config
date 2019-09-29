@@ -5,7 +5,7 @@ set -exuo pipefail
 
 flamegraph=${FLAMEGRAPH:-~/dev/FlameGraph/}
 browser=${BROWSER:-firefox}
-frequency=${FREQUENCY:-999}
+frequency=${FREQUENCY:-99}
 width=${WIDTH:-2000}
 
 perf_samples="perf_samples.svg"

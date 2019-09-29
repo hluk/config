@@ -1,6 +1,6 @@
 [Appearance]
 ColorScheme=Breeze
-Font=Fira Mono,10,-1,5,50,0,0,0,0,0
+Font=Overpass Mono Light,10,-1,5,25,0,0,0,0,0,Regular
 
 [General]
 Name=Screen

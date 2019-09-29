@@ -1,6 +1,10 @@
 #!/bin/bash
 qt_screen_scale_factors='eDP-1=1;DP-2=1;DP-2-1=2;DP-2-2=1;HDMI-2=2;'
 
+# Applies per-screen scale factors computed from on screen DPI (Qt 5.14).
+# See: https://lists.qt-project.org/pipermail/development/2019-September/037434.html
+export QT_ENABLE_HIGHDPI_SCALING=1
+
 fix_dpi() {
     laptop_height=1080
 
@@ -14,7 +18,7 @@ fix_dpi() {
         export QT_SCREEN_SCALE_FACTORS=
         export QT_SCALE_FACTOR=2
     else
-        dpi=96
+        dpi=144
         monitor_height=1080
         laptop_vertical_pos=$((monitor_height - laptop_height))
         xrandr_args="--pos 0x$laptop_vertical_pos"
@@ -28,18 +32,26 @@ fix_dpi() {
     xrdb -remove
     xrdb -merge ~/.Xresources
 
-    xfconf-query -c xsettings -p /Xft/DPI -s $dpi
+    xfconf-query --create --type int -c xsettings -p /Xft/DPI -s $dpi
 
     xrandr --output eDP-1 $xrandr_args
 }
 
 fix_dpi_kde() {
-    export QT_SCREEN_SCALE_FACTORS="$qt_screen_scale_factors"
+    fix_dpi
+    #export QT_SCREEN_SCALE_FACTORS="$qt_screen_scale_factors"
+    export QT_SCALE_FACTOR=1
 
-    sed -i 's/^\(ScreenScaleFactors=\).*/\1'"$qt_screen_scale_factors/" \
+    sed -i 's/^\(ScaleFactor=\).*/\1'"$QT_SCALE_FACTOR/" \
         ~/.config/kdeglobals
 
-    sed -i 's/^\(kdeglobals_kscreen_screenscalefactors=\).*/\1'"$qt_screen_scale_factors/" \
+    sed -i 's/^\(ScreenScaleFactors=\).*/\1'"$QT_SCREEN_SCALE_FACTORS/" \
+        ~/.config/kdeglobals
+
+    sed -i 's/^\(kdeglobals_kscreen_scalefactor=\).*/\1'"$QT_SCALE_FACTOR/" \
+        ~/.config/startupconfig
+
+    sed -i 's/^\(kdeglobals_kscreen_screenscalefactors=\).*/\1'"$QT_SCREEN_SCALE_FACTORS/" \
         ~/.config/startupconfig
 }
 
