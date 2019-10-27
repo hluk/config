@@ -11,6 +11,6 @@ export TERM=konsole-256color; exec konsole --hide-tabbar --hide-menubar --profil
 #exec xterm -e "$x"
 #exec Terminal -e "$x"
 #exec alacritty -e bash -c "$x"
-#exec ~/apps/alacritty/target/release/alacritty -e bash -c "$x"
+#exec ~/dev/alacritty/target/release/alacritty -e "$x"
 #exec roxterm
 

@@ -120,6 +120,10 @@ zoomEnabled=false
 PopupHideDelay=1000
 TextOnly=false
 
+[SubSession: 26e20a60-47ea-4131-b51d-2ee2bd8ee101]
+active=-1
+count=0
+
 [TabBox]
 ActivitiesMode=0
 ApplicationsMode=0

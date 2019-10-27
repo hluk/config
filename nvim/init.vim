@@ -83,7 +83,7 @@ autocmd BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
 autocmd BufRead,BufNewFile *.qml setfiletype javascript
 
 " Jenkinsfile
-autocmd BufRead,BufNewFile Jenkinsfile setfiletype groovy
+autocmd BufRead,BufNewFile *Jenkinsfile* setfiletype groovy
 
 " git commit message
 autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])|set spell|set nosmartindent|set noautoindent|set nocindent
@@ -176,6 +176,7 @@ command! -bang -nargs=? -complete=dir Files
 map <c-t> :Files<CR>
 map <c-k> :Files<CR>
 map <c-g> :Rg<CR>
+map <c-j> :Buffers<CR>
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -184,6 +185,10 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " grammar checker
 Plug 'rhysd/vim-grammarous'
+let g:grammarous#show_first_error=1
+map <F6> :GrammarousCheck --no-move-to-first-error<CR>
+nmap <F5> <Plug>(grammarous-move-to-next-error)
+nmap <S-F5> <Plug>(grammarous-move-to-previous-error)
 
 " Color schemes
 Plug 'sjl/badwolf'

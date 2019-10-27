@@ -33,15 +33,14 @@ ps_prompt() {
 }
 
 ps1() {
-    export PS1='%B$(ps_path)$(ps_git_branch)$(ps_error_code)$(ps_prompt)%b '
+    #export PS1='%B$(ps_path)$(ps_git_branch)$(ps_error_code)$(ps_prompt)%b '
+
+    # cargo install starship
+    # https://starship.rs/config/#prompt
+    eval "$(starship init zsh)"
 }
 
-if [[ $DEMO == 1 ]]; then
-    export PS1='%B%F{green}DEMO%f:%(?..%F{red}[%?]%f)%(!.#.>)%b '
-    alias waiverdb-cli='python ~/dev/factory/waiverdb/waiverdb/cli.py -C ~/dev/factory/waiverdb/conf/client.conf'
-else
-    ps1
-fi
+ps1
 
 # keys
 bindkey '^[[1~' beginning-of-line

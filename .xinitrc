@@ -1,5 +1,5 @@
 #!/bin/bash
-qt_screen_scale_factors='eDP-1=1;DP-2=1;DP-2-1=2;DP-2-2=1;HDMI-2=2;'
+#qt_screen_scale_factors='eDP-1=1;DP-2=1;DP-2-1=2;DP-2-2=1;HDMI-2=2;'
 
 # Applies per-screen scale factors computed from on screen DPI (Qt 5.14).
 # See: https://lists.qt-project.org/pipermail/development/2019-September/037434.html
@@ -15,18 +15,17 @@ fix_dpi() {
         export GDK_SCALE=2
         export GDK_DPI_SCALE=0.5
         xrandr_args="--off"
-        export QT_SCREEN_SCALE_FACTORS=
-        export QT_SCALE_FACTOR=2
+        export QT_SCREEN_SCALE_FACTORS=2
     else
         dpi=144
         monitor_height=1080
         laptop_vertical_pos=$((monitor_height - laptop_height))
         xrandr_args="--pos 0x$laptop_vertical_pos"
-        export QT_SCREEN_SCALE_FACTORS="$qt_screen_scale_factors"
-        export QT_SCALE_FACTOR=1
+        export QT_SCREEN_SCALE_FACTORS=1
     fi
 
     export QT_AUTO_SCREEN_SCALE_FACTOR=0
+    export QT_SCALE_FACTOR=1
 
     sed -i 's/^Xft\.dpi: .*/Xft.dpi: '"$dpi/" ~/.Xresources
     xrdb -remove
@@ -39,8 +38,6 @@ fix_dpi() {
 
 fix_dpi_kde() {
     fix_dpi
-    #export QT_SCREEN_SCALE_FACTORS="$qt_screen_scale_factors"
-    export QT_SCALE_FACTOR=1
 
     sed -i 's/^\(ScaleFactor=\).*/\1'"$QT_SCALE_FACTOR/" \
         ~/.config/kdeglobals

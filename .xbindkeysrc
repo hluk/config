@@ -17,56 +17,42 @@
     XF86Launch2
 
 # change keyboard layout
-"setxkbmap -print|grep -q cz && setxkbmap us || setxkbmap cz"
-    mod4+v
+"setxkbmap -print | grep -q cz && setxkbmap us || setxkbmap cz"
+    mod4+control+k
 
-# AUDIO# {{{
-# volume
-"~/dev/bin/volume_up.sh"
-    control+mod4+Up
 "~/dev/bin/volume_up.sh"
     XF86AudioRaiseVolume
-"~/dev/bin/volume_down.sh"
-    control+mod4+Down
 "~/dev/bin/volume_down.sh"
     XF86AudioLowerVolume
 "~/dev/bin/togglemute.sh"
     XF86AudioMute
-# }}}
 
-# SCREEN# {{{
-# turnoff redshift and invert
-"killall redshift; redshift -x"
-    mod4+KP_Multiply
+"~/dev/bin/red_up.sh"
+    mod4+control+Up
+"~/dev/bin/red_down.sh"
+    mod4+control+Down
 
-# random wallpaper
-"~/dev/img/set_wallpaper.sh"
-    mod4+a
-
-# red
-"~/dev/bin/red.sh +100"
-    mod4+control+Right
-"~/dev/bin/red.sh -100"
-    mod4+control+Left
-# }}}
-
-# APPS# {{{
-# terminal
 "~/dev/bin/console.sh"
     mod4+q
-"nemo"
-    mod4+e
 "xkill"
     mod4+mod1+x
 "~/dev/bin/browser.sh"
     mod4+w
 "~/dev/bin/clipboard.sh"
     control+grave
-"~/dev/menus/runmenu.sh"
-    mod4+r
-"PATH=~/dev/sprinter-gtk/:$PATH ~/dev/sprinter-gtk/openmenu.sh ~/down"
-    mod4+o
-"~/dev/menus/gamemenu.sh"
-    mod4+g
-# }}}
 
+"xdotool set_desktop 0"
+    mod4+1
+"xdotool set_desktop 1"
+    mod4+2
+"xdotool set_desktop 2"
+    mod4+3
+"xdotool set_desktop 3"
+    mod4+4
+"xdotool set_desktop 4"
+    mod4+5
+"xdotool set_desktop 5"
+    mod4+6
+
+"killall -HUP xbindkeys"
+    mod4+control+r

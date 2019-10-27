@@ -19,7 +19,7 @@
     whitespace = cr-at-eol
     autocrlf = input
     pager = less -FRSX
-    editor = vimx
+    editor = nvim
     trustctime = false
 [push]
     default = tracking
@@ -29,14 +29,16 @@
 [rebase]
     stat = true
 [diff]
-    tool = gvimdiff
+    tool = vimdiff
     colorMoved = true
     noprefix = true
 [difftool]
     prompt = false
     trustExitCode = true # :cq in Vim to abort opening next diffs
 [merge]
-    tool = gvimdiff
+    tool = vimdiff
 [mergetool]
     keepBackup = false
     trustExitCode = true
+[mergetool "vimdiff"]
+    cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
