@@ -1,0 +1,57 @@
+prompt_order = [
+    "username",
+    "hostname",
+    #"kubernetes",
+    "directory",
+    "git_branch",
+    "git_state",
+    "git_status",
+    #"package",
+    #"dotnet",
+    #"golang",
+    #"java",
+    #"nodejs",
+    #"python",
+    #"ruby",
+    #"rust",
+    #"nix_shell",
+    #"conda",
+    #"memory_usage",
+    #"aws",
+    "env_var",
+    "cmd_duration",
+    "line_break",
+    "jobs",
+    "battery",
+    "time",
+    "character",
+]
+
+[cmd_duration]
+min_time = 5
+prefix = "took "
+style = "bold yellow"
+
+[package]
+disabled = true
+
+[git_status]
+conflicted.value = "c"
+conflicted.style = "bold yellow"
+ahead = "a"
+behind.value = "b"
+behind.style = "bold yellow"
+diverged.value = "v"
+diverged.style = "bold yellow"
+untracked = ""
+stashed = "s"
+modified.value = "m"
+modified.style = "bold yellow"
+staged.value = "++"
+staged.style = "green"
+staged_count.enabled = false
+style = "dimmed blue"
+renamed.value = "r"
+renamed.style = "bold yellow"
+deleted.value = "d"
+deleted.style = "bold yellow"

@@ -9,7 +9,7 @@
 ~/.config/lattedockrc
 ~/.config/nvim/init.vim nvim/
 ~/.config/openbox/
-~/.config/startship.toml
+~/.config/starship.toml
 ~/.config/tig/
 ~/.config/yamllint/
 ~/.dwmrc.h
