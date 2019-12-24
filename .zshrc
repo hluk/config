@@ -1,3 +1,21 @@
+# env# {{{
+export EDITOR="nvim"
+export PAGER=less
+export LESS="--ignore-case --quit-if-one-screen --LONG-PROMPT --shift=5"
+
+# support colors in less
+export LESS_TERMCAP_mb=$'\E[01;31m'
+export LESS_TERMCAP_md=$'\E[01;33m'
+export LESS_TERMCAP_me=$'\E[0m'
+export LESS_TERMCAP_se=$'\E[0m'
+export LESS_TERMCAP_so=$'\E[01;44;33m'
+export LESS_TERMCAP_ue=$'\E[0m'
+export LESS_TERMCAP_us=$'\E[01;32m'
+
+export PATH="$HOME/.local/bin:$PATH"
+export PATH="$HOME/.cargo/bin:$PATH"
+# }}}
+
 # basic configuration# {{{
 HISTFILE=~/.histfile
 HISTSIZE=10000
@@ -110,24 +128,6 @@ zstyle ':completion:*' ignore-parents parent pwd
 zstyle ':completion::approximate*:*' prefix-needed false
 # }}}
 
-# env# {{{
-export EDITOR="nvim"
-export PAGER=less
-export LESS="--ignore-case --quit-if-one-screen --LONG-PROMPT --shift=5"
-
-# support colors in less
-export LESS_TERMCAP_mb=$'\E[01;31m'
-export LESS_TERMCAP_md=$'\E[01;33m'
-export LESS_TERMCAP_me=$'\E[0m'
-export LESS_TERMCAP_se=$'\E[0m'
-export LESS_TERMCAP_so=$'\E[01;44;33m'
-export LESS_TERMCAP_ue=$'\E[0m'
-export LESS_TERMCAP_us=$'\E[01;32m'
-
-export PATH="$HOME/.local/bin:$PATH"
-export PATH="$HOME/.cargo/bin:$PATH"
-# }}}
-
 # aliases {{{
 alias rm="rm -vI"
 alias cp="cp -v"
@@ -142,7 +142,7 @@ alias flash=~/dev/bin/flash.sh
 alias fl='export F=`ls -t /tmp/Flash*|head -1`;m $F'
 alias natsort=~/dev/natsort/natsort
 #alias m="mplayer -quiet"
-alias m="smplayer"
+alias m="QT_SCREEN_SCALE_FACTORS=1 smplayer"
 alias m0="mplayer -vo null -vc null -novideo"
 alias binwalk="~/apps/binwalk/src/binwalk -m ~/apps/binwalk/src/magic.binwalk"
 alias mkgallery='PATH="/home/lukas/dev/imagepeek:$PATH" ~/dev/bin/mkgallery.sh'
@@ -251,6 +251,23 @@ lyrics() {
             ~/dev/bin/lyrics.py "$@"
     )
 }
+
+gup() {
+    (
+        set -e
+
+        echo ' * fetching all'
+        git fetch --all --tags
+
+        branches="$(git branch --list --format '%(refname:short)' master devel develop)"
+        for branch in $branches; do
+            echo " * updading $branch"
+            git checkout "$branch"
+            git rebase "upstream/$branch"
+            git push origin "$branch"
+        done
+    )
+}
 # }}}
 
 # {{{ fd, fzf, rg
@@ -267,6 +284,8 @@ if [ -d ~/.fzf ]; then
     source ~/.fzf.zsh
     source "$HOME/.fzf/shell/completion.zsh"
     source "$HOME/.fzf/shell/key-bindings.zsh"
+
+    bindkey '^K' fzf-file-widget
 fi
 alias rg="rg --max-columns 999"
 # }}}

@@ -50,6 +50,11 @@ fix_dpi_kde() {
 
     sed -i 's/^\(kdeglobals_kscreen_screenscalefactors=\).*/\1'"$QT_SCREEN_SCALE_FACTORS/" \
         ~/.config/startupconfig
+
+    # Workaround for scaling issues in Qt 5.12.5.
+    unset QT_SCREEN_SCALE_FACTORS
+    unset QT_AUTO_SCREEN_SCALE_FACTOR
+    unset QT_SCALE_FACTOR
 }
 
 xfce_settings() {
@@ -97,7 +102,7 @@ xfce_openbox() {
 
 . /etc/X11/xinit/xinitrc-common
 
-export QT_QPA_PLATFORMTHEME=qt5ct
+#export QT_QPA_PLATFORMTHEME=qt5ct
 
 #xfce_i3
 kde

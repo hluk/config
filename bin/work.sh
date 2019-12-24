@@ -2,6 +2,7 @@
 set -ex
 
 VPN=${VPN:-'Brno (BRQ)'}
+#VPN='Phoenix (PHX2)'
 
 #if grep -q redhat /etc/resolv.conf; then
 #    nmcli radio wifi on

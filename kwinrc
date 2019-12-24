@@ -1,5 +1,5 @@
 [$Version]
-update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js
+update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js,kwin.upd:auto-bordersize
 
 [Compositing]
 AnimationSpeed=0
@@ -20,9 +20,11 @@ Id_3=d7d766e6-8c07-4a55-b655-8811686c3b2a
 Id_4=c7b50940-b324-4de3-97ca-182b27ce332a
 Id_5=ece0005e-15af-47ed-baa4-35956a3fcf1f
 Id_6=df1ae3d0-8de5-4cb4-b3b9-ad0ec195053f
+Id_7=8eeb8946-8ea5-4c66-819f-bd7a86709c26
 Name_1=desktop 1
-Number=6
-Rows=6
+Name_7=New Desktop
+Number=7
+Rows=7
 
 [Effect-CoverSwitch]
 TabBox=false
@@ -197,6 +199,7 @@ WindowSnapZone=10
 
 [org.kde.kdecoration2]
 BorderSize=Normal
+BorderSizeAuto=false
 ButtonsOnLeft=MS
 ButtonsOnRight=HIAX
 CloseOnDoubleClickOnMenu=false

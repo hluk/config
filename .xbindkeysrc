@@ -53,6 +53,8 @@
     mod4+5
 "xdotool set_desktop 5"
     mod4+6
+"xdotool set_desktop 6"
+    mod4+grave
 
 "killall -HUP xbindkeys"
     mod4+control+r

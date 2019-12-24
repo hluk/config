@@ -58,7 +58,7 @@ let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
 let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " workaround garbage characters displayed in terminal emulator
 " (https://github.com/neovim/neovim/wiki/FAQ#nvim-shows-weird-symbols-2-q-when-changing-modes)
-set guicursor=
+"set guicursor=
 autocmd OptionSet guicursor noautocmd set guicursor=
 
 " Fix resetting nopaste after pasting. (The issue breaks expandtab config.)
@@ -92,6 +92,9 @@ autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd BufRead,BufNewFile ~/.config/yamllint/config setfiletype yaml
 autocmd BufRead,BufNewFile */ansible/inventory/* setfiletype yaml
+
+" go
+autocmd FileType go setlocal ts=4 sts=4 sw=4 noexpandtab
 
 " ruby
 autocmd FileType ruby setlocal ts=2 sts=2 sw=2 expandtab
@@ -133,13 +136,6 @@ Plug 'tpope/vim-dispatch'
 " - automatic chmod +x for new scripts
 Plug 'tpope/vim-eunuch'
 
-" Perform all your vim insert mode completions with Tab
-Plug 'ervandew/supertab'
-let g:SuperTabDefaultCompletionType = 'context'
-let g:SuperTabContextDefaultCompletionType = "<c-x><c-o>"
-let g:SuperTabDefaultCompletionTypeDiscovery = ["&omnifunc:<c-x><c-o>","&completefunc:<c-x><c-n>"]
-let g:SuperTabClosePreviewOnPopupClose = 1
-
 " Python
 " PEP 8
 Plug 'nvie/vim-flake8'
@@ -149,8 +145,11 @@ Plug 'python/black'
 " Rust syntax
 Plug 'rust-lang/rust.vim'
 
+" Go
+Plug 'fatih/vim-go'
+
 " Ruby on Rails
-Plug 'tpope/vim-rails'
+"Plug 'tpope/vim-rails'
 
 " Jinja2
 Plug 'Glench/Vim-Jinja2-Syntax'
@@ -183,19 +182,44 @@ imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
 
-" grammar checker
-Plug 'rhysd/vim-grammarous'
-let g:grammarous#show_first_error=1
-map <F6> :GrammarousCheck --no-move-to-first-error<CR>
-nmap <F5> <Plug>(grammarous-move-to-next-error)
-nmap <S-F5> <Plug>(grammarous-move-to-previous-error)
-
 " Color schemes
 Plug 'sjl/badwolf'
 Plug 'morhetz/gruvbox'
 
 " reopen files at your last edit position
 Plug 'farmergreg/vim-lastplace'
+
+" completion
+"Plug 'neoclide/coc.nvim'
+"Plug 'ycm-core/YouCompleteMe'
+
+" :help deoplete-options
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
+if has('win32') || has('win64')
+  Plug 'tbodt/deoplete-tabnine', { 'do': 'powershell.exe .\install.ps1' }
+else
+  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+endif
+
+inoremap <silent><expr> <TAB>
+\ pumvisible() ? "\<C-n>" :
+\ <SID>check_back_space() ? "\<TAB>" :
+\ deoplete#manual_complete()
+function! s:check_back_space() abort "{{{
+let col = col('.') - 1
+return !col || getline('.')[col - 1]  =~ '\s'
+endfunction"}}}
+
+" python completion
+Plug 'deoplete-plugins/deoplete-jedi'
 
 call plug#end()
 " }}}
