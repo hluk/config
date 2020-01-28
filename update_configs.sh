@@ -3,7 +3,7 @@ set -euo pipefail
 
 shopt -s failglob
 
-diff=${DIFF:-vimdiff}
+diff=${DIFF:-nvim -d}
 
 home_configs=(
     .gitconfig

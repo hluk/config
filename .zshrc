@@ -312,20 +312,6 @@ PATH=/usr/lib/ccache/bin:$PATH
 ccache --max-size=8G >/dev/null
 # }}}
 
-# oh-my-zsh {{{
-
-# x - Smart extract
-source ~/.oh-my-zsh/plugins/extract/extract.plugin.zsh
-
-#export ZSH="$HOME/.oh-my-zsh"
-# https://github.com/robbyrussell/oh-my-zsh/wiki/Themes
-#ZSH_THEME="tjkirch"
-#ZSH_THEME="agnoster"
-#plugins=(git)
-#source "$ZSH/oh-my-zsh.sh"
-
-# }}}
-
 # brew {{{
 brew_init() {
     export BREW_PREFIX="$HOME/.linuxbrew"
@@ -335,15 +321,4 @@ brew_init() {
     export HOMEBREW_TEMP="$BREW_PREFIX/tmp"
     export PS1='%B%F{yellow}[brew]%B%F{blue}%n%(2v.%B@%b.@)%f%(!.%F{red}.%F{green})%m%f:%~$(git_branch)%(?..%F{red}[%?]%f)%(!.#.>)%b '
 }
-# }}}
-
-# work {{{
-alias kinit-redhat="kinit lholecek@REDHAT.COM"
-alias kinit-fedora="kinit lholecek@FEDORAPROJECT.ORG"
-
-# Sourcing completion for oc is slow.
-# oc completion zsh > ~/.zsh.d/oc-completion.zsh
-#source ~/.zsh.d/oc-completion.zsh
-#source ~/.oh-my-zsh/plugins/oc/oc.plugin.zsh
-#source <(oc completion zsh)
 # }}}

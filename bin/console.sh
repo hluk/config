@@ -3,8 +3,8 @@ if [ -z "$1" ]; then
     exec "$0" "$(dirname "$0")/screen.sh"
 fi
 
-xrdb -merge ~/.Xresources
-exec gnome-terminal --wait --maximize -- "$@"
+#xrdb -merge ~/.Xresources
+exec gnome-terminal --wait --maximize --hide-menubar -- "$@"
 #export TERM=konsole-256color; exec konsole --hide-tabbar --hide-menubar --profile Screen -e "$@"
 #exec st -f 'Fira Mono:size=11' -g 200x200 -e "$*"
 #exec xfce4-terminal --hide-menubar --hide-borders --hide-scrollbar --maximize -e "$*"
