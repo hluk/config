@@ -14,6 +14,7 @@
 ~/.config/tig/
 ~/.config/yamllint/
 ~/.dwmrc.h
+~/.fakevimrc
 ~/.gdbinit
 ~/.gitconfig
 ~/.i3/
