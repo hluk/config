@@ -7,6 +7,6 @@ pactl set-sink-volume 1 -- "$VOL" 2>/dev/null
 
 # show osd
 killall -q osd_cat
-P=$((VOL*100/65536))
-osd_cat -c white -O 1 -d 1 -A center -p middle -b percentage -P "$P" -T "volume $P%" &
+percent=$((VOL*100/65536))
+osd_cat -c white -O 1 -d 1 -A center -p middle -b percentage -P "$percent" -T "volume $percent%" &
 

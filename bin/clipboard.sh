@@ -6,6 +6,7 @@ rundir=~/dev/build/copyq
 cmd=$rundir/$version/copyq
 
 export COPYQ_LOG_LEVEL=debug
+export COPYQ_DEFAULT_ICON=1
 
 # There are some issues accessing clipboard and notifications being focused.
 # See: https://github.com/hluk/CopyQ/issues/1243#issuecomment-549040797

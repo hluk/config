@@ -6,8 +6,6 @@
 ~/.config/hexchat/servlist.conf hexchat
 ~/.config/kak/kakrc
 ~/.config/kwinrc
-~/.config/latte/
-~/.config/lattedockrc
 ~/.config/nvim/init.vim nvim/
 ~/.config/openbox/
 ~/.config/starship.toml

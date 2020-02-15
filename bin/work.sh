@@ -10,14 +10,18 @@ VPN=${VPN:-'Brno (BRQ)'}
 #    nmcli radio wifi off
 #fi
 
-nmcli --ask con up id "$VPN"
+nmcli --ask con up id "$VPN" || true
 
-klist || kinit
+kinit
 
-maybe_run() {
-    pgrep --full "$@" || "$@" &>/dev/null & disown
+run() {
+    "$@" &>/dev/null & disown
 }
 
-maybe_run konversation
+maybe_run() {
+    pgrep --full "$@" || run "$@"
+}
+
 maybe_run firefox
 maybe_run firefox -P work
+run "$(dirname "$0")/irc.sh"
