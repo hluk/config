@@ -1,11 +1,14 @@
 #!/usr/bin/env python3
 import argparse
 import logging
-import metallum
-import re
+import os
 import subprocess
 
+from metallum import album_search
+
 logger = logging.getLogger(__name__)
+
+DEFAULT_CONFIG_FILE_PATH = os.path.expanduser('~/.config/lastfm_wallpaper.ini')
 
 
 def run(*cmd):
@@ -19,9 +22,27 @@ def run(*cmd):
 
 
 def currently_playing():
-    playing = run('quodlibet', '--print-playing')
-    match = re.match(r'(.*) - (.*) - ([0-9]+) - .*', playing)
-    return match[1], match[2], int(match[3])
+    import configparser
+    import pylast
+
+    config = configparser.ConfigParser()
+    config.read(DEFAULT_CONFIG_FILE_PATH)
+    config = config["default"]
+
+    network = pylast.LastFMNetwork(
+        api_key=config["api_key"],
+        api_secret=config["api_secret"],
+        username=config["user"]
+    )
+
+    user = network.get_user(config["user"])
+    track = user.get_now_playing()
+    artist = track.get_artist()
+    album = track.get_album()
+    album_tracks = album.get_tracks()
+    track_number = album_tracks.index(track) + 1
+
+    return artist.get_name(), album.get_title(), track_number
 
 
 def parse_args():
@@ -67,7 +88,7 @@ def main():
     if not album_name or not artist_name:
         raise RuntimeError('Album and artist name are required')
 
-    albums = metallum.album_search(
+    albums = album_search(
         album_name,
         band=artist_name,
         strict=False,

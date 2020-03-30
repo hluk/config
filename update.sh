@@ -8,6 +8,7 @@ sed -i '/^P=/d' hexchat/*.conf
 args=(
     --exclude=update.sh
     --exclude=pwned.sh
+    --exclude=lyrics.py
     --exclude-dir=.git
     -iRE
     -e '^P='

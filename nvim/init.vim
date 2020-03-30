@@ -156,6 +156,10 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 " meson
 Plug 'igankevich/mesonic'
 
+" jsonnet
+Plug 'google/vim-jsonnet'
+autocmd BufRead,BufNewFile *.jsonnet setlocal ts=2 sts=2 sw=2 expandtab
+
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -202,11 +206,11 @@ else
 endif
 let g:deoplete#enable_at_startup = 1
 
-if has('win32') || has('win64')
-  Plug 'tbodt/deoplete-tabnine', { 'do': 'powershell.exe .\install.ps1' }
-else
-  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-endif
+"if has('win32') || has('win64')
+"  Plug 'tbodt/deoplete-tabnine', { 'do': 'powershell.exe .\install.ps1' }
+"else
+"  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+"endif
 
 inoremap <silent><expr> <TAB>
 \ pumvisible() ? "\<C-n>" :

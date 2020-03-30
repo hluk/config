@@ -1,6 +1,7 @@
 ~/.asoundrc
 ~/.config/alacritty.yml
 ~/.config/ansible-review/
+~/.config/fish/
 ~/.config/fontconfig/fonts.conf
 ~/.config/hexchat/hexchat.conf hexchat
 ~/.config/hexchat/servlist.conf hexchat
