@@ -1,3 +1,5 @@
+# Shortcuts: https://fishshell.com/docs/current/#shared-bindings
+# Alt-e ... edit command line in an editor
 set PATH ~/go/bin $PATH
 set PATH ~/.local/bin $PATH
 

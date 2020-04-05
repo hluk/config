@@ -53,9 +53,9 @@ call system('mkdir -p ~/.config/nvim/undofiles/')
 set undodir=~/.config/nvim/undofiles/
 set undofile
 " 256 and more colors
-set termguicolors
-let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+"set termguicolors
+"let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+"let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
 " workaround garbage characters displayed in terminal emulator
 " (https://github.com/neovim/neovim/wiki/FAQ#nvim-shows-weird-symbols-2-q-when-changing-modes)
 "set guicursor=
@@ -206,11 +206,11 @@ else
 endif
 let g:deoplete#enable_at_startup = 1
 
-"if has('win32') || has('win64')
-"  Plug 'tbodt/deoplete-tabnine', { 'do': 'powershell.exe .\install.ps1' }
-"else
-"  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-"endif
+if has('win32') || has('win64')
+  Plug 'tbodt/deoplete-tabnine', { 'do': 'powershell.exe .\install.ps1' }
+else
+  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+endif
 
 inoremap <silent><expr> <TAB>
 \ pumvisible() ? "\<C-n>" :
@@ -304,5 +304,12 @@ set bg=dark
 "colorscheme wombat
 "colorscheme onedark
 "colorscheme molokai
+
+" gruvbox color theme
+"https://github.com/morhetz/gruvbox/wiki/Configuration
+let g:gruvbox_italic=1
+let g:gruvbox_contrast_dark='hard'
+let g:gruvbox_contrast_light='hard'
+let g:gruvbox_improved_strings=0
 colorscheme gruvbox
 "}}}
