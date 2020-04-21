@@ -4,8 +4,8 @@ update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-
 [Compositing]
 AnimationSpeed=0
 Backend=OpenGL
-Enabled=true
-GLCore=true
+Enabled=false
+GLCore=false
 GLPreferBufferSwap=a
 GLTextureFilter=2
 HiddenPreviews=5
@@ -14,194 +14,33 @@ WindowsBlockCompositing=true
 XRenderSmoothScale=false
 
 [Desktops]
-Id_1=dc512de3-cf1c-4b13-b2bc-ac71abbe20cd
-Id_2=2223e562-968b-4be5-8eb9-a7664b549741
-Id_3=d7d766e6-8c07-4a55-b655-8811686c3b2a
-Id_4=c7b50940-b324-4de3-97ca-182b27ce332a
-Id_5=ece0005e-15af-47ed-baa4-35956a3fcf1f
-Id_6=df1ae3d0-8de5-4cb4-b3b9-ad0ec195053f
-Id_7=8eeb8946-8ea5-4c66-819f-bd7a86709c26
-Name_1=desktop 1
-Name_7=New Desktop
-Number=7
-Rows=7
-
-[Effect-CoverSwitch]
-TabBox=false
-TabBoxAlternative=false
-
-[Effect-Cube]
-BorderActivate=9
-BorderActivateCylinder=9
-BorderActivateSphere=9
-TouchBorderActivate=9
-TouchBorderActivateCylinder=9
-TouchBorderActivateSphere=9
-
-[Effect-DesktopGrid]
-BorderActivate=9
-TouchBorderActivate=9
-
-[Effect-FlipSwitch]
-Angle=0
-TabBox=false
-TabBoxAlternative=false
-XPosition=100
-
-[Effect-PresentWindows]
-BorderActivate=9
-BorderActivateAll=9
-BorderActivateClass=9
-TouchBorderActivate=7
-TouchBorderActivateAll=9
-TouchBorderActivateClass=9
-
-[Effect-Zoom]
-InitialZoom=1
-
-[ElectricBorders]
-Bottom=None
-BottomLeft=None
-BottomRight=None
-Left=None
-Right=None
-Top=None
-TopLeft=None
-TopRight=None
-
-[MouseBindings]
-CommandActiveTitlebar1=Raise
-CommandActiveTitlebar2=Start window tab drag
-CommandActiveTitlebar3=Operations menu
-CommandAll1=Move
-CommandAll2=Toggle raise and lower
-CommandAll3=Resize
-CommandAllKey=Alt
-CommandAllWheel=Nothing
-CommandInactiveTitlebar1=Activate and raise
-CommandInactiveTitlebar2=Start window tab drag
-CommandInactiveTitlebar3=Operations menu
-CommandTitlebarWheel=Switch to Window Tab to the Left/Right
-CommandWindow1=Activate, raise and pass click
-CommandWindow2=Activate and pass click
-CommandWindow3=Activate and pass click
-CommandWindowWheel=Scroll
+Id_1=46fcfe98-6b17-453d-ad23-ebc808a85ed1
+Number=1
+Rows=1
 
 [Plugins]
-activatelattelaunchermenuEnabled=false
 blurEnabled=false
 contrastEnabled=false
-coverswitchEnabled=true
-desktopchangeosdEnabled=false
 desktopgridEnabled=false
-enforcedecoEnabled=true
-flipswitchEnabled=true
-highlightwindowEnabled=true
-kwin4_effect_dialogparentEnabled=false
-kwin4_effect_fadeEnabled=false
 kwin4_effect_fadingpopupsEnabled=false
 kwin4_effect_frozenappEnabled=false
 kwin4_effect_loginEnabled=false
 kwin4_effect_logoutEnabled=false
 kwin4_effect_maximizeEnabled=false
 kwin4_effect_morphingpopupsEnabled=false
-kwin4_effect_squashEnabled=false
 kwin4_effect_translucencyEnabled=false
-kwin4_effect_windowapertureEnabled=false
-minimizeallEnabled=false
 presentwindowsEnabled=false
 screenedgeEnabled=false
-slideEnabled=false
 slidingpopupsEnabled=false
-synchronizeskipswitcherEnabled=false
-videowallEnabled=false
-windowgeometryEnabled=false
-zoomEnabled=false
-
-[Script-desktopchangeosd]
-PopupHideDelay=1000
-TextOnly=false
-
-[SubSession: 26e20a60-47ea-4131-b51d-2ee2bd8ee101]
-active=-1
-count=0
 
 [TabBox]
-ActivitiesMode=0
-ApplicationsMode=0
-BorderActivate=9
-BorderAlternativeActivate=9
 DesktopLayout=org.kde.breeze.desktop
 DesktopListLayout=org.kde.breeze.desktop
-DesktopMode=1
-HighlightWindows=true
 LayoutName=org.kde.breeze.desktop
-MinimizedMode=0
-MultiScreenMode=0
-ShowDesktopMode=0
-ShowTabBox=true
-SwitchingMode=0
-TouchBorderActivate=9
-TouchBorderAlternativeActivate=9
-
-[TabBoxAlternative]
-ActivitiesMode=1
-ApplicationsMode=0
-DesktopMode=1
-HighlightWindows=false
-LayoutName=present_windows
-MinimizedMode=0
-MultiScreenMode=0
-ShowDesktopMode=0
-ShowTabBox=true
-SwitchingMode=0
-
-[TouchEdges]
-Bottom=None
-Left=None
-Right=None
-Top=None
 
 [Windows]
-ActiveMouseScreen=true
-AutoRaise=false
-AutoRaiseInterval=750
-AutogroupInForeground=true
-AutogroupSimilarWindows=false
-BorderSnapZone=10
 BorderlessMaximizedWindows=true
-CenterSnapZone=0
-ClickRaise=true
-DelayFocusInterval=300
-ElectricBorderCooldown=350
-ElectricBorderCornerRatio=0.25
-ElectricBorderDelay=150
-ElectricBorderMaximize=true
-ElectricBorderTiling=true
-ElectricBorders=0
-FocusPolicy=ClickToFocus
-FocusStealingPreventionLevel=0
-GeometryTip=false
-HideUtilityWindowsForInactive=true
-InactiveTabsSkipTaskbar=false
-MaximizeButtonLeftClickCommand=Maximize
-MaximizeButtonMiddleClickCommand=Maximize (vertical only)
-MaximizeButtonRightClickCommand=Maximize (horizontal only)
-NextFocusPrefersMouse=false
-Placement=Maximizing
-RollOverDesktops=true
-SeparateScreenFocus=false
-ShadeHover=false
-ShadeHoverInterval=250
-SnapOnlyWhenOverlapping=false
-TitlebarDoubleClickCommand=Maximize
-WindowSnapZone=10
 
 [org.kde.kdecoration2]
-BorderSize=Normal
-BorderSizeAuto=false
-ButtonsOnLeft=MS
-ButtonsOnRight=HIAX
-CloseOnDoubleClickOnMenu=false
 library=org.kde.breeze
 theme=

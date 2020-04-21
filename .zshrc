@@ -137,6 +137,7 @@ alias ll="ls -lA"
 alias l="ls -lAtr"
 alias grep="grep --colour=auto"
 alias man="LESS='' LANG=C man"
+alias ssh="env TERM=xterm ssh"
 alias unpack="~/dev/bin/unpack.sh"
 alias flash=~/dev/bin/flash.sh
 alias fl='export F=`ls -t /tmp/Flash*|head -1`;m $F'
@@ -220,13 +221,8 @@ S() {
     )
 }
 
-# play flash movies
-pflv() {
-    pid=$(pgrep -f flashplayer | tail -l)
-    file=$(lsof -p ${pid} | awk \
-        '/\/tmp\/Flash/ {sub(/[rwu]$/, "", $4); print "/proc/" $2 "/fd/" $4}')
-    echo "$file"
-    smplayer ${file}
+tigl() {
+    git log --pretty="commit %h %s" "$@" | tig
 }
 
 # make directory if it does not exist and cd to it

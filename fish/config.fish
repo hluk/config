@@ -11,6 +11,7 @@ alias mv="mv -v"
 alias ls="ls --color=auto -h"
 alias ll="ls -lA"
 alias grep="grep --colour=auto"
+alias ssh="env TERM=xterm ssh"
 
 # package manager
 alias q="dnf"
@@ -32,6 +33,10 @@ function backup
     set file $argv[1]
     set date (date --iso-8601)
     7z a -p "$file-$date".7z "$file"
+end
+
+function tigl
+    git log --pretty="commit %h %s" $argv | tig
 end
 
 set fish_greeting

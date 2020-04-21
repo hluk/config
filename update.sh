@@ -13,7 +13,7 @@ args=(
     -iRE
     -e '^P='
     -e '^\s*pass'
-    -e 'passw'
+    -e 'passw(ord|d)'
     -e 'secret'
     .
 )
