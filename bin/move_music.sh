@@ -1,7 +1,10 @@
 #!/bin/bash
-set -xeuo pipefail
+set -euo pipefail
 
 music_dir=$HOME/Music/disk
+
+echo "$# files to unpack into $music_dir"
+du --total --human-readable "$@"
 
 for zip in "$@"; do
     dir="${zip%.*}"

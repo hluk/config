@@ -27,18 +27,24 @@ immutability=1
 plugin=org.kde.plasma.volume
 
 [Containments][1][Applets][15][Configuration]
-PreloadWeight=23
+PreloadWeight=37
 
 [Containments][1][Applets][18]
 immutability=1
 plugin=org.kde.redshiftControl
 
 [Containments][1][Applets][18][Configuration]
-PreloadWeight=18
+PreloadWeight=92
+
+[Containments][1][Applets][18][Configuration][Advanced]
+geoclueLocationEnabled=true
 
 [Containments][1][Applets][18][Configuration][ConfigDialog]
-DialogHeight=720
-DialogWidth=960
+DialogHeight=776
+DialogWidth=1347
+
+[Containments][1][Applets][18][Configuration][General]
+manualTemperatureStep=250
 
 [Containments][1][Applets][2]
 immutability=1
@@ -56,7 +62,7 @@ immutability=1
 plugin=org.kde.plasma.digitalclock
 
 [Containments][1][Applets][4][Configuration]
-PreloadWeight=0
+PreloadWeight=79
 
 [Containments][1][Applets][4][Configuration][Appearance]
 dateFormat=custom
@@ -72,7 +78,7 @@ immutability=1
 plugin=org.kde.plasma.systemtray
 
 [Containments][1][Applets][6][Configuration]
-PreloadWeight=23
+PreloadWeight=100
 SystrayContainmentId=7
 
 [Containments][1][ConfigDialog]
@@ -89,7 +95,7 @@ animationLauncherBouncing=false
 animationWindowAddedInGroup=false
 animationWindowInAttention=false
 animationsEnabled=false
-appletOrder=2;18;15;6;4
+appletOrder=2;21;18;15;6;4
 autoDecreaseIconSize=false
 blurEnabled=false
 dotsOnActive=true
@@ -110,6 +116,7 @@ splitterPosition2=2
 thickMargin=10
 threeColorsWindows=true
 titleTooltips=false
+unifiedGlobalShortcuts=false
 zoomLevel=0
 
 [Containments][1][Indicator]
@@ -120,6 +127,7 @@ padding=0.30000001192092896
 type=org.kde.latte.default
 
 [Containments][1][Indicator][org.kde.latte.default][General]
+extraDotOnActive=true
 minimizedTaskColoredDifferently=true
 
 [Containments][7]
@@ -151,7 +159,7 @@ immutability=1
 plugin=org.kde.plasma.notifications
 
 [Containments][7][Applets][12][Configuration]
-PreloadWeight=0
+PreloadWeight=100
 
 [Containments][7][Applets][12][Configuration][ConfigDialog]
 DialogHeight=2160
@@ -169,7 +177,7 @@ immutability=1
 plugin=org.kde.plasma.mediacontroller
 
 [Containments][7][Applets][20][Configuration]
-PreloadWeight=2
+PreloadWeight=0
 
 [Containments][7][Applets][8]
 immutability=1
@@ -183,12 +191,12 @@ DialogHeight=2160
 DialogWidth=3764
 
 [Containments][7][ConfigDialog]
-DialogHeight=2111
+DialogHeight=2160
 DialogWidth=3764
 
 [Containments][7][General]
 extraItems=org.kde.plasma.networkmanagement,org.kde.plasma.notifications,org.kde.plasma.battery,org.kde.plasma.devicenotifier,org.kde.plasma.mediacontroller,org.kde.plasma.keyboardindicator,org.kde.plasma.printmanager,org.kde.plasma.volume
-hiddenItems=org.kde.plasma.notifications,org.kde.plasma.networkmanagement,KDE Daemon,org.kde.plasma.mediacontroller,org.kde.plasma.printmanager,org.kde.plasma.devicenotifier
+hiddenItems=org.kde.plasma.networkmanagement,org.kde.plasma.mediacontroller,org.kde.plasma.printmanager,org.kde.plasma.devicenotifier
 knownItems=org.kde.plasma.networkmanagement,org.kde.plasma.notifications,org.kde.plasma.battery,org.kde.plasma.devicenotifier,org.kde.plasma.pkupdates,org.kde.plasma.mediacontroller,org.kde.plasma.keyboardindicator,org.kde.plasma.volume,org.kde.plasma.printmanager,org.kde.plasma.clipboard,org.kde.plasma.bluetooth
 shownItems=copyq,org.kde.plasma.volume,CopyQ
 

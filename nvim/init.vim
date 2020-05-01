@@ -3,6 +3,7 @@
 " :options
 " :read -- open file read only
 " :setl ar -- automatically reload file if changed
+" :windo difft -- diff open files
 " q/ -- search history
 " q: -- command history
 " gf -- open file which filename is under cursor
@@ -13,7 +14,9 @@
 " gq -- reformat
 "
 " :g/PATTERN/norm ... -- do something with each matched line (e.g. delete with dd)
-
+"
+" :args **/*.h | vert sall -- open all matching files
+"
 " http://vimbits.com/bits?sort=top
 " https://www.reddit.com/r/vim/wiki/vimrctips
 
@@ -52,19 +55,14 @@ set tildeop
 call system('mkdir -p ~/.config/nvim/undofiles/')
 set undodir=~/.config/nvim/undofiles/
 set undofile
-" 256 and more colors
-"set termguicolors
-"let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-"let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
-" workaround garbage characters displayed in terminal emulator
-" (https://github.com/neovim/neovim/wiki/FAQ#nvim-shows-weird-symbols-2-q-when-changing-modes)
-"set guicursor=
 autocmd OptionSet guicursor noautocmd set guicursor=
 
 " Fix resetting nopaste after pasting. (The issue breaks expandtab config.)
 " Fixed in version v0.4.2.
 " See: https://github.com/neovim/neovim/issues/7994
 au InsertLeave * set nopaste
+
+set termguicolors
 " }}}
 
 " PLUGINS {{{
@@ -224,7 +222,12 @@ endfunction"}}}
 " python completion
 Plug 'deoplete-plugins/deoplete-jedi'
 
+" handle line and column numbers in file names
+Plug 'wsdjeg/vim-fetch'
+
 call plug#end()
+
+call deoplete#custom#option('auto_complete_delay', 250)
 " }}}
 
 " KEYS {{{
@@ -279,15 +282,6 @@ set spell
 " FOLDS {{{
 set foldmethod=marker
 set foldnestmax=2
-"}}}
-
-" TABS {{{
-noremap tn :tabnew<space>
-noremap td :tabclose<CR>
-noremap <C-L> :tabnext<CR>
-noremap <C-H> :tabprev<CR>
-inoremap <C-L> <C-o>:tabnext<CR>
-inoremap <C-H> <C-o>:tabprev<CR>
 "}}}
 
 " HEX {{{

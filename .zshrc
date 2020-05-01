@@ -210,8 +210,8 @@ f=~/dev/factory
 # functions {{{
 # open editor in GNU screen in new window
 e() {
-    #screen -t ">$*" $EDITOR "$@"
-    tmux new-window -n ">$*" "$EDITOR \"$*\""
+    label=">$1${2:+..}"
+    tmux new-window -n "$label" $EDITOR "$@"
 }
 
 S() {

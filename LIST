@@ -3,8 +3,6 @@
 ~/.config/ansible-review/
 ~/.config/fish/
 ~/.config/fontconfig/fonts.conf
-~/.config/hexchat/hexchat.conf hexchat
-~/.config/hexchat/servlist.conf hexchat
 ~/.config/kak/kakrc
 ~/.config/kwinrc
 ~/.config/latte/
