@@ -5,9 +5,22 @@
 #
 # Enable USB debugging in Developer options.
 #
-set -e
+# List user installed packages:
+#
+#     adb shell cmd package list packages -3
+#
+# Print help:
+#
+#     adb shell cmd package help
+set -ex
+
 disable=(
     com.android.chrome
+
+    com.facebook.appmanager
+    com.facebook.katana
+    com.facebook.services
+    com.facebook.system
 )
 
 for app in "${disable[@]}"; do

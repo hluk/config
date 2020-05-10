@@ -1,5 +1,5 @@
 [Appearance]
-ColorScheme=Gruvbox
+ColorScheme=Materia-Manjaro
 LineSpacing=1
 UseFontLineChararacters=false
 

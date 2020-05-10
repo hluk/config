@@ -3,8 +3,6 @@ set -ex
 
 ./_update.awk LIST
 
-sed -i '/^P=/d' hexchat/*.conf
-
 args=(
     --exclude=update.sh
     --exclude=pwned.sh

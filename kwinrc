@@ -18,10 +18,21 @@ Id_1=46fcfe98-6b17-453d-ad23-ebc808a85ed1
 Number=1
 Rows=1
 
+[Effect-CoverSwitch]
+TabBox=false
+TabBoxAlternative=false
+
+[Effect-FlipSwitch]
+TabBox=false
+TabBoxAlternative=false
+
 [Plugins]
 blurEnabled=false
 contrastEnabled=false
+coverswitchEnabled=true
 desktopgridEnabled=false
+flipswitchEnabled=true
+highlightwindowEnabled=true
 kwin4_effect_fadingpopupsEnabled=false
 kwin4_effect_frozenappEnabled=false
 kwin4_effect_loginEnabled=false
@@ -34,9 +45,30 @@ screenedgeEnabled=false
 slidingpopupsEnabled=false
 
 [TabBox]
+ActivitiesMode=1
+ApplicationsMode=0
 DesktopLayout=org.kde.breeze.desktop
 DesktopListLayout=org.kde.breeze.desktop
+DesktopMode=1
+HighlightWindows=true
 LayoutName=org.kde.breeze.desktop
+MinimizedMode=0
+MultiScreenMode=0
+ShowDesktopMode=0
+ShowTabBox=true
+SwitchingMode=0
+
+[TabBoxAlternative]
+ActivitiesMode=1
+ApplicationsMode=0
+DesktopMode=1
+HighlightWindows=true
+LayoutName=org.kde.breeze.desktop
+MinimizedMode=0
+MultiScreenMode=0
+ShowDesktopMode=0
+ShowTabBox=true
+SwitchingMode=0
 
 [Windows]
 BorderlessMaximizedWindows=true

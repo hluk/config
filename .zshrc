@@ -1,3 +1,8 @@
+# Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
+if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+fi
+
 # env# {{{
 export EDITOR="nvim"
 export PAGER=less
@@ -55,7 +60,10 @@ ps1() {
 
     # cargo install starship
     # https://starship.rs/config/#prompt
-    eval "$(starship init zsh)"
+    #eval "$(starship init zsh)"
+
+    # https://github.com/romkatv/powerlevel10k
+    source ~/dev/powerlevel10k/powerlevel10k.zsh-theme
 }
 
 ps1
@@ -318,3 +326,6 @@ brew_init() {
     export PS1='%B%F{yellow}[brew]%B%F{blue}%n%(2v.%B@%b.@)%f%(!.%F{red}.%F{green})%m%f:%~$(git_branch)%(?..%F{red}[%?]%f)%(!.#.>)%b '
 }
 # }}}
+
+# To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
+[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

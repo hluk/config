@@ -164,18 +164,9 @@ Plug 'junegunn/fzf.vim'
 let g:fzf_layout = { 'right': '~70%' }
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 imap <c-x><c-f> <plug>(fzf-complete-path)
-command! -bang -nargs=* Rg
-  \ call fzf#vim#grep(
-  \   'rg --column --line-number --no-heading --color=always '.shellescape(<q-args>), 1,
-  \   <bang>0 ? fzf#vim#with_preview('up:60%')
-  \           : fzf#vim#with_preview('right:50%:hidden', '?'),
-  \   <bang>0)
-" Files command with preview window
-command! -bang -nargs=? -complete=dir Files
-  \ call fzf#vim#files(<q-args>, fzf#vim#with_preview(), <bang>0)
-map <c-t> :Files<CR>
-map <c-k> :Files<CR>
-map <c-g> :Rg<CR>
+map <c-t> :GFiles<CR>
+map <c-k> :GFiles<CR>
+map <c-g> :Rg!<CR>
 map <c-j> :Buffers<CR>
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
@@ -226,8 +217,6 @@ Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'wsdjeg/vim-fetch'
 
 call plug#end()
-
-call deoplete#custom#option('auto_complete_delay', 250)
 " }}}
 
 " KEYS {{{

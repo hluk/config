@@ -21,6 +21,7 @@
 ~/.local/share/konsole/Screen.profile konsole
 ~/.mozilla/firefox/*/chrome/userChrome.css firefox
 ~/.mplayer/
+~/.p10k.zsh
 ~/.screenrc
 ~/.tmux.conf
 ~/.vimrc

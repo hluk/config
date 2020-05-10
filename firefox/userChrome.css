@@ -3,6 +3,11 @@
   display: none;
 }
 
+#sidebar-splitter {
+    background-color: black !important;
+    border: none !important;
+}
+
 /* Hide top toolbar with tabs. */
 #TabsToolbar {
     visibility: collapse !important;
