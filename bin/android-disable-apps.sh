@@ -21,6 +21,14 @@ disable=(
     com.facebook.katana
     com.facebook.services
     com.facebook.system
+
+    com.samsung.android.allshare.service.mediashare
+    com.samsung.android.allshare.service.fileshare
+    com.samsung.android.calendar
+    com.samsung.android.providers.media
+
+    com.samsung.android.bixby.service
+    com.samsung.android.app.settings.bixby
 )
 
 for app in "${disable[@]}"; do

@@ -1,3 +1,6 @@
+# ALT-H is command help
+# edit command line on C-x C-e
+
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
@@ -30,44 +33,6 @@ setopt hist_ignore_all_dups
 setopt hist_expire_dups_first
 bindkey -e
 
-zstyle ':completion:*' list-colors ''
-zstyle :compinstall filename "$HOME/.zshrc"
-
-autoload -Uz compinit promptinit
-compinit
-promptinit
-
-setopt prompt_subst
-
-ps_git_branch() {
-    git branch 2> /dev/null | sed -n -e 's/^* (no branch)/%F{red}(*)%f/p' -e 's/^* \(.*\)/%F{magenta}(\1)%f/p'
-}
-
-ps_path() {
-    printf '%s' '%F{blue}%~%f'
-}
-
-ps_error_code() {
-    printf '%s' '%(?..%F{red}[%?]%f)'
-}
-
-ps_prompt() {
-    printf '%s' '%F{blue}%(!.#.>)%f'
-}
-
-ps1() {
-    #export PS1='%B$(ps_path)$(ps_git_branch)$(ps_error_code)$(ps_prompt)%b '
-
-    # cargo install starship
-    # https://starship.rs/config/#prompt
-    #eval "$(starship init zsh)"
-
-    # https://github.com/romkatv/powerlevel10k
-    source ~/dev/powerlevel10k/powerlevel10k.zsh-theme
-}
-
-ps1
-
 # keys
 bindkey '^[[1~' beginning-of-line
 bindkey '^[[4~' end-of-line
@@ -76,9 +41,7 @@ bindkey '^[[P' delete-char
 bindkey '^[[Z' reverse-menu-complete
 bindkey "^[OD" backward-word
 bindkey "^[OC" forward-word
-# ALT-H is command help
 
-# edit command line on C-x C-e
 autoload edit-command-line
 zle -N edit-command-line
 bindkey '^Xe' edit-command-line
@@ -89,6 +52,12 @@ setopt NO_FLOW_CONTROL
 # }}}
 
 # completion# {{{
+autoload -Uz compinit
+compinit
+
+zstyle ':completion:*' list-colors ''
+zstyle :compinstall filename "$HOME/.zshrc"
+
 # case insensitive completion
 zstyle ':completion:*' matcher-list 'm:{a-z}={A-Z}'
 
@@ -128,7 +97,7 @@ zstyle ':completion:*:approximate:*' max-errors 'reply=(  $((  ($#PREFIX+$#SUFFI
 zstyle ':completion:*:corrections' format '%B%d (errors %e)%b'
 
 # Don't complete stuff already on the line
-zstyle ':completion::*:(rm|cp|mv|gvim|mplayer):*' ignore-line true
+zstyle ':completion::*:(rm|cp|mv|e):*' ignore-line true
 
 # Don't complete directory we are already in (../here)
 zstyle ':completion:*' ignore-parents parent pwd
@@ -147,39 +116,16 @@ alias grep="grep --colour=auto"
 alias man="LESS='' LANG=C man"
 alias ssh="env TERM=xterm ssh"
 alias unpack="~/dev/bin/unpack.sh"
-alias flash=~/dev/bin/flash.sh
-alias fl='export F=`ls -t /tmp/Flash*|head -1`;m $F'
 alias natsort=~/dev/natsort/natsort
-#alias m="mplayer -quiet"
 alias m="QT_SCREEN_SCALE_FACTORS=1 smplayer"
-alias m0="mplayer -vo null -vc null -novideo"
-alias binwalk="~/apps/binwalk/src/binwalk -m ~/apps/binwalk/src/magic.binwalk"
-alias mkgallery='PATH="/home/lukas/dev/imagepeek:$PATH" ~/dev/bin/mkgallery.sh'
+alias venv='python3 -m venv .venv && source .venv/bin/activate && pip install --upgrade pip setuptools -q'
+alias copyq="$HOME/dev/build/copyq/release/copyq"
 
-# helgrind: detect race conditions
-#alias helgrind="QT_NO_GLIB=1 valgrind --tool=helgrind --track-lockorders=no"
-alias helgrind="QT_NO_GLIB=1 valgrind --tool=helgrind"
-
-alias wine32="WINEARCH=win32 WINEPREFIX=$HOME/.wine32 wine"
-alias winetricks32="WINEARCH=win32 WINEPREFIX=$HOME/.wine32 winetricks"
-
-# X11# {{{
-if [ -n "$DISPLAY" ]
-then
-	# aliases for X
+if [ -n "$DISPLAY" ]; then
     alias mc="mc -x"
-	alias feb="$HOME/dev/bin/feb.sh"
-	alias febt="THUMBS=1 $HOME/dev/bin/feb.hs"
-    alias copyq="$HOME/dev/build/copyq/release/copyq"
-
-    export IMAGEPEEK_SESSION="$HOME/.imagepeek"
-    alias peek="$HOME/dev/imagepeek/imagepeek"
-    alias peeks="PATH=\"$HOME/dev/imagepeek:$PATH\" peeks"
-    alias quick="~/dev/bin/imagequick.sh"
 else
     alias xx="startx"
 fi
-# }}}
 
 # package manager
 . /etc/os-release
@@ -210,7 +156,7 @@ elif [[ $NAME == "Ubuntu" ]]; then
 fi
 
 # cd ~d
-d=~/down
+d=~/Downloads
 b=~/dev/bin
 f=~/dev/factory
 # }}}
@@ -220,22 +166,6 @@ f=~/dev/factory
 e() {
     label=">$1${2:+..}"
     tmux new-window -n "$label" $EDITOR "$@"
-}
-
-S() {
-    (
-    cd "$1"
-    screen -t "#${1:-`basename "$PWD"`}" $EDITOR -S Session.vim
-    )
-}
-
-tigl() {
-    git log --pretty="commit %h %s" "$@" | tig
-}
-
-# make directory if it does not exist and cd to it
-mkcd() {
-    mkdir -p "$*" && cd "$*"
 }
 
 # "top" for processes with given names
@@ -255,23 +185,6 @@ lyrics() {
             ~/dev/bin/lyrics.py "$@"
     )
 }
-
-gup() {
-    (
-        set -e
-
-        echo ' * fetching all'
-        git fetch --all --tags
-
-        branches="$(git branch --list --format '%(refname:short)' master devel develop)"
-        for branch in $branches; do
-            echo " * updading $branch"
-            git checkout "$branch"
-            git rebase "upstream/$branch"
-            git push origin "$branch"
-        done
-    )
-}
 # }}}
 
 # {{{ fd, fzf, rg
@@ -288,14 +201,11 @@ if [ -d ~/.fzf ]; then
     source ~/.fzf.zsh
     source "$HOME/.fzf/shell/completion.zsh"
     source "$HOME/.fzf/shell/key-bindings.zsh"
-
-    bindkey '^K' fzf-file-widget
 fi
 alias rg="rg --max-columns 999"
 # }}}
 
 # plugins {{{
-# syntax highlighting
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 ZSH_HIGHLIGHT_HIGHLIGHTERS=( main brackets )
 ZSH_HIGHLIGHT_STYLES+=(
@@ -309,22 +219,17 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-1]='fg=green,bold'
 ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=red,bold'
 ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=yellow,bold'
 ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta,bold'
+
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#888899,bg=0"
+
+# https://github.com/romkatv/powerlevel10k
+source ~/dev/powerlevel10k/powerlevel10k.zsh-theme
 # }}}
 
 # ccache {{{
 PATH=/usr/lib/ccache/bin:$PATH
 ccache --max-size=8G >/dev/null
-# }}}
-
-# brew {{{
-brew_init() {
-    export BREW_PREFIX="$HOME/.linuxbrew"
-    export PATH="$BREW_PREFIX/sbin:$BREW_PREFIX/bin:/usr/bin"
-    export MANPATH="$(brew --prefix)/share/man:$MANPATH"
-    export INFOPATH="$(brew --prefix)/share/info:$INFOPATH"
-    export HOMEBREW_TEMP="$BREW_PREFIX/tmp"
-    export PS1='%B%F{yellow}[brew]%B%F{blue}%n%(2v.%B@%b.@)%f%(!.%F{red}.%F{green})%m%f:%~$(git_branch)%(?..%F{red}[%?]%f)%(!.#.>)%b '
-}
 # }}}
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.

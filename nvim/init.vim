@@ -85,6 +85,9 @@ autocmd BufRead,BufNewFile *Jenkinsfile* setfiletype groovy
 " git commit message
 autocmd FileType gitcommit au! BufEnter COMMIT_EDITMSG call setpos('.', [0, 1, 1, 0])|set spell|set nosmartindent|set noautoindent|set nocindent
 
+" json
+autocmd BufRead,BufNewFile *.json setlocal ts=2 sts=2 sw=2 expandtab
+
 " yaml
 autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd BufRead,BufNewFile ~/.config/yamllint/config setfiletype yaml
