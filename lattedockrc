@@ -6,6 +6,10 @@ outlineWidth=1
 11=eDP-1
 12=DP-2-1
 13=DP-1-2
+14=Screen30
+15=Screen32
+16=DP1-2
+17=eDP1
 
 [UniversalSettings]
 badges3DStyle=false

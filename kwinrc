@@ -18,6 +18,12 @@ Id_1=46fcfe98-6b17-453d-ad23-ebc808a85ed1
 Number=1
 Rows=1
 
+[DrmOutputs][e8eb59fce5][6dc1d62fe7]
+Scale=1
+
+[DrmOutputs][e8eb59fce5][fc397e583a]
+Scale=2
+
 [Effect-CoverSwitch]
 TabBox=false
 TabBoxAlternative=false
@@ -40,7 +46,6 @@ kwin4_effect_logoutEnabled=false
 kwin4_effect_maximizeEnabled=false
 kwin4_effect_morphingpopupsEnabled=false
 kwin4_effect_translucencyEnabled=false
-presentwindowsEnabled=false
 screenedgeEnabled=false
 slidingpopupsEnabled=false
 

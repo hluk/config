@@ -167,8 +167,8 @@ Plug 'junegunn/fzf.vim'
 let g:fzf_layout = { 'right': '~70%' }
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 imap <c-x><c-f> <plug>(fzf-complete-path)
-map <c-t> :GFiles<CR>
-map <c-k> :GFiles<CR>
+map <c-t> :Files<CR>
+map <c-k> :Files<CR>
 map <c-g> :Rg!<CR>
 map <c-j> :Buffers<CR>
 " Insert mode completion
@@ -218,6 +218,9 @@ Plug 'deoplete-plugins/deoplete-jedi'
 
 " handle line and column numbers in file names
 Plug 'wsdjeg/vim-fetch'
+
+" personal wiki
+Plug 'vimwiki/vimwiki'
 
 call plug#end()
 " }}}

@@ -42,6 +42,11 @@ bindkey '^[[Z' reverse-menu-complete
 bindkey "^[OD" backward-word
 bindkey "^[OC" forward-word
 
+# kitty terminal
+bindkey '\e[H'  beginning-of-line
+bindkey '\e[F'  end-of-line
+bindkey '\e[3~' delete-char
+
 autoload edit-command-line
 zle -N edit-command-line
 bindkey '^Xe' edit-command-line
@@ -120,6 +125,14 @@ alias natsort=~/dev/natsort/natsort
 alias m="QT_SCREEN_SCALE_FACTORS=1 smplayer"
 alias venv='python3 -m venv .venv && source .venv/bin/activate && pip install --upgrade pip setuptools -q'
 alias copyq="$HOME/dev/build/copyq/release/copyq"
+alias :q="exit"
+
+alias gc="git co"
+alias gd="git d"
+alias gf="git f"
+alias gl="git la"
+alias gst="git st"
+alias gu="git up"
 
 if [ -n "$DISPLAY" ]; then
     alias mc="mc -x"
@@ -220,8 +233,8 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=red,bold'
 ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=yellow,bold'
 ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta,bold'
 
-source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#888899,bg=0"
+source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # https://github.com/romkatv/powerlevel10k
 source ~/dev/powerlevel10k/powerlevel10k.zsh-theme

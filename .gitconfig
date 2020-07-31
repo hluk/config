@@ -7,7 +7,7 @@
     co = checkout
     st = status --branch --short
     d  = diff
-    la = log --date-order --oneline --all --graph --decorate --branches --tags -30
+    la = log --date-order --oneline --all --graph --decorate --branches --tags -20
     c = commit --allow-empty --signoff
     pr = pull --rebase
     f = fetch --all --tags --prune
@@ -19,7 +19,7 @@
 [core]
     whitespace = cr-at-eol
     autocrlf = input
-    pager = less -FRSX
+    pager = delta
     editor = nvim
     trustctime = false
 [push]
@@ -43,3 +43,12 @@
     trustExitCode = true
 [mergetool "vimdiff"]
     cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    features = decorations
+    whitespace-error-style = 22 reverse
+[delta "decorations"]
+    commit-decoration-style = bold yellow box ul
+    file-style = bold yellow ul
+    file-decoration-style = none
