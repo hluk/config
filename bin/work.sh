@@ -1,27 +1,34 @@
 #!/bin/bash
-set -ex
+set -e
 
 VPN=${VPN:-'Brno (BRQ)'}
 #VPN='Phoenix (PHX2)'
-
-#if grep -q redhat /etc/resolv.conf; then
-#    nmcli radio wifi on
-#else
-#    nmcli radio wifi off
-#fi
-
-nmcli --ask con up id "$VPN" || true
-
-kinit
 
 run() {
     "$@" &>/dev/null & disown
 }
 
 maybe_run() {
-    pgrep --full "$@" || run "$@"
+    pgrep --full "$*" || run "$@"
 }
 
-maybe_run firefox
-maybe_run firefox -P work
-run "$(dirname "$0")/irc.sh"
+if [[ $1 == "off" ]]; then
+    nmcli --ask con down id "$VPN"
+
+    kdestroy -A
+
+    copyq maybeWork
+elif [[ $1 == "on" ]]; then
+    nmcli --ask con up id "$VPN" || true
+
+    kinit
+
+    maybe_run firefox
+    maybe_run firefox -P work
+    run "$(dirname "$0")/irc.sh"
+
+    copyq maybeWork
+else
+    echo "usage: $0 {off|on}"
+    exit 1
+fi

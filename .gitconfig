@@ -19,7 +19,7 @@
 [core]
     whitespace = cr-at-eol
     autocrlf = input
-    pager = delta
+    pager = less -FRSX
     editor = nvim
     trustctime = false
 [push]
@@ -43,12 +43,3 @@
     trustExitCode = true
 [mergetool "vimdiff"]
     cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
-[interactive]
-    diffFilter = delta --color-only
-[delta]
-    features = decorations
-    whitespace-error-style = 22 reverse
-[delta "decorations"]
-    commit-decoration-style = bold yellow box ul
-    file-style = bold yellow ul
-    file-decoration-style = none

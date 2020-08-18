@@ -5,6 +5,10 @@ version=release
 rundir=~/dev/build/copyq
 cmd=$rundir/$version/copyq
 
+# Workaround for bug in Qt 5.14.2.
+# https://bugreports.qt.io/browse/QTBUG-84363
+export QV4_FORCE_INTERPRETER=1
+
 export COPYQ_LOG_LEVEL=debug
 export COPYQ_DEFAULT_ICON=1
 

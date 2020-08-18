@@ -140,7 +140,7 @@ Plug 'tpope/vim-eunuch'
 " PEP 8
 Plug 'nvie/vim-flake8'
 " :Black
-Plug 'python/black'
+Plug 'psf/black', { 'branch': 'stable' }
 
 " Rust syntax
 Plug 'rust-lang/rust.vim'
