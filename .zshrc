@@ -127,6 +127,8 @@ alias venv='python3 -m venv .venv && source .venv/bin/activate && pip install --
 alias copyq="$HOME/dev/build/copyq/release/copyq"
 alias :q="exit"
 
+alias open="xdg-open"
+
 alias gc="git co"
 alias gd="git d"
 alias gf="git f"

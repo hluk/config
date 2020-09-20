@@ -17,6 +17,9 @@
 "
 " :args **/*.h | vert sall -- open all matching files
 "
+" :!ctags -R . /usr/include/X11/ /usr/include/qt5/ -- generate ctags
+" S-k -- open manual page for symbol under cursor
+"
 " http://vimbits.com/bits?sort=top
 " https://www.reddit.com/r/vim/wiki/vimrctips
 
@@ -93,6 +96,9 @@ autocmd FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 autocmd BufRead,BufNewFile ~/.config/yamllint/config setfiletype yaml
 autocmd BufRead,BufNewFile */ansible/inventory/* setfiletype yaml
 
+" lua
+autocmd FileType lua setlocal ts=2 sts=2 sw=2 expandtab
+
 " go
 autocmd FileType go setlocal ts=4 sts=4 sw=4 noexpandtab
 
@@ -139,8 +145,6 @@ Plug 'tpope/vim-eunuch'
 " Python
 " PEP 8
 Plug 'nvie/vim-flake8'
-" :Black
-Plug 'psf/black', { 'branch': 'stable' }
 
 " Rust syntax
 Plug 'rust-lang/rust.vim'
@@ -220,6 +224,7 @@ Plug 'deoplete-plugins/deoplete-jedi'
 Plug 'wsdjeg/vim-fetch'
 
 " personal wiki
+let vimwiki_ext2syntax = {}  " disable rendering and helpers for md files
 Plug 'vimwiki/vimwiki'
 
 call plug#end()

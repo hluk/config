@@ -6,7 +6,7 @@ Backend=OpenGL
 Enabled=true
 GLCore=true
 GLPreferBufferSwap=a
-GLTextureFilter=2
+GLTextureFilter=0
 HiddenPreviews=5
 OpenGLIsUnsafe=false
 WindowsBlockCompositing=true
@@ -36,17 +36,22 @@ blurEnabled=false
 contrastEnabled=false
 coverswitchEnabled=true
 desktopgridEnabled=false
-flipswitchEnabled=true
 highlightwindowEnabled=true
+kwin4_effect_fadeEnabled=false
 kwin4_effect_fadingpopupsEnabled=false
 kwin4_effect_frozenappEnabled=false
 kwin4_effect_loginEnabled=false
 kwin4_effect_logoutEnabled=false
 kwin4_effect_maximizeEnabled=false
 kwin4_effect_morphingpopupsEnabled=false
+kwin4_effect_squashEnabled=false
 kwin4_effect_translucencyEnabled=false
+kwin4_effect_windowapertureEnabled=false
+presentwindowsEnabled=false
 screenedgeEnabled=false
+slideEnabled=false
 slidingpopupsEnabled=false
+zoomEnabled=false
 
 [TabBox]
 ActivitiesMode=1
@@ -79,4 +84,4 @@ BorderlessMaximizedWindows=true
 
 [org.kde.kdecoration2]
 library=org.kde.breeze
-theme=
+theme=Breeze

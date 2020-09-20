@@ -10,7 +10,7 @@ args=(
     --exclude-dir=.git
     -iRE
     -e '^P='
-    -e '^\s*pass'
+    -e '^\s*pass.'
     -e 'passw(ord|d)'
     -e 'secret'
     .

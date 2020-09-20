@@ -9,7 +9,7 @@ run() {
 }
 
 maybe_run() {
-    pgrep --full "$*" || run "$@"
+    pgrep --full "$*" >/dev/null || run "$@"
 }
 
 if [[ $1 == "off" ]]; then

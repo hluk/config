@@ -10,7 +10,7 @@ import time
 
 logger = logging.getLogger(__name__)
 
-TERMINAL_WINDOW_CLASS = 'xfce4-terminal|Gnome-terminal|konsole|st-256color'
+TERMINAL_WINDOW_CLASS = 'xfce4-terminal|Gnome-terminal|konsole|st-256color|kitty'
 
 
 def execute(cmd):
@@ -135,6 +135,10 @@ def open_music(desktop):
     focus_or_execute(desktop or 5, 'Quod Libet', '/usr/bin/quodlibet')
 
 
+def open_previous():
+    run('xdotool', 'key', '--clearmodifiers', 'Alt+Tab')
+
+
 def main():
     arg = sys.argv[1]
     desktop = int(sys.argv[2]) if len(sys.argv) > 2 else 0
@@ -153,6 +157,8 @@ def main():
         open_devel(desktop)
     elif arg == 'music':
         open_music(desktop)
+    elif arg == 'previous':
+        open_previous()
     else:
         desktop = int(arg)
         focus(desktop, '.*')
