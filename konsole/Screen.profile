@@ -1,6 +1,6 @@
 [Appearance]
 ColorScheme=Materia-Manjaro
-Font=Overpass Mono,12,-1,5,50,0,0,0,0,0
+Font=Iosevka Term Extended,12,-1,5,50,0,0,0,0,0
 LineSpacing=1
 UseFontLineChararacters=false
 

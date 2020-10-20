@@ -21,7 +21,7 @@ if [[ $1 == "off" ]]; then
 elif [[ $1 == "on" ]]; then
     nmcli --ask con up id "$VPN" || true
 
-    kinit
+    kinit "$USER@IPA.REDHAT.COM"
 
     maybe_run firefox
     maybe_run firefox -P work

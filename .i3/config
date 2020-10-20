@@ -21,7 +21,7 @@ set $ctrl Control
 
 # This font is widely installed, provides lots of unicode glyphs, right-to-left
 # text rendering and scalability on retina/hidpi displays (thanks to pango).
-font pango:Noto Sans Bold 16
+font pango:Noto Sans Bold 8
 
 # Before i3 v4.8, we used to recommend this one as the default:
 # font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
@@ -225,6 +225,7 @@ bindsym $mod+Shift+q exec --no-startup-id "~/dev/bin/console.sh"
 bindsym $mod+Shift+w exec --no-startup-id "~/dev/bin/browser.sh"
 
 bindsym $ctrl+grave exec --no-startup-id "~/dev/bin/clipboard.sh"
+bindsym $ctrl+exclam exec --no-startup-id "~/dev/build/copyq/Desktop-Debug/copyq -s test2 toggle"
 #bindsym $alt+F2 exec --no-startup-id "rofi -show run"
 #bindsym $mod+Tab exec --no-startup-id "rofi -show window"
 bindsym $mod+$alt+d exec --no-startup-id "qtcreator -lastsession"
@@ -246,8 +247,8 @@ bindsym XF86Launch8 exec --no-startup-id "~/dev/bin/red_up.sh"
 bindsym XF86Launch9 exec --no-startup-id "~/dev/bin/red_down.sh"
 
 # Keyboard
-exec --no-startup-id "xset r rate 200 50"
-exec --no-startup-id "numlockx"
+#exec --no-startup-id "xset r rate 200 50"
+#exec --no-startup-id "numlockx"
 
 # Autostart
 exec --no-startup-id "~/dev/bin/clipboard.sh"
@@ -260,5 +261,16 @@ workspace 1 output primary
 workspace 2 output primary
 workspace 3 output primary
 workspace 4 output primary
+
+# swaymsg -t get_outputs
+output eDP-1 scale 1.5
+output eDP-1 pos 0 0 res 1920x1080
+output DP-5 scale 2
+output DP-5 pos 1280 -360 res 3840x2160
+output "*" bg ~/.cache/lastfm_wallpaper/wallpaper.png fill
+# swaymsg -t get_inputs
+input type:keyboard repeat_delay 250
+input type:keyboard repeat_rate 45
+input * xkb_numlock enable
 
 exec --no-startup-id i3-msg 'workspace --no-auto-back-and-forth number 1'

@@ -60,6 +60,9 @@ set undodir=~/.config/nvim/undofiles/
 set undofile
 autocmd OptionSet guicursor noautocmd set guicursor=
 
+" show tabs and trailing whitespace
+set listchars=tab:>·,trail:~
+
 " Fix resetting nopaste after pasting. (The issue breaks expandtab config.)
 " Fixed in version v0.4.2.
 " See: https://github.com/neovim/neovim/issues/7994
@@ -253,6 +256,8 @@ vnoremap < <gv
 vnoremap > >gv
 
 inoremap jj <Esc>
+
+nnoremap Q <Nop>
 " }}}
 
 " COMPLETION {{{

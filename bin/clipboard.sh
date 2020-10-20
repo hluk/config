@@ -16,6 +16,10 @@ export COPYQ_DEFAULT_ICON=1
 # See: https://github.com/hluk/CopyQ/issues/1243#issuecomment-549040797
 export QT_QPA_PLATFORM=xcb
 
+#export QT_QPA_PLATFORM=wayland
+
+export QT_QPA_PLATFORMTHEME=qt5ct
+
 [ "$version" = "debug" ] && ulimit -c unlimited
 
 if [ $# -gt 1 ]; then

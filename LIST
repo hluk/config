@@ -3,6 +3,7 @@
 ~/.config/ansible-review/
 ~/.config/fish/
 ~/.config/fontconfig/fonts.conf
+~/.config/git/
 ~/.config/kak/kakrc
 ~/.config/kwinrc
 ~/.config/latte/

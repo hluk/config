@@ -8,7 +8,7 @@
     st = status --branch --short
     d  = diff
     la = log --date-order --oneline --all --graph --decorate --branches --tags -20
-    c = commit --allow-empty --signoff
+    c = commit --allow-empty #--signoff
     pr = pull --rebase
     f = fetch --all --tags --prune
     ca = commit --all --amend --no-edit
