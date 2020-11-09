@@ -14,9 +14,9 @@ export COPYQ_DEFAULT_ICON=1
 
 # There are some issues accessing clipboard and notifications being focused.
 # See: https://github.com/hluk/CopyQ/issues/1243#issuecomment-549040797
-export QT_QPA_PLATFORM=xcb
+#export QT_QPA_PLATFORM=xcb
 
-#export QT_QPA_PLATFORM=wayland
+export QT_QPA_PLATFORM=wayland
 
 export QT_QPA_PLATFORMTHEME=qt5ct
 

@@ -17,8 +17,19 @@ Id_1=46fcfe98-6b17-453d-ad23-ebc808a85ed1
 Number=1
 Rows=1
 
+[Desktops-screen--1]
+Id_1=e4dad493-a89f-4e4e-8847-322b6cefa71a
+Number=1
+Rows=1
+
 [DrmOutputs][6dc1d62fe7][6dc1d62fe7]
 Scale=1
+
+[DrmOutputs][86579dd64d][6dc1d62fe7]
+Scale=1
+
+[DrmOutputs][86579dd64d][985738bf76]
+Scale=2
 
 [DrmOutputs][e8eb59fce5][6dc1d62fe7]
 Scale=1

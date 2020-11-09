@@ -1,0 +1,144 @@
+@keyframes blink-warning {
+    70% {
+        color: white;
+    }
+
+    to {
+        color: white;
+        background-color: orange;
+    }
+}
+
+@keyframes blink-critical {
+    70% {
+      color: white;
+    }
+
+    to {
+        color: white;
+        background-color: red;
+    }
+}
+
+/* Reset all styles */
+* {
+    border: none;
+    border-radius: 0;
+    min-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+/* The whole bar */
+#waybar {
+    background-color: #282828;
+    color: #aaa;
+    font-family: Iosevka Term Medium Extended;
+    font-size: 12px;
+}
+
+/* Each module */
+#battery,
+#clock,
+#cpu,
+#mode,
+#network,
+#pulseaudio,
+#tray {
+    padding-left: 8px;
+    padding-right: 8px;
+}
+
+#battery {
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+#battery.warning {
+    color: orange;
+}
+
+#battery.critical {
+    color: red;
+}
+
+#battery.warning.discharging {
+    animation-name: blink-warning;
+    animation-duration: 3s;
+}
+
+#battery.critical.discharging {
+    animation-name: blink-critical;
+    animation-duration: 2s;
+}
+
+#clock {
+}
+
+#cpu {
+}
+
+#cpu.warning {
+    color: orange;
+}
+
+#cpu.critical {
+    color: red;
+}
+
+#mode {
+    background-color: #64727D;
+    border-bottom: 2px solid #eee;
+    /* To compensate for the top border and still have vertical centering */
+    padding-top: 2px;
+}
+
+#network {
+}
+
+#network.disconnected {
+    color: orange;
+}
+
+#pulseaudio {
+}
+
+#pulseaudio.muted {
+}
+
+#tray {
+}
+
+#window {
+    margin-left: 32px;
+    margin-right: 32px;
+    font-weight: normal;
+}
+
+#workspaces button {
+    border-bottom: 2px solid transparent;
+    /* To compensate for the top border and still have vertical centering */
+    padding-top: 2px;
+    padding-left: 8px;
+    padding-right: 8px;
+    color: #888888;
+    font-weight: bold;
+}
+
+#workspaces button:hover {
+  background: #323232;
+  box-shadow: inherit;
+  text-shadow: inherit;
+}
+
+#workspaces button.focused {
+    border-color: #4c7899;
+    color: white;
+    background-color: #285577;
+}
+
+#workspaces button.urgent {
+    border-color: #c9545d;
+    color: #c9545d;
+}

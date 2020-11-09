@@ -11,6 +11,11 @@ Parent=FALLBACK/
 TerminalCenter=false
 TerminalMargin=14
 
+[Interaction Options]
+AutoCopySelectedText=true
+CopyTextAsHTML=false
+MiddleClickPasteMode=1
+
 [Scrolling]
 HistoryMode=0
 ScrollBarPosition=2

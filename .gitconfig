@@ -32,7 +32,9 @@
 [diff]
     tool = vimdiff
     colorMoved = true
-    noprefix = true
+    # This removes "a/", "b/" prefix from paths in diff, making it easy to copy
+    # path, but it breaks creating diff files.
+    #noprefix = true
 [difftool]
     prompt = false
     trustExitCode = true # :cq in Vim to abort opening next diffs

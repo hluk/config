@@ -1,3 +1,7 @@
+[DownloadDialog Settings]
+Height 2160=954
+Width 3840=1659
+
 [PlasmaThemeExtended]
 outlineWidth=1
 
@@ -11,6 +15,7 @@ outlineWidth=1
 16=DP1-2
 17=eDP1
 18=Screen28
+19=DP-4
 
 [UniversalSettings]
 badges3DStyle=false

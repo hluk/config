@@ -1,2 +1,2 @@
 #!/bin/bash
-exec firefox -P work "$@" &>/dev/null
+exec "$(dirname "$0")/browser.sh" -P work "$@" &>/dev/null

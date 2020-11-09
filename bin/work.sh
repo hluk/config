@@ -4,12 +4,14 @@ set -e
 VPN=${VPN:-'Brno (BRQ)'}
 #VPN='Phoenix (PHX2)'
 
+browser="$(dirname "$0")/browser.sh"
+
 run() {
     "$@" &>/dev/null & disown
 }
 
-maybe_run() {
-    pgrep --full "$*" >/dev/null || run "$@"
+is_running() {
+    pgrep --full "$*" >/dev/null
 }
 
 if [[ $1 == "off" ]]; then
@@ -23,8 +25,8 @@ elif [[ $1 == "on" ]]; then
 
     kinit "$USER@IPA.REDHAT.COM"
 
-    maybe_run firefox
-    maybe_run firefox -P work
+    is_running firefox || run "$browser"
+    is_running firefox -P work || run "$browser" -P work
     run "$(dirname "$0")/irc.sh"
 
     copyq maybeWork

@@ -1,7 +1,7 @@
 #!/bin/bash
-# Fix high-DPI rendering on Wayland.
-#export GDK_BACKEND=wayland
-#export CLUTTER_BACKEND=wayland
-#export SDL_VIDEODRIVER=wayland
-
-exec firefox "$@" &>/dev/null
+if [[ $XDG_SESSION_TYPE == "x11" ]]; then
+    exec firefox "$@" &>/dev/null
+else
+    # Fix high-DPI rendering on Wayland.
+    exec firefox-wayland "$@" &>/dev/null
+fi

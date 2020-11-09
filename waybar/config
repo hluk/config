@@ -1,0 +1,117 @@
+{
+    "layer": "top",
+
+    "position": "top",
+
+    "height": 22,
+
+    "modules-left": [
+        "sway/workspaces",
+        "sway/mode"
+    ],
+    "modules-center": [
+        "sway/window"
+    ],
+    "modules-right": [
+        //"network",
+        "cpu",
+        "pulseaudio",
+        "battery",
+        "tray",
+        "clock#date",
+        "clock#time"
+    ],
+
+    "battery": {
+        "interval": 60,
+        "states": {
+            "warning": 30,
+            "critical": 15
+        },
+        // Connected to AC
+        "format": " {icon} {capacity}%",
+        // Not connected to AC
+        "format-discharging": "{icon} {capacity}%",
+        "format-icons": [
+            "",
+            "",
+            "",
+            "",
+            ""
+        ],
+        "tooltip": true
+    },
+
+    "clock#time": {
+        "interval": 60,
+        "format": "{:%H:%M}",
+        "tooltip": false
+    },
+
+    "clock#date": {
+      "interval": 60,
+      "format": "{:%e %b %Y}",
+      "tooltip-format": "{:%e %B %Y}"
+    },
+
+    "cpu": {
+        "interval": 10,
+        "format": " {usage}%({load})",
+        "states": {
+          "warning": 70,
+          "critical": 90
+        }
+    },
+
+    "network": {
+        "interval": 10,
+        "format-wifi": " {essid} ({signalStrength}%)",
+        "format-ethernet": "{ifname}",
+        "format-disconnected": "⚠ Disconnected",
+        "tooltip-format": "{ifname}: {ipaddr}"
+    },
+
+    "pulseaudio": {
+        "scroll-step": 5,
+        "format": "{icon} {volume}%",
+        "format-muted": "🔇 Muted",
+        "format-icons": {
+            "headphones": "",
+            "handsfree": "",
+            "headset": "",
+            "phone": "",
+            "portable": "",
+            "car": "",
+            "default": ["", ""] // Icons: volume-down, volume-up
+        },
+        "on-click": "pavucontrol",
+        "tooltip": true
+    },
+
+    "sway/mode": {
+        "format": "<span style=\"italic\"> {}</span>",
+        "tooltip": false
+    },
+
+    "sway/window": {
+        "format": "{}",
+        "max-length": 120
+    },
+
+    "sway/workspaces": {
+        "all-outputs": false,
+        "disable-scroll": true,
+        "format": "{icon}{name}",
+        "format-icons": {
+            "urgent": "",
+            "focused": "",
+            "default": ""
+        }
+    },
+
+    "tray": {
+        "icon-size": 16,
+        "spacing": 10
+    }
+
+}

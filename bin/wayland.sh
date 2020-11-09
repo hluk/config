@@ -5,7 +5,9 @@ export KWIN_OPENGL_INTERFACE=egl_wayland
 export QT_QPA_PLATFORM=wayland
 
 if [[ -n $DISPLAY ]]; then
-    weston &
+    #weston &
+    #kwin_wayland &
+    sway &
 else
     weston-launch -- --socket=wayland-system-0 &
 fi

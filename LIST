@@ -12,6 +12,7 @@
 ~/.config/openbox/
 ~/.config/qt5ct/
 ~/.config/tig/
+~/.config/waybar/
 ~/.config/yamllint/
 ~/.dwmrc.h
 ~/.fakevimrc
