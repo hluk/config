@@ -56,7 +56,7 @@ bindsym --release button2 kill
 bindsym button3 floating toggle
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run
+#bindsym $mod+d exec dmenu_run
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
@@ -219,7 +219,7 @@ client.background       #ffffff
 #for_window [instance="^xev$"] floating enable, border normal
 for_window [app_id="^copyq$"] floating enable, border normal
 
-for_window [app_id="mpv"] floating enable, resize set 960 540, border pixel 0
+for_window [app_id="^mpv$"] floating enable, resize set 960 540, border pixel 0
 
 for_window [app_id="^firefox$" title="^Firefox – Sharing Indicator$"] floating enable
 for_window [app_id="^firefox$" title="^Picture-in-Picture$"] floating enable
@@ -238,8 +238,8 @@ bindsym $mod+Shift+w exec --no-startup-id "~/dev/bin/browser.sh"
 
 bindsym $ctrl+grave exec --no-startup-id "~/dev/bin/clipboard.sh"
 bindsym $ctrl+exclam exec --no-startup-id "~/dev/build/copyq/Desktop-Debug/copyq -s test2 toggle"
-#bindsym $alt+F2 exec --no-startup-id "rofi -show run"
-#bindsym $mod+Tab exec --no-startup-id "rofi -show window"
+bindsym $alt+F2 exec --no-startup-id "rofi -show run"
+bindsym $mod+Tab exec --no-startup-id "rofi -show window"
 bindsym $mod+$alt+d exec --no-startup-id "qtcreator -lastsession"
 #bindsym $ctrl+$alt+l exec --no-startup-id "xflock4"
 bindsym $ctrl+$alt+l exec --no-startup-id "~/dev/bin/lock.sh"
