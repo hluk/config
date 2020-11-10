@@ -266,7 +266,7 @@ bindsym XF86Launch9 exec --no-startup-id "~/dev/bin/red_down.sh"
 # Autostart
 exec --no-startup-id "~/dev/bin/notifications.sh"
 exec --no-startup-id "~/dev/bin/clipboard.sh"
-exec --no-startup-id "wlsunset -l 49.2 -L 16.67"
+exec --no-startup-id "~/dev/bin/sunset.sh"
 #exec --no-startup-id pasystray
 #exec --no-startup-id nm-applet
 #exec --no-startup-id redshift-gtk

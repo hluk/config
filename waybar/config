@@ -14,13 +14,22 @@
     ],
     "modules-right": [
         //"network",
-        "cpu",
+        "custom/redshift",
         "pulseaudio",
+        "cpu",
         "battery",
         "tray",
         "clock#date",
         "clock#time"
     ],
+
+    "custom/redshift": {
+        "format": "{}°",
+        "on-scroll-up": "~/dev/bin/red_up.sh",
+        "on-scroll-down": "~/dev/bin/red_down.sh",
+        "on-click": "~/dev/bin/sunset.sh",
+        "exec": "~/dev/bin/red_watch.sh"
+    },
 
     "battery": {
         "interval": 60,
