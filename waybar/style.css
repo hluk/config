@@ -25,6 +25,7 @@
     border: none;
     border-radius: 0;
     min-height: 0;
+    min-width: 0;
     margin: 0;
     padding: 0;
 }
@@ -114,6 +115,7 @@
     margin-left: 32px;
     margin-right: 32px;
     font-weight: normal;
+    color: #bbb;
 }
 
 #workspaces button {
@@ -134,7 +136,7 @@
 
 #workspaces button.focused {
     border-color: #4c7899;
-    color: white;
+    color: #aaddff;
     background-color: #285577;
 }
 

@@ -11,6 +11,7 @@
 ~/.config/nvim/init.vim nvim/
 ~/.config/openbox/
 ~/.config/qt5ct/
+~/.config/sway/
 ~/.config/tig/
 ~/.config/waybar/
 ~/.config/yamllint/
@@ -18,7 +19,6 @@
 ~/.fakevimrc
 ~/.gdbinit
 ~/.gitconfig
-~/.i3/
 ~/.inputrc
 ~/.local/share/konsole/Screen.profile konsole
 ~/.mozilla/firefox/*/chrome/userChrome.css firefox

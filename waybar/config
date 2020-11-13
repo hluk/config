@@ -86,12 +86,12 @@
         "format-muted": "🔇 Muted",
         "format-icons": {
             "headphones": "",
-            "handsfree": "",
-            "headset": "",
+            "handsfree": "",
+            "headset": "",
             "phone": "",
             "portable": "",
             "car": "",
-            "default": ["", ""] // Icons: volume-down, volume-up
+            "default": ["", ""]
         },
         "on-click": "pavucontrol",
         "tooltip": true
