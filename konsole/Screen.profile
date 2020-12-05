@@ -1,6 +1,6 @@
 [Appearance]
 ColorScheme=Materia-Manjaro
-Font=Iosevka Term Extended,12,-1,5,50,0,0,0,0,0
+Font=JetBrains Mono NL,11,-1,5,50,0,0,0,0,0
 LineSpacing=1
 UseFontLineChararacters=false
 

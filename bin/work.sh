@@ -4,7 +4,8 @@ set -e
 VPN=${VPN:-'Brno (BRQ)'}
 #VPN='Phoenix (PHX2)'
 
-browser="$(dirname "$0")/browser.sh"
+dir=$(dirname "$0")
+browser=$dir/browser.sh
 
 run() {
     "$@" &>/dev/null & disown
@@ -27,7 +28,9 @@ elif [[ $1 == "on" ]]; then
 
     is_running firefox || run "$browser"
     is_running firefox -P work || run "$browser" -P work
-    run "$(dirname "$0")/irc.sh"
+    run "$dir/irc.sh"
+
+    is_running thunderbird || run "$dir/mail.sh"
 
     copyq maybeWork
 else

@@ -14,6 +14,7 @@
     ],
     "modules-right": [
         //"network",
+        "custom/pomodoro",
         "custom/redshift",
         "pulseaudio",
         "cpu",
@@ -23,11 +24,20 @@
         "clock#time"
     ],
 
+    "custom/pomodoro": {
+        "interval": 60,
+        "on-click": "~/dev/bin/pomodoro.py next",
+        "on-click-right": "~/dev/bin/pomodoro.py prev",
+        "on-scroll-up": "~/dev/bin/pomodoro.py up",
+        "on-scroll-down": "~/dev/bin/pomodoro.py down",
+        "exec": "~/dev/bin/pomodoro.py"
+    },
+
     "custom/redshift": {
         "format": "{}°",
+        "on-click": "~/dev/bin/sunset.sh",
         "on-scroll-up": "~/dev/bin/red_up.sh",
         "on-scroll-down": "~/dev/bin/red_down.sh",
-        "on-click": "~/dev/bin/sunset.sh",
         "exec": "~/dev/bin/red_watch.sh"
     },
 
