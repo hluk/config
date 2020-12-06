@@ -1,25 +1,3 @@
-@keyframes blink-warning {
-    70% {
-        color: white;
-    }
-
-    to {
-        color: white;
-        background-color: orange;
-    }
-}
-
-@keyframes blink-critical {
-    70% {
-      color: white;
-    }
-
-    to {
-        color: white;
-        background-color: red;
-    }
-}
-
 /* Reset all styles */
 * {
     border: none;
@@ -52,28 +30,12 @@
     padding-right: 8px;
 }
 
-#battery {
-    animation-timing-function: linear;
-    animation-iteration-count: infinite;
-    animation-direction: alternate;
-}
-
 #battery.warning {
     color: orange;
 }
 
 #battery.critical {
     color: red;
-}
-
-#battery.warning.discharging {
-    animation-name: blink-warning;
-    animation-duration: 3s;
-}
-
-#battery.critical.discharging {
-    animation-name: blink-critical;
-    animation-duration: 2s;
 }
 
 #clock {
@@ -145,4 +107,9 @@
 #workspaces button.urgent {
     border-color: #c9545d;
     color: #c9545d;
+}
+
+#custom-pomodoro.paused {
+    background: #f53c3c;
+    color: white;
 }

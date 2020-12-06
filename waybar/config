@@ -30,7 +30,8 @@
         "on-click-right": "~/dev/bin/pomodoro.py prev",
         "on-scroll-up": "~/dev/bin/pomodoro.py up",
         "on-scroll-down": "~/dev/bin/pomodoro.py down",
-        "exec": "~/dev/bin/pomodoro.py"
+        "exec": "sh -c ~/dev/bin/pomodoro.py",
+        "return-type": "json"
     },
 
     "custom/redshift": {
