@@ -2,25 +2,31 @@
 """
 Simple pomodoro timer to show status in waybar (panel for sway window manager).
 
+Requires inotify_simple Python package.
+
 Example configuration in "~/.config/waybar/config":
 
     "custom/pomodoro": {
-        "interval": 60,
         "on-click": "~/dev/bin/pomodoro.py next",
         "on-click-right": "~/dev/bin/pomodoro.py prev",
         "on-scroll-up": "~/dev/bin/pomodoro.py up",
         "on-scroll-down": "~/dev/bin/pomodoro.py down",
-        "exec": "sh -c ~/dev/bin/pomodoro.py",
+        "exec": "~/dev/bin/pomodoro.py",
         "return-type": "json"
     },
-
-Using "sh -c" in the above fixes issues with updating the status.
 """
 import json
 import getpass
+import logging
 import math
 import sys
 from time import time
+
+from inotify_simple import INotify, flags
+
+
+logging.basicConfig(level=logging.DEBUG, format="%(levelname)s: %(message)s")
+log = logging.getLogger(__name__)
 
 
 class Interval:
@@ -58,14 +64,14 @@ SCROLL_MINUTES = 2
 STATE_FILE = f"/tmp/pomodoro-{getpass.getuser()}"
 
 
-def main():
+def update(cmds=[]):
     intervals = [WORK, SHORT] * SHORT_COUNT + [WORK, LONG]
 
     index, start = load_state(STATE_FILE)
     index0 = index
     start0 = start
 
-    for cmd in sys.argv[1:]:
+    for cmd in cmds:
         if cmd == "next" or cmd == "prev":
             if start > 0:
                 d = 1 if cmd == "next" else -1
@@ -98,10 +104,44 @@ def main():
         "class": status,
     }
 
-    print(json.dumps(out))
+    print(json.dumps(out), flush=True)
 
     if index0 != index or start0 != start:
         save_state(STATE_FILE, index, start)
+
+
+def watch(state_file):
+    inotify = INotify()
+    watch_flags = flags.CREATE | flags.DELETE | flags.MODIFY | flags.DELETE_SELF
+    watched = False
+    while True:
+        if not watched:
+            try:
+                watch = inotify.add_watch(state_file, watch_flags)
+                watched = True
+                log.debug('inotify watch: %s', watch)
+            except FileNotFoundError:
+                save_state(state_file, 0, 0)
+            except OSError as e:
+                log.warning('failed inotify watch: %s', e)
+
+        timeout_ms = 60 * 1000 if watched else 1000
+        for event in inotify.read(timeout=timeout_ms):
+            event_flags = flags.from_mask(event.mask)
+            log.debug('inotify: %s', event_flags)
+            if flags.DELETE_SELF in event_flags:
+                watched = False
+
+        update()
+
+
+def main():
+    cmds = sys.argv[1:]
+    if cmds:
+        update(cmds)
+    else:
+        update()
+        return watch(STATE_FILE)
 
 
 if __name__ == "__main__":
