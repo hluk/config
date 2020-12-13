@@ -209,8 +209,8 @@ for_window [app_id=".*"] inhibit_idle fullscreen
 
 assign [app_id="^firefox$"] 2
 assign [app_id="^firefox$" title="^Meet - .*"] 0
-assign [instance="^hexchat$"] 3
 assign [app_id="^org.qt-project.qtcreator$"] 3
+assign [instance="^hexchat$"] 4
 assign [app_id="^Steam$"] 4
 assign [app_id="^smplayer$"] 4
 assign [app_id="^mpv$"] 4
@@ -253,13 +253,12 @@ exec "~/dev/bin/sunset.sh"
 exec "~/dev/bin/idle.sh"
 
 # swaymsg -t get_outputs
-exec "~/dev/bin/monitors.sh"
+exec_always "~/dev/bin/monitors.sh"
 
 # swaymsg -t get_inputs
-input type:keyboard repeat_delay 250
-input type:keyboard repeat_rate 45
 input type:keyboard xkb_numlock enable
-input type:keyboard xkb_options caps:escape
+exec_always "~/dev/bin/keyboard.sh"
+
 
 workspace 0 output eDP-1
 workspace 1 output DP-4

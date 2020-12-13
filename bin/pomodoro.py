@@ -81,6 +81,11 @@ def update(cmds=[]):
             if start > 0:
                 d = 1 if cmd == "up" else -1
                 start += d * 60 * SCROLL_MINUTES
+        elif cmd == "reset":
+            index = 0
+            start = 0
+        else:
+            raise RuntimeError(f"Unknown command: {cmd}")
 
     interval = intervals[index]
     remaining_seconds = interval.minutes * 60

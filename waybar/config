@@ -25,12 +25,12 @@
     ],
 
     "custom/pomodoro": {
-        "interval": 60,
         "on-click": "~/dev/bin/pomodoro.py next",
         "on-click-right": "~/dev/bin/pomodoro.py prev",
+        "on-click-middle": "~/dev/bin/pomodoro.py reset",
         "on-scroll-up": "~/dev/bin/pomodoro.py up",
         "on-scroll-down": "~/dev/bin/pomodoro.py down",
-        "exec": "sh -c ~/dev/bin/pomodoro.py",
+        "exec": "~/dev/bin/pomodoro.py",
         "return-type": "json"
     },
 
