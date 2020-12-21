@@ -1,0 +1,5 @@
+--hidden
+
+--glob=!.git/*
+--glob=!.venv/*
+--glob=!venv/*

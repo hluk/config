@@ -157,7 +157,7 @@ bar {
         #tray_output eDP-1
         #tray_output DP-4
         #status_command i3status --config ~/.i3/status.conf
-        #status_command i3status-rs ~/.i3/status.toml
+        #status_command i3status-rs ~/.config/sway/status.toml
         swaybar_command waybar
         colors {
                 background #282828
@@ -228,7 +228,7 @@ bindsym $mod+$alt+d exec "qtcreator -lastsession"
 bindsym $ctrl+$alt+l exec "~/dev/bin/lock.sh"
 bindsym $mod+F4 exec "xfce4-session-logout"
 
-bindsym $mod+$ctrl+t exec "copyq triggerGlobalShortcut 'Copy Text in Image'"
+bindsym $mod+$ctrl+t exec "~/dev/bin/clipboard.sh triggerGlobalShortcut 'Copy Text in Image'"
 
 bindsym $mod+$ctrl+s exec "~/dev/bin/screenshot.sh"
 

@@ -34,8 +34,8 @@ class Interval:
         self.minutes = minutes
 
 
-class Work(Interval):
-    name = "work"
+class Focus(Interval):
+    name = "focus"
 
 
 class Break(Interval):
@@ -56,7 +56,7 @@ def save_state(state_file, index, start):
         f.write(f"{index} {start}")
 
 
-WORK = Work(minutes=25)
+FOCUS = Focus(minutes=25)
 SHORT = Break(minutes=5)
 LONG = Break(minutes=30)
 SHORT_COUNT = 4
@@ -65,7 +65,7 @@ STATE_FILE = f"/tmp/pomodoro-{getpass.getuser()}"
 
 
 def update(cmds=[]):
-    intervals = [WORK, SHORT] * SHORT_COUNT + [WORK, LONG]
+    intervals = [FOCUS, SHORT] * SHORT_COUNT + [FOCUS, LONG]
 
     index, start = load_state(STATE_FILE)
     index0 = index

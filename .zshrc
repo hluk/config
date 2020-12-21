@@ -209,6 +209,7 @@ lyrics() {
 # A-c: cd
 # C-t: complete path
 # C-r: history
+export RIPGREP_CONFIG_PATH=$HOME/.config/ripgreprc
 if [ -d ~/.fzf ]; then
     export PATH="$HOME/.fzf/bin:$PATH"
     export FZF_DEFAULT_COMMAND='rg --files'
