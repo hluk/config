@@ -70,8 +70,8 @@
 
     "clock#date": {
       "interval": 60,
-      "format": "{:%e %b %Y}",
-      "tooltip-format": "{:%e %B %Y}"
+      "format": "{:%e %b %Y %a}",
+      "tooltip-format": "{:%e %B %Y %A}"
     },
 
     "cpu": {

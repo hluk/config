@@ -8,4 +8,5 @@ mako_args=(
     --padding="4,4,4,4"
     #--anchor="top-center"
 )
-exec mako "${mako_args[@]}"
+#exec mako "${mako_args[@]}"
+exec ~/dev/mako/build/mako "${mako_args[@]}"

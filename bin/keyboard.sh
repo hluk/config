@@ -2,13 +2,14 @@
 set -xeu
 
 k="input type:keyboard"
+# man 7 xkeyboard-config
 msg=$(cat <<EOD
 $k repeat_delay 250
 $k repeat_rate 45
 $k xkb_model pc104
-$k xkb_options "grp:shifts_toggle,caps:escape"
-$k xkb_layout "us,us,cz"
-$k xkb_variant ",dvorak,"
+$k xkb_options "grp:shifts_toggle,caps:ctrl_modifier,altwin:alt_super_win"
+$k xkb_layout "us,cz"
+$k xkb_variant ","
 EOD
 )
 swaymsg "$msg"

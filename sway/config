@@ -191,15 +191,9 @@ client.placeholder      #000000 #0c0c0c #ffffff #000000   #0c0c0c
 client.background       #ffffff
 
 # Window behavior
-#for_window [instance="^copyq$" class="^[Cc]opyq"] floating enable, border normal
-#for_window [instance="^xfce4-appfinder$" class="^Xfce4-appfinder$"] floating enable, border normal
-#for_window [instance="^xev$"] floating enable, border normal
 for_window [app_id="^copyq$"] floating enable, border normal
 
 for_window [app_id="^mpv$"] floating enable, resize set 960 540, border pixel 0
-
-for_window [app_id="^firefox$" title="^Firefox - Sharing Indicator$"] floating enable
-for_window [app_id="^firefox$" title="^Picture-in-Picture$"] floating enable
 
 # Omit locking when fullscreen window is active
 # xwayland version
@@ -208,7 +202,9 @@ for_window [class=".*"] inhibit_idle fullscreen
 for_window [app_id=".*"] inhibit_idle fullscreen
 
 assign [app_id="^firefox$"] 2
-assign [app_id="^firefox$" title="^Meet - .*"] 0
+for_window [app_id="^firefox$" title="^Firefox .* Sharing Indicator$"] floating enable
+for_window [app_id="^firefox$" title="^Picture-in-Picture$"] floating enable
+
 assign [app_id="^org.qt-project.qtcreator$"] 3
 assign [instance="^hexchat$"] 4
 assign [app_id="^Steam$"] 4

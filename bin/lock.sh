@@ -1,2 +1,2 @@
 #!/bin/bash
-exec swaylock --image ~/.cache/lastfm_wallpaper/wallpaper.png
+exec swaylock --daemonize --image ~/.cache/lastfm_wallpaper/wallpaper.png

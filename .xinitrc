@@ -13,5 +13,4 @@ xrandr --output DP-1-2 --primary
 export LIBVA_DRIVER_NAME=iHD
 exec chromium-freeworld \
     --force-device-scale-factor=2 \
-    --window-size=3840,2160 \
     --window-position=0,0

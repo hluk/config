@@ -196,20 +196,20 @@ Plug 'farmergreg/vim-lastplace'
 "Plug 'ycm-core/YouCompleteMe'
 
 " :help deoplete-options
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
-
-if has('win32') || has('win64')
-  Plug 'tbodt/deoplete-tabnine', { 'do': 'powershell.exe .\install.ps1' }
-else
-  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-endif
+"if has('nvim')
+"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+"else
+"  Plug 'Shougo/deoplete.nvim'
+"  Plug 'roxma/nvim-yarp'
+"  Plug 'roxma/vim-hug-neovim-rpc'
+"endif
+"let g:deoplete#enable_at_startup = 1
+"
+"if has('win32') || has('win64')
+"  Plug 'tbodt/deoplete-tabnine', { 'do': 'powershell.exe .\install.ps1' }
+"else
+"  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+"endif
 
 inoremap <silent><expr> <TAB>
 \ pumvisible() ? "\<C-n>" :
@@ -225,10 +225,6 @@ Plug 'deoplete-plugins/deoplete-jedi'
 
 " handle line and column numbers in file names
 Plug 'wsdjeg/vim-fetch'
-
-" personal wiki
-let vimwiki_ext2syntax = {}  " disable rendering and helpers for md files
-Plug 'vimwiki/vimwiki'
 
 call plug#end()
 " }}}
