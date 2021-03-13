@@ -9,7 +9,7 @@ $k repeat_rate 45
 $k xkb_model pc104
 $k xkb_options "grp:shifts_toggle,caps:ctrl_modifier,altwin:alt_super_win"
 $k xkb_layout "us,cz"
-$k xkb_variant ","
+$k xkb_variant ",qwerty"
 EOD
 )
 swaymsg "$msg"

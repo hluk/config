@@ -6,6 +6,9 @@ out2="Goldstar Company Ltd LG Ultra HD 0x00003617"
 out1_enabled=${1:-enable}
 scale=${2:-2}
 
+#wallpaper=~/.cache/lastfm_wallpaper/wallpaper.png
+wallpaper=~/Documents/wallpapers/i31ntyjb1fl61.jpg
+
 s1=$scale
 w1=1920
 h1=1080
@@ -34,7 +37,7 @@ output "$out1" $out1_enabled
 output "$out2" scale $s2
 output "$out2" pos $x2 $y2 res ${w2}x$h2
 
-output "*" bg ~/.cache/lastfm_wallpaper/wallpaper.png fill
+output "*" bg "$wallpaper" fill
 EOD
 )
 swaymsg "$msg"

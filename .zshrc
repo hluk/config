@@ -194,7 +194,22 @@ topp() {
 backup() {
     file=$1
     date=$(date --iso-8601)
-    7z a -p "$file-$date".7z "$file"
+    base=$(basename "$file")
+    base=${base/./_}
+    output_base=~/Documents/backup/$base-$date
+
+    set -xo pipefail
+    if [[ "$file" =~ "\\.gnupg" ]]; then
+        output=$output_base.7z
+        7z a -p "$output" "$file"
+    else
+        output=$output_base.tar.xf.gpg
+        tar cvJ "$file" |
+            gpg --encrypt --sign --armor --recipient hluk@email.cz \
+            --output "$output"
+    fi
+
+    echo "Backup: $output"
 }
 
 lyrics() {
