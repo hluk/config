@@ -1,7 +1,7 @@
 #!/bin/bash
 set -exuo pipefail
 
-pkill waybar || true
+pkill -f 'waybar -b bar-0' || true
 pkill -f pomodoro.py || true
 pkill -f 'inotifywait .* /tmp/redshift' || true
 

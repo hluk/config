@@ -1,0 +1,82 @@
+{
+    "2d1690e1-6a53-4814-8efa-1fee694bb640": {
+        "id": "2d1690e1-6a53-4814-8efa-1fee694bb640",
+        "name": "Google Search",
+        "keyword": "g",
+        "cmd": "https://google.com/search?q=%s",
+        "icon": "/usr/share/ulauncher/media/google-search-icon.png",
+        "is_default_search": true,
+        "run_without_argument": false,
+        "added": 1616417895.448737
+    },
+    "1bc8be27-ae2e-4c18-8001-a68b695cfbdc": {
+        "id": "1bc8be27-ae2e-4c18-8001-a68b695cfbdc",
+        "name": "Stack Overflow",
+        "keyword": "so",
+        "cmd": "http://stackoverflow.com/search?q=%s",
+        "icon": "/usr/share/ulauncher/media/stackoverflow-icon.svg",
+        "is_default_search": true,
+        "run_without_argument": false,
+        "added": 1616417895.4488363
+    },
+    "72b98e8c-991f-4b86-a66b-a3e72f5a75f8": {
+        "id": "72b98e8c-991f-4b86-a66b-a3e72f5a75f8",
+        "name": "Wikipedia",
+        "keyword": "wiki",
+        "cmd": "https://en.wikipedia.org/wiki/%s",
+        "icon": "/usr/share/ulauncher/media/wikipedia-icon.png",
+        "is_default_search": true,
+        "run_without_argument": false,
+        "added": 1616417895.4489355
+    },
+    "02e35a90-0d8b-43dc-a306-ecdab73e9680": {
+        "id": "02e35a90-0d8b-43dc-a306-ecdab73e9680",
+        "name": "firefox",
+        "keyword": "firefox",
+        "cmd": "~/dev/bin/browser.sh",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": true,
+        "added": 1616418824.683738
+    },
+    "dfd842ee-7af2-4562-aa3d-ad5e01f20529": {
+        "id": "dfd842ee-7af2-4562-aa3d-ad5e01f20529",
+        "name": "firefox-work",
+        "keyword": "firefox-work",
+        "cmd": "~/dev/bin/browser-work.sh",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": true,
+        "added": 1616418887.1755898
+    },
+    "256bab22-34fa-4f74-b95e-804d8e9fd7dc": {
+        "id": "256bab22-34fa-4f74-b95e-804d8e9fd7dc",
+        "name": "mail",
+        "keyword": "mail",
+        "cmd": "~/dev/bin/mail.sh",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": true,
+        "added": 1616418912.3820233
+    },
+    "40df041d-95c0-41d9-913b-f6dc5baac62d": {
+        "id": "40df041d-95c0-41d9-913b-f6dc5baac62d",
+        "name": "qtcreator-dark",
+        "keyword": "qtcreator-dark",
+        "cmd": "qtcreator -lastsession -theme dark",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": true,
+        "added": 1616419074.7378855
+    },
+    "d70006c4-1cce-4bf4-aaf0-4b4b1e0544b5": {
+        "id": "d70006c4-1cce-4bf4-aaf0-4b4b1e0544b5",
+        "name": "qtcreator-light",
+        "keyword": "qtcreator-light",
+        "cmd": "qtcreator -lastsession -theme light",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": true,
+        "added": 1616419088.5217493
+    }
+}

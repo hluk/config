@@ -178,7 +178,7 @@ hide_edge_borders --i3 smart
 
 titlebar_padding 2
 titlebar_border_thickness 0
-font Iosevka Term Medium Extended 10px
+font JetBrains Mono NL Medium 10px
 
 workspace_auto_back_and_forth yes
 
@@ -201,6 +201,8 @@ for_window [app_id="^mpv$"] floating enable, resize set 960 540, border pixel 0
 for_window [app_id="^firefox$" title="^Picture-in-Picture$"] floating enable
 for_window [title=" - Sharing Indicator$"] floating enable, sticky enable
 for_window [title="^Password Required .* Firefox$"] floating enable
+
+for_window [app_id="^ulauncher$"] floating enable, border none
 
 # Omit locking when fullscreen window is active
 # xwayland version

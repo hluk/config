@@ -26,3 +26,6 @@ set scrolloff=5
 set clipboard=unnamedplus
 " use ~ with movement
 set tildeop
+
+" clear highlighted search term on space
+noremap <silent> <Space> :nohlsearch<CR>
