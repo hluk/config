@@ -78,5 +78,15 @@
         "is_default_search": false,
         "run_without_argument": true,
         "added": 1616419088.5217493
+    },
+    "94f883d1-175d-4a18-a1bb-21a86af86515": {
+        "id": "94f883d1-175d-4a18-a1bb-21a86af86515",
+        "name": "suspend",
+        "keyword": "suspend",
+        "cmd": "systemctl suspend",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": true,
+        "added": 1616442792.9143527
     }
 }

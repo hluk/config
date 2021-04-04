@@ -3,7 +3,14 @@
 #
 # Click 7 times on Build Number under About.
 #
-# Enable USB debugging in Developer options.
+# Enable "Wireless debugging" in Developer options.
+#
+# Select option "Pair device with pairing code".
+#
+# Run following commands (note that the ports will change on the phone):
+#
+#     adb pair ipaddr:port1 code
+#     adb pair ipaddr:port2 code
 #
 # List user installed packages:
 #
@@ -21,11 +28,6 @@ disable=(
     com.facebook.katana
     com.facebook.services
     com.facebook.system
-
-    com.samsung.android.allshare.service.mediashare
-    com.samsung.android.allshare.service.fileshare
-    com.samsung.android.calendar
-    com.samsung.android.providers.media
 
     com.samsung.android.bixby.service
     com.samsung.android.app.settings.bixby
