@@ -9,6 +9,8 @@ scale=${2:-2}
 #wallpaper=~/.cache/lastfm_wallpaper/wallpaper.png
 wallpaper=~/Documents/wallpapers/i31ntyjb1fl61.jpg
 
+script_root="$(dirname "$(readlink -f "$0")")"
+
 s1=$scale
 w1=1920
 h1=1080
@@ -23,7 +25,10 @@ w2=3840
 h2=2160
 
 x1=$((0))
-y1=$((h2/s2 - h1/s1))
+# In Qt 5.15.2, menu positions are wrong when using multiple displays with
+# different Y coordinates.
+#y1=$((h2/s2 - h1/s1))
+y1=$((0))
 x2=$((w1/s1))
 y2=$((0))
 
@@ -41,3 +46,6 @@ output "*" bg "$wallpaper" fill
 EOD
 )
 swaymsg "$msg"
+
+# Changing monitors layout can break mako notifications.
+"$script_root/notifications.sh" & disown

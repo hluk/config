@@ -231,6 +231,7 @@ if [ -d ~/.fzf ]; then
     #export FZF_DEFAULT_COMMAND='fd --type f'
     export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
     export FZF_DEFAULT_OPTS="--history=$HOME/.local/share/fzf_history"
+    export FZF_ALT_C_COMMAND='fd --type directory'
 
     source ~/.fzf.zsh
     source "$HOME/.fzf/shell/completion.zsh"
