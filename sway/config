@@ -218,7 +218,7 @@ assign [instance="^hexchat$"] 4
 assign [app_id="^Steam$"] 4
 assign [app_id="^smplayer$"] 4
 assign [app_id="^mpv$"] 4
-assign [app_id="^thunderbird$"] 3
+assign [app_id="^evolution$"] 3
 
 # Shortcuts
 bindsym $mod+Shift+q exec "~/dev/bin/console.sh"

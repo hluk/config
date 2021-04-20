@@ -9,7 +9,7 @@ set -o pipefail
 # redirect output to LOGFILE
 exec 1> ~/wallpaper.log
 
-WALLPATH=${WALLPATH:-"$HOME/wallpapers"}
+WALLPATH=${WALLPATH:-"$HOME/Pictures/wallpapers"}
 
 # screen resolution
 #RES=(1920 1080)

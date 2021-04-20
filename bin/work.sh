@@ -20,6 +20,8 @@ if [[ $1 == "off" ]]; then
 
     kdestroy -A
 
+    pkill 'evolution-*'
+
     copyq maybeWork
 elif [[ $1 == "on" ]]; then
     nmcli --ask con up id "$VPN" || true

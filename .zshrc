@@ -45,6 +45,10 @@ bindkey '^[[Z' reverse-menu-complete
 bindkey "^[OD" backward-word
 bindkey "^[OC" forward-word
 
+# tmux
+bindkey '^[OH' beginning-of-line
+bindkey '^[OF' end-of-line
+
 # kitty terminal
 bindkey '\e[H'  beginning-of-line
 bindkey '\e[F'  end-of-line

@@ -5,7 +5,8 @@ fi
 
 #xrdb -merge ~/.Xresources
 #exec gnome-terminal --wait --maximize --hide-menubar -- "$@"
-exec konsole --hide-tabbar --hide-menubar --profile Screen -e "$@"
+exec foot --maximized "$@"
+#exec konsole --hide-tabbar --hide-menubar --profile Screen -e "$@"
 #kitty -- "$@"
 #exec st -f 'Fira Mono:size=11' -g 200x200 -e "$*"
 #exec xfce4-terminal --hide-menubar --hide-borders --hide-scrollbar --maximize -e "$*"

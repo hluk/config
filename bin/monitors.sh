@@ -6,8 +6,7 @@ out2="Goldstar Company Ltd LG Ultra HD 0x00003617"
 out1_enabled=${1:-enable}
 scale=${2:-2}
 
-#wallpaper=~/.cache/lastfm_wallpaper/wallpaper.png
-wallpaper=~/Documents/wallpapers/i31ntyjb1fl61.jpg
+wallpaper=~/Pictures/wallpapers/current.jpg
 
 script_root="$(dirname "$(readlink -f "$0")")"
 
@@ -33,7 +32,7 @@ x2=$((w1/s1))
 y2=$((0))
 
 msg=$(cat <<EOD
-output "*" scale 1
+output "*" scale $scale
 
 output "$out1" scale $s1
 output "$out1" pos $x1 $y1 res ${w1}x$h1

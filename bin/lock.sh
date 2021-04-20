@@ -1,4 +1,3 @@
 #!/bin/bash
-#wallpaper=~/.cache/lastfm_wallpaper/wallpaper.png
-wallpaper=~/Documents/wallpapers/i31ntyjb1fl61.jpg
+wallpaper=~/Pictures/wallpapers/current.jpg
 exec swaylock --daemonize --image "$wallpaper"
