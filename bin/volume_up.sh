@@ -1,6 +1,4 @@
 #!/bin/bash
-#pidof -s pulseaudio &&
-    #"`dirname $0`/pavolume.sh" 1000 ||
-    "`dirname $0`/volume.sh" 5%+
-#pacmd dump|awk --non-decimal-data '$1~/set-sink-volume/{system ("pacmd "$1" "$2" "$3+5000)}'
-
+script_root="$(dirname "$(readlink -f "$0")")"
+exec "$script_root/pavolume.sh" +1000
+#exec "$script_root/volume.sh" 1%+

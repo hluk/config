@@ -51,7 +51,7 @@ set shiftwidth=4
 " keep a 5 line buffer for the cursor from top/bottom of window
 set scrolloff=5
 " X11 clipboard
-set clipboard=unnamedplus
+set clipboard=unnamed,unnamedplus
 " use ~ with movement
 set tildeop
 " persistent undo history
@@ -178,6 +178,7 @@ map <c-t> :Files<CR>
 map <c-k> :Files<CR>
 map <c-g> :Rg!<CR>
 map <c-j> :Buffers<CR>
+map <c-l> :Tags<CR>
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)

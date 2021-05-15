@@ -7,7 +7,7 @@ if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]
 fi
 
 # env# {{{
-export EDITOR="nvim"
+export EDITOR="$HOME/dev/bin/editor.sh"
 export PAGER=less
 export LESS="--ignore-case --quit-if-one-screen --LONG-PROMPT --shift=5"
 
