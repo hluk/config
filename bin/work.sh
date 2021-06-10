@@ -20,8 +20,6 @@ if [[ $1 == "off" ]]; then
 
     kdestroy -A
 
-    pkill 'evolution-*'
-
     copyq maybeWork
 elif [[ $1 == "on" ]]; then
     nmcli --ask con up id "$VPN" || true
@@ -30,9 +28,6 @@ elif [[ $1 == "on" ]]; then
 
     is_running firefox || run "$browser"
     is_running firefox -P work || run "$browser" -P work
-    run "$dir/irc.sh"
-
-    is_running thunderbird || run "$dir/mail.sh"
 
     copyq maybeWork
 else

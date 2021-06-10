@@ -1,4 +1,0 @@
-#!/bin/bash
-set -e
-export PATH=$(dirname "$0")/irc-bin:$PATH
-exec /usr/bin/firefox -p work "$@"

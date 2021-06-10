@@ -1,3 +1,9 @@
 #!/bin/bash
 wallpaper=~/Pictures/wallpapers/current.jpg
-exec swaylock --daemonize --image "$wallpaper"
+args=(
+    --daemonize
+    --indicator-radius=100
+    --indicator-thickness=20
+    --image="$wallpaper"
+)
+exec swaylock "${args[@]}"
