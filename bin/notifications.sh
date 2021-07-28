@@ -7,6 +7,10 @@ mako_args=(
     --margin="4,4,4,4"
     --padding="4,4,4,4"
     #--anchor="top-center"
+
+    #  swaymsg -t get_outputs
+    #--output="eDP-1"
+    --output="DP-4"
 )
 
 pkill mako || true

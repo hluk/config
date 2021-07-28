@@ -227,6 +227,8 @@ Plug 'deoplete-plugins/deoplete-jedi'
 " handle line and column numbers in file names
 Plug 'wsdjeg/vim-fetch'
 
+Plug 'psf/black'
+
 call plug#end()
 " }}}
 

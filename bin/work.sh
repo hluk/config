@@ -6,6 +6,7 @@ VPN=${VPN:-'Brno (BRQ)'}
 
 dir=$(dirname "$0")
 browser=$dir/browser.sh
+copyq=$HOME/dev/build/copyq/release/copyq
 
 run() {
     "$@" &>/dev/null & disown
@@ -20,7 +21,7 @@ if [[ $1 == "off" ]]; then
 
     kdestroy -A
 
-    copyq maybeWork
+    "$copyq" maybeWork
 elif [[ $1 == "on" ]]; then
     nmcli --ask con up id "$VPN" || true
 
@@ -29,7 +30,7 @@ elif [[ $1 == "on" ]]; then
     is_running firefox || run "$browser"
     is_running firefox -P work || run "$browser" -P work
 
-    copyq maybeWork
+    "$copyq" maybeWork
 else
     echo "usage: $0 {off|on}"
     exit 1
