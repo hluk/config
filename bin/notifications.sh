@@ -11,6 +11,8 @@ mako_args=(
     #  swaymsg -t get_outputs
     #--output="eDP-1"
     --output="DP-4"
+
+    --actions=1
 )
 
 pkill mako || true

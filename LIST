@@ -5,9 +5,11 @@
 ~/.config/foot/foot.ini
 ~/.config/git/
 ~/.config/gtk-3.0/settings.ini gtk-3.0/
+~/.config/kitty/kitty.conf
 ~/.config/kwinrc
 ~/.config/latte/
 ~/.config/lattedockrc
+~/.config/mako/config mako/
 ~/.config/nvim/init.vim nvim/
 ~/.config/openbox/
 ~/.config/qt5ct/
