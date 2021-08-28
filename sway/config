@@ -44,7 +44,6 @@ bindsym $mod+$left focus left
 bindsym $mod+$down focus down
 bindsym $mod+$up focus up
 bindsym $mod+$right focus right
-bindsym $alt+Tab focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -227,7 +226,6 @@ bindsym $mod+Shift+w exec "~/dev/bin/browser.sh"
 bindsym $ctrl+grave exec "~/dev/bin/clipboard.sh"
 bindsym $ctrl+exclam exec "~/dev/build/copyq/Desktop-Debug/copyq -s test2 toggle"
 bindsym $alt+F2 exec "~/dev/config/bin/sway_run.sh"
-bindsym $mod+Tab exec "~/dev/config/bin/sway_windows.sh"
 bindsym $mod+$alt+d exec "qtcreator -lastsession"
 bindsym $ctrl+$alt+l exec "~/dev/bin/lock.sh"
 bindsym $mod+F4 exec "xfce4-session-logout"
@@ -235,6 +233,11 @@ bindsym $mod+F4 exec "xfce4-session-logout"
 bindsym $mod+$ctrl+t exec "~/dev/bin/clipboard.sh triggerGlobalShortcut 'Copy Text in Image'"
 
 bindsym $mod+$ctrl+s exec "~/dev/bin/screenshot.sh"
+
+# Focus windows
+exec_always "~/dev/config/bin/sway_windows.sh"
+bindsym $alt+Tab exec "~/dev/config/bin/sway_windows.sh switch-to-urgent-or-lru-window"
+bindsym $mod+Tab exec "~/dev/config/bin/sway_windows.sh switch-window"
 
 # Volume
 bindsym XF86AudioLowerVolume exec "~/dev/bin/volume_down.sh"

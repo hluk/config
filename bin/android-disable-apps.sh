@@ -10,7 +10,7 @@
 # Run following commands (note that the ports will change on the phone):
 #
 #     adb pair ipaddr:port1 code
-#     adb pair ipaddr:port2 code
+#     adb connect ipaddr:port2
 #
 # List user installed packages:
 #
@@ -31,8 +31,11 @@ disable=(
 
     com.samsung.android.bixby.service
     com.samsung.android.app.settings.bixby
+
+    com.microsoft.appmanager
+    com.microsoft.skydrive
 )
 
 for app in "${disable[@]}"; do
-    adb shell pm disable-user $app
+    adb shell pm disable-user $app || true
 done

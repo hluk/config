@@ -11,6 +11,7 @@ immutability=1
 isPreferredForShortcuts=false
 lastScreen=13
 location=5
+name=
 onPrimary=true
 plugin=org.kde.latte.containment
 raiseOnActivityChange=false
@@ -18,7 +19,7 @@ raiseOnDesktopChange=false
 settingsComplexity=4
 timerHide=700
 timerShow=200
-viewType=1
+viewType=0
 visibility=0
 wallpaperplugin=org.kde.image
 
@@ -27,7 +28,7 @@ immutability=1
 plugin=org.kde.plasma.volume
 
 [Containments][1][Applets][15][Configuration]
-PreloadWeight=0
+PreloadWeight=10
 
 [Containments][1][Applets][15][Configuration][ConfigDialog]
 DialogHeight=983
@@ -59,16 +60,23 @@ plugin=org.kde.latte.plasmoid
 PreloadWeight=0
 
 [Containments][1][Applets][2][Configuration][General]
+animationLauncherBouncing=false
+animationWindowAddedInGroup=false
+animationWindowInAttention=false
 groupingAppIdBlacklist=chromium-freeworld.desktop
 groupingLauncherUrlBlacklist=applications:chromium-freeworld.desktop
-launchers59=applications:org.kde.konsole.desktop,applications:firefox.desktop
+infoBadgeProminentColorEnabled=true
+isInLatteDock=true
+launchers59=applications:kitty.desktop,applications:org.mozilla.firefox.desktop
+middleClickAction=Close
+showWindowActions=true
 
 [Containments][1][Applets][20]
 immutability=1
 plugin=org.kde.plasma.systemtray
 
 [Containments][1][Applets][20][Configuration]
-PreloadWeight=20
+PreloadWeight=25
 SystrayContainmentId=21
 
 [Containments][1][Applets][4]
@@ -97,16 +105,19 @@ PreloadWeight=0
 [Containments][1][General]
 activeIndicator=None
 advanced=true
+alignmentUpgraded=true
 animationLauncherBouncing=false
 animationWindowAddedInGroup=false
 animationWindowInAttention=false
 animationsEnabled=false
-appletOrder=2;18;15;20;4
+appletOrder=2;15;20;4
+appletShadowsEnabled=false
 autoDecreaseIconSize=false
 blurEnabled=false
 dotsOnActive=true
 dragActiveWindowEnabled=true
 durationTime=None
+iconSize=32
 inConfigureAppletsMode=true
 infoBadgeProminentColorEnabled=true
 middleClickAction=Close
@@ -118,10 +129,12 @@ shadowColor=000000
 shadowOpacity=60
 shadowSize=75
 shadows=None
+shadowsUpgraded=true
 showWindowActions=true
 solidBackgroundForMaximized=true
 splitterPosition=1
 splitterPosition2=2
+tasksUpgraded=true
 thickMargin=10
 threeColorsWindows=true
 titleTooltips=false
@@ -175,7 +188,7 @@ immutability=1
 plugin=org.kde.plasma.battery
 
 [Containments][21][Applets][26][Configuration]
-PreloadWeight=10
+PreloadWeight=0
 
 [Containments][21][Applets][27]
 immutability=1
@@ -184,23 +197,36 @@ plugin=org.kde.plasma.bluetooth
 [Containments][21][Applets][27][Configuration]
 PreloadWeight=10
 
+[Containments][21][Applets][28]
+immutability=1
+plugin=org.kde.plasma.mediacontroller
+
+[Containments][21][Applets][28][Configuration]
+PreloadWeight=18
+
 [Containments][21][ConfigDialog]
 DialogHeight=1408
 DialogWidth=1719
 
 [Containments][21][General]
-extraItems=org.kde.plasma.notifications,org.kde.plasma.mediacontroller,org.kde.plasma.volume,org.kde.plasma.devicenotifier,org.kde.plasma.battery,org.kde.plasma.bluetooth,CopyQ
-knownItems=org.kde.plasma.notifications,org.kde.plasma.mediacontroller,org.kde.plasma.clipboard,org.kde.plasma.volume,org.kde.plasma.devicenotifier,org.kde.plasma.battery,org.kde.plasma.bluetooth
+extraItems=org.kde.plasma.notifications,org.kde.plasma.mediacontroller,org.kde.plasma.volume,org.kde.plasma.devicenotifier,org.kde.plasma.battery,org.kde.plasma.bluetooth,org.kde.plasma.keyboardlayout
+knownItems=org.kde.plasma.notifications,org.kde.plasma.mediacontroller,org.kde.plasma.clipboard,org.kde.plasma.volume,org.kde.plasma.devicenotifier,org.kde.plasma.battery,org.kde.plasma.bluetooth,org.kde.plasma.keyboardlayout
 shownItems=CopyQ
 
 [LayoutSettings]
-activities=
+activities={free-activities}
 background=
+backgroundStyle=0
 color=blue
+customBackground=
+customTextColor=
 disableBordersForMaximizedWindows=false
+icon=
 lastUsedActivity=cd22846e-0a2f-471c-80dc-28b4c543d88f
 launchers=
+popUpMargin=-1
 preferredForShortcutsTouched=false
+schemeFile=
 showInMenu=true
 textColor=fcfcfc
 version=2

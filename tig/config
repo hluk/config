@@ -1,2 +1,3 @@
 set ignore-case = yes
 set show-untracked = no
+set main-view-author-width = 16

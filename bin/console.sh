@@ -7,7 +7,7 @@ fi
 #exec gnome-terminal --wait --maximize --hide-menubar -- "$@"
 #exec foot --maximized "$@"
 #exec konsole --hide-tabbar --hide-menubar --profile Screen -e "$@"
-exec kitty -- "$@"
+exec kitty --start-as=maximized -- "$@"
 #exec st -f 'Fira Mono:size=11' -g 200x200 -e "$*"
 #exec xfce4-terminal --hide-menubar --hide-borders --hide-scrollbar --maximize -e "$*"
 #exec urxvt -icon /usr/share/icons/Tango/scalable/apps/terminal.svg -tn rxvt-256color -e "$*"

@@ -6,22 +6,26 @@ Width 3840=1659
 outlineWidth=1
 
 [ScreenConnectors]
-10=HDMI-2
-11=eDP-1
-12=DP-2-1
-13=DP-1-2
-14=Screen30
-15=Screen32
-16=DP1-2
-17=eDP1
-18=Screen28
-19=DP-4
+10=HDMI-2:::0,0 1920x1080
+11=eDP-1:::0,0 1920x1080
+12=DP-2-1:::0,0 1920x1080
+13=DP-1-2:::0,0 1920x1080
+14=Screen30:::0,0 1920x1080
+15=Screen32:::0,0 1920x1080
+16=DP1-2:::0,0 1920x1080
+17=eDP1:::0,0 1920x1080
+18=Screen28:::0,0 1920x1080
+19=DP-4:::0,0 1920x1080
+20=DP-5:::0,0 1920x1080
 
 [UniversalSettings]
 badges3DStyle=false
 canDisableBorders=false
+contextMenuActionsAlwaysShown=_layouts,_preferences,_quit_latte,_separator1,_add_latte_widgets,_add_view
 currentLayout=My Layout
 downloadWindowSize=800,550
+inAdvancedModeForEditSettings=true
+isAvailableGeometryBroadcastedToPlasma=true
 lastNonAssignedLayout=My Layout
 launchers=
 layoutsColumnWidths=179,134,105,0
@@ -31,5 +35,6 @@ metaPressAndHoldEnabled=true
 mouseSensitivity=2
 screenTrackerInterval=2500
 showInfoWindow=true
+singleModeLayoutName=My Layout
 unifiedGlobalShortcuts=true
 version=2

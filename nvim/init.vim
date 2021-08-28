@@ -112,6 +112,9 @@ autocmd FileType eruby setlocal ts=2 sts=2 sw=2 expandtab
 " meson
 autocmd BufRead,BufNewFile meson.build setlocal ts=2 sts=2 sw=2 expandtab
 
+" elixir
+autocmd FileType elixir setlocal formatprg=mix\ format\ -
+
 "" toggle comment (NERD commenter)
 Plug 'scrooloose/nerdcommenter'
 map <C-\> <leader>c<SPACE>j
@@ -135,7 +138,7 @@ let g:UltiSnipsExpandTrigger="<tab>"
 
 " fugitive (git)
 Plug 'tpope/vim-fugitive'
-no gitd :Gd master<CR>
+command Gbl Git blame
 
 " asynchronous build and test dispatcher
 Plug 'tpope/vim-dispatch'
@@ -149,24 +152,23 @@ Plug 'tpope/vim-eunuch'
 " PEP 8
 Plug 'nvie/vim-flake8'
 
+" A collection of language packs for Vim.
+Plug 'sheerun/vim-polyglot'
 " Rust syntax
-Plug 'rust-lang/rust.vim'
-
+"Plug 'rust-lang/rust.vim'
 " Go
-Plug 'fatih/vim-go'
+"Plug 'fatih/vim-go'
+" meson
+"Plug 'igankevich/mesonic'
+" jsonnet
+"Plug 'google/vim-jsonnet'
+"autocmd BufRead,BufNewFile *.jsonnet setlocal ts=2 sts=2 sw=2 expandtab
 
 " Ruby on Rails
 "Plug 'tpope/vim-rails'
 
 " Jinja2
 Plug 'Glench/Vim-Jinja2-Syntax'
-
-" meson
-Plug 'igankevich/mesonic'
-
-" jsonnet
-Plug 'google/vim-jsonnet'
-autocmd BufRead,BufNewFile *.jsonnet setlocal ts=2 sts=2 sw=2 expandtab
 
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
@@ -197,20 +199,20 @@ Plug 'farmergreg/vim-lastplace'
 "Plug 'ycm-core/YouCompleteMe'
 
 " :help deoplete-options
-"if has('nvim')
-"  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-"else
-"  Plug 'Shougo/deoplete.nvim'
-"  Plug 'roxma/nvim-yarp'
-"  Plug 'roxma/vim-hug-neovim-rpc'
-"endif
-"let g:deoplete#enable_at_startup = 1
-"
-"if has('win32') || has('win64')
-"  Plug 'tbodt/deoplete-tabnine', { 'do': 'powershell.exe .\install.ps1' }
-"else
-"  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-"endif
+if has('nvim')
+  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
+else
+  Plug 'Shougo/deoplete.nvim'
+  Plug 'roxma/nvim-yarp'
+  Plug 'roxma/vim-hug-neovim-rpc'
+endif
+let g:deoplete#enable_at_startup = 1
+
+if has('win32') || has('win64')
+  Plug 'tbodt/deoplete-tabnine', { 'do': 'powershell.exe .\install.ps1' }
+else
+  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
+endif
 
 inoremap <silent><expr> <TAB>
 \ pumvisible() ? "\<C-n>" :
@@ -271,6 +273,19 @@ nnoremap <A-h> <C-w>h
 nnoremap <A-j> <C-w>j
 nnoremap <A-k> <C-w>k
 nnoremap <A-l> <C-w>l
+
+tnoremap <A-S-h> <C-\><C-N><C-w><S-h>
+tnoremap <A-S-j> <C-\><C-N><C-w><S-j>
+tnoremap <A-S-k> <C-\><C-N><C-w><S-k>
+tnoremap <A-S-l> <C-\><C-N><C-w><S-l>
+inoremap <A-S-h> <C-\><C-N><C-w><S-h>
+inoremap <A-S-j> <C-\><C-N><C-w><S-j>
+inoremap <A-S-k> <C-\><C-N><C-w><S-k>
+inoremap <A-S-l> <C-\><C-N><C-w><S-l>
+nnoremap <A-S-h> <C-w><S-h>
+nnoremap <A-S-j> <C-w><S-j>
+nnoremap <A-S-k> <C-w><S-k>
+nnoremap <A-S-l> <C-w><S-l>
 " }}}
 
 " COMPLETION {{{

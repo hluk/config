@@ -22,6 +22,16 @@ Id_1=e4dad493-a89f-4e4e-8847-322b6cefa71a
 Number=1
 Rows=1
 
+[DrmOutputs][3f38493490][1de14028-ce25-5907-af91-5ec8f9626cae]
+Mode=1920x1080_47982
+Scale=1
+Transform=normal
+
+[DrmOutputs][3f38493490][9da184ac-365f-5da0-96d3-16e5e03a287b]
+Mode=3840x2160_59997
+Scale=2
+Transform=normal
+
 [DrmOutputs][6dc1d62fe7][6dc1d62fe7]
 Scale=1
 
@@ -44,6 +54,16 @@ TabBoxAlternative=false
 [Effect-FlipSwitch]
 TabBox=false
 TabBoxAlternative=false
+
+[ModifierOnlyShortcuts]
+Meta=org.kde.krunner,/App,,toggleDisplay
+
+[NightColor]
+Active=true
+EveningBeginFixed=1800
+Mode=Times
+MorningBeginFixed=0600
+TransitionTime=60
 
 [Plugins]
 blurEnabled=false
@@ -70,11 +90,8 @@ zoomEnabled=false
 [TabBox]
 ActivitiesMode=1
 ApplicationsMode=0
-DesktopLayout=org.kde.breeze.desktop
-DesktopListLayout=org.kde.breeze.desktop
 DesktopMode=1
 HighlightWindows=true
-LayoutName=org.kde.breeze.desktop
 MinimizedMode=0
 MultiScreenMode=0
 ShowDesktopMode=0
@@ -95,7 +112,3 @@ SwitchingMode=0
 
 [Windows]
 BorderlessMaximizedWindows=true
-
-[org.kde.kdecoration2]
-library=org.kde.breeze
-theme=Breeze
