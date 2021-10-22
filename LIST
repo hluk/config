@@ -20,6 +20,7 @@
 ~/.config/ulauncher/
 ~/.config/waybar/
 ~/.config/wofi/
+~/.config/xkb/
 ~/.config/yamllint/
 ~/.dwmrc.h
 ~/.fakevimrc

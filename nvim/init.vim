@@ -60,6 +60,9 @@ set undodir=~/.config/nvim/undofiles/
 set undofile
 autocmd OptionSet guicursor noautocmd set guicursor=
 
+" automatically reload changed file
+set autoread
+
 " show tabs and trailing whitespace
 set list listchars=tab:>·,trail:~
 
@@ -78,6 +81,9 @@ set termguicolors
 " :PlugUpdate to update plugins
 " :PlugUpgrade to upgrade vim-plug
 call plug#begin('~/.config/nvim/plugged')
+
+" python
+"autocmd BufWritePost *.py silent :!darker %
 
 " doxygen
 autocmd BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
@@ -229,7 +235,7 @@ Plug 'deoplete-plugins/deoplete-jedi'
 " handle line and column numbers in file names
 Plug 'wsdjeg/vim-fetch'
 
-Plug 'psf/black'
+"Plug 'psf/black'
 
 call plug#end()
 " }}}

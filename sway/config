@@ -50,6 +50,7 @@ bindsym $mod+Left focus left
 bindsym $mod+Down focus down
 bindsym $mod+Up focus up
 bindsym $mod+Right focus right
+bindsym $alt+Tab focus left
 
 # move focused window
 bindsym $mod+$ctrl+$left move left
@@ -73,7 +74,7 @@ bindsym $mod+v split v
 bindsym $mod+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
-bindsym $mod+s layout stacking
+#bindsym $mod+s layout stacking
 bindsym $mod+Shift+t layout tabbed
 bindsym $mod+Shift+s layout toggle split
 
@@ -84,7 +85,7 @@ bindsym $mod+Shift+space floating toggle
 bindsym $mod+space focus mode_toggle
 
 # focus the parent container
-bindsym $mod+a focus parent
+#bindsym $mod+a focus parent
 
 # focus the child container
 #bindsym $mod+d focus child
@@ -102,9 +103,9 @@ bindsym $mod+8 workspace 8
 bindsym $mod+9 workspace 9
 bindsym $mod+0 workspace 10
 
-bindsym $mod+q workspace 1
-bindsym $mod+w workspace 2
-bindsym $mod+e workspace 3
+bindsym $mod+a workspace 1
+bindsym $mod+s workspace 2
+bindsym $mod+d workspace 3
 bindsym $mod+r workspace 4
 bindsym $mod+t workspace 5
 
@@ -209,9 +210,6 @@ for_window [class=".*"] inhibit_idle fullscreen
 # wayland vesion
 for_window [app_id=".*"] inhibit_idle fullscreen
 
-assign [app_id="^firefox$" title="^Firefox - Sharing Indicator$"] 5
-assign [app_id="^firefox$" title="^Meet - .*"] 0
-assign [app_id="^firefox$"] 2
 assign [app_id="^org.qt-project.qtcreator$"] 3
 assign [instance="^hexchat$"] 4
 assign [app_id="^Steam$"] 4
@@ -233,11 +231,6 @@ bindsym $mod+F4 exec "xfce4-session-logout"
 bindsym $mod+$ctrl+t exec "~/dev/bin/clipboard.sh triggerGlobalShortcut 'Copy Text in Image'"
 
 bindsym $mod+$ctrl+s exec "~/dev/bin/screenshot.sh"
-
-# Focus windows
-exec_always "~/dev/config/bin/sway_windows.sh"
-bindsym $alt+Tab exec "~/dev/config/bin/sway_windows.sh switch-to-urgent-or-lru-window"
-bindsym $mod+Tab exec "~/dev/config/bin/sway_windows.sh switch-window"
 
 # Volume
 bindsym XF86AudioLowerVolume exec "~/dev/bin/volume_down.sh"
@@ -267,7 +260,8 @@ input type:keyboard xkb_numlock enable
 exec_always "~/dev/bin/keyboard.sh"
 
 
-workspace 0 output eDP-1
+#workspace 0 output eDP-1
+workspace 0 output DP-3
 workspace 1 output DP-4
 workspace 2 output DP-4
 workspace 3 output DP-4

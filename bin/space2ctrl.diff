@@ -1,0 +1,22 @@
+diff --git a/space2meta.c b/space2meta.c
+index b454d5e..287b103 100644
+--- a/space2meta.c
++++ b/space2meta.c
+@@ -7,7 +7,7 @@
+ // clang-format off
+ const struct input_event
+ space_down = {.type = EV_KEY, .code = KEY_SPACE,    .value = 1},
+-meta_down  = {.type = EV_KEY, .code = KEY_LEFTMETA, .value = 1},
++meta_down  = {.type = EV_KEY, .code = KEY_LEFTCTRL, .value = 1},
+ syn        = {.type = EV_SYN, .code = SYN_REPORT,   .value = 0};
+ // clang-format on
+ 
+@@ -116,7 +116,7 @@ int main(int argc, char *argv[]) {
+                 break;
+             case SPACE_IS_META:
+                 if (input.type == EV_KEY && input.code == KEY_SPACE) {
+-                    input.code = KEY_LEFTMETA;
++                    input.code = KEY_LEFTCTRL;
+                     if (input.value == 0)
+                         state = START;
+                 }

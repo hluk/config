@@ -1,15 +1,15 @@
 #!/bin/bash
-set -xeu
+set -eu
 
-k="input type:keyboard"
 # man 7 xkeyboard-config
-msg=$(cat <<EOD
-$k repeat_delay 250
-$k repeat_rate 45
-$k xkb_model pc104
-$k xkb_options "grp:ctrls_toggle,caps:ctrl_modifier,numpad:mac"
-$k xkb_layout "us,cz"
-$k xkb_variant ",qwerty"
+# ~/.config/xkb/symbols/custom
+msg=$(sed 's/^/input type:keyboard /' <<EOD
+repeat_delay 250
+repeat_rate 45
+xkb_model pc104
+xkb_options "grp:ctrls_toggle,numpad:mac"
+xkb_layout "custom,cz"
+xkb_variant ",qwerty"
 EOD
 )
 swaymsg "$msg"
