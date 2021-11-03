@@ -17,6 +17,9 @@
 "
 " :args **/*.h | vert sall -- open all matching files
 "
+" :'<,'>norm @r -- run a macro on each line in selection
+" :'<,'>norm . -- repeat last change on each line in selection
+"
 " :!ctags -R . /usr/include/X11/ /usr/include/qt5/ -- generate ctags
 " S-k -- open manual page for symbol under cursor
 "
@@ -138,9 +141,9 @@ let g:ale_linters = {
 autocmd BufEnter schema.rb ALEDisable
 
 " snippets
-Plug 'SirVer/ultisnips'
-Plug 'honza/vim-snippets'
-let g:UltiSnipsExpandTrigger="<tab>"
+"Plug 'SirVer/ultisnips'
+"Plug 'honza/vim-snippets'
+"let g:UltiSnipsExpandTrigger="<tab>"
 
 " fugitive (git)
 Plug 'tpope/vim-fugitive'
@@ -192,6 +195,16 @@ imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
 imap <c-x><c-j> <plug>(fzf-complete-file-ag)
 imap <c-x><c-l> <plug>(fzf-complete-line)
+
+" Fuzzy find
+"Plug 'nvim-lua/plenary.nvim'
+"Plug 'nvim-telescope/telescope.nvim'
+"nnoremap <c-k> <cmd>Telescope find_files<cr>
+"nnoremap <c-t> <cmd>Telescope find_files<cr>
+"nnoremap <c-g> <cmd>Telescope live_grep<cr>
+"nnoremap <c-j> <cmd>Telescope buffers<cr>
+"nnoremap <c-l> <cmd>Telescope help_tags<cr>
+"autocmd FileType TelescopePrompt call deoplete#custom#buffer_option('auto_complete', v:false)
 
 " Color schemes
 Plug 'sjl/badwolf'

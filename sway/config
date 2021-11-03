@@ -33,6 +33,7 @@ floating_modifier $mod
 # kill focused window
 #bindsym $mod+Shift+q kill
 bindsym $alt+F4 kill
+bindsym $mod+F4 kill
 
 # The middle button over a titlebar kills the window
 bindsym --release button2 kill
@@ -210,23 +211,14 @@ for_window [class=".*"] inhibit_idle fullscreen
 # wayland vesion
 for_window [app_id=".*"] inhibit_idle fullscreen
 
-assign [app_id="^org.qt-project.qtcreator$"] 3
-assign [instance="^hexchat$"] 4
-assign [app_id="^Steam$"] 4
-assign [app_id="^smplayer$"] 4
-assign [app_id="^mpv$"] 4
-assign [app_id="^evolution$"] 3
-
 # Shortcuts
 bindsym $mod+Shift+q exec "~/dev/bin/console.sh"
 bindsym $mod+Shift+w exec "~/dev/bin/browser.sh"
 
-bindsym $ctrl+grave exec "~/dev/bin/clipboard.sh"
-bindsym $ctrl+exclam exec "~/dev/build/copyq/Desktop-Debug/copyq -s test2 toggle"
-bindsym $alt+F2 exec "~/dev/config/bin/sway_run.sh"
-bindsym $mod+$alt+d exec "qtcreator -lastsession"
+bindsym $mod+q exec "~/dev/bin/clipboard.sh"
+bindsym $mod+z exec "~/dev/build/copyq/Desktop-Debug/copyq -s test2 toggle"
+bindsym $mod+F2 exec "~/dev/config/bin/sway_run.sh"
 bindsym $ctrl+$alt+l exec "~/dev/bin/lock.sh"
-bindsym $mod+F4 exec "xfce4-session-logout"
 
 bindsym $mod+$ctrl+t exec "~/dev/bin/clipboard.sh triggerGlobalShortcut 'Copy Text in Image'"
 
@@ -248,9 +240,12 @@ bindsym XF86Launch9 exec "~/dev/bin/red_down.sh"
 
 # Autostart
 exec "~/dev/bin/notifications.sh"
-exec "~/dev/bin/clipboard.sh"
 exec "~/dev/bin/sunset.sh"
 exec "~/dev/bin/idle.sh"
+
+# sleep as workaround for big tray icons waybar 0.9.8 bug
+# https://github.com/Alexays/Waybar/issues/1212
+exec sh -c "sleep 5; exec ~/dev/bin/clipboard.sh"
 
 # swaymsg -t get_outputs
 exec_always "~/dev/bin/monitors.sh"
