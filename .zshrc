@@ -151,7 +151,13 @@ fi
 
 # package manager
 . /etc/os-release
-if [[ $NAME =~ "Arch Linux" ]]; then
+if [[ $NAME =~ "Fedora" ]]; then
+    alias q="dnf"
+    alias s="q search --cacheonly --all"
+    alias i="sudo dnf install"
+    alias u="sudo dnf remove"
+    alias up="sudo dnf upgrade"
+elif [[ $NAME =~ "Arch Linux" ]]; then
     #alias q="pacaur"
     #alias q="trizen"
     alias q="yay"
@@ -163,12 +169,6 @@ if [[ $NAME =~ "Arch Linux" ]]; then
     alias qdiff="sudo pacdiff"
     #alias up="q -Syu --aur"
     alias clean="q -Qdt"
-elif [[ $NAME =~ "Fedora" ]]; then
-    alias q="dnf"
-    alias s="q search --cacheonly --all"
-    alias i="sudo dnf install"
-    alias u="sudo dnf remove"
-    alias up="sudo dnf upgrade"
 elif [[ $NAME =~ "Ubuntu" ]]; then
     alias q="apt"
     alias s="q search"
