@@ -1,0 +1,103 @@
+[Window settings for copyq]
+Description=Window settings for copyq
+position=1164,376
+positionrule=4
+size=701,680
+sizerule=4
+title=CopyQ
+titlematch=1
+types=1
+wmclass=copyq copyq
+wmclasscomplete=true
+wmclassmatch=1
+
+[Window settings for copyq action dialog]
+Description=Window settings for copyq action dialog
+position=98,101
+positionrule=4
+size=942,840
+sizerule=4
+title=Action Dialog — CopyQ
+titlematch=1
+types=1
+wmclass=copyq
+wmclassmatch=1
+
+[Window settings for copyq commands]
+Description=Window settings for copyq commands
+position=98,101
+positionrule=4
+size=942,840
+sizerule=4
+title=Commands — CopyQ
+titlematch=1
+types=1
+wmclass=copyq
+wmclassmatch=1
+
+[Window settings for copyq log]
+Description=Window settings for copyq log
+position=98,101
+positionrule=4
+size=1357,899
+sizerule=4
+title=Log — CopyQ
+titlematch=1
+types=1
+wmclass=copyq
+wmclassmatch=1
+
+[Window settings for copyq preferences]
+Description=Window settings for copyq preferences
+position=98,101
+positionrule=4
+size=942,840
+sizerule=4
+title=Preferences — CopyQ
+titlematch=1
+types=1
+wmclass=copyq
+wmclassmatch=1
+
+[Window settings for copyq select icon]
+Description=Window settings for copyq select icon
+position=220,154
+positionrule=4
+size=942,840
+sizerule=4
+title=Select Icon — CopyQ
+titlematch=1
+types=1
+wmclass=copyq
+wmclassmatch=1
+
+[Window settings for firefox]
+Description=Window settings for firefox
+clientmachine=localhost
+maximizehoriz=true
+maximizehorizrule=3
+maximizevert=true
+maximizevertrule=3
+title="_MENTIONS" (23) - lholecek@redhat.com - Red Hat Mail - Mozilla Firefox
+types=1
+windowrole=browser
+windowrolematch=1
+wmclass=navigator firefox
+wmclasscomplete=true
+wmclassmatch=1
+
+[Window settings for konsole]
+Description=Window settings for konsole
+clientmachine=localhost
+maximizehoriz=true
+maximizehorizrule=3
+maximizevert=true
+maximizevertrule=3
+noborder=true
+noborderrule=3
+title=~ : screen.sh — Konsole
+types=1
+windowrole=mainwindow#1
+windowrolematch=1
+wmclass=konsole
+wmclassmatch=1

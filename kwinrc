@@ -41,6 +41,16 @@ Scale=1
 [DrmOutputs][86579dd64d][985738bf76]
 Scale=2
 
+[DrmOutputs][bc0564d5bc][04190c4c-31a0-5120-bc74-0a2e59dd3f50]
+Mode=3840x2160_59997
+Scale=2
+Transform=normal
+
+[DrmOutputs][bc0564d5bc][1de14028-ce25-5907-af91-5ec8f9626cae]
+Mode=1920x1080_59977
+Scale=2
+Transform=normal
+
 [DrmOutputs][e8eb59fce5][6dc1d62fe7]
 Scale=1
 
@@ -56,7 +66,7 @@ TabBox=false
 TabBoxAlternative=false
 
 [ModifierOnlyShortcuts]
-Meta=org.kde.krunner,/App,,toggleDisplay
+;Meta=org.kde.krunner,/App,,toggleDisplay
 
 [NightColor]
 Active=true
@@ -71,9 +81,11 @@ contrastEnabled=false
 coverswitchEnabled=true
 desktopgridEnabled=false
 highlightwindowEnabled=true
+kwin4_effect_dialogparentEnabled=false
 kwin4_effect_fadeEnabled=false
 kwin4_effect_fadingpopupsEnabled=false
 kwin4_effect_frozenappEnabled=false
+kwin4_effect_fullscreenEnabled=false
 kwin4_effect_loginEnabled=false
 kwin4_effect_logoutEnabled=false
 kwin4_effect_maximizeEnabled=false
@@ -112,3 +124,7 @@ SwitchingMode=0
 
 [Windows]
 BorderlessMaximizedWindows=true
+
+[org.kde.kdecoration2]
+library=org.kde.kwin.aurorae
+theme=__aurorae__svg__Materia-Manjaro-Gradient-Dark

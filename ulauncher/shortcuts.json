@@ -13,7 +13,7 @@
         "id": "dfd842ee-7af2-4562-aa3d-ad5e01f20529",
         "name": "firefox-work",
         "keyword": "firefox-work",
-        "cmd": "~/dev/bin/browser-work.sh",
+        "cmd": "exec ~/dev/bin/browser.sh -P work",
         "icon": null,
         "is_default_search": false,
         "run_without_argument": true,

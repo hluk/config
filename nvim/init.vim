@@ -199,9 +199,9 @@ imap <c-x><c-l> <plug>(fzf-complete-line)
 " Fuzzy find
 "Plug 'nvim-lua/plenary.nvim'
 "Plug 'nvim-telescope/telescope.nvim'
-"nnoremap <c-k> <cmd>Telescope find_files<cr>
-"nnoremap <c-t> <cmd>Telescope find_files<cr>
-"nnoremap <c-g> <cmd>Telescope live_grep<cr>
+"nnoremap <c-k> <cmd>Telescope find_files hidden=true<cr>
+"nnoremap <c-t> <cmd>Telescope find_files hidden=true<cr>
+"nnoremap <c-g> <cmd>Telescope live_grep hidden=true<cr>
 "nnoremap <c-j> <cmd>Telescope buffers<cr>
 "nnoremap <c-l> <cmd>Telescope help_tags<cr>
 "autocmd FileType TelescopePrompt call deoplete#custom#buffer_option('auto_complete', v:false)

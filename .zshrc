@@ -184,22 +184,14 @@ f=~/dev/factory
 # }}}
 
 # functions {{{
-# open editor in GNU screen in new window
+# open editor in tmux in new window
 e() {
     label=">$1${2:+..}"
-    tmux new-window -n "$label" $EDITOR "$@"
-}
-
-# "top" for processes with given names
-topp() {
-    htop -p $(pidof "$@" | tr ' ' ,)
-}
-
-lyrics() {
-    (
-        source ~/dev/python-metallum/.venv/bin/activate &&
-            ~/dev/bin/lyrics.py "$@"
-    )
+    if [[ -n $TMUX ]]; then
+      tmux new-window -n "$label" $EDITOR "$@"
+    else
+      $EDITOR "$@"
+    fi
 }
 # }}}
 
