@@ -188,7 +188,7 @@ f=~/dev/factory
 e() {
     label=">$1${2:+..}"
     if [[ -n $TMUX ]]; then
-      tmux new-window -n "$label" $EDITOR "$@"
+      tmux new-window $EDITOR "$@"
     else
       $EDITOR "$@"
     fi

@@ -75,18 +75,19 @@ set list listchars=tab:>·,trail:~
 au InsertLeave * set nopaste
 
 set termguicolors
+
+set foldmethod=marker
+set foldnestmax=2
 " }}}
 
-" PLUGINS {{{
-" https://github.com/junegunn/vim-plug
-"   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-" :PlugInstall to install new plugins
-" :PlugUpdate to update plugins
-" :PlugUpgrade to upgrade vim-plug
-call plug#begin('~/.config/nvim/plugged')
+" FILES {{{
+" update tab title in tmux
+autocmd BufEnter * call system("tmux rename-window " . expand("%:p:gs?/home/[a-z]*/??"))
+autocmd VimLeave * call system("tmux rename-window $(basename $SHELL)")
 
 " python
 "autocmd BufWritePost *.py silent :!darker %
+autocmd BufRead,BufNewFile *.py setlocal foldmethod=indent
 
 " doxygen
 autocmd BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
@@ -123,6 +124,18 @@ autocmd BufRead,BufNewFile meson.build setlocal ts=2 sts=2 sw=2 expandtab
 
 " elixir
 autocmd FileType elixir setlocal formatprg=mix\ format\ -
+
+" fedpkg update (Bodhi update configuration)
+autocmd BufRead,BufNewFile bodhi.template setlocal filetype=toml
+" }}}
+
+" PLUGINS {{{
+" https://github.com/junegunn/vim-plug
+"   curl -fLo ~/.local/share/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
+" :PlugInstall to install new plugins
+" :PlugUpdate to update plugins
+" :PlugUpgrade to upgrade vim-plug
+call plug#begin('~/.config/nvim/plugged')
 
 "" toggle comment (NERD commenter)
 Plug 'scrooloose/nerdcommenter'
@@ -182,8 +195,11 @@ Plug 'Glench/Vim-Jinja2-Syntax'
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
-let g:fzf_layout = { 'right': '~70%' }
+let g:fzf_layout = { 'window': { 'width': 0.9, 'height': 0.9 } }
+let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 let g:fzf_history_dir = '~/.local/share/fzf-history'
+let $FZF_DEFAULT_COMMAND = 'rg --files'
+let $RIPGREP_CONFIG_PATH = $HOME .. '/.config/ripgreprc'
 imap <c-x><c-f> <plug>(fzf-complete-path)
 map <c-t> :Files<CR>
 map <c-k> :Files<CR>
@@ -250,7 +266,57 @@ Plug 'wsdjeg/vim-fetch'
 
 "Plug 'psf/black'
 
+" Treesitter
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
+Plug 'nvim-treesitter/nvim-treesitter-textobjects'
+
 call plug#end()
+
+lua <<EOF
+require'nvim-treesitter.configs'.setup {
+    ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
+    textobjects = {
+        select = {
+            enable = true,
+            keymaps = {
+                ["af"] = "@function.outer",
+                ["if"] = "@function.inner",
+                ["ac"] = "@class.outer",
+                ["ic"] = "@class.inner",
+                ["ab"] = "@block.outer",
+                ["ib"] = "@block.inner",
+                ["aa"] = "@parameter.outer",
+                ["ia"] = "@parameter.inner",
+                },
+            },
+        move = {
+            enable = true,
+            set_jumps = true,
+            goto_next_start = {
+                ["]m"] = "@function.outer",
+                ["]b"] = "@block.outer",
+                ["]a"] = "@parameter.outer",
+                },
+            goto_next_end = {
+                ["]M"] = "@function.outer",
+                ["]B"] = "@block.outer",
+                ["]A"] = "@parameter.outer",
+                },
+            goto_previous_start = {
+                ["[m"] = "@function.outer",
+                ["[b"] = "@block.outer",
+                ["[a"] = "@parameter.outer",
+                },
+            goto_previous_end = {
+                ["[M"] = "@function.outer",
+                ["[B"] = "@block.outer",
+                ["[A"] = "@parameter.outer",
+                },
+            },
+    },
+}
+EOF
 " }}}
 
 " KEYS {{{
@@ -329,11 +395,6 @@ set wildignore+=*.flv,.*mp4,*.mp3,*.wav,*.wmv,*.avi,*.mkv,*.mov
 "set spelllang=cs
 map <F7> :set spell!<CR>
 set spell
-"}}}
-
-" FOLDS {{{
-set foldmethod=marker
-set foldnestmax=2
 "}}}
 
 " HEX {{{

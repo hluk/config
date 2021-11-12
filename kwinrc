@@ -126,5 +126,5 @@ SwitchingMode=0
 BorderlessMaximizedWindows=true
 
 [org.kde.kdecoration2]
-library=org.kde.kwin.aurorae
-theme=__aurorae__svg__Materia-Manjaro-Gradient-Dark
+library=org.kde.breeze
+theme=Breeze

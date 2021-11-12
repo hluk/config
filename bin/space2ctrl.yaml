@@ -1,4 +1,0 @@
-- JOB: intercept -g $DEVNODE | space2meta | uinput -d $DEVNODE
-  DEVICE:
-    EVENTS:
-      EV_KEY: [KEY_SPACE]
