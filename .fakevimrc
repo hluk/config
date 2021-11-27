@@ -29,3 +29,14 @@ set tildeop
 
 " clear highlighted search term on space
 noremap <silent> <Space> :nohlsearch<CR>
+
+" faster commands
+nnoremap ; :
+nnoremap : ;
+
+" typos
+command! Q :q
+command! Qa :qa
+command! W :w
+command! Wq :wq
+command! WQ :wq

@@ -28,13 +28,12 @@ build() {
     sudo cmake --build build --target install
 }
 
-build f2meta KEY_F KEY_LEFTMETA
 build space2ctrl KEY_SPACE KEY_LEFTCTRL
 
 sudo systemctl enable --now udevmon
-sudo cat /etc/interception/udevmon.d/modifiers.yaml <<EOF
+sudo tee /etc/interception/udevmon.d/modifiers.yaml <<EOF
 ---
-- JOB: intercept -g \$DEVNODE | f2meta | space2ctrl | uinput -d \$DEVNODE
+- JOB: intercept -g \$DEVNODE | space2ctrl | uinput -d \$DEVNODE
   DEVICE:
     EVENTS:
       EV_KEY:

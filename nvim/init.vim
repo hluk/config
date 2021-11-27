@@ -87,7 +87,7 @@ autocmd VimLeave * call system("tmux rename-window $(basename $SHELL)")
 
 " python
 "autocmd BufWritePost *.py silent :!darker %
-autocmd BufRead,BufNewFile *.py setlocal foldmethod=indent
+"autocmd BufRead,BufNewFile *.py setlocal foldmethod=indent
 
 " doxygen
 autocmd BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
@@ -200,17 +200,17 @@ let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let $FZF_DEFAULT_COMMAND = 'rg --files'
 let $RIPGREP_CONFIG_PATH = $HOME .. '/.config/ripgreprc'
-imap <c-x><c-f> <plug>(fzf-complete-path)
-map <c-t> :Files<CR>
-map <c-k> :Files<CR>
-map <c-g> :Rg!<CR>
-map <c-j> :Buffers<CR>
-map <c-l> :Tags<CR>
+inoremap <c-x><c-f> <plug>(fzf-complete-path)
+noremap <c-t> :Files<CR>
+noremap <c-k> :Files<CR>
+noremap <c-g> :Rg!<CR>
+noremap <c-j> :Buffers<CR>
+noremap <c-l> :Tags<CR>
 " Insert mode completion
-imap <c-x><c-k> <plug>(fzf-complete-word)
-imap <c-x><c-f> <plug>(fzf-complete-path)
-imap <c-x><c-j> <plug>(fzf-complete-file-ag)
-imap <c-x><c-l> <plug>(fzf-complete-line)
+inoremap <c-x><c-k> <plug>(fzf-complete-word)
+inoremap <c-x><c-f> <plug>(fzf-complete-path)
+inoremap <c-x><c-j> <plug>(fzf-complete-file-ag)
+inoremap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Fuzzy find
 "Plug 'nvim-lua/plenary.nvim'
@@ -322,6 +322,9 @@ EOF
 " KEYS {{{
 " faster commands
 nnoremap ; :
+nnoremap : ;
+vnoremap ; :
+vnoremap : ;
 
 " typos
 command! Q :q
