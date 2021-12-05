@@ -85,9 +85,16 @@ set foldnestmax=2
 autocmd BufEnter * call system("tmux rename-window " . expand("%:p:gs?/home/[a-z]*/??"))
 autocmd VimLeave * call system("tmux rename-window $(basename $SHELL)")
 
+" Restore open folds
+augroup restore_folds
+  autocmd!
+  autocmd BufWinLeave *.* mkview 1
+  autocmd BufWinEnter *.* silent! loadview 1
+augroup END
+
 " python
 "autocmd BufWritePost *.py silent :!darker %
-"autocmd BufRead,BufNewFile *.py setlocal foldmethod=indent
+autocmd BufRead,BufNewFile *.py setlocal foldmethod=indent
 
 " doxygen
 autocmd BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
@@ -192,6 +199,9 @@ Plug 'sheerun/vim-polyglot'
 " Jinja2
 Plug 'Glench/Vim-Jinja2-Syntax'
 
+" Nim
+Plug 'alaviss/nim.nvim'
+
 " fzf
 Plug 'junegunn/fzf', { 'dir': '~/.fzf', 'do': './install --all' }
 Plug 'junegunn/fzf.vim'
@@ -200,7 +210,6 @@ let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let $FZF_DEFAULT_COMMAND = 'rg --files'
 let $RIPGREP_CONFIG_PATH = $HOME .. '/.config/ripgreprc'
-inoremap <c-x><c-f> <plug>(fzf-complete-path)
 noremap <c-t> :Files<CR>
 noremap <c-k> :Files<CR>
 noremap <c-g> :Rg!<CR>
@@ -225,9 +234,16 @@ inoremap <c-x><c-l> <plug>(fzf-complete-line)
 " Color schemes
 Plug 'sjl/badwolf'
 Plug 'morhetz/gruvbox'
+Plug 'catppuccin/nvim'
+Plug 'rose-pine/neovim'
+Plug 'EdenEast/nightfox.nvim'
+Plug 'folke/tokyonight.nvim', { 'branch': 'main' }
 
 " reopen files at your last edit position
 Plug 'farmergreg/vim-lastplace'
+
+Plug 'nvim-lualine/lualine.nvim'
+Plug 'kyazdani42/nvim-web-devicons'
 
 " completion
 "Plug 'neoclide/coc.nvim'
@@ -271,6 +287,10 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
 call plug#end()
+
+lua << END
+require'lualine'.setup()
+END
 
 lua <<EOF
 require'nvim-treesitter.configs'.setup {
@@ -417,9 +437,15 @@ set bg=dark
 
 " gruvbox color theme
 "https://github.com/morhetz/gruvbox/wiki/Configuration
-let g:gruvbox_italic=1
-let g:gruvbox_contrast_dark='hard'
-let g:gruvbox_contrast_light='hard'
-let g:gruvbox_improved_strings=0
-colorscheme gruvbox
+"let g:gruvbox_italic=1
+"let g:gruvbox_contrast_dark='hard'
+"let g:gruvbox_contrast_light='hard'
+"let g:gruvbox_improved_strings=0
+"colorscheme gruvbox
+
+"colorscheme duskfox
+"colorscheme nightfox
+"colorscheme rose-pine
+"colorscheme catppuccin
+colorscheme tokyonight
 "}}}

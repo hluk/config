@@ -22,6 +22,7 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
+export PATH="$HOME/dev/Nim/bin:$PATH"
 
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"

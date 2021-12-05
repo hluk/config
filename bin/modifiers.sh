@@ -2,8 +2,10 @@
 # Enables emulating key modifiers with other keys.
 set -exuo pipefail
 
-sudo dnf -y copr enable fszymanski/interception-tools
-sudo dnf -y install interception-tools
+if [[ ! -f /usr/bin/udevmon ]]; then
+    sudo dnf -y copr enable fszymanski/interception-tools
+    sudo dnf -y install interception-tools
+fi
 
 cd ~/dev/
 test -d space2meta ||

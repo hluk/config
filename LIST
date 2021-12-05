@@ -20,6 +20,7 @@
 ~/.config/ulauncher/
 ~/.config/waybar/
 ~/.config/wofi/
+~/.config/xitomatl/xitomatl.ini
 ~/.config/xkb/
 ~/.config/yamllint/
 ~/.dwmrc.h
