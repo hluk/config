@@ -22,6 +22,8 @@
 ~/.config/wofi/
 ~/.config/xitomatl/xitomatl.ini
 ~/.config/xkb/
+~/.config/qutebrowser/autoconfig.yml qutebrowser/
+~/.config/qutebrowser/greasemonkey/ qutebrowser/
 ~/.config/yamllint/
 ~/.dwmrc.h
 ~/.fakevimrc

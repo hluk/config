@@ -78,6 +78,10 @@ set termguicolors
 
 set foldmethod=marker
 set foldnestmax=2
+
+set showtabline=2
+
+let mapleader = ","
 " }}}
 
 " FILES {{{
@@ -287,12 +291,10 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-treesitter/nvim-treesitter-textobjects'
 
 call plug#end()
+" }}}
 
-lua << END
-require'lualine'.setup()
-END
-
-lua <<EOF
+" LUA {{{
+lua <<LUA_END
 require'nvim-treesitter.configs'.setup {
     ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
@@ -336,7 +338,42 @@ require'nvim-treesitter.configs'.setup {
             },
     },
 }
-EOF
+require'lualine'.setup {
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {
+      'branch',
+      'diff',
+      {'diagnostics', sources={'nvim_lsp', 'coc'}},
+    },
+    lualine_c = {{'filename', path=1}},
+    lualine_x = {'encoding', 'fileformat', 'filetype'},
+    lualine_y = {'progress'},
+    lualine_z = {'location'}
+  },
+  inactive_sections = {
+    lualine_a = {},
+    lualine_b = {{'filename', path=1}},
+    lualine_c = {},
+    lualine_x = {'location'},
+    lualine_y = {},
+    lualine_z = {}
+  },
+  tabline = {
+    lualine_a = {{
+      'buffers',
+      show_filename_only=false,
+      mode=2,
+      max_length = vim.o.columns
+    }},
+    lualine_b = {},
+    lualine_c = {},
+    lualine_x = {},
+    lualine_y = {},
+    lualine_z = {}
+  },
+}
+LUA_END
 " }}}
 
 " KEYS {{{
@@ -352,6 +389,28 @@ command! Qa :qa
 command! W :w
 command! Wq :wq
 command! WQ :wq
+
+" buffers
+nnoremap <Leader>l :ls<CR>
+nnoremap <Leader>b :bp<CR>
+nnoremap <Leader>f :bn<CR>
+nnoremap <Leader>g :e#<CR>
+nnoremap <Leader>1 :1b<CR>
+nnoremap <Leader>2 :2b<CR>
+nnoremap <Leader>3 :3b<CR>
+nnoremap <Leader>4 :4b<CR>
+nnoremap <Leader>5 :5b<CR>
+nnoremap <Leader>6 :6b<CR>
+nnoremap <Leader>7 :7b<CR>
+nnoremap <Leader>8 :8b<CR>
+nnoremap <Leader>9 :9b<CR>
+nnoremap <Leader>0 :10b<CR>
+" Ngb jumps to specific buffer
+let c = 1
+while c <= 99
+  execute "nnoremap " . c . "gb :" . c . "b\<CR>"
+  let c += 1
+endwhile
 
 " edit/source configuration
 noremap <C-e>e :split ~/.config/nvim/init.vim <CR>
