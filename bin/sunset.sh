@@ -6,7 +6,7 @@ pkill wlsunset || true
 
 lat=48.2
 lon=16.67
-min_temp=4000
+min_temp=4500
 max_temp=6500
 config=/tmp/redshift-$USER
 

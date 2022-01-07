@@ -17,5 +17,5 @@ mako_args=(
 
 pkill mako || true
 
-#exec mako "${mako_args[@]}"
-exec ~/dev/mako/build/mako "${mako_args[@]}"
+exec mako "${mako_args[@]}"
+#exec ~/dev/mako/build/mako "${mako_args[@]}"

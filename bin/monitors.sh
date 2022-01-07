@@ -14,10 +14,7 @@ s1=$scale
 w1=1920
 h1=1080
 
-if [[ $out1_enabled == "1" ]]; then
-    out1_enabled=enable
-else
-    out1_enabled=disable
+if [[ $out1_enabled != "1" ]]; then
     echo "Disabling $out1"
     w1=0
 fi
@@ -34,12 +31,24 @@ y1=$((0))
 x2=$((w1/s1))
 y2=$((0))
 
+if [[ $out1_enabled == "1" ]]; then
+msg_out1=$(cat <<EOD
+output "$out1" scale $s1
+output "$out1" pos $x1 $y1 res ${w1}x$h1
+output "$out1" enable
+EOD
+)
+else
+msg_out1=$(cat <<EOD
+output "$out1" disable
+EOD
+)
+fi
+
 msg=$(cat <<EOD
 output "*" scale $scale
 
-output "$out1" scale $s1
-output "$out1" pos $x1 $y1 res ${w1}x$h1
-output "$out1" $out1_enabled
+$msg_out1
 
 output "$out2" scale $s2
 output "$out2" pos $x2 $y2 res ${w2}x$h2

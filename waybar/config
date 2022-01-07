@@ -14,7 +14,7 @@
     ],
     "modules-right": [
         //"network",
-        "custom/pomodoro",
+        //"custom/pomodoro",
         "custom/redshift",
         "pulseaudio",
         "cpu",

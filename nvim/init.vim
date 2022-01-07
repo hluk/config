@@ -51,6 +51,7 @@ set wildmode=longest:full,full
 " tab -> spaces
 set expandtab
 set shiftwidth=4
+set tabstop=4
 " keep a 5 line buffer for the cursor from top/bottom of window
 set scrolloff=5
 " X11 clipboard
@@ -62,6 +63,9 @@ call system('mkdir -p ~/.config/nvim/undofiles/')
 set undodir=~/.config/nvim/undofiles/
 set undofile
 autocmd OptionSet guicursor noautocmd set guicursor=
+
+" disable per-file configuration
+set nomodeline
 
 " automatically reload changed file
 set autoread
@@ -187,6 +191,7 @@ Plug 'nvie/vim-flake8'
 
 " A collection of language packs for Vim.
 Plug 'sheerun/vim-polyglot'
+let g:polyglot_disabled = ['markdown']
 " Rust syntax
 "Plug 'rust-lang/rust.vim'
 " Go
@@ -344,7 +349,7 @@ require'lualine'.setup {
     lualine_b = {
       'branch',
       'diff',
-      {'diagnostics', sources={'nvim_lsp', 'coc'}},
+      {'diagnostics', sources = {'nvim_diagnostic', 'coc'}},
     },
     lualine_c = {{'filename', path=1}},
     lualine_x = {'encoding', 'fileformat', 'filetype'},

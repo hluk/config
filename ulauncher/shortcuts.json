@@ -58,5 +58,25 @@
         "is_default_search": false,
         "run_without_argument": true,
         "added": 1616442792.9143527
+    },
+    "dad20573-80db-4a03-ac63-a271456cc003": {
+        "id": "dad20573-80db-4a03-ac63-a271456cc003",
+        "name": "xitomatl",
+        "keyword": "xitomatl",
+        "cmd": "~/dev/bin/xitomatl.sh 0",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": true,
+        "added": 1639845139.189707
+    },
+    "5743da27-6251-4220-ae7d-4b84f329dc46": {
+        "id": "5743da27-6251-4220-ae7d-4b84f329dc46",
+        "name": "chromium",
+        "keyword": "chromium",
+        "cmd": "~/dev/bin/chromium.sh",
+        "icon": null,
+        "is_default_search": false,
+        "run_without_argument": true,
+        "added": 1640673560.1423335
     }
 }

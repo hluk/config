@@ -72,7 +72,7 @@ bindsym $mod+Shift+Right move right
 bindsym $mod+v split v
 
 # enter fullscreen mode for the focused container
-bindsym $mod+f fullscreen toggle
+bindsym $mod+Shift+f fullscreen toggle
 
 # change container layout (stacked, tabbed, toggle split)
 #bindsym $mod+s layout stacking
@@ -107,21 +107,21 @@ bindsym $mod+0 workspace 10
 bindsym $mod+a workspace 1
 bindsym $mod+s workspace 2
 bindsym $mod+d workspace 3
-bindsym $mod+r workspace 4
-bindsym $mod+t workspace 5
+bindsym $mod+f workspace 4
+bindsym $mod+g workspace 5
 
 # move focused container to workspace
-bindsym $mod+$ctrl+grave move container to workspace 0
-bindsym $mod+$ctrl+1 move container to workspace 1
-bindsym $mod+$ctrl+2 move container to workspace 2
-bindsym $mod+$ctrl+3 move container to workspace 3
-bindsym $mod+$ctrl+4 move container to workspace 4
-bindsym $mod+$ctrl+5 move container to workspace 5
-bindsym $mod+$ctrl+6 move container to workspace 6
-bindsym $mod+$ctrl+7 move container to workspace 7
-bindsym $mod+$ctrl+8 move container to workspace 8
-bindsym $mod+$ctrl+9 move container to workspace 9
-bindsym $mod+$ctrl+0 move container to workspace 10
+bindsym $mod+Shift+grave move container to workspace 0
+bindsym $mod+Shift+1 move container to workspace 1
+bindsym $mod+Shift+2 move container to workspace 2
+bindsym $mod+Shift+3 move container to workspace 3
+bindsym $mod+Shift+4 move container to workspace 4
+bindsym $mod+Shift+5 move container to workspace 5
+bindsym $mod+Shift+6 move container to workspace 6
+bindsym $mod+Shift+7 move container to workspace 7
+bindsym $mod+Shift+8 move container to workspace 8
+bindsym $mod+Shift+9 move container to workspace 9
+bindsym $mod+Shift+0 move container to workspace 10
 
 bindsym $mod+m move workspace to output right
 
@@ -218,6 +218,7 @@ bindsym $mod+Shift+w exec "~/dev/bin/browser.sh"
 bindsym $mod+q exec "~/dev/bin/clipboard.sh"
 bindsym $mod+z exec "~/dev/build/copyq/Desktop-Debug/copyq -s test2 toggle"
 bindsym $mod+F2 exec "~/dev/config/bin/sway_run.sh"
+bindsym $alt+F2 exec "~/dev/config/bin/sway_run.sh"
 bindsym $ctrl+$alt+l exec "~/dev/bin/lock.sh"
 
 bindsym $mod+$ctrl+t exec "~/dev/bin/clipboard.sh triggerGlobalShortcut 'Copy Text in Image'"
@@ -228,9 +229,10 @@ bindsym $mod+$ctrl+s exec "~/dev/bin/screenshot.sh"
 bindsym XF86AudioLowerVolume exec "~/dev/bin/volume_down.sh"
 bindsym XF86AudioRaiseVolume exec "~/dev/bin/volume_up.sh"
 bindsym XF86AudioMute exec "~/dev/bin/togglemute.sh"
-bindsym $mod+p exec "pavucontrol"
+bindsym $mod+Shift+p exec "pavucontrol"
 
 bindsym XF86AudioPlay exec "~/dev/bin/toggleplay.sh"
+bindsym $mod+p exec "~/dev/bin/toggleplay.sh"
 
 # redshift (manual)
 bindsym $mod+$ctrl+Up exec "~/dev/bin/red_up.sh"
@@ -242,6 +244,7 @@ bindsym XF86Launch9 exec "~/dev/bin/red_down.sh"
 exec "~/dev/bin/notifications.sh"
 exec "~/dev/bin/sunset.sh"
 exec "~/dev/bin/idle.sh"
+exec "~/dev/bin/xitomatl.sh"
 
 # sleep as workaround for big tray icons waybar 0.9.8 bug
 # https://github.com/Alexays/Waybar/issues/1212
