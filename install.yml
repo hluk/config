@@ -1,0 +1,123 @@
+# ansible-playbook --ask-become-pass install.yml
+---
+- name: Install and configure Fedora
+  hosts: localhost
+  tasks:
+    - name: Install packages
+      become: yes
+      dnf:
+        state: present
+        name:
+          # Apps/Utilities
+          - chromium-freeworld
+          - dolphin
+          - firefox-wayland
+          - keepassxc
+          - pavucontrol
+          - pinentry-qt
+
+          - ShellCheck
+          - autojump-zsh
+          - bat
+          - bolt
+          - fd-find
+          - htop
+          - inotify-tools
+          - marked
+          - p7zip-plugins
+          - playerctl
+          - pulseaudio-utils
+          - ripgrep
+
+          - sddm
+          - sddm-breeze
+
+          - ffmpeg
+          - gstreamer1-vaapi
+          - intel-media-driver
+          - libva-intel-driver
+          - libva-intel-hybrid-driver
+          - libva-utils
+
+          - copyq
+          - GraphicsMagick
+          - python3-pygments
+          - wl-clipboard
+          - xclip
+
+          # Python
+          - black
+          - ipython
+          - poetry
+          - python3-rich
+
+          # Sway
+          - grim
+          - mako
+          - slurp
+          - swappy
+          - sway
+          - ulauncher
+          - waybar
+          - xdg-desktop-portal-wlr
+
+          # fonts
+          - google-noto-sans-fonts
+          - google-roboto-fonts
+          - jetbrains-mono-nl-fonts
+          - overpass-fonts
+          - overpass-mono-fonts
+
+          # work
+          - buildah
+          - fedora-packager-kerberos
+          - flatpak-builder
+          - freeipa-client
+          - freeipa-selinux
+          - ipa-admintools
+          - ipa-client
+          - krb5-workstation
+          - openldap-clients
+          - origin-clients
+          - postgresql
+          - python3-kubernetes
+          - python3-libselinux
+          - python3-openshift
+          - skopeo
+          - sssd-ipa
+
+          # CopyQ development
+          - appstream-qt-devel
+          - desktop-file-utils
+          - extra-cmake-modules
+          - gcc-c++
+          - kf5-knotifications-devel
+          - kf5-rpm-macros
+          - libXfixes-devel
+          - libXtst-devel
+          - libappstream-glib
+          - libstdc++-devel
+          - ninja-build
+          - qt-creator
+          - qt5-assistant
+          - qt5-doc
+          - qt5-qtbase-devel
+          - qt5-qtbase-private-devel
+          - qt5-qtscript-devel
+          - qt5-qtsvg-devel
+          - qt5-qttools-devel
+          - qt5-qtwayland-devel
+          - qt5-qtx11extras-devel
+          - qwt-qt5-devel
+          - wayland-devel
+
+          - python3-fonttools
+
+          - qt6-linguist
+          - qt6-qtbase-devel
+          - qt6-qtbase-gui
+          - qt6-qtbase-private-devel
+          - qt6-qtsvg-devel
+          - qt6-qttools-devel
+          - qt6-qtwayland
+          - qt6-qtwayland-devel

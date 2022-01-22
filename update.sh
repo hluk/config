@@ -4,6 +4,7 @@ set -ex
 ./_update.awk LIST
 
 args=(
+    --exclude=hotspot.sh
     --exclude=update.sh
     --exclude=pwned.sh
     --exclude=lyrics.py

@@ -254,15 +254,14 @@ exec sh -c "sleep 5; exec ~/dev/bin/clipboard.sh"
 exec_always "~/dev/bin/monitors.sh"
 
 # swaymsg -t get_inputs
-input type:keyboard xkb_numlock enable
+#input type:keyboard xkb_numlock enable
 exec_always "~/dev/bin/keyboard.sh"
 
 
-#workspace 0 output eDP-1
-workspace 0 output DP-3
-workspace 1 output DP-4
-workspace 2 output DP-4
-workspace 3 output DP-4
-workspace 4 output DP-4
+workspace 0 output eDP-1
+workspace 1 output DP-6
+workspace 2 output DP-6
+workspace 3 output DP-6
+workspace 4 output DP-6
 
-focus output DP-4
+focus output DP-6

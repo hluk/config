@@ -225,20 +225,10 @@ noremap <c-g> :Rg!<CR>
 noremap <c-j> :Buffers<CR>
 noremap <c-l> :Tags<CR>
 " Insert mode completion
-inoremap <c-x><c-k> <plug>(fzf-complete-word)
-inoremap <c-x><c-f> <plug>(fzf-complete-path)
-inoremap <c-x><c-j> <plug>(fzf-complete-file-ag)
-inoremap <c-x><c-l> <plug>(fzf-complete-line)
-
-" Fuzzy find
-"Plug 'nvim-lua/plenary.nvim'
-"Plug 'nvim-telescope/telescope.nvim'
-"nnoremap <c-k> <cmd>Telescope find_files hidden=true<cr>
-"nnoremap <c-t> <cmd>Telescope find_files hidden=true<cr>
-"nnoremap <c-g> <cmd>Telescope live_grep hidden=true<cr>
-"nnoremap <c-j> <cmd>Telescope buffers<cr>
-"nnoremap <c-l> <cmd>Telescope help_tags<cr>
-"autocmd FileType TelescopePrompt call deoplete#custom#buffer_option('auto_complete', v:false)
+imap <c-x><c-k> <plug>(fzf-complete-word)
+imap <c-x><c-f> <plug>(fzf-complete-path)
+imap <c-x><c-j> <plug>(fzf-complete-file-ag)
+imap <c-x><c-l> <plug>(fzf-complete-line)
 
 " Color schemes
 Plug 'sjl/badwolf'
@@ -255,36 +245,14 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
 " completion
-"Plug 'neoclide/coc.nvim'
-"Plug 'ycm-core/YouCompleteMe'
+"Plug 'neovim/nvim-lspconfig'
+"Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'hrsh7th/cmp-buffer'
+Plug 'hrsh7th/cmp-path'
+Plug 'hrsh7th/cmp-cmdline'
+Plug 'hrsh7th/nvim-cmp'
 
-" :help deoplete-options
-if has('nvim')
-  Plug 'Shougo/deoplete.nvim', { 'do': ':UpdateRemotePlugins' }
-else
-  Plug 'Shougo/deoplete.nvim'
-  Plug 'roxma/nvim-yarp'
-  Plug 'roxma/vim-hug-neovim-rpc'
-endif
-let g:deoplete#enable_at_startup = 1
-
-if has('win32') || has('win64')
-  Plug 'tbodt/deoplete-tabnine', { 'do': 'powershell.exe .\install.ps1' }
-else
-  Plug 'tbodt/deoplete-tabnine', { 'do': './install.sh' }
-endif
-
-inoremap <silent><expr> <TAB>
-\ pumvisible() ? "\<C-n>" :
-\ <SID>check_back_space() ? "\<TAB>" :
-\ deoplete#manual_complete()
-function! s:check_back_space() abort "{{{
-let col = col('.') - 1
-return !col || getline('.')[col - 1]  =~ '\s'
-endfunction"}}}
-
-" python completion
-Plug 'deoplete-plugins/deoplete-jedi'
+Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
 
 " handle line and column numbers in file names
 Plug 'wsdjeg/vim-fetch'
@@ -300,7 +268,40 @@ call plug#end()
 
 " LUA {{{
 lua <<LUA_END
-require'nvim-treesitter.configs'.setup {
+local cmp = require('cmp')
+cmp.setup({
+    sources = {{ name = 'buffer' }},
+    completion = {
+        autocomplete = {
+            require('cmp.types').cmp.TriggerEvent.InsertEnter,
+            require('cmp.types').cmp.TriggerEvent.TextChanged
+        }
+    }
+})
+cmp.setup.cmdline('/', {
+  sources = {{ name = 'buffer' }}
+})
+cmp.setup.cmdline(':', {
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  })
+})
+
+require('cmp_tabnine.config'):setup({
+    max_lines = 1000;
+    max_num_results = 20;
+    sort = true;
+    run_on_every_keystroke = true;
+    snippet_placeholder = '..';
+    ignored_file_types = { -- default is not to ignore
+        -- uncomment to ignore in lua:
+        -- lua = true
+    };
+})
+
+require('nvim-treesitter.configs').setup {
     ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
     sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
     textobjects = {
@@ -475,6 +476,7 @@ set wildignore+=*.flv,.*mp4,*.mp3,*.wav,*.wmv,*.avi,*.mkv,*.mov
 
 "set completeopt=longest,menuone,preview
 "set completeopt=longest,menuone,menu
+set completeopt=menu,menuone,noselect
 "}}}
 
 " DICTIONARY (C-x C-k) {{{

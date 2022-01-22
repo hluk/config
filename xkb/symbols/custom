@@ -1,14 +1,14 @@
 xkb_symbols {
         include "pc+us(altgr-intl)+inet(evdev)"
 
-        modifier_map Mod4 { <CAPS> };
-        key <CAPS> {
-                type = "ONE_LEVEL",
-                symbols[group1] = [ Super_L ],
-                actions[group1] = [
-                     LatchMods(modifiers=Mod4)
-                ]
-        };
+        #modifier_map Mod4 { <CAPS> };
+        #key <CAPS> {
+        #        type = "ONE_LEVEL",
+        #        symbols[group1] = [ Super_L ],
+        #        actions[group1] = [
+        #             LatchMods(modifiers=Mod4)
+        #        ]
+        #};
 
         #key <RALT> { [ Control_L ] };
         #modifier_map Control { <RALT> };

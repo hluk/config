@@ -8,4 +8,11 @@ exec chromium-freeworld \
     --enable-features=UseOzonePlatform \
     --ozone-platform=wayland \
     --user-data-dir="$HOME/work/chromium-profile" \
+    --ignore-gpu-blocklist \
+    --enable-gpu-rasterization \
+    --enable-zero-copy \
+    --disable-gpu-driver-bug-workarounds \
+    --enable-accelerated-video-decode \
+    --enable-features=VaapiVideoDecoder \
+    --use-gl=egl \
     "$@"

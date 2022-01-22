@@ -23,6 +23,8 @@ export LESS_TERMCAP_us=$'\E[01;32m'
 export PATH="$HOME/.local/bin:$PATH"
 export PATH="$HOME/.cargo/bin:$PATH"
 export PATH="$HOME/dev/Nim/bin:$PATH"
+export PATH="$HOME/dev/bin:$PATH"
+export PATH="$HOME/dev/scripts:$PATH"
 
 export GOPATH="$HOME/go"
 export PATH="$GOPATH/bin:$PATH"
@@ -177,6 +179,9 @@ elif [[ $NAME =~ "Ubuntu" ]]; then
     alias u="sudo apt remove"
     alias up="sudo apt update && sudo apt upgrade"
 fi
+
+alias w0="~/dev/scripts/work.sh off"
+alias w1="~/dev/scripts/work.sh on"
 
 # cd ~d
 d=~/Downloads
