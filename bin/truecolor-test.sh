@@ -5,6 +5,7 @@ echo -e "\e[3mitalic\e[0m"
 echo -e "\e[3m\e[1mbold italic\e[0m"
 echo -e "\e[4munderline\e[0m"
 echo -e "\e[9mstrikethrough\e[0m"
+echo -e '\e[4:3m\e[58:2::240:143:104mundercurl\e[59m\e[4:0m'
 
 # Tests support for truecolor on terminal.
 # https://gist.github.com/XVilka/8346728

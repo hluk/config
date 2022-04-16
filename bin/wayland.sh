@@ -7,7 +7,9 @@ export QT_QPA_PLATFORM=wayland
 if [[ -n $DISPLAY ]]; then
     #weston &
     #kwin_wayland &
-    sway &
+    #mutter --nested &
+    gnome-shell --nested &
+    #sway &
 else
     weston-launch -- --socket=wayland-system-0 &
 fi

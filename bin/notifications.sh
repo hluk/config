@@ -1,4 +1,7 @@
 #!/bin/bash
+pkill swaync && sleep 0.2 || true
+exec /usr/bin/swaync
+
 mako_args=(
     --width=320
     --height=240

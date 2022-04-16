@@ -24,6 +24,7 @@
           - bolt
           - fd-find
           - htop
+          - httpie
           - inotify-tools
           - marked
           - p7zip-plugins
@@ -35,6 +36,9 @@
 
           - sddm
           - sddm-breeze
+
+          # Qt theme manager
+          - kvantum
 
           - ffmpeg
           - gstreamer1-vaapi
@@ -125,6 +129,9 @@
           - qt6-qttools-devel
           - qt6-qtwayland
           - qt6-qtwayland-devel
+
+          - openbox
+          - xorg-x11-server-Xephyr
 
     - name: NeoVim - Install vim-plug
       get_url:

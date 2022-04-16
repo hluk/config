@@ -80,9 +80,6 @@ au InsertLeave * set nopaste
 
 set termguicolors
 
-set foldmethod=marker
-set foldnestmax=2
-
 set showtabline=2
 
 let mapleader = ","
@@ -92,17 +89,6 @@ let mapleader = ","
 " update tab title in tmux
 autocmd BufEnter * call system("tmux rename-window " . expand("%:p:gs?/home/[a-z]*/??"))
 autocmd VimLeave * call system("tmux rename-window $(basename $SHELL)")
-
-" Restore open folds
-augroup restore_folds
-  autocmd!
-  autocmd BufWinLeave *.* mkview 1
-  autocmd BufWinEnter *.* silent! loadview 1
-augroup END
-
-" python
-"autocmd BufWritePost *.py silent :!darker %
-autocmd BufRead,BufNewFile *.py setlocal foldmethod=indent
 
 " doxygen
 autocmd BufNewFile,BufReadPost *.cpp,*.c,*.h set syntax+=.doxygen
@@ -177,6 +163,10 @@ autocmd BufEnter schema.rb ALEDisable
 Plug 'tpope/vim-fugitive'
 command Gbl Git blame
 
+" lazygit
+Plug 'kdheepak/lazygit.nvim'
+nnoremap <silent> <leader>g :LazyGit<CR>
+
 " asynchronous build and test dispatcher
 Plug 'tpope/vim-dispatch'
 
@@ -191,7 +181,7 @@ Plug 'nvie/vim-flake8'
 
 " A collection of language packs for Vim.
 Plug 'sheerun/vim-polyglot'
-let g:polyglot_disabled = ['markdown']
+let g:polyglot_disabled = ['autoindent', 'markdown']
 " Rust syntax
 "Plug 'rust-lang/rust.vim'
 " Go
@@ -245,8 +235,8 @@ Plug 'nvim-lualine/lualine.nvim'
 Plug 'kyazdani42/nvim-web-devicons'
 
 " completion
-"Plug 'neovim/nvim-lspconfig'
-"Plug 'hrsh7th/cmp-nvim-lsp'
+Plug 'neovim/nvim-lspconfig'
+Plug 'hrsh7th/cmp-nvim-lsp'
 Plug 'hrsh7th/cmp-buffer'
 Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
@@ -268,9 +258,17 @@ call plug#end()
 
 " LUA {{{
 lua <<LUA_END
+-- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
+require'lspconfig'.pylsp.setup{}
+
 local cmp = require('cmp')
 cmp.setup({
-    sources = {{ name = 'buffer' }},
+    sources = {
+      { name = 'nvim_lsp' },
+      { name = 'buffer' },
+      { name = 'cmp_tabnine' },
+      { name = 'path' },
+    },
     completion = {
         autocomplete = {
             require('cmp.types').cmp.TriggerEvent.InsertEnter,
@@ -295,8 +293,7 @@ require('cmp_tabnine.config'):setup({
     sort = true;
     run_on_every_keystroke = true;
     snippet_placeholder = '..';
-    ignored_file_types = { -- default is not to ignore
-        -- uncomment to ignore in lua:
+    ignored_file_types = {
         -- lua = true
     };
 })
@@ -400,7 +397,7 @@ command! WQ :wq
 nnoremap <Leader>l :ls<CR>
 nnoremap <Leader>b :bp<CR>
 nnoremap <Leader>f :bn<CR>
-nnoremap <Leader>g :e#<CR>
+nnoremap <Leader>, :e#<CR>
 nnoremap <Leader>1 :1b<CR>
 nnoremap <Leader>2 :2b<CR>
 nnoremap <Leader>3 :3b<CR>

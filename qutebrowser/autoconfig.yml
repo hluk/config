@@ -23,13 +23,27 @@ settings:
   colors.tabs.selected.odd.bg:
     global: '#060'
   colors.webpage.bg:
-    global: black
+    global: white
+  colors.webpage.darkmode.algorithm:
+    global: lightness-cielab
   colors.webpage.darkmode.enabled:
-    global: true
+    global: false
+  colors.webpage.darkmode.policy.images:
+    global: never
   colors.webpage.darkmode.policy.page:
     global: always
   colors.webpage.preferred_color_scheme:
-    global: dark
+    global: light
+  content.desktop_capture:
+    https://meet.google.com: true
+  content.media.audio_capture:
+    https://meet.google.com: true
+  content.media.audio_video_capture:
+    https://meet.google.com: true
+  content.media.video_capture:
+    https://meet.google.com: true
+  content.notifications.enabled:
+    https://meet.google.com: true
   fonts.tabs.selected:
     global: 7pt default_family
   fonts.tabs.unselected:

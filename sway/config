@@ -11,7 +11,8 @@ exec lxpolkit
 # Allow screen sharing
 exec env XDG_CURRENT_DESKTOP=sway /usr/libexec/xdg-desktop-portal -r
 
-workspace_layout tabbed
+default_orientation horizontal
+#workspace_layout tabbed
 
 set $mod Mod4
 set $alt Mod1
@@ -195,7 +196,8 @@ client.background       #ffffff
 #for_window [instance="^copyq$" class="^[Cc]opyq"] floating enable, border normal
 #for_window [instance="^xfce4-appfinder$" class="^Xfce4-appfinder$"] floating enable, border normal
 #for_window [instance="^xev$"] floating enable, border normal
-for_window [app_id="^copyq$"] floating enable, border normal
+for_window [app_id="^com.github.hluk.copyq$"] floating enable, border normal
+for_window [title="^InfiniteCopy$"] floating enable, border normal
 
 for_window [app_id="^mpv$"] floating enable, resize set 960 540, border pixel 0
 
@@ -256,6 +258,9 @@ exec_always "~/dev/bin/monitors.sh"
 # swaymsg -t get_inputs
 #input type:keyboard xkb_numlock enable
 exec_always "~/dev/bin/keyboard.sh"
+
+# Toggle notification center
+bindsym $mod+Shift+n exec swaync-client --toggle-panel --skip-wait
 
 
 workspace 0 output eDP-1

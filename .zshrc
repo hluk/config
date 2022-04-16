@@ -145,6 +145,7 @@ alias gf="git f"
 alias gl="git la"
 alias gst="git st"
 alias gu="git up"
+alias gg="lazygit"
 
 if [ -n "$DISPLAY" ]; then
     alias mc="mc -x"
@@ -180,6 +181,8 @@ elif [[ $NAME =~ "Ubuntu" ]]; then
     alias up="sudo apt update && sudo apt upgrade"
 fi
 
+alias b0="~/dev/scripts/bluetooth.sh off"
+alias b1="~/dev/scripts/bluetooth.sh on"
 alias w0="~/dev/scripts/work.sh off"
 alias w1="~/dev/scripts/work.sh on"
 

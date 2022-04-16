@@ -20,13 +20,7 @@ if [[ $1 == "off" ]]; then
 else
     rfkill unblock "$id"
     #device=$(bluetoothctl devices | grep -F "$name" | cut -d ' ' -f 2)
-    sleep 1
-
-    while ! bt_pair; do
-        sleep 1
-    done
-
-    while ! bt_connect; do
-        sleep 1
-    done
+    sleep 2
+    bt_pair || true
+    bt_connect || true
 fi
