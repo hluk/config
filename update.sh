@@ -8,6 +8,7 @@ args=(
     --exclude=update.sh
     --exclude=pwned.sh
     --exclude=lyrics.py
+    --exclude=.gitconfig
     --exclude-dir=.git
     -iRE
     -e '^P='

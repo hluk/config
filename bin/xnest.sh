@@ -10,13 +10,18 @@ D=:${D:-"9"}
 Xephyr $D -ac -br -reset -terminate +iglx +extension Composite -screen 1600x900 &
 #Xephyr $D -ac -br -reset -terminate +iglx +extension Composite -screen 640x480 &
 export DISPLAY=$D
+export WAYLAND_DISPLAY=
 sleep 1
 
+export QT_QPA_PLATFORM=xcb
+
+#herbstluftwm &
 openbox &
+#awesome &
 #xfwm4 &
 #i3 &
 #mutter &
-#startkde &
+#startplasma-x11 &
 sleep 1
 
 /usr/libexec/gsd-xsettings &

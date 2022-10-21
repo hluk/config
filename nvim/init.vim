@@ -242,8 +242,6 @@ Plug 'hrsh7th/cmp-path'
 Plug 'hrsh7th/cmp-cmdline'
 Plug 'hrsh7th/nvim-cmp'
 
-Plug 'tzachar/cmp-tabnine', { 'do': './install.sh' }
-
 " handle line and column numbers in file names
 Plug 'wsdjeg/vim-fetch'
 
@@ -259,25 +257,69 @@ call plug#end()
 " LUA {{{
 lua <<LUA_END
 -- https://github.com/neovim/nvim-lspconfig/blob/master/doc/server_configurations.md#pylsp
-require'lspconfig'.pylsp.setup{}
+require'lspconfig'.pylsp.setup{
+    settings = {
+        pylsp = {
+            plugins = {
+                mccabe = {
+                    enabled = false,
+                },
+                pycodestyle = {
+                    maxLineLength = 100,
+                    enabled = true,
+                },
+                pylint = {
+                    args = {
+                        '--max-line-length=100',
+                        '--disable=arguments-renamed',
+                        '--disable=missing-class-docstring',
+                        '--disable=missing-function-docstring',
+                        '--disable=missing-module-docstring',
+                        '--extension-pkg-whitelist=PyQt5',
+                    },
+                    enabled = false,
+                },
+            }
+        }
+    }
+}
 
 local cmp = require('cmp')
 cmp.setup({
-    sources = {
-      { name = 'nvim_lsp' },
-      { name = 'buffer' },
-      { name = 'cmp_tabnine' },
-      { name = 'path' },
+  sources = {
+    { name = 'nvim_lsp' },
+    { name = 'buffer' },
+    { name = 'path' },
+  },
+  completion = {
+      autocomplete = {
+          require('cmp.types').cmp.TriggerEvent.InsertEnter,
+          require('cmp.types').cmp.TriggerEvent.TextChanged
+      }
+  },
+  mapping = cmp.mapping.preset.insert({
+    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<CR>'] = cmp.mapping.confirm {
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = false,
     },
-    completion = {
-        autocomplete = {
-            require('cmp.types').cmp.TriggerEvent.InsertEnter,
-            require('cmp.types').cmp.TriggerEvent.TextChanged
-        }
-    }
-})
-cmp.setup.cmdline('/', {
-  sources = {{ name = 'buffer' }}
+    ['<Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_next_item()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+    ['<S-Tab>'] = cmp.mapping(function(fallback)
+      if cmp.visible() then
+        cmp.select_prev_item()
+      else
+        fallback()
+      end
+    end, { 'i', 's' }),
+  }),
 })
 cmp.setup.cmdline(':', {
   sources = cmp.config.sources({
@@ -287,19 +329,8 @@ cmp.setup.cmdline(':', {
   })
 })
 
-require('cmp_tabnine.config'):setup({
-    max_lines = 1000;
-    max_num_results = 20;
-    sort = true;
-    run_on_every_keystroke = true;
-    snippet_placeholder = '..';
-    ignored_file_types = {
-        -- lua = true
-    };
-})
-
 require('nvim-treesitter.configs').setup {
-    ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    ensure_installed = "all",
     sync_install = false, -- install languages synchronously (only applied to `ensure_installed`)
     textobjects = {
         select = {
@@ -381,10 +412,10 @@ LUA_END
 
 " KEYS {{{
 " faster commands
-nnoremap ; :
-nnoremap : ;
-vnoremap ; :
-vnoremap : ;
+"nnoremap ; :
+"nnoremap : ;
+"vnoremap ; :
+"vnoremap : ;
 
 " typos
 command! Q :q
@@ -507,8 +538,8 @@ set bg=dark
 "colorscheme gruvbox
 
 "colorscheme duskfox
-"colorscheme nightfox
+colorscheme nightfox
 "colorscheme rose-pine
 "colorscheme catppuccin
-colorscheme tokyonight
+"colorscheme tokyonight
 "}}}

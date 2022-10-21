@@ -1,7 +1,7 @@
 #!/bin/bash
 set -exo pipefail
 
-id=$(rfkill list | grep ': hci0: Bluetooth' | grep -o '^[0-9]\+')
+id=$(rfkill list | grep ': Bluetooth' | grep -o '^[0-9]\+')
 #name='JBL REFLECT FLOW'
 device='98:52:3D:09:A0:17'
 

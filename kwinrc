@@ -1,13 +1,14 @@
 [$Version]
-update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js,kwin.upd:auto-bordersize,kwin.upd:animation-speed,kwin.upd:desktop-grid-click-behavior,kwin.upd:no-swap-encourage,kwin.upd:make-translucency-effect-disabled-by-default,kwin.upd:remove-flip-switch-effect,kwin.upd:remove-cover-switch-effect,kwin.upd:remove-cubeslide-effect,kwin.upd:remove-xrender-backend,kwin.upd:enable-scale-effect-by-default
+update_info=kwin.upd:replace-scalein-with-scale,kwin.upd:port-minimizeanimation-effect-to-js,kwin.upd:port-scale-effect-to-js,kwin.upd:port-dimscreen-effect-to-js,kwin.upd:auto-bordersize,kwin.upd:animation-speed,kwin.upd:desktop-grid-click-behavior,kwin.upd:no-swap-encourage,kwin.upd:make-translucency-effect-disabled-by-default,kwin.upd:remove-flip-switch-effect,kwin.upd:remove-cover-switch-effect,kwin.upd:remove-cubeslide-effect,kwin.upd:remove-xrender-backend,kwin.upd:enable-scale-effect-by-default,kwin.upd:overview-group-plugin-id,kwin.upd:animation-speed-cleanup
 
 [Compositing]
 Backend=OpenGL
 Enabled=true
 GLCore=true
-GLPreferBufferSwap=a
+GLPreferBufferSwap=e
 GLTextureFilter=0
 HiddenPreviews=5
+LatencyPolicy=Low
 OpenGLIsUnsafe=false
 WindowsBlockCompositing=true
 XRenderSmoothScale=false
@@ -56,6 +57,8 @@ Scale=1
 
 [DrmOutputs][e8eb59fce5][fc397e583a]
 Scale=2
+TabBox=false
+TabBoxAlternative=false
 
 [Effect-CoverSwitch]
 TabBox=false
@@ -68,12 +71,21 @@ TabBoxAlternative=false
 [Effect-PresentWindows]
 BorderActivateAll=9
 
+[Effect-presentwindows]
+BorderActivateAll=9
+
+[Effect-windowview]
+BorderActivateAll=9
+
 [ModifierOnlyShortcuts]
 Meta=org.kde.krunner,/App,,toggleDisplay
 
 [NightColor]
 Active=true
+EveningBeginFixed=1730
 Mode=Times
+MorningBeginFixed=0615
+NightTemperature=4000
 TransitionTime=90
 
 [Plugins]
@@ -94,10 +106,12 @@ kwin4_effect_scaleEnabled=false
 kwin4_effect_squashEnabled=false
 kwin4_effect_translucencyEnabled=false
 kwin4_effect_windowapertureEnabled=false
+overviewEnabled=false
 presentwindowsEnabled=false
 screenedgeEnabled=false
 slideEnabled=false
 slidingpopupsEnabled=false
+windowviewEnabled=false
 zoomEnabled=false
 
 [TabBox]
@@ -125,7 +139,3 @@ SwitchingMode=0
 
 [Windows]
 BorderlessMaximizedWindows=true
-
-[org.kde.kdecoration2]
-library=org.kde.breeze
-theme=Breeze

@@ -31,8 +31,8 @@ set tildeop
 noremap <silent> <Space> :nohlsearch<CR>
 
 " faster commands
-nnoremap ; :
-nnoremap : ;
+"nnoremap ; :
+"nnoremap : ;
 
 " typos
 command! Q :q

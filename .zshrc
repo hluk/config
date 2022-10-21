@@ -139,13 +139,18 @@ alias :q="exit"
 
 alias open="xdg-open"
 
+alias g="git"
 alias gc="git co"
 alias gd="git d"
 alias gf="git f"
-alias gl="git la"
+alias gs="git show"
 alias gst="git st"
 alias gu="git up"
 alias gg="lazygit"
+
+gl() {
+    git la --color -$LINES | head -$((LINES - 4))
+}
 
 if [ -n "$DISPLAY" ]; then
     alias mc="mc -x"
@@ -253,3 +258,5 @@ ccache --max-size=8G >/dev/null
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+
+source ~/.config/broot/launcher/bash/br
