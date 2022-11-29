@@ -51,9 +51,9 @@
     },
     "94f883d1-175d-4a18-a1bb-21a86af86515": {
         "id": "94f883d1-175d-4a18-a1bb-21a86af86515",
-        "name": "suspend",
+        "name": "suspend/sleep",
         "keyword": "suspend",
-        "cmd": "systemctl suspend",
+        "cmd": "~/dev/bin/suspend.sh",
         "icon": null,
         "is_default_search": false,
         "run_without_argument": true,

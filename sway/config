@@ -219,8 +219,7 @@ bindsym $mod+Shift+w exec "~/dev/bin/browser.sh"
 
 bindsym $mod+q exec "~/dev/bin/clipboard.sh"
 bindsym $mod+z exec "~/dev/build/copyq/Desktop-Debug/copyq -s test2 toggle"
-bindsym $mod+F2 exec "~/dev/config/bin/sway_run.sh"
-bindsym $alt+F2 exec "~/dev/config/bin/sway_run.sh"
+bindsym $mod+x exec "~/dev/config/bin/sway_run.sh"
 bindsym $ctrl+$alt+l exec "~/dev/bin/lock.sh"
 
 bindsym $mod+$ctrl+t exec "~/dev/bin/clipboard.sh triggerGlobalShortcut 'Copy Text in Image'"

@@ -12,7 +12,8 @@
 #waybar {
     background-color: #282828;
     color: #aaa;
-    font-family: JetBrains Mono NL Medium;
+    /*font-family: JetBrains Mono NL Medium;*/
+    font-family: Overpass;
     font-size: 12px;
 }
 

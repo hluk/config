@@ -82,9 +82,8 @@ Meta=org.kde.krunner,/App,,toggleDisplay
 
 [NightColor]
 Active=true
-EveningBeginFixed=1730
+EveningBeginFixed=1600
 Mode=Times
-MorningBeginFixed=0615
 NightTemperature=4000
 TransitionTime=90
 
@@ -122,7 +121,7 @@ HighlightWindows=true
 MinimizedMode=0
 MultiScreenMode=0
 ShowDesktopMode=0
-ShowTabBox=true
+ShowTabBox=false
 SwitchingMode=0
 
 [TabBoxAlternative]
@@ -139,3 +138,11 @@ SwitchingMode=0
 
 [Windows]
 BorderlessMaximizedWindows=true
+Placement=Centered
+
+[Xwayland]
+Scale=2
+
+[org.kde.kdecoration2]
+library=org.kde.breeze
+theme=Breeze

@@ -82,7 +82,8 @@ set termguicolors
 
 set showtabline=2
 
-let mapleader = ","
+let mapleader = " "
+set notimeout
 " }}}
 
 " FILES {{{
@@ -140,8 +141,8 @@ call plug#begin('~/.config/nvim/plugged')
 
 "" toggle comment (NERD commenter)
 Plug 'scrooloose/nerdcommenter'
-map <C-\> <leader>c<SPACE>j
-imap <C-\> <C-o><leader>c<SPACE><DOWN>
+map <C-\> ,c<SPACE>j
+imap <C-\> <C-o>,c<SPACE><DOWN>
 
 "" taglist
 "Plug 'vim-scripts/taglist.vim'
@@ -165,7 +166,7 @@ command Gbl Git blame
 
 " lazygit
 Plug 'kdheepak/lazygit.nvim'
-nnoremap <silent> <leader>g :LazyGit<CR>
+nnoremap <silent> <leader>G :LazyGit<CR>
 
 " asynchronous build and test dispatcher
 Plug 'tpope/vim-dispatch'
@@ -209,11 +210,10 @@ let g:fzf_preview_window = ['right:50%', 'ctrl-/']
 let g:fzf_history_dir = '~/.local/share/fzf-history'
 let $FZF_DEFAULT_COMMAND = 'rg --files'
 let $RIPGREP_CONFIG_PATH = $HOME .. '/.config/ripgreprc'
-noremap <c-t> :Files<CR>
-noremap <c-k> :Files<CR>
-noremap <c-g> :Rg!<CR>
-noremap <c-j> :Buffers<CR>
-noremap <c-l> :Tags<CR>
+noremap <leader>f :Files<CR>
+noremap <leader>g :Rg!<CR>
+noremap <leader>b :Buffers<CR>
+noremap <leader>t :Tags<CR>
 " Insert mode completion
 imap <c-x><c-k> <plug>(fzf-complete-word)
 imap <c-x><c-f> <plug>(fzf-complete-path)
@@ -424,34 +424,12 @@ command! W :w
 command! Wq :wq
 command! WQ :wq
 
-" buffers
-nnoremap <Leader>l :ls<CR>
-nnoremap <Leader>b :bp<CR>
-nnoremap <Leader>f :bn<CR>
-nnoremap <Leader>, :e#<CR>
-nnoremap <Leader>1 :1b<CR>
-nnoremap <Leader>2 :2b<CR>
-nnoremap <Leader>3 :3b<CR>
-nnoremap <Leader>4 :4b<CR>
-nnoremap <Leader>5 :5b<CR>
-nnoremap <Leader>6 :6b<CR>
-nnoremap <Leader>7 :7b<CR>
-nnoremap <Leader>8 :8b<CR>
-nnoremap <Leader>9 :9b<CR>
-nnoremap <Leader>0 :10b<CR>
-" Ngb jumps to specific buffer
-let c = 1
-while c <= 99
-  execute "nnoremap " . c . "gb :" . c . "b\<CR>"
-  let c += 1
-endwhile
-
 " edit/source configuration
-noremap <C-e>e :split ~/.config/nvim/init.vim <CR>
-noremap <C-e>r :source ~/.config/nvim/init.vim <CR>
+noremap <leader>ee :split ~/.config/nvim/init.vim <CR>
+noremap <leader>er :source ~/.config/nvim/init.vim <CR>
 
 " clear highlighted search term on space
-noremap <silent> <Space> :nohlsearch<CR>
+noremap <silent> <leader><Space> :nohlsearch<CR>
 
 " reselect visual block after indent
 vnoremap < <gv
@@ -462,27 +440,19 @@ inoremap jj <Esc>
 nnoremap Q <Nop>
 
 "tnoremap <Esc> <C-\><C-n>
-tnoremap <A-h> <C-\><C-N><C-w>h
-tnoremap <A-j> <C-\><C-N><C-w>j
-tnoremap <A-k> <C-\><C-N><C-w>k
-tnoremap <A-l> <C-\><C-N><C-w>l
-inoremap <A-h> <C-\><C-N><C-w>h
-inoremap <A-j> <C-\><C-N><C-w>j
-inoremap <A-k> <C-\><C-N><C-w>k
-inoremap <A-l> <C-\><C-N><C-w>l
-nnoremap <A-h> <C-w>h
-nnoremap <A-j> <C-w>j
-nnoremap <A-k> <C-w>k
-nnoremap <A-l> <C-w>l
+"tnoremap <leader>h <C-\><C-N><C-w>h
+"tnoremap <leader>j <C-\><C-N><C-w>j
+"tnoremap <leader>k <C-\><C-N><C-w>k
+"tnoremap <leader>l <C-\><C-N><C-w>l
+nnoremap <leader>h <C-w>h
+nnoremap <leader>j <C-w>j
+nnoremap <leader>k <C-w>k
+nnoremap <leader>l <C-w>l
 
 tnoremap <A-S-h> <C-\><C-N><C-w><S-h>
 tnoremap <A-S-j> <C-\><C-N><C-w><S-j>
 tnoremap <A-S-k> <C-\><C-N><C-w><S-k>
 tnoremap <A-S-l> <C-\><C-N><C-w><S-l>
-inoremap <A-S-h> <C-\><C-N><C-w><S-h>
-inoremap <A-S-j> <C-\><C-N><C-w><S-j>
-inoremap <A-S-k> <C-\><C-N><C-w><S-k>
-inoremap <A-S-l> <C-\><C-N><C-w><S-l>
 nnoremap <A-S-h> <C-w><S-h>
 nnoremap <A-S-j> <C-w><S-j>
 nnoremap <A-S-k> <C-w><S-k>
