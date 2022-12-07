@@ -143,3 +143,7 @@
     - name: NeoVim - Update plugins
       command: nvim nvim --headless +PlugUpgrade +PlugInstall +PlugUpdate +qa
       tags: neovim
+
+    - name: Disable fingerprint delay on authentication
+      command: sudo authselect disable-feature with-fingerprint
+      tags: config

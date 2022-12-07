@@ -13,9 +13,6 @@
     f = fetch --all --tags --prune
     ca = commit --all --amend --no-edit
     cn = commit --amend --no-edit
-    up = !git checkout master && git pull --rebase upstream master && git push origin master
-    upm = !git checkout main && git pull --rebase upstream main && git push origin main
-    upd = !git checkout develop && git pull --rebase upstream develop && git push origin develop
     rmb = "!f() { git branch -D $*; git push --delete origin $*; }; f"
 [core]
     whitespace = cr-at-eol

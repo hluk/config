@@ -14,7 +14,7 @@
     ],
     "modules-right": [
         //"network",
-        //"custom/pomodoro",
+        "custom/notification",
         "custom/redshift",
         "pulseaudio",
         "cpu",
@@ -24,14 +24,22 @@
         "clock#time"
     ],
 
-    "custom/pomodoro": {
-        "on-click": "~/dev/bin/pomodoro.py next",
-        "on-click-right": "~/dev/bin/pomodoro.py prev",
-        "on-click-middle": "~/dev/bin/pomodoro.py reset",
-        "on-scroll-up": "~/dev/bin/pomodoro.py up",
-        "on-scroll-down": "~/dev/bin/pomodoro.py down",
-        "exec": "~/dev/bin/pomodoro.py",
-        "return-type": "json"
+    "custom/notification": {
+        "tooltip": false,
+        "format": "{icon}",
+        "format-icons": {
+            "notification": "<span foreground='red'></span>",
+            "none": "",
+            "dnd-notification": "<span foreground='red'></span>",
+            "dnd-none": ""
+        },
+        "return-type": "json",
+        "exec-if": "which swaync-client",
+        "exec": "swaync-client --subscribe-waybar",
+        "on-click": "swaync-client --toggle-panel --skip-wait",
+        "on-click-right": "swaync-client --toggle-dnd --skip-wait",
+        "on-click-middle": "swaync-client --close-all --skip-wait",
+        "escape": true
     },
 
     "custom/redshift": {

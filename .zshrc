@@ -49,13 +49,13 @@ bindkey "^[OD" backward-word
 bindkey "^[OC" forward-word
 
 # tmux
-bindkey '^[OH' beginning-of-line
-bindkey '^[OF' end-of-line
+bindkey -v '^[OH' beginning-of-line
+bindkey -v '^[OF' end-of-line
 
 # kitty terminal
-bindkey '\e[H'  beginning-of-line
-bindkey '\e[F'  end-of-line
-bindkey '\e[3~' delete-char
+bindkey -v '\e[H'  beginning-of-line
+bindkey -v '\e[F'  end-of-line
+bindkey -v '\e[3~' delete-char
 
 autoload edit-command-line
 zle -N edit-command-line
@@ -150,6 +150,19 @@ alias gg="lazygit"
 
 gl() {
     git la --color -$LINES | head -$((LINES - 4))
+}
+
+gup() {
+    if git branch --list main|grep -q .; then
+        branch=main
+    elif git branch --list develop|grep -q .; then
+        branch=develop
+    else
+        branch=master
+    fi
+    git checkout $branch &&
+        git pull --rebase upstream $branch &&
+        git push origin $branch
 }
 
 if [ -n "$DISPLAY" ]; then
@@ -255,6 +268,12 @@ source ~/dev/powerlevel10k/powerlevel10k.zsh-theme
 PATH=/usr/lib/ccache/bin:$PATH
 ccache --max-size=8G >/dev/null
 # }}}
+
+# Use vi mode
+bindkey -v
+bindkey -M vicmd v edit-command-line
+bindkey -v '^?' backward-delete-char
+export KEYTIMEOUT=1
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
