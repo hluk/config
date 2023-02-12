@@ -84,6 +84,8 @@ set showtabline=2
 
 let mapleader = " "
 set notimeout
+
+"set relativenumber
 " }}}
 
 " FILES {{{

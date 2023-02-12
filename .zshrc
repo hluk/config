@@ -147,6 +147,7 @@ alias gs="git show"
 alias gst="git st"
 alias gu="git up"
 alias gg="lazygit"
+alias gpr="git pr"
 
 gl() {
     git la --color -$LINES | head -$((LINES - 4))
@@ -239,7 +240,6 @@ if [ -d ~/.fzf ]; then
     source "$HOME/.fzf/shell/completion.zsh"
     source "$HOME/.fzf/shell/key-bindings.zsh"
 fi
-alias rg="rg --max-columns 999"
 # }}}
 
 # plugins {{{

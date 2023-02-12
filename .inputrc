@@ -1,3 +1,0 @@
-# Disable annoying "Display all XXX possibilities?" prompt.
-set completion-query-items 0
-set page-completions off

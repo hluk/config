@@ -8,5 +8,5 @@ export MOZ_ENABLE_WAYLAND=1
 export LIBVA_DRIVER_NAME=iHD
 
 #exec rofi -show run
-
-exec ulauncher
+#exec ulauncher
+exec krunner

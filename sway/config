@@ -235,6 +235,9 @@ bindsym $mod+Shift+p exec "pavucontrol"
 bindsym XF86AudioPlay exec "~/dev/bin/toggleplay.sh"
 bindsym $mod+p exec "~/dev/bin/toggleplay.sh"
 
+bindsym XF86MonBrightnessDown exec "~/dev/bin/brightness_down.sh"
+bindsym XF86MonBrightnessUp exec "~/dev/bin/brightness_up.sh"
+
 # redshift (manual)
 bindsym $mod+$ctrl+Up exec "~/dev/bin/red_up.sh"
 bindsym $mod+$ctrl+Down exec "~/dev/bin/red_down.sh"

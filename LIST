@@ -1,9 +1,9 @@
 ~/.ansible.cfg
-~/.asoundrc
 ~/.config/alacritty.yml
 ~/.config/ansible-review/
 ~/.config/fontconfig/fonts.conf
 ~/.config/foot/foot.ini
+~/.config/gdb/gdbinit
 ~/.config/git/
 ~/.config/gtk-3.0/settings.ini gtk-3.0/
 ~/.config/kitty/kitty.conf
@@ -18,6 +18,7 @@
 ~/.config/sway/
 ~/.config/swaync/
 ~/.config/tig/
+~/.config/tmux/tmux.conf
 ~/.config/ulauncher/
 ~/.config/waybar/
 ~/.config/wofi/
@@ -26,22 +27,12 @@
 ~/.config/qutebrowser/autoconfig.yml qutebrowser/
 ~/.config/qutebrowser/greasemonkey/ qutebrowser/
 ~/.config/yamllint/
-~/.dwmrc.h
 ~/.fakevimrc
-~/.gdbinit
-~/.gitconfig
-~/.inputrc
 ~/.local/share/konsole/Screen.profile konsole
 ~/.mozilla/firefox/*/chrome/userChrome.css firefox
 ~/.mplayer/
 ~/.p10k.zsh
-~/.screenrc
-~/.tmux.conf
 ~/.vimrc
-~/.xbindkeysrc
-~/.xinitrc
-~/.Xmodmap
-~/.Xresources
 ~/.zshrc
 ~/dev/bin/
 ~/dev/colors/

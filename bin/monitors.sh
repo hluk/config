@@ -4,13 +4,15 @@ set -xeu
 out1="Unknown 0x086E 0x00000000"
 out2="Goldstar Company Ltd LG Ultra HD 0x00003617"
 out1_enabled=${1:-1}
+scale1=1.5
+scale2=2
 scale=2
 
 wallpaper=~/Pictures/wallpapers/current.jpg
 
 script_root="$(dirname "$(readlink -f "$0")")"
 
-s1=$scale
+s1=$scale1
 w1=1920
 h1=1080
 
@@ -19,7 +21,7 @@ if [[ $out1_enabled != "1" ]]; then
     w1=0
 fi
 
-s2=$scale
+s2=$scale2
 w2=3840
 h2=2160
 
@@ -28,7 +30,7 @@ x1=$((0))
 # different Y coordinates.
 #y1=$((h2/s2 - h1/s1))
 y1=$((0))
-x2=$((w1/s1))
+x2=$(python -c "print(int($w1/$s1))")
 y2=$((0))
 
 if [[ $out1_enabled == "1" ]]; then

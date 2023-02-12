@@ -12,13 +12,13 @@
 #waybar {
     background-color: #282828;
     color: #aaa;
-    /*font-family: JetBrains Mono NL Medium;*/
-    font-family: Overpass;
+    font-family: JetBrains Mono NL Medium;
+    /*font-family: Overpass;*/
     font-size: 12px;
 }
 
 /* Each module */
-#custom-pomodoro,
+#custom-notification,
 #custom-redshift,
 #battery,
 #clock,
@@ -108,9 +108,4 @@
 #workspaces button.urgent {
     border-color: #c9545d;
     color: #c9545d;
-}
-
-#custom-pomodoro.paused {
-    background: #f53c3c;
-    color: white;
 }

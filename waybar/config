@@ -29,13 +29,14 @@
         "format": "{icon}",
         "format-icons": {
             "notification": "<span foreground='red'></span>",
-            "none": "",
+            "none": "<span foreground='#555'></span>",
             "dnd-notification": "<span foreground='red'></span>",
             "dnd-none": ""
         },
         "return-type": "json",
         "exec-if": "which swaync-client",
         "exec": "swaync-client --subscribe-waybar",
+        "restart-interval": 300,
         "on-click": "swaync-client --toggle-panel --skip-wait",
         "on-click-right": "swaync-client --toggle-dnd --skip-wait",
         "on-click-middle": "swaync-client --close-all --skip-wait",
@@ -86,8 +87,8 @@
         "interval": 10,
         "format": " {usage}%({load})",
         "states": {
-          "warning": 70,
-          "critical": 90
+          "warning": 10,
+          "critical": 25
         }
     },
 
