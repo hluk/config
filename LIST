@@ -11,7 +11,7 @@
 ~/.config/latte/
 ~/.config/lattedockrc
 ~/.config/mako/config mako/
-~/.config/nvim/init.vim nvim/
+~/.config/nvim
 ~/.config/openbox/
 ~/.config/qt5ct/
 ~/.config/ripgreprc
