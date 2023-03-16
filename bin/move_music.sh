@@ -1,7 +1,7 @@
 #!/bin/bash
 set -euo pipefail
 
-music_dir=${TARGET_DIR:-HOME/Music/disk}
+music_dir=${TARGET_DIR:-$HOME/Music/disk}
 
 echo "$# files to unpack into $music_dir"
 du --total --human-readable "$@"

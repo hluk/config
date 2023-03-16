@@ -1,6 +1,10 @@
 #!/bin/bash
-grim -g "$(slurp)" - | swappy -f -
+set -e
 
-#export XDG_CURRENT_DESKTOP=sway
-#export QT_QPA_PLATFORM=
-#exec ~/dev/build/flameshot/src/flameshot "$@"
+image=$(mktemp "/tmp/screenshot-$USER-XXX.png")
+cleanup() {
+    rm -rf -- "$image"
+}
+trap cleanup QUIT TERM INT HUP EXIT
+grim -t png -c "$image"
+krita "$image"

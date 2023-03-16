@@ -150,7 +150,7 @@ alias gg="lazygit"
 alias gpr="git pr"
 
 gl() {
-    git la --color -$LINES | head -$((LINES - 4))
+    git la --color -$LINES | head -$((LINES - 8))
 }
 
 gup() {

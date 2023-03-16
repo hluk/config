@@ -11,5 +11,4 @@ ulimit -c unlimited
 export LLVM_INSTALL_DIR="/usr"
 
 source /etc/profile
-exec "$bin" -lastsession
-
+exec "$bin" -theme dark -lastsession

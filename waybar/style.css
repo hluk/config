@@ -1,23 +1,64 @@
-/* Reset all styles */
 * {
-    border: none;
-    border-radius: 0;
-    min-height: 0;
-    min-width: 0;
-    margin: 0;
-    padding: 0;
-}
-
-/* The whole bar */
-#waybar {
-    background-color: #282828;
-    color: #aaa;
-    font-family: JetBrains Mono NL Medium;
+    font-family: FontAwesome, JetBrains Mono NL Medium;
     /*font-family: Overpass;*/
     font-size: 12px;
 }
 
-/* Each module */
+window#waybar {
+    background-color: #282828;
+    color: #aaa;
+    transition-property: background-color;
+    transition-duration: .5s;
+}
+
+window#waybar.hidden {
+    opacity: 0.2;
+}
+
+/*
+window#waybar.empty {
+    background-color: transparent;
+}
+window#waybar.solo {
+    background-color: #FFFFFF;
+}
+*/
+
+button {
+    /* Avoid rounded borders under each button name */
+    border: none;
+    border-radius: 0;
+}
+
+#workspaces button {
+    padding: 0 5px;
+    color: #888888;
+    font-weight: bold;
+}
+
+#workspaces button:hover {
+    box-shadow: inherit;
+    text-shadow: inherit;
+    background: inherit;
+    border: inherit;
+}
+
+#workspaces button.focused {
+    border-color: #4c7899;
+    color: #aaddff;
+    background-color: #285577;
+}
+
+#workspaces button.urgent {
+    border-color: #c9545d;
+    color: #c9545d;
+}
+
+#mode {
+    background-color: #64727D;
+    border-bottom: 3px solid #ffffff;
+}
+
 #custom-notification,
 #custom-redshift,
 #battery,
@@ -27,8 +68,22 @@
 #network,
 #pulseaudio,
 #tray {
-    padding-left: 8px;
-    padding-right: 8px;
+    padding: 0 10px;
+}
+
+#window,
+#workspaces {
+    margin: 0 4px;
+}
+
+/* If workspaces is the leftmost module, omit left margin */
+.modules-left > widget:first-child > #workspaces {
+    margin-left: 0;
+}
+
+/* If workspaces is the rightmost module, omit right margin */
+.modules-right > widget:last-child > #workspaces {
+    margin-right: 0;
 }
 
 #battery.warning {
@@ -53,18 +108,36 @@
     color: red;
 }
 
-#mode {
-    background-color: #64727D;
-    border-bottom: 2px solid #eee;
-    /* To compensate for the top border and still have vertical centering */
-    padding-top: 2px;
+@keyframes blink {
+    to {
+        background-color: #ffffff;
+        color: #000000;
+    }
+}
+
+#battery.critical:not(.charging) {
+    background-color: #f53c3c;
+    color: #ffffff;
+    animation-name: blink;
+    animation-duration: 0.5s;
+    animation-timing-function: linear;
+    animation-iteration-count: infinite;
+    animation-direction: alternate;
+}
+
+label:focus {
+    background-color: #000000;
+}
+
+#cpu {
 }
 
 #network {
+    background-color: #2980b9;
 }
 
 #network.disconnected {
-    color: orange;
+    background-color: #f53c3c;
 }
 
 #pulseaudio {
@@ -73,39 +146,86 @@
 #pulseaudio.muted {
 }
 
+#wireplumber {
+    background-color: #fff0f5;
+    color: #000000;
+}
+
+#wireplumber.muted {
+    background-color: #f53c3c;
+}
+
+#custom-media {
+    background-color: #66cc99;
+    color: #2a5c45;
+    min-width: 100px;
+}
+
+#custom-media.custom-spotify {
+    background-color: #66cc99;
+}
+
+#custom-media.custom-vlc {
+    background-color: #ffa000;
+}
+
+#temperature {
+    background-color: #f0932b;
+}
+
+#temperature.critical {
+    background-color: #eb4d4b;
+}
+
 #tray {
 }
 
-#window {
-    margin-left: 32px;
-    margin-right: 32px;
-    font-weight: normal;
-    color: #bbb;
+#tray > .passive {
+    -gtk-icon-effect: dim;
 }
 
-#workspaces button {
-    border-bottom: 2px solid transparent;
-    /* To compensate for the top border and still have vertical centering */
-    padding-top: 2px;
-    padding-left: 8px;
-    padding-right: 8px;
-    color: #888888;
-    font-weight: bold;
+#tray > .needs-attention {
+    -gtk-icon-effect: highlight;
+    background-color: #eb4d4b;
 }
 
-#workspaces button:hover {
-  background: #323232;
-  box-shadow: inherit;
-  text-shadow: inherit;
+#idle_inhibitor {
+    background-color: #2d3436;
 }
 
-#workspaces button.focused {
-    border-color: #4c7899;
-    color: #aaddff;
-    background-color: #285577;
+#idle_inhibitor.activated {
+    background-color: #ecf0f1;
+    color: #2d3436;
 }
 
-#workspaces button.urgent {
-    border-color: #c9545d;
-    color: #c9545d;
+#language {
+    background: #00b093;
+    color: #740864;
+    padding: 0 5px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state {
+    background: #97e1ad;
+    color: #000000;
+    padding: 0 0px;
+    margin: 0 5px;
+    min-width: 16px;
+}
+
+#keyboard-state > label {
+    padding: 0 5px;
+}
+
+#keyboard-state > label.locked {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+#scratchpad.empty {
+	background-color: transparent;
 }
