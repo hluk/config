@@ -94,6 +94,7 @@ bindsym $mod+space focus mode_toggle
 
 # switch to workspace
 bindsym $mod+grave workspace 0
+bindsym $mod+equal workspace 0
 bindsym $mod+1 workspace 1
 bindsym $mod+2 workspace 2
 bindsym $mod+3 workspace 3
@@ -270,5 +271,11 @@ workspace 1 output DP-6
 workspace 2 output DP-6
 workspace 3 output DP-6
 workspace 4 output DP-6
+workspace 5 output DP-6
+workspace 6 output eDP-1
+workspace 7 output eDP-1
+workspace 8 output eDP-1
+workspace 9 output eDP-1
+workspace 10 output eDP-1
 
 focus output DP-6

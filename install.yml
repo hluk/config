@@ -20,6 +20,7 @@
           - pinentry-qt
 
           - ShellCheck
+          - zoxide
           - autojump-zsh
           - bat
           - bolt

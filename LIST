@@ -1,6 +1,7 @@
 ~/.ansible.cfg
 ~/.config/alacritty.yml
 ~/.config/ansible-review/
+~/.config/fd/
 ~/.config/fontconfig/fonts.conf
 ~/.config/foot/foot.ini
 ~/.config/gdb/gdbinit

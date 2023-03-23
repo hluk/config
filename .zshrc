@@ -37,6 +37,7 @@ SAVEHIST=10000
 setopt hist_ignore_dups
 setopt hist_ignore_all_dups
 setopt hist_expire_dups_first
+setopt inc_append_history
 bindkey -e
 
 # keys
@@ -259,6 +260,9 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta,bold'
 
 ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#888899,bg=0"
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
+
+# https://github.com/ajeetdsouza/zoxide
+eval "$(zoxide init zsh --cmd j)"
 
 # https://github.com/romkatv/powerlevel10k
 source ~/dev/powerlevel10k/powerlevel10k.zsh-theme

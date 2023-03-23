@@ -11,7 +11,7 @@ return {
   { "wsdjeg/vim-fetch" },
 
   -- Asynchronous Lint Engine
-  { "w0rp/ale", enabled = false },
+  { "dense-analysis/ale" },
 
   -- Python - PEP 8
   { "nvie/vim-flake8", enabled = false },
