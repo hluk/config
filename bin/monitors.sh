@@ -1,7 +1,7 @@
 #!/bin/bash
 set -xeu
 
-out1="Unknown 0x086E 0x00000000"
+out1="BOE 0x086E Unknown"
 out2="Goldstar Company Ltd LG Ultra HD 0x00003617"
 out1_enabled=${1:-1}
 scale1=1.5

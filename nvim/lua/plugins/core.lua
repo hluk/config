@@ -1,26 +1,42 @@
 return {
-  --{ "leap.nvim", enabled = false },
-  { "nvim-notify", enabled = false },
-  { "mini.pairs", enabled = false },
   { "LuaSnip", enabled = false },
-
-  -- fugitive (git)
-  { "tpope/vim-fugitive" },
+  { "SchemaStore.nvim", enabled = false },
+  { "alpha-nvim", enabled = false },
+  { "flit.nvim", enabled = false },
+  { "leap.nvim", enabled = false },
+  { "mason-lspconfig.nvim", enabled = false },
+  { "mason.nvim", enabled = false },
+  { "mini.pairs", enabled = false },
+  { "neoconf.nvim", enabled = false },
+  { "null-ls.nvim", enabled = false },
+  { "nvim-navic", enabled = false },
+  { "nvim-notify", enabled = false },
+  { "nvim-spectre", enabled = false },
+  { "persistence.nvim", enabled = false },
+  { "todo-comments.nvim", enabled = false },
+  { "vim-repeat", enabled = false },
 
   -- handle line and column numbers in file names
   { "wsdjeg/vim-fetch" },
 
   -- Asynchronous Lint Engine
-  { "dense-analysis/ale" },
+  {
+    "dense-analysis/ale",
+    init = function()
+      vim.g.ale_echo_cursor = 0
+    end,
+  },
 
   -- Python - PEP 8
   { "nvie/vim-flake8", enabled = false },
 
   -- A collection of language packs for Vim.
-  { "sheerun/vim-polyglot" },
-
-  -- Jinja2
-  { "Glench/Vim-Jinja2-Syntax" },
+  {
+    "sheerun/vim-polyglot",
+    init = function()
+      vim.g.polyglot_disabled = { "autoindent", "markdown" }
+    end,
+  },
 
   -- file helpers:
   -- - :Mkdir, :Rename, :SudoWrite, ...
@@ -29,13 +45,7 @@ return {
 
   -- colorscheme
   { "EdenEast/nightfox.nvim" },
-
-  {
-    "nvim-treesitter",
-    opts = {
-      ensure_installed = "all",
-    },
-  },
+  { "ellisonleao/gruvbox.nvim" },
 
   {
     "which-key.nvim",
@@ -46,7 +56,7 @@ return {
   {
     "LazyVim/LazyVim",
     opts = {
-      colorscheme = "nightfox",
+      colorscheme = "gruvbox",
       spelling = true,
     },
   },

@@ -162,9 +162,14 @@ gup() {
     else
         branch=master
     fi
+
     git checkout $branch &&
+    if git remote | grep -qw upstream; then
         git pull --rebase upstream $branch &&
-        git push origin $branch
+        #git push origin $branch
+    else
+        git pull --rebase origin $branch
+    fi
 }
 
 if [ -n "$DISPLAY" ]; then
@@ -262,7 +267,7 @@ ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#888899,bg=0"
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # https://github.com/ajeetdsouza/zoxide
-eval "$(zoxide init zsh --cmd j)"
+#eval "$(zoxide init zsh --cmd j)"
 
 # https://github.com/romkatv/powerlevel10k
 source ~/dev/powerlevel10k/powerlevel10k.zsh-theme
@@ -278,6 +283,9 @@ bindkey -v
 bindkey -M vicmd v edit-command-line
 bindkey -v '^?' backward-delete-char
 export KEYTIMEOUT=1
+# Override PageUp/Down in vi mode
+bindkey -v '^[[5~' backward-word
+bindkey -v '^[[6~' forward-word
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

@@ -4,7 +4,7 @@
   hosts: localhost
   tasks:
     - name: Install packages
-      become: yes
+      become: true
       dnf:
         state: present
         name:
@@ -134,18 +134,25 @@
 
           - openbox
           - xorg-x11-server-Xephyr
-
-    - name: NeoVim - Install vim-plug
-      get_url:
-        url: https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim
-        dest: ~/.local/share/nvim/site/autoload/plug.vim
-        mode: '0640'
-      tags: neovim
-
-    - name: NeoVim - Update plugins
-      command: nvim nvim --headless +PlugUpgrade +PlugInstall +PlugUpdate +qa
-      tags: neovim
+      tags: install
 
     - name: Disable fingerprint delay on authentication
       command: sudo authselect disable-feature with-fingerprint
       tags: config
+
+    - name: Disable automatic suspend/sleep on inactivity on AC (GNOME)
+      command: >-
+        gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing
+      tags: config
+
+    - name: Disable automatic suspend/sleep on inactivity on AC (UPower)
+      become: true
+      ansible.builtin.copy:
+        src: polkit/10-disable-suspend.rules
+        dest: /etc/polkit-1/rules.d/10-disable-suspend.rules
+        owner: root
+        group: root
+        mode: u=rw,g=r,o=r
+      tags:
+        - config
+        - root

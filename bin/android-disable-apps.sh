@@ -1,4 +1,7 @@
 #!/bin/bash
+# A nicer and more thorough alternative is:
+# https://github.com/0x192/universal-android-debloater
+#
 # $ sudo dnf install android-tools
 #
 # Click 7 times on Build Number under About.

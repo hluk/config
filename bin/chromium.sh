@@ -5,11 +5,11 @@
 
 export PROFILE=${PROFILE:-}
 export LIBVA_DRIVER_NAME=iHD
-#export SDL_VIDEODRIVER=wayland
+export SDL_VIDEODRIVER=wayland
 args=(
-    #--enable-features=UseOzonePlatform
-    #--ozone-platform=wayland
-    --ozone-platform=x11
+    --enable-features=UseOzonePlatform
+    --ozone-platform=wayland
+    #--ozone-platform=x11
     #--ozone-platform-hint=auto
 
     --user-data-dir="$HOME/work/chromium-profile$PROFILE"
@@ -28,15 +28,18 @@ args=(
     --enable-native-gpu-memory-buffers
     --gpu-no-context-lost
     --disable-infobars
-    --ignore-gpu-blocklist
     --no-sandbox
     --window-position="0,0"
     --no-first-run
-    --in-process-gpu
+    # --in-process-gpu
     --fullscreen
     --kiosk
+
+    --disable-features=UserAgentClientHint
 
     "https://play.geforcenow.com/mall/#/layout/games/gameSectionGrid?search=false"
 )
 #exec gamemoderun chromium-freeworld "${args[@]}" "$@"
-exec gamescope -r 60 -w 1920 -h 1080 -f -- chromium-freeworld "${args[@]}" "$@"
+#exec gamescope -r 60 -w 1920 -h 1080 -f -- chromium-freeworld "${args[@]}" "$@"
+#chromium-browser "${args[@]}" "$@"
+flatpak run com.brave.Browser "${args[@]}" "$@"

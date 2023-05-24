@@ -12,6 +12,7 @@ vim.api.nvim_create_autocmd({ "BufEnter" }, {
 vim.api.nvim_create_autocmd({ "VimLeave" }, {
   pattern = { "*" },
   callback = function()
-    vim.fn.system("tmux rename-window $(basename $SHELL)")
+    -- https://github.com/neovim/neovim/issues/21856
+    vim.fn.jobstart("tmux rename-window $(basename $SHELL)", {detach=true})
   end,
 })

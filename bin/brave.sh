@@ -17,7 +17,8 @@ args=(
     --disable-gpu-driver-bug-workarounds
     --enable-accelerated-video-decode
     --enable-features=VaapiVideoDecoder
-    --use-gl=egl
+    # --use-gl=egl
+    --use-gl=angle
 
     --enable-gpu
     --enable-gpu-memory-buffer-video-frames
@@ -25,6 +26,6 @@ args=(
     --enable-accelerated-vpx-decode
     --enable-native-gpu-memory-buffers
     --gpu-no-context-lost
-    --in-process-gpu
+    # --in-process-gpu
 )
 exec flatpak run com.brave.Browser "${args[@]}"
