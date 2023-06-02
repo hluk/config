@@ -144,15 +144,3 @@
       command: >-
         gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing
       tags: config
-
-    - name: Disable automatic suspend/sleep on inactivity on AC (UPower)
-      become: true
-      ansible.builtin.copy:
-        src: polkit/10-disable-suspend.rules
-        dest: /etc/polkit-1/rules.d/10-disable-suspend.rules
-        owner: root
-        group: root
-        mode: u=rw,g=r,o=r
-      tags:
-        - config
-        - root
