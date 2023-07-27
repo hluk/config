@@ -1,0 +1,17 @@
+#!/usr/bin/env python3
+import yaml
+import sys
+
+import jinja2
+
+values = {}
+for arg in sys.argv[1:]:
+    values.update(yaml.safe_load(arg))
+
+env = jinja2.Environment(
+    loader=jinja2.BaseLoader,
+    undefined=jinja2.StrictUndefined,
+)
+input = sys.stdin.read()
+template = env.from_string(input)
+template.stream(values).dump(sys.stdout)

@@ -159,8 +159,10 @@ gup() {
         branch=main
     elif git branch --list develop|grep -q .; then
         branch=develop
-    else
+    elif git branch --list master|grep -q .; then
         branch=master
+    else
+        branch=devel
     fi
 
     git checkout $branch &&

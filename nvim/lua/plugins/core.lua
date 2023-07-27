@@ -38,6 +38,8 @@ return {
     end,
   },
 
+  { "Glench/Vim-Jinja2-Syntax" },
+
   -- file helpers:
   -- - :Mkdir, :Rename, :SudoWrite, ...
   -- - automatic chmod +x for new scripts

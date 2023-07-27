@@ -18,7 +18,7 @@ cherry_pick() {
     git cherry-pick "$1" || {
         git checkout HEAD^ poetry.lock
         git mergetool
-        git cherry-pick --continue || git cherry-pick --skip
+        git cherry-pick --continue --no-edit || git cherry-pick --skip
     }
     git checkout HEAD^ poetry.lock
     update_dependencies

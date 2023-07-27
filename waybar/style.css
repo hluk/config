@@ -1,6 +1,5 @@
 * {
-    font-family: FontAwesome, JetBrains Mono NL Medium;
-    /*font-family: Overpass;*/
+    font-family: Noto Sans Medium;
     font-size: 12px;
 }
 
@@ -191,12 +190,11 @@ label:focus {
 }
 
 #idle_inhibitor {
-    background-color: #2d3436;
+    font-size: 20px;
 }
 
 #idle_inhibitor.activated {
-    background-color: #ecf0f1;
-    color: #2d3436;
+    color: #aaddff;
 }
 
 #language {

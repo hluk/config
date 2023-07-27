@@ -16,9 +16,9 @@ sleep 1
 export QT_QPA_PLATFORM=xcb
 
 #herbstluftwm &
-openbox &
+#openbox &
 #awesome &
-#xfwm4 &
+xfwm4 &
 #i3 &
 #mutter &
 #startplasma-x11 &

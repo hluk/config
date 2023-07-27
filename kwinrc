@@ -138,11 +138,6 @@ SwitchingMode=0
 
 [Windows]
 BorderlessMaximizedWindows=true
-Placement=Centered
 
 [Xwayland]
 Scale=2
-
-[org.kde.kdecoration2]
-library=org.kde.breeze
-theme=Breeze

@@ -5,3 +5,5 @@ vim.opt.spell = true
 vim.opt.conceallevel = 0
 vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
+vim.opt.relativenumber = false
+vim.opt.wrap = true
