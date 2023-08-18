@@ -14,18 +14,10 @@ return {
   { "nvim-spectre", enabled = false },
   { "persistence.nvim", enabled = false },
   { "todo-comments.nvim", enabled = false },
-  { "vim-repeat", enabled = false },
+  { "flash.nvim", enabled = false },
 
   -- handle line and column numbers in file names
   { "wsdjeg/vim-fetch" },
-
-  -- Asynchronous Lint Engine
-  {
-    "dense-analysis/ale",
-    init = function()
-      vim.g.ale_echo_cursor = 0
-    end,
-  },
 
   -- Python - PEP 8
   { "nvie/vim-flake8", enabled = false },

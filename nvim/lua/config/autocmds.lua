@@ -16,3 +16,12 @@ vim.api.nvim_create_autocmd({ "VimLeave" }, {
     vim.fn.jobstart("tmux rename-window $(basename $SHELL)", {detach=true})
   end,
 })
+
+vim.api.nvim_create_autocmd({ "FileType" }, {
+  pattern = { "lua", "ruby", "eruby" },
+  callback = function()
+    vim.opt.shiftwidth = 2
+    vim.opt.tabstop = 2
+    vim.opt.softtabstop = 2
+  end,
+})

@@ -144,3 +144,24 @@
       command: >-
         gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing
       tags: config
+
+    - name: Use iwd instead of wpa_supplicant for wifi hotspot
+      become: true
+      ansible.builtin.copy:
+        src: NetworkManager/conf.d/00-iwd.conf
+        dest: /etc/NetworkManager/conf.d/00-iwd.conf
+        owner: root
+        group: root
+        mode: u=rw,g=r,o=r
+      tags:
+        - config
+        - root
+      notify:
+        - restart NetworkManager
+
+  handlers:
+    - name: restart NetworkManager
+      become: true
+      ansible.builtin.systemd:
+        state: restarted
+        name: NetworkManager

@@ -3,12 +3,16 @@ import yaml
 import sys
 
 import jinja2
+try:
+    from ansible.template import AnsibleEnvironment as Environment
+except ImportError:
+    Environment = jinja2.Environment
 
 values = {}
 for arg in sys.argv[1:]:
     values.update(yaml.safe_load(arg))
 
-env = jinja2.Environment(
+env = Environment(
     loader=jinja2.BaseLoader,
     undefined=jinja2.StrictUndefined,
 )
