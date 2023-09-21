@@ -6,7 +6,8 @@
 vim.api.nvim_create_autocmd({ "BufEnter" }, {
   pattern = { "*" },
   callback = function()
-    vim.fn.system("tmux rename-window " .. vim.fn.expand("%:p:gs?/home/[a-z]*/??"))
+    name = vim.fn.expand("%:t")
+    vim.fn.system("tmux rename-window " .. name)
   end,
 })
 vim.api.nvim_create_autocmd({ "VimLeave" }, {

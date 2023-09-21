@@ -134,6 +134,9 @@
 
           - openbox
           - xorg-x11-server-Xephyr
+
+          # wifi deamon
+          - iwd
       tags: install
 
     - name: Disable fingerprint delay on authentication
@@ -144,6 +147,18 @@
       command: >-
         gsettings set org.gnome.settings-daemon.plugins.power sleep-inactive-ac-type nothing
       tags: config
+
+    - name: Use better pager
+      become: true
+      ansible.builtin.copy:
+        src: profile.d/less-improved.sh
+        dest: /etc/profile.d/less-improved.sh
+        owner: root
+        group: root
+        mode: u=rw,g=r,o=r
+      tags:
+        - config
+        - root
 
     - name: Use iwd instead of wpa_supplicant for wifi hotspot
       become: true

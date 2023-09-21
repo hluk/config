@@ -17,6 +17,12 @@ return {
         "regex",
         "yaml",
       },
+      indent = {
+        enable = true,
+        disable = {
+          "yaml",
+        }
+      }
     },
   },
 }
