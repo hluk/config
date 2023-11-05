@@ -11,8 +11,8 @@
 ~/.config/kwinrc
 ~/.config/latte/
 ~/.config/lattedockrc
+~/.config/lvim/config.lua lvim/
 ~/.config/mako/config mako/
-~/.config/nvim
 ~/.config/openbox/
 ~/.config/qt5ct/
 ~/.config/ripgreprc

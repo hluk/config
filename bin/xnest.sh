@@ -7,8 +7,8 @@ D=:${D:-"9"}
 #Xephyr $D -ac -br -reset -terminate +iglx +extension Composite +xinerama -screen 800x600+0+0 -screen 800x600+0+800 &
 #Xephyr $D -ac -br -reset -terminate +iglx +extension Composite +extension RANDR -screen 800x600+0+0 -screen 800x600+0+800 &
 #Xephyr $D -ac -br -reset -terminate +iglx +extension Composite -screen 5120x1440 &
-Xephyr $D -ac -br -reset -terminate +iglx +extension Composite -screen 1600x900 &
 #Xephyr $D -ac -br -reset -terminate +iglx +extension Composite -screen 640x480 &
+Xephyr $D -ac -br -reset -terminate +iglx +extension Composite -screen 1600x900 &
 export DISPLAY=$D
 export WAYLAND_DISPLAY=
 sleep 1
@@ -16,12 +16,12 @@ sleep 1
 export QT_QPA_PLATFORM=xcb
 
 #herbstluftwm &
-openbox &
+#openbox &
 #awesome &
 #xfwm4 &
 #i3 &
 #mutter --x11 &
-#startplasma-x11 &
+startplasma-x11 &
 sleep 1
 
 /usr/libexec/gsd-xsettings &

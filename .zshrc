@@ -9,7 +9,7 @@ fi
 # env# {{{
 export EDITOR="$HOME/dev/bin/editor.sh"
 export PAGER=less
-export LESS="--raw-control-chars --ignore-case --quit-if-one-screen --LONG-PROMPT --shift=5"
+export LESS="--RAW-CONTROL-CHARS --ignore-case --quit-if-one-screen --LONG-PROMPT --shift=5"
 export SYSTEMD_LESS=$LESS
 
 # support colors in less
@@ -249,7 +249,6 @@ if [ -d ~/.fzf ]; then
     source "$HOME/.fzf/shell/completion.zsh"
     source "$HOME/.fzf/shell/key-bindings.zsh"
 fi
-# }}}
 
 # plugins {{{
 source /usr/share/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
