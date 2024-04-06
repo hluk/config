@@ -148,7 +148,9 @@ alias gf="git f"
 alias gs="git show"
 alias gst="git st"
 alias gu="git up"
-alias gg="lazygit"
+# alias gg="lazygit"
+alias gg="gitui"
+# alias gg="flatpak run com.github.Murmele.Gittyup"
 alias gpr="git pr"
 
 gl() {
@@ -173,6 +175,10 @@ gup() {
     else
         git pull --rebase origin $branch
     fi
+}
+
+tigg() {
+  git log --pretty='format:commit %h %s' -G "$@" | tig
 }
 
 if [ -n "$DISPLAY" ]; then
@@ -265,7 +271,6 @@ ZSH_HIGHLIGHT_STYLES[bracket-level-2]='fg=red,bold'
 ZSH_HIGHLIGHT_STYLES[bracket-level-3]='fg=yellow,bold'
 ZSH_HIGHLIGHT_STYLES[bracket-level-4]='fg=magenta,bold'
 
-ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#888899,bg=0"
 source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 
 # https://github.com/ajeetdsouza/zoxide
@@ -291,5 +296,3 @@ bindkey -v '^[[6~' forward-word
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
-
-source ~/.config/broot/launcher/bash/br

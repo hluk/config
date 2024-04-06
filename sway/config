@@ -208,20 +208,27 @@ for_window [title="^Password Required .* Firefox$"] floating enable
 
 for_window [app_id="^ulauncher$"] floating enable, border none
 
+for_window [class="^steam_app_"] floating enable, border none
+
 # Omit locking when fullscreen window is active
 # xwayland version
-for_window [class=".*"] inhibit_idle fullscreen
+# for_window [class=".*"] inhibit_idle fullscreen
 # wayland vesion
-for_window [app_id=".*"] inhibit_idle fullscreen
+# for_window [app_id=".*"] inhibit_idle fullscreen
+# all windows
+for_window [class=".*"] inhibit_idle focus
+for_window [app_id=".*"] inhibit_idle focus
 
 # Shortcuts
 bindsym $mod+Shift+q exec "~/dev/bin/console.sh"
 bindsym $mod+Shift+w exec "~/dev/bin/browser.sh"
+bindsym $mod+Shift+e exec "dolphin"
 
 bindsym $mod+q exec "~/dev/bin/clipboard.sh"
 bindsym $mod+z exec "~/dev/build/copyq/Desktop-Debug/copyq -s test2 toggle"
 bindsym $mod+x exec "~/dev/config/bin/sway_run.sh"
 bindsym $ctrl+$alt+l exec "~/dev/bin/lock.sh"
+bindsym $ctrl+$alt+0 exec "~/dev/bin/suspend.sh"
 
 bindsym $mod+$ctrl+t exec "~/dev/bin/clipboard.sh triggerGlobalShortcut 'Copy Text in Image'"
 

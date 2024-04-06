@@ -1,6 +1,8 @@
 #!/bin/bash
-#exec hx "$@"
-#exec nvim "$@"
-exec ~/.local/bin/lvim "$@"
-#exec emacs -nw "$@"
-#exec emacsclient -nw "$@"
+if [[ -f poetry.lock ]]; then
+  cmd="poetry run"
+fi
+
+#exec $cmd hx "$@"
+#exec $cmd nvim "$@"
+exec $cmd ~/.local/bin/lvim "$@"

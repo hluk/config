@@ -12,7 +12,7 @@ args=(
     #--ozone-platform=x11
     #--ozone-platform-hint=auto
 
-    --user-data-dir="$HOME/work/chromium-profile$PROFILE"
+    # --user-data-dir="$HOME/work/chromium-profile$PROFILE"
     --ignore-gpu-blocklist
     --enable-gpu-rasterization
     --enable-zero-copy
@@ -28,18 +28,19 @@ args=(
     --enable-native-gpu-memory-buffers
     --gpu-no-context-lost
     --disable-infobars
-    --no-sandbox
+    # --no-sandbox
     --window-position="0,0"
     --no-first-run
     # --in-process-gpu
     --fullscreen
-    --kiosk
+    # --kiosk
 
     --disable-features=UserAgentClientHint
 
-    "https://play.geforcenow.com/mall/#/layout/games/gameSectionGrid?search=false"
+    # "https://play.geforcenow.com/mall/#/layout/games/gameSectionGrid?search=false"
+    https://www.netflix.com/browse/my-list
 )
 #exec gamemoderun chromium-freeworld "${args[@]}" "$@"
 #exec gamescope -r 60 -w 1920 -h 1080 -f -- chromium-freeworld "${args[@]}" "$@"
-chromium-browser "${args[@]}" "$@"
-# flatpak run com.brave.Browser "${args[@]}" "$@"
+# chromium-browser "${args[@]}" "$@"
+flatpak run com.brave.Browser "${args[@]}" "$@"

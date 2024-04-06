@@ -7,10 +7,11 @@
 
     "modules-left": [
         "sway/workspaces",
-        "sway/mode"
+        "sway/mode",
+        "tray",
+        "sway/window",
     ],
     "modules-center": [
-        "sway/window"
     ],
     "modules-right": [
         //"network",
@@ -20,7 +21,6 @@
         "cpu",
         "battery",
         "idle_inhibitor",
-        "tray",
         "clock#date",
         "clock#time"
     ],

@@ -16,12 +16,12 @@ sleep 1
 export QT_QPA_PLATFORM=xcb
 
 #herbstluftwm &
-#openbox &
+openbox &
 #awesome &
 #xfwm4 &
 #i3 &
 #mutter --x11 &
-startplasma-x11 &
+#startplasma-x11 &
 sleep 1
 
 /usr/libexec/gsd-xsettings &

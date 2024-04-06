@@ -3,6 +3,7 @@ set -exuo pipefail
 
 files=(
     ~/.config/copyq
+    ~/.local/share/copyq/copyq/items
     ~/.config/keepassxc.kdbx
     ~/.gmailctl/config.jsonnet
     ~/.gnupg

@@ -1,8 +1,9 @@
 #!/bin/bash
-#screen -x default $@ || screen -R default $@
-#exec screen -d -RR default $@
-
+set -e
 cd ~
 export TMUX=""
-tmux attach -d || tmux -2
-
+if tmux list-sessions > /dev/null; then
+    tmux attach -d
+else
+    exec tmux -2
+fi

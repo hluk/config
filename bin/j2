@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 import yaml
+import os
 import sys
 
 import jinja2
@@ -8,12 +9,15 @@ try:
 except ImportError:
     Environment = jinja2.Environment
 
+template_dir = os.environ.get('TEMPLATES', 'templates')
+
 values = {}
 for arg in sys.argv[1:]:
     values.update(yaml.safe_load(arg))
 
+loader = jinja2.FileSystemLoader(template_dir)
 env = Environment(
-    loader=jinja2.BaseLoader,
+    loader=loader,
     undefined=jinja2.StrictUndefined,
 )
 input = sys.stdin.read()

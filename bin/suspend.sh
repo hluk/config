@@ -1,2 +1,4 @@
 #!/bin/bash
-systemctl suspend
+set -e
+lock.sh
+exec systemctl suspend
