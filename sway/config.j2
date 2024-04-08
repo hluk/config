@@ -32,103 +32,12 @@ set $right l
 floating_modifier $mod
 
 # kill focused window
-#bindsym $mod+Shift+q kill
 bindsym $alt+F4 kill
-bindsym $mod+F4 kill
 
 # The middle button over a titlebar kills the window
 bindsym --release button2 kill
 # The right button toggles floating
 bindsym button3 floating toggle
-
-# change focus
-bindsym $mod+$left focus left
-bindsym $mod+$down focus down
-bindsym $mod+$up focus up
-bindsym $mod+$right focus right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Left focus left
-bindsym $mod+Down focus down
-bindsym $mod+Up focus up
-bindsym $mod+Right focus right
-bindsym $alt+Tab focus left
-
-# move focused window
-bindsym $mod+$ctrl+$left move left
-bindsym $mod+$ctrl+$down move down
-bindsym $mod+$ctrl+$up move up
-bindsym $mod+$ctrl+$right move right
-
-# alternatively, you can use the cursor keys:
-bindsym $mod+Shift+Left move left
-bindsym $mod+Shift+Down move down
-bindsym $mod+Shift+Up move up
-bindsym $mod+Shift+Right move right
-
-# split in horizontal orientation
-#bindsym $mod+$ctrl+h split h
-
-# split in vertical orientation
-bindsym $mod+v split v
-
-# enter fullscreen mode for the focused container
-bindsym $mod+Shift+f fullscreen toggle
-
-# change container layout (stacked, tabbed, toggle split)
-#bindsym $mod+s layout stacking
-bindsym $mod+Shift+t layout tabbed
-bindsym $mod+Shift+s layout toggle split
-
-# toggle tiling / floating
-bindsym $mod+Shift+space floating toggle
-
-# change focus between tiling / floating windows
-bindsym $mod+space focus mode_toggle
-
-# focus the parent container
-#bindsym $mod+a focus parent
-
-# focus the child container
-#bindsym $mod+d focus child
-
-# switch to workspace
-bindsym $mod+grave workspace 0
-bindsym $mod+equal workspace 0
-bindsym $mod+1 workspace 1
-bindsym $mod+2 workspace 2
-bindsym $mod+3 workspace 3
-bindsym $mod+4 workspace 4
-bindsym $mod+5 workspace 5
-bindsym $mod+6 workspace 6
-bindsym $mod+7 workspace 7
-bindsym $mod+8 workspace 8
-bindsym $mod+9 workspace 9
-bindsym $mod+0 workspace 10
-
-bindsym $mod+a workspace 1
-bindsym $mod+s workspace 2
-bindsym $mod+d workspace 3
-bindsym $mod+f workspace 4
-bindsym $mod+g workspace 5
-
-# move focused container to workspace
-bindsym $mod+Shift+grave move container to workspace 0
-bindsym $mod+Shift+1 move container to workspace 1
-bindsym $mod+Shift+2 move container to workspace 2
-bindsym $mod+Shift+3 move container to workspace 3
-bindsym $mod+Shift+4 move container to workspace 4
-bindsym $mod+Shift+5 move container to workspace 5
-bindsym $mod+Shift+6 move container to workspace 6
-bindsym $mod+Shift+7 move container to workspace 7
-bindsym $mod+Shift+8 move container to workspace 8
-bindsym $mod+Shift+9 move container to workspace 9
-bindsym $mod+Shift+0 move container to workspace 10
-
-bindsym $mod+m move workspace to output right
-
-# reload the configuration file
-bindsym $mod+Shift+c reload
 
 # resize window (you can also use the mouse for that)
 mode "resize" {
@@ -153,8 +62,6 @@ mode "resize" {
         bindsym Return mode "default"
         bindsym Escape mode "default"
 }
-
-bindsym $mod+$alt+r mode "resize"
 
 bar {
         #tray_output eDP-1
@@ -210,6 +117,8 @@ for_window [app_id="^ulauncher$"] floating enable, border none
 
 for_window [class="^steam_app_"] floating enable, border none
 
+for_window [class="^Shortcut_center"] floating enable
+
 # Omit locking when fullscreen window is active
 # xwayland version
 # for_window [class=".*"] inhibit_idle fullscreen
@@ -220,58 +129,64 @@ for_window [class=".*"] inhibit_idle focus
 for_window [app_id=".*"] inhibit_idle focus
 
 # Shortcuts
-bindsym $mod+Shift+q exec "~/dev/bin/console.sh"
-bindsym $mod+Shift+w exec "~/dev/bin/browser.sh"
-bindsym $mod+Shift+e exec "dolphin"
+bindsym --no-repeat Super_L mode "shortcut mode"
+mode "shortcut mode" {
+  {% macro bind(key, cmd) -%}
+    {% for mod in ("", "$mod+") %}
+      bindsym {{ mod }}{{ key }} {{ cmd }}; mode default
+    {%- endfor %}
+  {%- endmacro %}
 
-bindsym $mod+q exec "~/dev/bin/clipboard.sh"
-bindsym $mod+z exec "~/dev/build/copyq/Desktop-Debug/copyq -s test2 toggle"
-bindsym $mod+x exec "~/dev/config/bin/sway_run.sh"
-bindsym $ctrl+$alt+l exec "~/dev/bin/lock.sh"
-bindsym $ctrl+$alt+0 exec "~/dev/bin/suspend.sh"
+  {% macro bindexec(key, cmd) -%}
+    {% for mod in ("", "$mod+") %}
+      bindsym {{ mod }}{{ key }} exec 'swaymsg mode default; {{ cmd }}'
+    {%- endfor %}
+  {%- endmacro %}
 
-bindsym $mod+$ctrl+t exec "~/dev/bin/clipboard.sh triggerGlobalShortcut 'Copy Text in Image'"
+  {% include 'shortcuts' %}
 
-bindsym $mod+$ctrl+s exec "~/dev/bin/screenshot.sh"
+  bindsym Super_L workspace back_and_forth; mode default
+  bindsym Escape mode default
+}
+
+{% macro bind(key, cmd) -%}
+  bindsym $mod+{{ key }} {{ cmd }}; mode default
+{%- endmacro %}
+
+{% macro bindexec(key, cmd) -%}
+  bindsym $mod+{{ key }} exec 'swaymsg mode default; {{ cmd }}'
+{%- endmacro %}
+
+{% include 'shortcuts' %}
+
+bindsym $ctrl+$alt+l exec "~/bin/lock.sh"
+bindsym $ctrl+$alt+0 exec "~/bin/suspend.sh"
 
 # Volume
-bindsym XF86AudioLowerVolume exec "~/dev/bin/volume_down.sh"
-bindsym XF86AudioRaiseVolume exec "~/dev/bin/volume_up.sh"
-bindsym XF86AudioMute exec "~/dev/bin/togglemute.sh"
-bindsym $mod+Shift+p exec "pavucontrol"
+bindsym XF86AudioLowerVolume exec "~/bin/volume_down.sh"
+bindsym XF86AudioRaiseVolume exec "~/bin/volume_up.sh"
+bindsym XF86AudioMute exec "~/bin/togglemute.sh"
+bindsym XF86AudioPlay exec "~/bin/toggleplay.sh"
 
-bindsym XF86AudioPlay exec "~/dev/bin/toggleplay.sh"
-bindsym $mod+p exec "~/dev/bin/toggleplay.sh"
-
-bindsym XF86MonBrightnessDown exec "~/dev/bin/brightness_down.sh"
-bindsym XF86MonBrightnessUp exec "~/dev/bin/brightness_up.sh"
-
-# redshift (manual)
-bindsym $mod+$ctrl+Up exec "~/dev/bin/red_up.sh"
-bindsym $mod+$ctrl+Down exec "~/dev/bin/red_down.sh"
-bindsym XF86Launch8 exec "~/dev/bin/red_up.sh"
-bindsym XF86Launch9 exec "~/dev/bin/red_down.sh"
+bindsym XF86MonBrightnessDown exec "~/bin/brightness_down.sh"
+bindsym XF86MonBrightnessUp exec "~/bin/brightness_up.sh"
 
 # Autostart
-exec "~/dev/bin/notifications.sh"
-exec "~/dev/bin/sunset.sh"
-exec "~/dev/bin/idle.sh"
-exec "~/dev/bin/xitomatl.sh"
+exec "~/bin/notifications.sh"
+exec "~/bin/sunset.sh"
+exec "~/bin/idle.sh"
+exec "~/bin/xitomatl.sh"
 
 # sleep as workaround for big tray icons waybar 0.9.8 bug
 # https://github.com/Alexays/Waybar/issues/1212
-exec sh -c "sleep 5; exec ~/dev/bin/clipboard.sh"
+exec sh -c "sleep 5; exec ~/bin/clipboard.sh"
 
 # swaymsg -t get_outputs
-exec_always "~/dev/bin/monitors.sh"
+exec_always "~/bin/monitors.sh"
 
 # swaymsg -t get_inputs
 #input type:keyboard xkb_numlock enable
-exec_always "~/dev/bin/keyboard.sh"
-
-# Toggle notification center
-bindsym $mod+Shift+n exec swaync-client --toggle-panel --skip-wait
-
+exec_always "~/bin/keyboard.sh"
 
 workspace 0 output eDP-1
 workspace 1 output DP-6

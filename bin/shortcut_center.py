@@ -11,8 +11,9 @@ SERVER = ("localhost", 8889)
 TITLE = "Shortcut Center"
 WINDOW_CLASS_NAME = "Shortcut_center"
 WIDTH = 180
-HEIGHT = 150
+HEIGHT = 320
 
+COMMAND_FORMAT = "{} & disown"
 DEFAULT_ACTION = 'swaymsg "workspace back_and_forth"'
 MAPPING = {
     "p": "~/bin/toggleplay.sh",
@@ -67,9 +68,8 @@ class App:
             self.root.quit()
             return
 
-        os.system(command)
+        os.system(COMMAND_FORMAT.format(command))
         self.close()
-        self.shortcut.set("")
 
     def trigger(self, value):
         map = MAPPING.get(value)
@@ -81,6 +81,7 @@ class App:
 
     def close(self):
         self.root.withdraw()
+        self.shortcut.set("")
 
     def open(self):
         self.root.deiconify()

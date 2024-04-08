@@ -54,3 +54,8 @@ for config in "${configs[@]}"; do
 done
 
 update_firefox
+
+pushd ~/.config/sway
+./bin/j2 < config.j2 > config
+swaymsg reload
+popd

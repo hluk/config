@@ -1,0 +1,84 @@
+{{ bind('$alt+r', 'mode resize') }}
+
+# change focus
+{{ bind('$left', 'focus left') }}
+{{ bind('$down', 'focus down') }}
+{{ bind('$up', 'focus up') }}
+{{ bind('$right', 'focus right') }}
+
+# move focused window
+{{ bind('$ctrl+$left', 'move left') }}
+{{ bind('$ctrl+$down', 'move down') }}
+{{ bind('$ctrl+$up', 'move up') }}
+{{ bind('$ctrl+$right', 'move right') }}
+
+# split in vertical orientation
+{{ bind('v', 'split v') }}
+
+# enter fullscreen mode for the focused container
+{{ bind('Shift+f', 'fullscreen toggle') }}
+
+# change container layout (stacked, tabbed, toggle split)
+{{ bind('Shift+t', 'layout tabbed') }}
+{{ bind('Shift+s', 'layout toggle split') }}
+
+# toggle tiling / floating
+{{ bind('Shift+space', 'floating toggle') }}
+
+# change focus between tiling / floating windows
+{{ bind('space', 'focus mode_toggle') }}
+
+# switch to workspace
+{{ bind('grave', 'workspace 0') }}
+{{ bind('equal', 'workspace 0') }}
+{{ bind('1', 'workspace 1') }}
+{{ bind('2', 'workspace 2') }}
+{{ bind('3', 'workspace 3') }}
+{{ bind('4', 'workspace 4') }}
+{{ bind('5', 'workspace 5') }}
+{{ bind('6', 'workspace 6') }}
+{{ bind('7', 'workspace 7') }}
+{{ bind('8', 'workspace 8') }}
+{{ bind('9', 'workspace 9') }}
+{{ bind('0', 'workspace 10') }}
+
+{{ bind('a', 'workspace 1') }}
+{{ bind('s', 'workspace 2') }}
+{{ bind('d', 'workspace 3') }}
+{{ bind('f', 'workspace 4') }}
+{{ bind('g', 'workspace 5') }}
+
+{{ bind('n', 'workspace next') }}
+{{ bind('p', 'workspace prev') }}
+
+# move focused container to workspace
+{{ bind('Shift+grave', 'move container to workspace 0') }}
+{{ bind('Shift+1', 'move container to workspace 1') }}
+{{ bind('Shift+2', 'move container to workspace 2') }}
+{{ bind('Shift+3', 'move container to workspace 3') }}
+{{ bind('Shift+4', 'move container to workspace 4') }}
+{{ bind('Shift+5', 'move container to workspace 5') }}
+{{ bind('Shift+6', 'move container to workspace 6') }}
+{{ bind('Shift+7', 'move container to workspace 7') }}
+{{ bind('Shift+8', 'move container to workspace 8') }}
+{{ bind('Shift+9', 'move container to workspace 9') }}
+{{ bind('Shift+0', 'move container to workspace 10') }}
+
+{{ bind('m', 'move workspace to output right') }}
+
+{{ bindexec('Shift+q', '~/bin/console.sh') }}
+{{ bindexec('Shift+w', '~/bin/browser.sh') }}
+{{ bindexec('Shift+e', 'dolphin') }}
+
+{{ bindexec('q', '~/bin/clipboard.sh') }}
+{{ bindexec('z', '~/dev/build/copyq/Desktop-Debug/copyq -s test2 toggle') }}
+{{ bindexec('x', '~/dev/config/bin/sway_run.sh') }}
+{{ bindexec('$ctrl+t', '~/bin/clipboard.sh triggerGlobalShortcut "Copy Text in Image"') }}
+{{ bindexec('$ctrl+s', '~/bin/screenshot.sh') }}
+{{ bindexec('Shift+p', 'pavucontrol') }}
+{{ bindexec('Return', '~/bin/toggleplay.sh') }}
+
+# Toggle notification center
+{{ bindexec('Shift+n', 'swaync-client --toggle-panel --skip-wait') }}
+
+{{ bindexec('r', 'cd ~/.config/sway && ~/bin/j2 < config.j2 > config && swaymsg reload') }}
