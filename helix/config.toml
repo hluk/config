@@ -1,0 +1,23 @@
+theme = "gruvbox"
+
+[editor]
+#line-number = "relative"
+mouse = false
+
+[editor.cursor-shape]
+insert = "bar"
+normal = "block"
+select = "underline"
+
+[editor.file-picker]
+hidden = false
+
+[editor.indent-guides]
+render = true
+
+[keys.normal]
+#";" = "command_mode"
+D = "kill_to_line_end"
+C-space = "command_palette"
+y = "yank_joined_to_clipboard"
+p = "paste_clipboard_after"

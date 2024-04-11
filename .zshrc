@@ -157,38 +157,12 @@ gl() {
     git la --color -$LINES | head -$((LINES - 8))
 }
 
-gup() {
-    if git branch --list main|grep -q .; then
-        branch=main
-    elif git branch --list develop|grep -q .; then
-        branch=develop
-    elif git branch --list master|grep -q .; then
-        branch=master
-    else
-        branch=devel
-    fi
-
-    git checkout $branch &&
-    if git remote | grep -qw upstream; then
-        git pull --rebase upstream $branch &&
-        #git push origin $branch
-    else
-        git pull --rebase origin $branch
-    fi
-}
-
 tigg() {
   git log --pretty='format:commit %h %s' -G "$@" | tig
 }
 
-if [ -n "$DISPLAY" ]; then
-    alias mc="mc -x"
-else
-    alias xx="startx"
-fi
-
 # package manager
-. /etc/os-release
+source /etc/os-release
 if [[ $NAME =~ "Fedora" ]]; then
     alias q="dnf"
     alias s="q search --cacheonly --all"
@@ -226,19 +200,15 @@ b=~/dev/bin
 f=~/dev/factory
 # }}}
 
-# functions {{{
 # open editor in tmux in new window
 e() {
-    label=">$1${2:+..}"
     if [[ -n $TMUX ]]; then
       tmux new-window $EDITOR "$@"
     else
       $EDITOR "$@"
     fi
 }
-# }}}
 
-# {{{ fd, fzf, rg
 # A-c: cd
 # C-t: complete path
 # C-r: history

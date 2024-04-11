@@ -55,7 +55,8 @@ button {
 }
 
 #mode {
-    background-color: #64727D;
+    background-color: #c9545d;
+    color: white;
     border-bottom: 3px solid #ffffff;
 }
 

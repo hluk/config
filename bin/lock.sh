@@ -6,4 +6,9 @@ args=(
     --indicator-thickness=20
     --image="$wallpaper"
 )
+
+if [[ $(playerctl status) == Playing ]]; then
+    playerctl pause
+fi
+
 exec swaylock "${args[@]}"

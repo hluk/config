@@ -1,0 +1,19 @@
+#!/bin/bash
+set -euo pipefail
+
+if git branch --list main|grep -q .; then
+    branch=main
+elif git branch --list develop|grep -q .; then
+    branch=develop
+elif git branch --list master|grep -q .; then
+    branch=master
+else
+    branch=devel
+fi
+
+git checkout $branch &&
+if git remote | grep -qw upstream; then
+    git pull --rebase upstream $branch
+else
+    git pull --rebase origin $branch
+fi

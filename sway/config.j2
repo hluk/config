@@ -129,33 +129,30 @@ for_window [class=".*"] inhibit_idle focus
 for_window [app_id=".*"] inhibit_idle focus
 
 # Shortcuts
+{% macro bind_(key, cmd, mods, exit_cmd) -%}
+  {% for mod in mods %}
+    bindsym --no-repeat {{ mod }}{{ key }} {{ cmd }}; {{ exit_cmd }}
+  {%- endfor %}
+{%- endmacro %}
+
+{% macro bindexec_(key, cmd, mods, exit_cmd) -%}
+  {% for mod in mods %}
+    bindsym --no-repeat {{ mod }}{{ key }} {{ exit_cmd }}; exec '{{ cmd }}'
+  {%- endfor %}
+{%- endmacro %}
+
 bindsym --no-repeat Super_L mode "shortcut mode"
 mode "shortcut mode" {
-  {% macro bind(key, cmd) -%}
-    {% for mod in ("", "$mod+") %}
-      bindsym {{ mod }}{{ key }} {{ cmd }}; mode default
-    {%- endfor %}
-  {%- endmacro %}
-
-  {% macro bindexec(key, cmd) -%}
-    {% for mod in ("", "$mod+") %}
-      bindsym {{ mod }}{{ key }} exec 'swaymsg mode default; {{ cmd }}'
-    {%- endfor %}
-  {%- endmacro %}
-
+  {% macro bind(key, cmd, mods=("", "$mod+"), exit_cmd="mode default") -%}{{ bind_(key, cmd, mods, exit_cmd) }}{%- endmacro %}
+  {% macro bindexec(key, cmd, mods=("", "$mod+"), exit_cmd="mode default") -%}{{ bindexec_(key, cmd, mods, exit_cmd) }}{%- endmacro %}
   {% include 'shortcuts' %}
 
-  bindsym Super_L workspace back_and_forth; mode default
-  bindsym Escape mode default
+  {{ bind('Super_L', 'workspace back_and_forth') }}
+  {{ bind('Escape', '') }}
 }
 
-{% macro bind(key, cmd) -%}
-  bindsym $mod+{{ key }} {{ cmd }}; mode default
-{%- endmacro %}
-
-{% macro bindexec(key, cmd) -%}
-  bindsym $mod+{{ key }} exec 'swaymsg mode default; {{ cmd }}'
-{%- endmacro %}
+{% macro bind(key, cmd, mods=("$mod+",), exit_cmd="") -%}{{ bind_(key, cmd, mods, exit_cmd) }}{%- endmacro %}
+{% macro bindexec(key, cmd, mods=("$mod+",), exit_cmd="") -%}{{ bindexec_(key, cmd, mods, exit_cmd) }}{%- endmacro %}
 
 {% include 'shortcuts' %}
 
@@ -188,16 +185,12 @@ exec_always "~/bin/monitors.sh"
 #input type:keyboard xkb_numlock enable
 exec_always "~/bin/keyboard.sh"
 
-workspace 0 output eDP-1
-workspace 1 output DP-6
-workspace 2 output DP-6
-workspace 3 output DP-6
-workspace 4 output DP-6
-workspace 5 output DP-6
-workspace 6 output eDP-1
-workspace 7 output eDP-1
-workspace 8 output eDP-1
-workspace 9 output eDP-1
-workspace 10 output eDP-1
+{% for n in [0,6,7,8,9,10] %}
+  workspace {{ n }} output eDP-1
+{% endfor %}
+
+{% for n in [1,2,3,4,5] %}
+  workspace {{ n }} output DP-6
+{% endfor %}
 
 focus output DP-6

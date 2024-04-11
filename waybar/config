@@ -7,11 +7,11 @@
 
     "modules-left": [
         "sway/workspaces",
-        "sway/mode",
         "tray",
         "sway/window",
     ],
     "modules-center": [
+        "sway/mode",
     ],
     "modules-right": [
         //"network",
