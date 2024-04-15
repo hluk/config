@@ -34,22 +34,6 @@ alias gg="gitui"
 # alias gg="flatpak run com.github.Murmele.Gittyup"
 alias gpr="git pr"
 
-function e
-    if test -n $TMUX
-        tmux new-window $EDITOR $argv
-    else
-        $EDITOR $argv
-    end
-end
-
-function gl
-    git la --color -$LINES | head -$(math $LINES - 5)
-end
-
-function tigg
-  git log --pretty='format:commit %h %s' -G $argv | tig
-end
-
 set fish_greeting
 
 # starship init fish | source
