@@ -2,9 +2,9 @@
 # edit command line on C-x C-e
 
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+# if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
+#   source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
+# fi
 
 # env# {{{
 export EDITOR="$HOME/dev/bin/editor.sh"
@@ -247,7 +247,7 @@ source /usr/share/zsh-autosuggestions/zsh-autosuggestions.zsh
 #eval "$(zoxide init zsh --cmd j)"
 
 # https://github.com/romkatv/powerlevel10k
-source ~/dev/powerlevel10k/powerlevel10k.zsh-theme
+# source ~/dev/powerlevel10k/powerlevel10k.zsh-theme
 # }}}
 
 # ccache {{{
@@ -265,4 +265,4 @@ bindkey -v '^[[5~' backward-word
 bindkey -v '^[[6~' forward-word
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
-[[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh
+# [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

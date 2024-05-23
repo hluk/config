@@ -54,7 +54,7 @@ git checkout -b "$branch"
 poetry install --no-root
 git commit --allow-empty --message "Update dependencies"
 
-for branch in $(git branch --remote --list "$remote/dependabot/*"); do
+for branch in $(git branch --remote --list "$remote/dependabot/*" "$remote/pre-commit-ci-update-config"); do
     cherry_pick "$branch"
 done
 

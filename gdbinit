@@ -5,5 +5,8 @@ set history filename ~/.config/gdb/gdb_history
 
 set debuginfod enabled off
 
+# Do not stop on SIGPIPE
+handle SIGPIPE nostop noprint pass
+
 python import sys, types
 python module = types.ModuleType('~/dev/qt-creator/share/qtcreator/debugger/gdbbridge.py')

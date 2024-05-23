@@ -21,3 +21,6 @@ D = "kill_to_line_end"
 C-space = "command_palette"
 y = "yank_joined_to_clipboard"
 p = "paste_clipboard_after"
+
+[keys.select]
+y = "yank_joined_to_clipboard"

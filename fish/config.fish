@@ -4,8 +4,18 @@ fish_vi_key_bindings
 
 set PATH ~/go/bin $PATH
 set PATH ~/.local/bin $PATH
+set PATH ~/bin $PATH
+set PATH ~/dev/scripts $PATH
 
 set -gx EDITOR $HOME/bin/editor.sh
+
+set -gx PAGER less
+set -gx LESS "--RAW-CONTROL-CHARS --ignore-case --quit-if-one-screen --LONG-PROMPT --shift=5"
+set -gx SYSTEMD_LESS $LESS
+
+set __fish_machine ""
+
+alias copyq="~/dev/build/copyq/release/copyq"
 
 alias rm="rm -vI"
 alias cp="cp -v"
@@ -22,6 +32,9 @@ alias i="sudo dnf install"
 alias u="sudo dnf remove"
 alias up="sudo dnf upgrade"
 
+alias w0="~/dev/scripts/work.sh off"
+alias w1="~/dev/scripts/work.sh on"
+
 alias g="git"
 alias gc="git co"
 alias gd="git d"
@@ -36,9 +49,9 @@ alias gpr="git pr"
 
 set fish_greeting
 
-# starship init fish | source
-
-source /usr/share/autojump/autojump.fish
+if test -f /usr/share/autojump/autojump.fish
+    source /usr/share/autojump/autojump.fish
+end
 
 # A-c: cd
 # C-t: complete path
@@ -49,7 +62,9 @@ export FZF_DEFAULT_COMMAND='rg --files'
 export FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 export FZF_DEFAULT_OPTS="--history=$HOME/.local/share/fzf_history"
 
-source /usr/share/fzf/shell/key-bindings.fish
-fzf_key_bindings
+if test -f /usr/share/fzf/shell/key-bindings.fish
+    source /usr/share/fzf/shell/key-bindings.fish
+    fzf_key_bindings
+end
 
 alias rg="rg --max-columns 999"

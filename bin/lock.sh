@@ -7,8 +7,6 @@ args=(
     --image="$wallpaper"
 )
 
-if [[ $(playerctl status) == Playing ]]; then
-    playerctl pause
-fi
+playerctl pause --all-players & disown
 
 exec swaylock "${args[@]}"

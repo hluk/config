@@ -8,4 +8,5 @@
 exec ~/dev/tidal-hifi/dist/linux-unpacked/tidal-hifi \
     --enable-features=UseOzonePlatform \
     --ozone-platform-hint=auto \
-    --enable-features=WaylandWindowDecorations
+    --enable-features=WaylandWindowDecorations \
+    &> ~/.local/state/tidal.log

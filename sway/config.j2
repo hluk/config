@@ -104,7 +104,7 @@ client.background       #ffffff
 #for_window [instance="^copyq$" class="^[Cc]opyq"] floating enable, border normal
 #for_window [instance="^xfce4-appfinder$" class="^Xfce4-appfinder$"] floating enable, border normal
 #for_window [instance="^xev$"] floating enable, border normal
-for_window [app_id="^com.github.hluk.copyq$"] floating enable, border normal
+for_window [app_id="^com.github.hluk.copyq$"] floating enable, border normal, move position 60 ppt 20 ppt
 for_window [title="^InfiniteCopy$"] floating enable, border normal
 
 for_window [app_id="^mpv$"] floating enable, resize set 960 540, border pixel 0
@@ -113,6 +113,7 @@ for_window [app_id="^firefox$" title="^Picture-in-Picture$"] floating enable
 for_window [title=" - Sharing Indicator$"] floating enable, sticky enable
 for_window [title="^Password Required .* Firefox$"] floating enable
 
+for_window [class="^krunner$"] floating enable, border none
 for_window [app_id="^ulauncher$"] floating enable, border none
 
 for_window [class="^steam_app_"] floating enable, border none
