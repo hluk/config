@@ -11,7 +11,7 @@
 ~/.config/helix/
 ~/.config/kitty/kitty.conf
 ~/.config/kwinrc
-~/.config/lvim/config.lua lvim/
+~/.config/nvim/
 ~/.config/mako/config mako/
 ~/.config/openbox/
 ~/.config/qt5ct/

@@ -1,6 +1,7 @@
 # Shortcuts: https://fishshell.com/docs/current/#shared-bindings
 # Alt-e ... edit command line in an editor
 fish_vi_key_bindings
+bind U redo
 
 set PATH ~/go/bin $PATH
 set PATH ~/.local/bin $PATH
@@ -14,6 +15,7 @@ set -gx LESS "--RAW-CONTROL-CHARS --ignore-case --quit-if-one-screen --LONG-PROM
 set -gx SYSTEMD_LESS $LESS
 
 set __fish_machine ""
+set fish_prompt_pwd_dir_length 40
 
 alias copyq="~/dev/build/copyq/release/copyq"
 

@@ -38,7 +38,7 @@ args=(
     --disable-features=UserAgentClientHint
 
     # "https://play.geforcenow.com/mall/#/layout/games/gameSectionGrid?search=false"
-    https://www.netflix.com/browse/my-list
+    #https://www.netflix.com/browse/my-list
 )
 #exec gamemoderun chromium-freeworld "${args[@]}" "$@"
 #exec gamescope -r 60 -w 1920 -h 1080 -f -- chromium-freeworld "${args[@]}" "$@"

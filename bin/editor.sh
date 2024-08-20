@@ -4,5 +4,5 @@ if [[ -f poetry.lock ]]; then
 fi
 
 #exec $cmd hx "$@"
-#exec $cmd nvim "$@"
-exec $cmd ~/.local/bin/lvim "$@"
+exec $cmd nvim "$@"
+#exec $cmd ~/.local/bin/lvim "$@"
