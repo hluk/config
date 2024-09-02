@@ -21,3 +21,21 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
     vim.opt.expandtab = false
   end,
 })
+
+vim.env.RIPGREP_CONFIG_PATH = vim.env.HOME .. "/.config/ripgreprc"
+
+require("telescope").setup {
+  pickers = {
+    find_files = {
+      hidden = true,
+      file_ignore_patterns = {
+        "^.git/",
+        "^.mypy_cache/",
+        "^.tox/",
+        "^.venv/",
+        "^tags$",
+        "^venv/",
+      },
+    },
+  }
+}
