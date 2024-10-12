@@ -43,7 +43,7 @@ button {
     border: inherit;
 }
 
-#workspaces button.focused {
+#workspaces button.active {
     border-color: #4c7899;
     color: #aaddff;
     background-color: #285577;

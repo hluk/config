@@ -6,6 +6,14 @@ vim.opt.shiftwidth = 4
 vim.opt.tabstop = 4
 vim.opt.softtabstop = 4
 
+vim.opt.scrolloff=5
+
+vim.opt.relativenumber = false
+
+-- Always show command line and suppress "Press ENTER or type command to
+-- continue" messages
+vim.opt.cmdheight = 1
+
 vim.api.nvim_create_autocmd({ "FileType" }, {
   pattern = { "yaml", "json", "jsonnet" },
   callback = function()
@@ -24,6 +32,7 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
 
 vim.env.RIPGREP_CONFIG_PATH = vim.env.HOME .. "/.config/ripgreprc"
 
+local actions = require "telescope.actions"
 require("telescope").setup {
   pickers = {
     find_files = {
@@ -37,5 +46,13 @@ require("telescope").setup {
         "^venv/",
       },
     },
+  },
+  defaults = {
+    mappings = {
+      i = {
+        ["<C-j>"] = actions.cycle_history_next,
+        ["<C-k>"] = actions.cycle_history_prev,
+      }
+    }
   }
 }

@@ -9,6 +9,7 @@
 ~/.config/git/
 ~/.config/gtk-3.0/settings.ini gtk-3.0/
 ~/.config/helix/
+~/.config/hypr/
 ~/.config/kitty/kitty.conf
 ~/.config/kwinrc
 ~/.config/nvim/
