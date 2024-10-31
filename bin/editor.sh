@@ -5,4 +5,5 @@ fi
 
 #exec $cmd hx "$@"
 exec $cmd nvim "$@"
+#exec $cmd zed --foreground "$@"
 #exec $cmd ~/.local/bin/lvim "$@"

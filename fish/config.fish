@@ -14,6 +14,9 @@ set -gx PAGER less
 set -gx LESS "--RAW-CONTROL-CHARS --ignore-case --quit-if-one-screen --LONG-PROMPT --shift=5"
 set -gx SYSTEMD_LESS $LESS
 
+set -gx REQUESTS_CA_BUNDLE /etc/pki/tls/certs/ca-bundle.crt
+set -gx K8S_AUTH_SSL_CA_CERT /etc/pki/tls/cert.pem
+
 set __fish_machine ""
 set fish_prompt_pwd_dir_length 40
 

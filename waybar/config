@@ -6,12 +6,12 @@
     "height": 22,
 
     "modules-left": [
-        "hyprland/workspaces",
+        "sway/workspaces",
         "tray",
-        "hyprland/window",
+        "sway/window",
     ],
     "modules-center": [
-        "hyprland/mode",
+        "sway/mode",
     ],
     "modules-right": [
         //"network",
@@ -127,17 +127,17 @@
         "tooltip": true
     },
 
-    "hyprland/mode": {
+    "sway/mode": {
         "format": "<span style=\"italic\"> {}</span>",
         "tooltip": false
     },
 
-    "hyprland/window": {
+    "sway/window": {
         "format": "{}",
         "max-length": 120
     },
 
-    "hyprland/workspaces": {
+    "sway/workspaces": {
         "all-outputs": false,
         "disable-scroll": true,
         "format": "{icon}{name}",

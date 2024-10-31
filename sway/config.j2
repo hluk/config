@@ -29,7 +29,7 @@ set $left h
 set $right l
 
 # Use Mouse+$mod to drag floating windows to their wanted position
-floating_modifier $mod
+floating_modifier $alt
 
 # kill focused window
 bindsym $alt+F4 kill
@@ -68,7 +68,7 @@ bar {
         #tray_output DP-4
         #status_command i3status --config ~/.i3/status.conf
         #status_command i3status-rs ~/.config/sway/status.toml
-        swaybar_command waybar
+        swaybar_command sh -c "sleep 5; exec ~/bin/waybar.sh"
         colors {
                 background #282828
                 statusline #aaaaaa
@@ -109,8 +109,8 @@ for_window [title="^InfiniteCopy$"] floating enable, border normal
 
 for_window [app_id="^mpv$"] floating enable, resize set 960 540, border pixel 0
 
-for_window [app_id="^org.mozilla.firefox$"] move workspace 2
-for_window [app_id="^firefox-work$"] move workspace 3
+# for_window [app_id="^org.mozilla.firefox$"] move workspace 2
+# for_window [app_id="^firefox-work$"] move workspace 3
 for_window [app_id="^firefox$" title="^Picture-in-Picture$"] floating enable
 
 for_window [title=" - Sharing Indicator$"] floating enable, sticky enable

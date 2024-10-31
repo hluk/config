@@ -2,7 +2,7 @@
 set -xeu
 
 out1="BOE 0x086E Unknown"
-out2="Goldstar Company Ltd LG Ultra HD 0x00003617"
+out2="LG Electronics LG Ultra HD 0x00003617"
 out1_enabled=${1:-1}
 scale1=1.5
 scale2=2
