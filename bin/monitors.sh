@@ -58,6 +58,8 @@ output "$out2" pos $x2 $y2 res ${w2}x$h2
 output "*" bg "$wallpaper" fill
 EOD
 )
+echo $msg
+exit
 swaymsg "$msg"
 
 # Changing monitors layout can break mako notifications.
