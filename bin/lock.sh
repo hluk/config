@@ -5,6 +5,7 @@ args=(
     --indicator-radius=100
     --indicator-thickness=20
     --image="$wallpaper"
+    # --color=000000
 )
 
 playerctl pause --all-players & disown

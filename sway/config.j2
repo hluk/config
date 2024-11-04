@@ -1,13 +1,13 @@
 # Sway Wayland compositor configuration.
 # See: sway(5)
+output * scale 2
+output * pos 1280 0 res 3840x2160
+output * bg "~/Pictures/wallpapers/current.jpg" fill
 output eDP-1 pos 0 0 res 1920x1080
 output eDP-1 enable
 output eDP-1 scale 1.5
 output eDP-1 pos 0 0 res 1920x1080
 output eDP-1 enable
-output DP-6 scale 2
-output DP-6 pos 1280 0 res 3840x2160
-output * bg "~/Pictures/wallpapers/current.jpg" fill
 
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \
@@ -76,7 +76,7 @@ bar {
         #tray_output DP-4
         #status_command i3status --config ~/.i3/status.conf
         #status_command i3status-rs ~/.config/sway/status.toml
-        swaybar_command sh -c "sleep 5; exec ~/bin/waybar.sh"
+        swaybar_command sh -c "exec ~/bin/waybar.sh"
         colors {
                 background #282828
                 statusline #aaaaaa
@@ -198,6 +198,8 @@ exec sh -c "sleep 5; exec ~/bin/clipboard.sh"
 exec_always "~/bin/keyboard.sh"
 
 exec_always sh -c "pkill ulauncher; ulauncher --hide-window"
+
+exec_always sh -c "exec ~/bin/waybar.sh"
 
 {% for n in [0,6,7,8,9,10] %}
   workspace {{ n }} output eDP-1
