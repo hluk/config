@@ -1,13 +1,11 @@
 # Sway Wayland compositor configuration.
 # See: sway(5)
-output * scale 2
-output * pos 1280 0 res 3840x2160
+output "LG Electronics LG Ultra HD 0x00003617" scale 2
+output "LG Electronics LG Ultra HD 0x00003617" pos 1280 0 res 3840x2160
 output * bg "~/Pictures/wallpapers/current.jpg" fill
 output eDP-1 pos 0 0 res 1920x1080
-output eDP-1 enable
 output eDP-1 scale 1.5
 output eDP-1 pos 0 0 res 1920x1080
-output eDP-1 enable
 
 exec systemctl --user import-environment DISPLAY WAYLAND_DISPLAY SWAYSOCK
 exec hash dbus-update-activation-environment 2>/dev/null && \

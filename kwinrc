@@ -84,14 +84,17 @@ Meta=org.kde.krunner,/App,,toggleDisplay
 Active=true
 EveningBeginFixed=1600
 Mode=Times
-NightTemperature=4000
 TransitionTime=90
 
 [Plugins]
 blurEnabled=false
-contrastEnabled=false
+contrastEnabled=true
 coverswitchEnabled=true
 desktopgridEnabled=false
+dialogparentEnabled=false
+fadingpopupsEnabled=false
+fullscreenEnabled=false
+hidecursorEnabled=true
 highlightwindowEnabled=true
 kwin4_effect_dialogparentEnabled=false
 kwin4_effect_fadingpopupsEnabled=false
@@ -105,11 +108,17 @@ kwin4_effect_scaleEnabled=false
 kwin4_effect_squashEnabled=false
 kwin4_effect_translucencyEnabled=false
 kwin4_effect_windowapertureEnabled=false
+loginEnabled=false
+logoutEnabled=false
+maximizeEnabled=false
 overviewEnabled=false
 presentwindowsEnabled=false
+scaleEnabled=false
 screenedgeEnabled=false
 slideEnabled=false
 slidingpopupsEnabled=false
+squashEnabled=false
+windowapertureEnabled=false
 windowviewEnabled=false
 zoomEnabled=false
 
@@ -139,7 +148,28 @@ SwitchingMode=0
 [Tiling]
 padding=4
 
+[Tiling][01848a6f-5be5-5fe5-ab4b-4745cbc49b1f]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][05b5a6a0-4a0e-56ad-8e00-dcfcd5e8b944]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][0ba0ea17-4845-5876-9689-3735cb2030e7]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][28808d28-b402-5190-a01c-627aa25f4712]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
 [Tiling][3e6a13d3-7d29-5922-82c3-84e8bdf10429]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][777ad12f-417e-5539-ac75-538722ab7799]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][d992f58e-7fa5-5086-b047-113d5cd7f9d7]
+tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
+
+[Tiling][e485ddb1-c43f-576e-b29a-f8de91755f83]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Windows]

@@ -5,8 +5,8 @@
 #     cd tidal-hifi
 #     npm run build-unpacked
 #
-exec ~/dev/tidal-hifi/dist/linux-unpacked/tidal-hifi \
+# exec ~/dev/tidal-hifi/dist/linux-unpacked/tidal-hifi \
+exec flatpak run com.mastermindzh.tidal-hifi \
     --enable-features=UseOzonePlatform \
     --ozone-platform-hint=auto \
-    --enable-features=WaylandWindowDecorations \
-    &> ~/.local/state/tidal.log
+    --enable-features=WaylandWindowDecorations

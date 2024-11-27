@@ -4,6 +4,7 @@ set -e
 version=release
 rundir=~/dev/build/copyq
 cmd=$rundir/$version/copyq
+# cmd=/usr/bin/copyq
 
 # Workaround for bug in Qt 5.14.2.
 # https://bugreports.qt.io/browse/QTBUG-84363

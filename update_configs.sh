@@ -6,11 +6,6 @@ shopt -s failglob
 diff=${DIFF:-nvim -d}
 
 home_configs=(
-    .gitconfig
-    .i3/*
-    .tmux.conf
-    .vimrc
-    .Xresources
     .zshrc
 )
 
@@ -54,8 +49,3 @@ for config in "${configs[@]}"; do
 done
 
 update_firefox
-
-pushd ~/.config/sway
-./bin/j2 < config.j2 > config
-swaymsg reload
-popd
