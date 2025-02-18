@@ -1,0 +1,71 @@
+[user]
+    name = Lukas Holecek
+    email = hluk@email.cz
+[color]
+    ui = auto
+[alias]
+    co = checkout
+    st = status --branch --short
+    d  = diff
+    la = log --date-order --oneline --all --graph --decorate --branches --tags -20
+    c = commit --allow-empty #--signoff
+    pr = pull --rebase
+    f = fetch --all --tags --prune
+    ca = commit --all --amend --no-edit
+    cn = commit --amend --no-edit
+    rmb = "!f() { git branch -D $*; git push --delete origin $*; }; f"
+[core]
+    whitespace = cr-at-eol
+    autocrlf = input
+    pager = less -FRSX
+    editor = nvim
+    trustctime = false
+[push]
+    default = tracking
+[rerere]
+    enabled = true
+    autoupdate = true
+[rebase]
+    autosquash = true
+    stat = true
+[diff]
+    algorithm = histogram
+    tool = vimdiff
+    colorMoved = true
+    # This removes "a/", "b/" prefix from paths in diff, making it easy to copy
+    # path, but it breaks creating diff files.
+    noprefix = true
+[difftool]
+    prompt = false
+    trustExitCode = true # :cq in Vim to abort opening next diffs
+[merge]
+    tool = vimdiff
+[mergetool]
+    keepBackup = false
+    trustExitCode = true
+[mergetool "vimdiff"]
+    cmd = lvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[init]
+    defaultBranch = main
+
+[diff "ansible-vault"]
+    textconv = env ANSIBLE_VAULT_PASSWORD_FILE=vault-password-file.sh ansible-vault view
+
+# Delta - nicer diffs
+[core]
+    pager = delta
+[interactive]
+    diffFilter = delta --color-only
+[delta]
+    navigate = true  # use n and N to move between diff sections
+    side-by-side = true
+[merge]
+    conflictstyle = diff3
+[diff]
+    colorMoved = default
+[credential "https://github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
+[credential "https://gist.github.com"]
+	helper =
+	helper = !/usr/bin/gh auth git-credential
