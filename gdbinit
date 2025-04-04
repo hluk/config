@@ -9,4 +9,4 @@ set debuginfod enabled off
 handle SIGPIPE nostop noprint pass
 
 python import sys, types
-python module = types.ModuleType('~/dev/qt-creator/share/qtcreator/debugger/gdbbridge.py')
+python module = types.ModuleType('~/dev/qt/qt-creator/share/qtcreator/debugger/gdbbridge.py')

@@ -1,5 +1,7 @@
 #!/bin/bash
-if [[ -f poetry.lock ]]; then
+if [[ -f uv.lock || -f .venv/pyvenv.cfg ]]; then
+    cmd="uv run"
+elif [[ -f poetry.lock ]]; then
     cmd="poetry run"
 fi
 

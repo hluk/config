@@ -6,4 +6,5 @@ return {
   { import = "astrocommunity.pack.cpp" },
   { import = "astrocommunity.pack.python-ruff" },
   { import = "astrocommunity.colorscheme.catppuccin" },
+  --{ import = "astrocommunity.colorscheme.dracula-nvim" },
 }

@@ -1,21 +1,13 @@
-~/.ansible.cfg
-~/.config/alacritty.yml
-~/.config/ansible-review/
 ~/.config/fd/
 ~/.config/fish
 ~/.config/fontconfig/fonts.conf
-~/.config/foot/foot.ini
 ~/.config/gdb/gdbinit
 ~/.config/git/
 ~/.config/gtk-3.0/settings.ini gtk-3.0/
 ~/.config/helix/
-~/.config/hypr/
 ~/.config/kitty/kitty.conf
 ~/.config/kwinrc
 ~/.config/nvim/
-~/.config/mako/config mako/
-~/.config/openbox/
-~/.config/qt5ct/
 ~/.config/ripgreprc
 ~/.config/sway/
 ~/.config/swaync/
@@ -30,11 +22,5 @@
 ~/.fakevimrc
 ~/.local/share/konsole/Screen.profile konsole
 ~/.mozilla/firefox/*/chrome/userChrome.css firefox
-~/.p10k.zsh
-~/.vimrc
 ~/.zshrc
 ~/dev/bin/
-~/dev/colors/
-~/dev/menus/*.sh menus/
-/usr/lib/udev/keymaps/microsoft-ergonomic-keyboard udev/keymaps/microsoft-ergonomic-keyboard
-/usr/lib/udev/rules.d/95-keymap.rules udev/rules.d/95-keymap.rules

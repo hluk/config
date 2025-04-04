@@ -5,4 +5,4 @@ set -e
 sleep "${1:-5}"
 
 cd ~/dev/xitomatl
-exec poetry run xitomatl 2> .xitomatl.log
+exec uv run xitomatl 2> .xitomatl.log

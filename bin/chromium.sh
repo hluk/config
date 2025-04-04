@@ -43,4 +43,5 @@ args=(
 #exec gamemoderun chromium-freeworld "${args[@]}" "$@"
 #exec gamescope -r 60 -w 1920 -h 1080 -f -- chromium-freeworld "${args[@]}" "$@"
 # chromium-browser "${args[@]}" "$@"
-flatpak run com.brave.Browser "${args[@]}" "$@"
+# flatpak run com.brave.Browser "${args[@]}" "$@"
+flatpak run org.chromium.Chromium "${args[@]}" "$@"

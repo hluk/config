@@ -9,7 +9,7 @@ try:
 except ImportError:
     Environment = jinja2.Environment
 
-template_dir = os.environ.get('TEMPLATES', 'templates')
+template_dir = os.environ.get('TEMPLATES', '.')
 
 values = {}
 for arg in sys.argv[1:]:
@@ -22,4 +22,5 @@ env = Environment(
 )
 input = sys.stdin.read()
 template = env.from_string(input)
-template.stream(values).dump(sys.stdout)
+for x in template.generate(values):
+    sys.stdout.write(str(x))

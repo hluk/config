@@ -8,15 +8,18 @@ D=:${D:-"9"}
 #Xephyr $D -ac -br -reset -terminate +iglx +extension Composite +extension RANDR -screen 800x600+0+0 -screen 800x600+0+800 &
 #Xephyr $D -ac -br -reset -terminate +iglx +extension Composite -screen 5120x1440 &
 #Xephyr $D -ac -br -reset -terminate +iglx +extension Composite -screen 640x480 &
+# Xephyr $D -ac -br -reset -terminate +iglx +extension Composite -screen 3840x2160 &
 Xephyr $D -ac -br -reset -terminate +iglx +extension Composite -screen 1600x900 &
+x_pid=$!
+# trap "kill $x_pid || true" QUIT TERM INT HUP EXIT
 export DISPLAY=$D
 export WAYLAND_DISPLAY=
 sleep 1
 
 export QT_QPA_PLATFORM=xcb
 
-#herbstluftwm &
 openbox &
+#herbstluftwm &
 #awesome &
 #xfwm4 &
 #i3 &
@@ -26,14 +29,13 @@ sleep 1
 
 /usr/libexec/gsd-xsettings &
 settings_pid=$!
+trap "kill $settings_pid || true" QUIT TERM INT HUP EXIT
 
 #xfce4-terminal
 #~/dev/build/copyq/debug/install/bin/copyq -s test1
 #~/dev/build/copyq/debug/install/bin/copyq &
 #~/dev/build/copyq/Qt_5-Debug/copyq tests "$@"
 "$@"
-
-kill "$settings_pid"
 
 #cinnamon-settings &
 #cinnamon-session
@@ -45,12 +47,4 @@ kill "$settings_pid"
 
 exit_code=$?
 
-echo "Press Enter to continue..."
-read
-
-killall Xnest
-killall Xephyr
-wait
-
 exit $exit_code
-

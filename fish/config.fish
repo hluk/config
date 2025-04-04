@@ -3,6 +3,7 @@
 fish_vi_key_bindings
 bind U redo
 
+set PATH ~/.cargo/bin $PATH
 set PATH ~/go/bin $PATH
 set PATH ~/.local/bin $PATH
 set PATH ~/bin $PATH
@@ -16,6 +17,8 @@ set -gx SYSTEMD_LESS $LESS
 
 set -gx REQUESTS_CA_BUNDLE /etc/pki/tls/certs/ca-bundle.crt
 set -gx K8S_AUTH_SSL_CA_CERT /etc/pki/tls/cert.pem
+
+set -gx PYTHON_KEYRING_BACKEND keyring.backends.fail.Keyring
 
 set __fish_machine ""
 set fish_prompt_pwd_dir_length 40
@@ -41,7 +44,10 @@ alias w0="~/dev/scripts/work.sh off"
 alias w1="~/dev/scripts/work.sh on"
 
 alias g="git"
-alias gc="git co"
+alias gco="git checkout"
+alias gbr="git switch --create"
+alias gca="git commit -all"
+alias gcam="git commit -all --message"
 alias gd="git d"
 alias gf="git f"
 alias gs="git show"
@@ -52,11 +58,27 @@ alias gg="gitui"
 # alias gg="flatpak run com.github.Murmele.Gittyup"
 alias gpr="git pr"
 
+set -gx BAT_STYLE "auto,-numbers,-changes"
+alias baty="yq | bat --language=yaml"
+alias batj="jq | bat --language=json"
+alias batl="bat --pager='less -FR +G' --language=log"
+
+alias n="ninja"
+alias ni="ninja install"
+set -gx CMAKE_GENERATOR Ninja
+set -gx CMAKE_EXPORT_COMPILE_COMMANDS 1
+
 set fish_greeting
 
-if test -f /usr/share/autojump/autojump.fish
-    source /usr/share/autojump/autojump.fish
+if test -f /usr/bin/zoxide
+    zoxide init --cmd j fish | source
 end
+
+# https://carapace-sh.github.io/carapace-bin/setup.html
+# use ~/.config/carapace/bridges.yaml
+# set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense' # optional
+set -Ux CARAPACE_MATCH 1 # case-insensitive
+carapace _carapace | source
 
 # A-c: cd
 # C-t: complete path

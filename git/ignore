@@ -1,3 +1,6 @@
 _build/
 __pycache__/
 .cache/
+.vscode/
+
+**/.claude/settings.local.json

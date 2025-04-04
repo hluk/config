@@ -1,4 +1,3 @@
-vim.opt.mouse = ""
 vim.opt.wrap = true
 vim.opt.spell = true
 
@@ -9,6 +8,13 @@ vim.opt.softtabstop = 4
 vim.opt.scrolloff=5
 
 vim.opt.relativenumber = false
+
+vim.opt.background = "dark"
+
+vim.opt.completeopt = "menu,menuone,noselect,popup"
+
+-- Folding is confusing and some documents get auto-folded
+vim.wo.foldenable = false
 
 -- Always show command line and suppress "Press ENTER or type command to
 -- continue" messages
@@ -30,7 +36,19 @@ vim.api.nvim_create_autocmd({ "FileType" }, {
   end,
 })
 
+-- Avoid modifying fugitive diff buffers
+vim.api.nvim_create_autocmd({ "BufReadPost" }, {
+  pattern = { "fugitive:///*//0/*" },
+  callback = function()
+    vim.opt_local.modifiable = false
+    vim.opt_local.readonly = true
+  end,
+})
+
 vim.env.RIPGREP_CONFIG_PATH = vim.env.HOME .. "/.config/ripgreprc"
+
+local cmp = require('cmp')
+cmp.mapping.preset["<TAB>"] = vim.NIL
 
 local actions = require "telescope.actions"
 require("telescope").setup {
@@ -56,3 +74,15 @@ require("telescope").setup {
     }
   }
 }
+
+vim.api.nvim_set_keymap('i', '<C-l>', 'copilot#Accept("<CR>")', { expr=true, noremap = true, silent = true })
+
+vim.api.nvim_create_user_command("CopyRelativePath", function()
+  local path = vim.fn.expand("%p")
+  vim.fn.setreg("+", path)
+  vim.notify('Path copied to clipobard:\n"' .. path .. '"', vim.log.levels.INFO)
+end, {})
+vim.api.nvim_set_keymap('n', '<C-g>', '', {
+  noremap = true, silent = true,
+  callback = vim.cmd.CopyRelativePath
+})

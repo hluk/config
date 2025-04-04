@@ -1,1 +1,0 @@
-on-button-middle=exec makoctl menu -n "$id" rofi -dmenu -p 'Select action: '
