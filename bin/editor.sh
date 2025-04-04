@@ -1,5 +1,6 @@
 #!/bin/bash
 if [[ -f poetry.lock ]]; then
+    export PATH="$HOME/.local/bin:$PATH"
     cmd="poetry run"
 fi
 

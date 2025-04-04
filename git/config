@@ -3,6 +3,12 @@
     email = hluk@email.cz
 [color]
     ui = auto
+[column]
+    ui = auto
+[branch]
+    sort = -committerdate
+[tag]
+    sort = version:refname
 [alias]
     co = checkout
     st = status --branch --short
@@ -10,31 +16,44 @@
     la = log --date-order --oneline --all --graph --decorate --branches --tags -20
     c = commit --allow-empty #--signoff
     pr = pull --rebase
-    f = fetch --all --tags --prune
+    f = fetch --all --tags
     ca = commit --all --amend --no-edit
     cn = commit --amend --no-edit
     rmb = "!f() { git branch -D $*; git push --delete origin $*; }; f"
+[pull]
+    rebase = true
+[fetch]
+    prune = true
+    pruneTags = true
+    all = true
 [core]
     whitespace = cr-at-eol
     autocrlf = input
-    pager = less -FRSX
+    pager = bat
     editor = nvim
     trustctime = false
 [push]
-    default = tracking
+    default = simple
+    autoSetupRemote = true
 [rerere]
     enabled = true
     autoupdate = true
 [rebase]
     autosquash = true
+    autoStash = true
+    updateRefs = true
     stat = true
 [diff]
     algorithm = histogram
     tool = vimdiff
     colorMoved = true
+    colorMovedWS = allow-indentation-change
     # This removes "a/", "b/" prefix from paths in diff, making it easy to copy
     # path, but it breaks creating diff files.
     noprefix = true
+    renames = true
+[color "diff"]
+    whitespace = red reverse
 [difftool]
     prompt = false
     trustExitCode = true # :cq in Vim to abort opening next diffs
@@ -44,7 +63,7 @@
     keepBackup = false
     trustExitCode = true
 [mergetool "vimdiff"]
-    cmd = lvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+    cmd = nvim -d $BASE $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [init]
     defaultBranch = main
 
@@ -60,7 +79,7 @@
     navigate = true  # use n and N to move between diff sections
     side-by-side = true
 [merge]
-    conflictstyle = diff3
+    conflictstyle = zdiff3
 [diff]
     colorMoved = default
 [credential "https://github.com"]
@@ -69,3 +88,7 @@
 [credential "https://gist.github.com"]
 	helper =
 	helper = !/usr/bin/gh auth git-credential
+[maintenance]
+	repo = /home/lholecek/.cache/catalog/git/plm-playbooks-97d338ba
+	repo = /home/lholecek/.cache/catalog/git/bst.git-16ee258c
+	repo = /home/lholecek/.cache/catalog/git/errata-tool-playbooks-28ce0c0e

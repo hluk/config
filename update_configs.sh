@@ -5,10 +5,6 @@ shopt -s failglob
 
 diff=${DIFF:-nvim -d}
 
-home_configs=(
-    .zshrc
-)
-
 configs=(
     openbox/*
 )
@@ -39,10 +35,6 @@ update_firefox() {
         fi
     done
 }
-
-for config in "${home_configs[@]}"; do
-    create_or_diff "$config" ~/"$config"
-done
 
 for config in "${configs[@]}"; do
     create_or_diff "$config" ~/.config/"$config"

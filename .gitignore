@@ -1,5 +1,6 @@
 /nvim/lazy-lock.json
 /nvim/lua/plugins/example.lua
+/fish/completions
 /fish/fish_variables
 /sway/config
 *.bak

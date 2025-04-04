@@ -54,8 +54,17 @@ alias gpr="git pr"
 
 set fish_greeting
 
-if test -f /usr/share/autojump/autojump.fish
-    source /usr/share/autojump/autojump.fish
+# https://carapace-sh.github.io/carapace-bin/setup.html
+set -Ux CARAPACE_BRIDGES 'zsh,fish,bash,inshellisense' # optional
+carapace _carapace | source
+# workaround for fish <4.0b1
+if test ! -f ~/.config/fish/completions/git.fish
+    mkdir -p ~/.config/fish/completions
+    carapace --list | awk '{print $1}' | xargs -I{} touch ~/.config/fish/completions/{}.fish # disable auto-loaded completions (#185)
+end
+
+if test -f /usr/bin/zoxide
+    zoxide init --cmd j fish | source
 end
 
 # A-c: cd
