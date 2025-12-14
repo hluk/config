@@ -88,7 +88,3 @@
 [credential "https://gist.github.com"]
 	helper =
 	helper = !/usr/bin/gh auth git-credential
-[maintenance]
-	repo = /home/lholecek/.cache/catalog/git/plm-playbooks-97d338ba
-	repo = /home/lholecek/.cache/catalog/git/bst.git-16ee258c
-	repo = /home/lholecek/.cache/catalog/git/errata-tool-playbooks-28ce0c0e

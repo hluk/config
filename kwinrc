@@ -62,7 +62,7 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 
 [Wayland]
 InputMethod[$d]
-VirtualKeyboardEnabled=false
+VirtualKeyboardEnabled=true
 
 [Windows]
 BorderlessMaximizedWindows=true
