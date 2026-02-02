@@ -10,7 +10,7 @@ return {
 
   -- cycle through diffs
   -- :DiffviewFileHistory %
-  { "sindrets/diffview.nvim" },
+  -- { "sindrets/diffview.nvim" },
 
   -- handle line and column numbers in file names
   { "wsdjeg/vim-fetch" },
@@ -21,9 +21,9 @@ return {
   { "tpope/vim-eunuch" },
 
   -- colorscheme
-  { "EdenEast/nightfox.nvim" },
-  { "ellisonleao/gruvbox.nvim" },
-  { "catppuccin/nvim" },
+  -- { "EdenEast/nightfox.nvim" },
+  -- { "ellisonleao/gruvbox.nvim" },
+  -- { "catppuccin/nvim" },
 
   -- -- Structural search and replace
   -- {

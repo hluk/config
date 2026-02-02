@@ -71,7 +71,10 @@ set -gx CMAKE_EXPORT_COMPILE_COMMANDS 1
 set fish_greeting
 
 if test -f /usr/bin/zoxide
-    zoxide init --cmd j fish | source
+    zoxide init fish | source
+    # never cd to an existing subdirectory with the same name
+    # https://github.com/ajeetdsouza/zoxide/issues/852
+    alias j='__zoxide_z /'
 end
 
 # https://carapace-sh.github.io/carapace-bin/setup.html
