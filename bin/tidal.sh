@@ -7,6 +7,4 @@
 #
 # exec ~/dev/tidal-hifi/dist/linux-unpacked/tidal-hifi \
 exec flatpak run com.mastermindzh.tidal-hifi \
-    --enable-features=UseOzonePlatform \
-    --ozone-platform-hint=auto \
-    --enable-features=WaylandWindowDecorations
+    --disable-features=WaylandWpColorManagerV1

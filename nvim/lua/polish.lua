@@ -78,11 +78,15 @@ require("telescope").setup {
 vim.api.nvim_set_keymap('i', '<C-l>', 'copilot#Accept("<CR>")', { expr=true, noremap = true, silent = true })
 
 vim.api.nvim_create_user_command("CopyRelativePath", function()
-  local path = vim.fn.expand("%p")
+  local path = vim.fn.expand("%:~:.")
   vim.fn.setreg("+", path)
   vim.notify('Path copied to clipobard:\n"' .. path .. '"', vim.log.levels.INFO)
 end, {})
 vim.api.nvim_set_keymap('n', '<C-g>', '', {
   noremap = true, silent = true,
   callback = vim.cmd.CopyRelativePath
+})
+vim.api.nvim_set_keymap('n', '<C-z>', '', {
+  noremap = true, silent = true,
+  callback = vim.cmd.ClangdSwitchSourceHeader
 })

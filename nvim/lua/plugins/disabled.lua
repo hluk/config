@@ -1,4 +1,5 @@
 return {
+  { "stevearc/conform.nvim", enabled = false },
   { "AstroNvim/astrotheme", enabled = false },
   { "JoosepAlviste/nvim-ts-context-commentstring", enabled = false },
   { "L3MON4D3/LuaSnip", enabled = false },
@@ -20,7 +21,7 @@ return {
   { "nvim-tree/nvim-web-devicons", enabled = false },
   { "onsails/lspkind.nvim", enabled = false },
   { "p00f/clangd_extensions.nvim", enabled = false },
-  { "rcarriga/nvim-notify", enabled = false },
+  --{ "rcarriga/nvim-notify", enabled = false },
   { "s1n7ax/nvim-window-picker", enabled = false },
   { "stevearc/aerial.nvim", enabled = false },
   { "stevearc/dressing.nvim", enabled = false },

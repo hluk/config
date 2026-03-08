@@ -24,9 +24,6 @@ slidingpopupsEnabled=false
 [TabBox]
 LayoutName=compact
 
-[Tiling]
-padding=4
-
 [Tiling][1a13b187-8f4a-5b7e-86bf-2cd7b7389c34]
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
@@ -40,6 +37,7 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][600e6e29-bef0-4b42-aa27-93f09a4a581a][4d72a751-d4e6-4770-a063-c0908d11c9d5]
+padding=4
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][600e6e29-bef0-4b42-aa27-93f09a4a581a][7a7cfca9-9695-4cdf-9d5b-ed0f55867fbd]
@@ -71,5 +69,5 @@ Scale=2
 
 [org.kde.kdecoration2]
 ButtonsOnLeft=MF
-library=org.kde.kwin.aurorae
+library=org.kde.kwin.aurorae.v2
 theme=__aurorae__svg__Materia-Dark
