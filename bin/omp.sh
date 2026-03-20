@@ -61,6 +61,12 @@ mkdir -p ~/.config/omp ~/.config/gh
 workspace=$(readlink -f "$PWD")
 exec podman run --rm -it \
   --security-opt label=disable \
+  --cap-add=DAC_READ_SEARCH \
+  --group-add=190 \
+  -v /var/lib/systemd/coredump:/var/lib/systemd/coredump:ro \
+  -v /var/log/journal:/var/log/journal:ro \
+  -v /etc/machine-id:/etc/machine-id:ro \
+  --name "omp-$(basename "$PWD")" \
   -v ~/.config/gh:/home/omp/.config/gh:rw \
   -v ~/.config/omp:/home/omp/.omp:rw \
   -v "$workspace":/workspace:rw \

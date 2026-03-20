@@ -4,6 +4,8 @@ FROM quay.io/fedora/fedora:latest
 USER root
 
 RUN dnf install -y --setopt install_weak_deps=false --nodocs \
+      --disablerepo=* \
+      --enablerepo=fedora,updates \
       neovim \
       gh \
       rg \
@@ -11,16 +13,21 @@ RUN dnf install -y --setopt install_weak_deps=false --nodocs \
       jq \
       yq \
       xdg-utils \
+      procps \
       # Python and the usual build dependencies
       python3-devel \
       krb5-libs \
       openldap \
+      # coredumpctl
+      systemd-udev \
+      gdb \
       # CopyQ
       ninja \
       cmake \
       extra-cmake-modules \
       gcc-c++ \
       git \
+      miniaudio-devel \
       kf6-kguiaddons-devel \
       kf6-knotifications-devel \
       kf6-kstatusnotifieritem-devel \
@@ -39,9 +46,14 @@ RUN dnf install -y --setopt install_weak_deps=false --nodocs \
       wayland-devel \
       # UI tests
       openbox \
-      xorg-x11-server-Xvfb
+      xorg-x11-server-Xvfb \
+      sway \
+      wl-clipboard
 
 RUN useradd -m -u 1000 -g 0 -s /bin/bash omp
+
+RUN echo "omp ALL=(ALL) NOPASSWD: ALL" > /etc/sudoers.d/omp-nopasswd \
+ && chmod 0440 /etc/sudoers.d/omp-nopasswd
 
 RUN mkdir -p /workspace && chown -R omp:root /workspace
 WORKDIR /workspace

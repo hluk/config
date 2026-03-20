@@ -5,6 +5,7 @@ return {
   { import = "astrocommunity.recipes.heirline-nvchad-statusline" },
   { import = "astrocommunity.pack.cpp" },
   { import = "astrocommunity.pack.python.ruff" },
-  { import = "astrocommunity.colorscheme.catppuccin" },
-  --{ import = "astrocommunity.colorscheme.dracula-nvim" },
+  -- { import = "astrocommunity.colorscheme.catppuccin" },
+  { import = "astrocommunity.colorscheme.gruvbox-nvim" },
+  -- { import = "astrocommunity.colorscheme.dracula-nvim" },
 }

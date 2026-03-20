@@ -9,7 +9,9 @@ vim.opt.scrolloff=5
 
 vim.opt.relativenumber = false
 
-vim.opt.background = "dark"
+-- The default theme is based on current terminal background color
+-- vim.opt.background = "dark"
+-- vim.opt.background = "light"
 
 vim.opt.completeopt = "menu,menuone,noselect,popup"
 
@@ -42,6 +44,33 @@ vim.api.nvim_create_autocmd({ "BufReadPost" }, {
   callback = function()
     vim.opt_local.modifiable = false
     vim.opt_local.readonly = true
+  end,
+})
+
+-- Strip trailing whitespace from yanked text
+vim.api.nvim_create_autocmd("TextYankPost", {
+  callback = function()
+    -- if vim.v.event.operator ~= "y" then return end
+
+    local event = vim.v.event
+    local reg = event.regname
+    if reg == "" then reg = '"' end
+
+    local cleaned = vim.tbl_map(function(line)
+      return line:gsub("%s+$", "")
+    end, event.regcontents)
+
+    vim.fn.setreg(reg, cleaned, event.regtype)
+
+    -- Sync to clipboard registers when clipboard option is active
+    local cb = vim.opt.clipboard:get()
+    local is_unnamed_reg = event.regname == ""
+    if is_unnamed_reg then
+      for _, v in ipairs(cb) do
+        if v == "unnamedplus" then vim.fn.setreg("+", cleaned, event.regtype) end
+        if v == "unnamed" then vim.fn.setreg("*", cleaned, event.regtype) end
+      end
+    end
   end,
 })
 

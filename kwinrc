@@ -47,6 +47,7 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][600e6e29-bef0-4b42-aa27-93f09a4a581a][c48c4a61-aa7e-465a-90e1-5a23801e36ab]
+padding=4
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][600e6e29-bef0-4b42-aa27-93f09a4a581a][d6bd86c2-091b-4e9c-81fe-46a2ebd1b4cd]
@@ -59,6 +60,7 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Wayland]
+InputMethod[$e]=/usr/share/applications/org.kde.plasma.keyboard.desktop
 VirtualKeyboardEnabled=true
 
 [Windows]
