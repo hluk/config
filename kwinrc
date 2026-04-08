@@ -31,6 +31,7 @@ tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"wi
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][600e6e29-bef0-4b42-aa27-93f09a4a581a][32329ded-1188-4008-a3cc-da22e1192a6f]
+padding=4
 tiles={"layoutDirection":"horizontal","tiles":[{"width":0.25},{"width":0.5},{"width":0.25}]}
 
 [Tiling][600e6e29-bef0-4b42-aa27-93f09a4a581a][47e5d4bf-df5e-4958-9ba9-00a1609c1716]
@@ -71,5 +72,3 @@ Scale=2
 
 [org.kde.kdecoration2]
 ButtonsOnLeft=MF
-library=org.kde.kwin.aurorae.v2
-theme=__aurorae__svg__Materia-Dark

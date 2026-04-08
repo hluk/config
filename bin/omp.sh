@@ -6,7 +6,6 @@
 # Mounts in the container:
 # - current directory
 # - ~/.config/omp/
-# - ~/.config/gh/
 set -euo pipefail
 
 image=omp
@@ -56,7 +55,7 @@ if should_build_image && ! build_image; then
   exit 1
 fi
 
-mkdir -p ~/.config/omp ~/.config/gh
+mkdir -p ~/.config/omp
 
 workspace=$(readlink -f "$PWD")
 exec podman run --rm -it \
@@ -67,7 +66,6 @@ exec podman run --rm -it \
   -v /var/log/journal:/var/log/journal:ro \
   -v /etc/machine-id:/etc/machine-id:ro \
   --name "omp-$(basename "$PWD")" \
-  -v ~/.config/gh:/home/omp/.config/gh:rw \
   -v ~/.config/omp:/home/omp/.omp:rw \
   -v "$workspace":/workspace:rw \
   -w /workspace \
